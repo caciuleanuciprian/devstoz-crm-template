@@ -54,3 +54,19 @@ export const useAxios = <T, D = any>(
 
   return { cancelRequest, response, error, loading, fetchData };
 };
+
+// Usage example:
+//
+// const params = {
+//   method: "POST",
+//   url: "/posts",
+//   headers: { accept: "*/*" },
+//   data: {
+//     userId: 1,
+//     id: 19392,
+//     title: "title",
+//     body: "Sample text",
+//   },
+// };
+//
+// const { response, loading, error, fetchData } = useAxios(params, true);
