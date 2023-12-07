@@ -1,10 +1,4 @@
-import {
-  ArrowRight,
-  Mail,
-  MoreHorizontal,
-  MoreVertical,
-  Trash,
-} from "lucide-react";
+import { ArrowRight, Mail, MoreHorizontal, Trash } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
