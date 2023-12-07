@@ -11,6 +11,7 @@ import ErrorPage from "./routes/error-page.tsx";
 import Dashboard from "./routes/dashboard.tsx";
 import Clients from "./routes/clients.tsx";
 import Reports from "./routes/reports.tsx";
+import { Toaster } from "./components/ui/toaster.tsx";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         {/* <AuthGuard> */}
         {/* <DisclaimerGuard> */}
         <RouterProvider router={router} />
+        <Toaster />
         {/* </DisclaimerGuard> */}
         {/* </AuthGuard> */}
       </RecoilRoot>
