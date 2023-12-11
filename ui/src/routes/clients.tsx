@@ -1,4 +1,5 @@
 import Navigation from "@/components/navigation";
+import Page from "@/components/page";
 import SearchBar from "@/components/search-bar";
 import { Table } from "@/components/ui/table";
 import { LinkIDS } from "@/constants/navigation/consts";
@@ -14,13 +15,10 @@ const Clients = () => {
   }, []);
 
   return (
-    <>
-      <Navigation />
-      <div>
-        <SearchBar />
-        <Table />
-      </div>
-    </>
+    <Page>
+      <SearchBar />
+      <Table />
+    </Page>
   );
 };
 

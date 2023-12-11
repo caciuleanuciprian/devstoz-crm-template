@@ -10,18 +10,18 @@ import { useState } from "react";
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   return (
-    <Command>
+    <Command className="bg-[#F4F4F5]">
       <CommandInput
         value={searchValue}
         onValueChange={(value: string) => setSearchValue(value)}
         placeholder="Type a command or search..."
       />
-      {searchValue && (
+      {/* {searchValue && (
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandSeparator />
         </CommandList>
-      )}
+      )} */}
     </Command>
   );
 };
