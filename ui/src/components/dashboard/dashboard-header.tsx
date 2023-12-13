@@ -1,10 +1,21 @@
-import SearchBar from "../search-bar";
+import { PlusSquare } from "lucide-react";
+import Dropdown from "../dropdown";
+import { DropdownMenuProps } from "@/constants/dashboard/types";
 
 const DashboardHeader = () => {
+  const DROPDOWN_MENUS: DropdownMenuProps[] = [
+    {
+      label: "Clients",
+      items: [
+        { name: "Add Client", icon: <PlusSquare /> },
+        { name: "Other menus", icon: <PlusSquare /> },
+      ],
+    },
+  ];
   return (
-    <div className="flex h-[5vh] gap-3 items-center py-4 pl-8 pr-4 bg-[#F4F4F5]">
+    <div className="flex justify-between h-[5vh] mb-4 pt-4 items-center ">
       <p>Dashboard</p>
-      <SearchBar />
+      <Dropdown icon={<PlusSquare />} menus={DROPDOWN_MENUS} />
     </div>
   );
 };

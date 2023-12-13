@@ -9,5 +9,3 @@ export enum LinkIDS {
   CLIENTS = 1,
   REPORTS = 2,
 }
-
-export const NAV_WIDTH_PX = 256;

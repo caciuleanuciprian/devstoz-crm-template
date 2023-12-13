@@ -10,7 +10,7 @@ import { useState } from "react";
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   return (
-    <Command className="bg-[#F4F4F5]">
+    <Command>
       <CommandInput
         value={searchValue}
         onValueChange={(value: string) => setSearchValue(value)}

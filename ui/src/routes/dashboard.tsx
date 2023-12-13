@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 import Page from "@/components/page";
 import DashboardTable from "@/components/dashboard/dashboard-table";
 import DashboardHeader from "@/components/dashboard/dashboard-header";
+import Pagination from "@/components/pagination";
 
 const Dashboard = () => {
   const [, setIsActive] = useRecoilState(activeNavTabAtom);
@@ -17,10 +18,13 @@ const Dashboard = () => {
 
   return (
     <Page>
-      <div className="h-full px-4">
+      <div className="h-full bg-secondary pr-4">
         <DashboardHeader />
-        <div className="flex h-[90vh] w-full bg-white rounded-lg flex-col py-4 px-4">
-          <DashboardTable />
+        <div className="flex h-[90vh] max-h-[90vh] overflow-auto w-full bg-background rounded-lg flex-col">
+          <div>
+            <DashboardTable />
+          </div>
+          <Pagination />
         </div>
       </div>
     </Page>
