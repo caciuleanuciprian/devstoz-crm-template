@@ -14,24 +14,24 @@ const TableDropDownMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={"ghost"} className="h-8 w-8 p-0">
-          <MoreHorizontal className="h-4 w-4" />
+        <Button variant={"ghost"} className="h-[1.2rem] w-[1.2rem] p-0">
+          <MoreHorizontal className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <ArrowRight className="mr-2 h-4 w-4" />
+            <ArrowRight className="mr-2 h-[1.2rem] w-[1.2rem]" />
             <span>View</span>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Mail className="mr-2 h-4 w-4" />
+            <Mail className="mr-2 h-[1.2rem] w-[1.2rem]" />
             <span>Send email</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Trash className="mr-2 h-4 w-4" />
+          <Trash className="mr-2 h-[1.2rem] w-[1.2rem]" />
           <span>Delete</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

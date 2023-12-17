@@ -33,7 +33,7 @@ const Dropdown = ({ icon, menus }: DropdownProps) => {
             {menu.label && <DropdownMenuSeparator />}
             {menu.items.map((item: DropdownMenuItemProps) => (
               <>
-                <DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
                   {item.icon && <Icon className="mr-2" icon={item.icon} />}
                   <p className="text-xs">{item.name}</p>
                 </DropdownMenuItem>

@@ -41,6 +41,7 @@ module.exports = {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+          links: "hsl(var(--accent-links))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",

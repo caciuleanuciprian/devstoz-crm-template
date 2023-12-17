@@ -36,18 +36,24 @@ export const columns: ColumnDef<Client>[] = [
       return (
         <div className="text-right">
           <Dropdown
-            icon={<MoreHorizontal />}
+            icon={<MoreHorizontal className="h-[1.2rem] w-[1.2rem]" />}
             menus={[
               {
                 label: "Actions",
                 items: [
-                  { name: "View", icon: <ArrowRight /> },
+                  {
+                    name: "View",
+                    icon: <ArrowRight className="h-[1.2rem] w-[1.2rem]" />,
+                  },
                   {
                     name: "Send email",
                     icon: <Mail />,
                     separator: true,
                   },
-                  { name: "Delete", icon: <Trash /> },
+                  {
+                    name: "Delete",
+                    icon: <Trash className="h-[1.2rem] w-[1.2rem]" />,
+                  },
                 ],
               },
             ]}

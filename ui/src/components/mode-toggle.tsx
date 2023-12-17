@@ -1,4 +1,4 @@
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, SunMoon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -25,15 +25,24 @@ export function ModeToggle() {
         onCloseAutoFocus={(e) => e.preventDefault()}
         align="end"
       >
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => setTheme("light")}
+        >
+          <Sun className="h-[1.2rem] w-[1.2rem] mr-2" /> Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => setTheme("dark")}
+        >
+          <Moon className="h-[1.2rem] w-[1.2rem] mr-2" /> Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
+        {/* <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => setTheme("system")}
+        >
+          <SunMoon className="h-[1.2rem] w-[1.2rem] mr-2" /> System
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
