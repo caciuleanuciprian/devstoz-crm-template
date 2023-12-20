@@ -6,8 +6,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "./ui/button";
-import Icon from "./icon";
+import { Button } from "@/components/ui/button";
+import Icon from "@/components/icons/icon";
 import {
   DropdownMenuItemProps,
   DropdownMenuProps,

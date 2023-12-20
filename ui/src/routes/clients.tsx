@@ -1,6 +1,6 @@
-import Navigation from "@/components/navigation";
-import Page from "@/components/page";
-import SearchBar from "@/components/search-bar";
+import Navigation from "@/components/navigation/navigation";
+import Page from "@/components/ui-custom/page";
+import SearchBar from "@/components/ui-custom/search-bar";
 import { Table } from "@/components/ui/table";
 import { LinkIDS } from "@/constants/navigation/consts";
 import { activeNavTabAtom } from "@/lib/recoil/navigation.recoil";

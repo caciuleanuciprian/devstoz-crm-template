@@ -1,7 +1,7 @@
 import { Bell, PlusSquare, UserRoundPlus } from "lucide-react";
-import Dropdown from "../dropdown";
+import Dropdown from "@/components/ui-custom/dropdown";
 import { DropdownMenuProps } from "@/constants/dashboard/types";
-import Icon from "../icon";
+import Icon from "@/components/icons/icon";
 
 const DashboardHeader = () => {
   const DROPDOWN_MENUS: DropdownMenuProps[] = [

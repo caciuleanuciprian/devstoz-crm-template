@@ -1,14 +1,17 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Icons } from "./ui/icons";
-import { Label } from "./ui/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Icons } from "@/components/ui/icons";
+import { Label } from "@/components/ui/label";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface UserRegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+export function UserRegisterForm({
+  className,
+  ...props
+}: UserRegisterFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   async function onSubmit(event: React.SyntheticEvent) {
@@ -60,9 +63,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         {isLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
-          <Icons.gitHub className="mr-2 h-4 w-4" />
-        )}{" "}
-        Github
+          <Icons.google className="mr-2 h-4 w-4" />
+        )}
+        Google
       </Button>
     </div>
   );

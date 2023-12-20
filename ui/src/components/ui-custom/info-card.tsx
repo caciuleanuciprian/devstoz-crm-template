@@ -1,5 +1,5 @@
 import { InfoCardType } from "@/constants/clients/types";
-import Icon from "./icon";
+import Icon from "@/components/icons/icon";
 
 interface InfoCardProps {
   data: InfoCardType;
@@ -10,10 +10,10 @@ interface InfoCardProps {
 const InfoCard = ({ data, icon, currencySymbol }: InfoCardProps) => {
   console.log(data);
   return (
-    <div className="bg-secondary rounded-lg flex flex-col justify-between w-full h-[50%] min-h-[150px] max-h-[150px] p-4 ">
-      <p className="text-4xl font-medium truncate">{data.label}</p>
+    <div className="bg-secondary rounded-lg flex flex-col justify-between w-full h-[45%] min-h-[150px] max-h-[150px] p-4">
+      <p className="text-2xl font-medium truncate">{data.label}</p>
       <div>
-        <p className="flex gap-2 items-center text-4xl font-medium ">
+        <p className="flex gap-2 items-center text-2xl font-medium ">
           <Icon className="h-[2rem] w-[2rem]" icon={icon} />
           {`${currencySymbol ? currencySymbol : ""}${data.amount}`}
         </p>

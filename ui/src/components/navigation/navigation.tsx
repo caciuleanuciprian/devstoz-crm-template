@@ -4,12 +4,12 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
-import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "@/components/icons/mode-toggle";
 import Logo from "./logo";
 import { useRecoilState } from "recoil";
 import { activeNavTabAtom } from "@/lib/recoil/navigation.recoil";
 import { LINKS } from "@/constants/navigation/consts";
-import Logout from "./logout";
+import Logout from "@/components/icons/logout";
 
 const Navigation = () => {
   const [isActive] = useRecoilState(activeNavTabAtom);
@@ -29,7 +29,7 @@ const Navigation = () => {
                   className={
                     isActive === index
                       ? " bg-accent-links w-full px-2 py-1 !m-0 rounded"
-                      : "!m-0 transition-all cursor-pointer ease-in-out w-full px-2 py-1  rounded hover:bg-accent-links"
+                      : "!m-0 cursor-pointer ease-in-out w-full px-2 py-1  rounded hover:bg-accent-links"
                   }
                 >
                   <Link

@@ -1,9 +1,9 @@
 import DashboardHeader from "@/components/dashboard/dashboard-header";
 import DashboardTable from "@/components/dashboard/dashboard-table";
-import Navigation from "@/components/navigation";
-import Page from "@/components/page";
-import Pagination from "@/components/pagination";
-import SearchBar from "@/components/search-bar";
+import Navigation from "@/components/navigation/navigation";
+import Page from "@/components/ui-custom/page";
+import Pagination from "@/components/table/pagination";
+import SearchBar from "@/components/ui-custom/search-bar";
 import { Table } from "@/components/ui/table";
 import { LinkIDS } from "@/constants/navigation/consts";
 import { activeNavTabAtom } from "@/lib/recoil/navigation.recoil";

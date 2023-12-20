@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowRight, Mail, MoreHorizontal, Trash } from "lucide-react";
-import Dropdown from "../dropdown";
+import Dropdown from "@/components/ui-custom/dropdown";
 import { Client, ClientAddress } from "@/constants/clients/types";
 
 export const columns: ColumnDef<Client>[] = [
