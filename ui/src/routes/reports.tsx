@@ -21,10 +21,7 @@ const Reports = () => {
       <div className="h-full bg-secondary pr-4">
         <DashboardHeader />
         <div className="flex h-[90vh] max-h-[90vh] overflow-auto w-full bg-background rounded-lg flex-col">
-          <div>
-            <DashboardTable />
-          </div>
-          <Pagination />
+          <div>Reports</div>
         </div>
       </div>
     </Page>

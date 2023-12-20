@@ -10,3 +10,10 @@ export interface ClientAddress {
   street: string;
   number: number;
 }
+
+export interface InfoCardType {
+  id: number;
+  label: string;
+  amount: number;
+  pastAmount: number;
+}

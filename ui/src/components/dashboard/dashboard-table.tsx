@@ -1,11 +1,17 @@
 import { DataTable } from "./data-table";
-import { columns } from "./columns";
-import { ClientsMockedData } from "@/constants/clients/clients";
 
-const DashboardTable = () => {
+import { ColumnDef } from "@tanstack/react-table";
+import { Client } from "@/constants/clients/types";
+
+interface DashboardTableProps {
+  columns: ColumnDef<Client>[];
+  data: Client[];
+}
+
+const DashboardTable = ({ columns, data }: DashboardTableProps) => {
   return (
-    <div className="h-full">
-      <DataTable columns={columns} data={ClientsMockedData} />
+    <div>
+      <DataTable columns={columns} data={data} />
     </div>
   );
 };
