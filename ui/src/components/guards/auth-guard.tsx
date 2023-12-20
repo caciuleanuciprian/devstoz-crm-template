@@ -1,4 +1,5 @@
 import { isAuthenticatedAtom } from "@/lib/recoil/authentication.recoil";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
@@ -6,20 +7,13 @@ const AuthGuard = ({ children }: any) => {
   const navigate = useNavigate();
   const [isAuthenticated] = useRecoilState<boolean>(isAuthenticatedAtom);
 
-  const checkIfOnAuthPage = () => {
-    return location.pathname === "/";
-  };
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  }, []);
 
-  console.log(!isAuthenticated && checkIfOnAuthPage());
-  return (
-    <>
-      {!isAuthenticated
-        ? !checkIfOnAuthPage()
-          ? navigate("/")
-          : null
-        : children}
-    </>
-  );
+  return <>{!isAuthenticated ? null : children}</>;
 };
 
 export default AuthGuard;

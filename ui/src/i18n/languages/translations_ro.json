@@ -1,0 +1,17 @@
+{
+  "SignIn": "Înregistrare",
+  "Email": "Email",
+  "Password": "Parolă",
+  "OrSignInWith": "Sau înregistrare cu",
+  "ForgotPassword": "Am uitat parola",
+  "Register": "Înregistrare",
+  "Login": "Logare",
+  "CreateAnAccount": "Creează un cont",
+  "EnterEmailBelow": "Introduceți emailul mai jos pentru a creea un cont",
+  "SignInWithEmail": "Înregistrare cu email",
+  "OrContinueWith": "Sau continuați cu",
+  "Tos": "Termeni si condiții",
+  "Privacy": "Politica de confidențialitate",
+  "Google": "Google",
+  "InvalidEmail": "Email invalid"
+}

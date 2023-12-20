@@ -28,14 +28,14 @@ const Navigation = () => {
                   key={index}
                   className={
                     isActive === index
-                      ? " bg-accent-links w-full px-2 py-1 !m-0 rounded"
-                      : "!m-0 cursor-pointer ease-in-out w-full px-2 py-1  rounded hover:bg-accent-links"
+                      ? " bg-accent-links w-full !m-0 rounded"
+                      : "!m-0 cursor-pointer ease-in-out w-full rounded hover:bg-accent-links"
                   }
                 >
                   <Link
                     key={`${link.id}-${link.name}`}
                     to={link.href}
-                    className="w-full flex justify-start items-center"
+                    className="w-full flex justify-start items-center px-2 py-1"
                   >
                     {link.name}
                   </Link>

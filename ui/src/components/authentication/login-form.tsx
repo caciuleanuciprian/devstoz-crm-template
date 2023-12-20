@@ -1,33 +1,29 @@
 import { Link } from "react-router-dom";
-import { UserRegisterForm } from "@/components/forms/user-register-form";
+import { UserLoginForm } from "../forms/user-login-form";
+import { LanguageContext } from "@/i18n/language-context";
+import { useContext } from "react";
 
 const LoginForm = () => {
+  const { dictionary } = useContext(LanguageContext);
   return (
     <div className="lg:p-8">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Login</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">
+            {dictionary.SignIn}
+          </h1>
           <p className="text-sm text-muted-foreground">
-            Enter your email below to create your account
+            {dictionary.EnterEmailBelow}
           </p>
         </div>
-        <UserRegisterForm />
+        <UserLoginForm />
         <p className=" text-center text-sm text-muted-foreground">
-          By clicking continue, you agree to our{" "}
           <Link
             to="/"
             className="underline underline-offset-4 hover:text-primary"
           >
-            Terms of Service{" "}
+            {dictionary.ForgotPassword}
           </Link>
-          and{" "}
-          <Link
-            to="/"
-            className="underline underline-offset-4 hover:text-primary"
-          >
-            Privacy Policy
-          </Link>
-          .
         </p>
       </div>
     </div>
