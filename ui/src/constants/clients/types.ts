@@ -17,3 +17,24 @@ export interface InfoCardType {
   amount: number;
   pastAmount: number;
 }
+
+export interface ClientInputProps {
+  label: string;
+  isLoading: boolean;
+  type: string;
+  name: string;
+  validations?: any;
+}
+
+export interface ClientFormProps {
+  fields: string[];
+  initialValues: {};
+  sheetProps: SheetProps;
+}
+
+export interface SheetProps {
+  trigger: string | React.FC | any;
+  title: string;
+  description: string;
+  submitTxt: string;
+}

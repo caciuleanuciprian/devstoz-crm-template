@@ -13,5 +13,17 @@
   "Tos": "Terms of Service",
   "Privacy": "Privacy Policy",
   "Google": "Google",
-  "InvalidEmail": "Invalid Email Value"
+  "InvalidEmail": "Email is invalid",
+  "Name": "Name",
+  "Phone": "Phone",
+  "Address": "Address",
+  "EmptyFieldError": "Field cannot be empty",
+  "InvalidPhoneNumber": "Phone Number is invalid",
+  "AddClient": "Add client",
+  "AddNewClientTitle": "Add a new client",
+  "AddNewClientDescription": "Fill up the details of the new client below. Click submit when you're done.",
+  "Submit": "Submit",
+  "Dashboard": "Dashboard",
+  "ClientAddedSuccess": "Client added succesfully.",
+  "GenericError": "Something went wrong."
 }

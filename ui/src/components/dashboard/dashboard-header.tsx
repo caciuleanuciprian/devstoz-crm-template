@@ -1,32 +1,31 @@
-import { Bell, PlusSquare, UserRoundPlus } from "lucide-react";
-import Dropdown from "@/components/ui-custom/dropdown";
-import { DropdownMenuProps } from "@/constants/dashboard/types";
+import { Bell, UserRoundPlus } from "lucide-react";
 import Icon from "@/components/icons/icon";
+import { ClientForm } from "../clients/client-form";
+import { Button } from "../ui/button";
+import { useContext } from "react";
+import { LanguageContext } from "@/i18n/language-context";
 
 const DashboardHeader = () => {
-  const DROPDOWN_MENUS: DropdownMenuProps[] = [
-    {
-      label: "Clients",
-      items: [
-        {
-          name: "Add Client",
-          icon: <UserRoundPlus className="h-[1.2rem] w-[1.2rem]" />,
-        },
-        {
-          name: "Other menus",
-          icon: <PlusSquare className="h-[1.2rem] w-[1.2rem]" />,
-        },
-      ],
-    },
-  ];
+  const { dictionary } = useContext(LanguageContext);
   return (
     <div className="flex justify-between h-[5vh] mb-4 pt-4 items-center ">
-      <p>Dashboard</p>
+      <p>{dictionary.Dashboard}</p>
       <div className="flex justify-center items-center gap-2">
         <Icon icon={<Bell className="h-[1.2rem] w-[1.2rem] " />} />
-        <Dropdown
-          icon={<PlusSquare className="h-[1.2rem] w-[1.2rem]" />}
-          menus={DROPDOWN_MENUS}
+        <ClientForm
+          fields={[]}
+          initialValues={{}}
+          sheetProps={{
+            trigger: (
+              <Button variant={"default"} className="flex text-xs">
+                <UserRoundPlus className="h-[1.2rem] w-[1.2rem] mr-2" />
+                {dictionary.AddClient}
+              </Button>
+            ),
+            title: `${dictionary.AddNewClientTitle}`,
+            description: `${dictionary.AddNewClientDescription}`,
+            submitTxt: `${dictionary.Submit}`,
+          }}
         />
       </div>
     </div>

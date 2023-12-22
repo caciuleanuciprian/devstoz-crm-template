@@ -1,7 +1,9 @@
 export interface DropdownMenuItemProps {
-  name: string;
+  name?: any;
   icon?: any;
   separator?: boolean;
+  fn?: (params?: any) => void;
+  component?: any;
 }
 
 export interface DropdownMenuProps {

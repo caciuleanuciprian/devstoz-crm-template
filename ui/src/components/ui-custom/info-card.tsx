@@ -8,15 +8,14 @@ interface InfoCardProps {
 }
 
 const InfoCard = ({ data, icon, currencySymbol }: InfoCardProps) => {
-  console.log(data);
   return (
     <div className="bg-secondary rounded-lg flex flex-col justify-between w-full h-[45%] min-h-[150px] max-h-[150px] p-4">
       <p className="text-2xl font-medium truncate">{data.label}</p>
       <div>
-        <p className="flex gap-2 items-center text-2xl font-medium ">
-          <Icon className="h-[2rem] w-[2rem]" icon={icon} />
+        <div className="flex gap-2 items-center text-2xl font-medium ">
+          <Icon className="h-[2rem] w-[2rem] !cursor-default" icon={icon} />
           {`${currencySymbol ? currencySymbol : ""}${data.amount}`}
-        </p>
+        </div>
         <p className="font-thin text-xs opacity-50">{`*${Math.floor(
           (data.amount / data.pastAmount) * 100
         )}% more than last month`}</p>

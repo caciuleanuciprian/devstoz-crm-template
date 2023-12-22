@@ -21,26 +21,26 @@ interface DropdownProps {
 const Dropdown = ({ icon, menus }: DropdownProps) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="p-0">
           <Icon icon={icon} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
         {menus.map((menu: DropdownMenuProps) => (
-          <>
+          <div key={menu.label}>
             {menu.label && <DropdownMenuLabel>{menu.label}</DropdownMenuLabel>}
             {menu.label && <DropdownMenuSeparator />}
             {menu.items.map((item: DropdownMenuItemProps) => (
-              <>
-                <DropdownMenuItem className="cursor-pointer">
+              <div key={item.name}>
+                <DropdownMenuItem onClick={item.fn} className="cursor-pointer">
                   {item.icon && <Icon className="mr-2" icon={item.icon} />}
                   <p className="text-xs">{item.name}</p>
                 </DropdownMenuItem>
                 {item.separator && <DropdownMenuSeparator />}
-              </>
+              </div>
             ))}
-          </>
+          </div>
         ))}
       </DropdownMenuContent>
     </DropdownMenu>

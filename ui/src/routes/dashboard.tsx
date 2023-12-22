@@ -17,6 +17,7 @@ import {
 import ResponsiveBarChart from "@/components/charts/responsive-bar-chart";
 import { User2 } from "lucide-react";
 import InfoCard from "@/components/ui-custom/info-card";
+import { ClientForm } from "@/components/clients/client-form";
 
 const Dashboard = () => {
   const [, setIsActive] = useRecoilState(activeNavTabAtom);
