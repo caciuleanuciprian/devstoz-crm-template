@@ -8,10 +8,19 @@ import { ModeToggle } from "@/components/icons/mode-toggle";
 import Logo from "./logo";
 import { useRecoilState } from "recoil";
 import { activeNavTabAtom } from "@/lib/recoil/navigation.recoil";
-import { LINKS } from "@/constants/navigation/consts";
 import Logout from "@/components/icons/logout";
+import { useContext } from "react";
+import { LanguageContext } from "@/i18n/language-context";
 
 const Navigation = () => {
+  const { dictionary } = useContext(LanguageContext);
+  const LINKS = [
+    { id: 0, name: dictionary.Dashboard, href: "/dashboard" },
+    { id: 1, name: dictionary.Clients, href: "/clients" },
+    { id: 2, name: dictionary.Reports, href: "/reports" },
+    { id: 3, name: dictionary.Settings, href: "/settings" },
+  ];
+
   const [isActive] = useRecoilState(activeNavTabAtom);
 
   return (

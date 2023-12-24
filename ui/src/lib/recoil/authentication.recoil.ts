@@ -8,5 +8,5 @@ export const authStateAtom = atom({
 
 export const isAuthenticatedAtom = atom({
   key: "isAuthenticatedAtom",
-  default: true,
+  default: false,
 });

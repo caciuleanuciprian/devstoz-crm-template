@@ -8,6 +8,7 @@ import { Formiz, useForm, useFormFields } from "@formiz/core";
 import { InputField } from "./input";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
+import { toast } from "../ui/use-toast";
 
 interface UserLoginFormProps extends React.HTMLAttributes<HTMLDivElement> {
   onSubmit?: () => void;
@@ -35,6 +36,7 @@ export function UserLoginForm({
 
     setTimeout(() => {
       setIsLoading(false);
+      toast({ variant: "destructive", description: dictionary.GenericError });
     }, 3000);
   }
 

@@ -14,6 +14,7 @@
   "Privacy": "Privacy Policy",
   "Google": "Google",
   "InvalidEmail": "Email is invalid",
+  "ID": "ID",
   "Name": "Name",
   "Phone": "Phone",
   "Address": "Address",
@@ -25,5 +26,8 @@
   "Submit": "Submit",
   "Dashboard": "Dashboard",
   "ClientAddedSuccess": "Client added succesfully.",
-  "GenericError": "Something went wrong."
+  "GenericError": "Something went wrong.",
+  "Clients": "Clients",
+  "Reports": "Reports",
+  "Settings": "Settings"
 }

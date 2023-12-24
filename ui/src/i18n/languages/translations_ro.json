@@ -13,5 +13,21 @@
   "Tos": "Termeni si condiții",
   "Privacy": "Politica de confidențialitate",
   "Google": "Google",
-  "InvalidEmail": "Email invalid"
+  "InvalidEmail": "Email invalid",
+  "ID": "ID",
+  "Name": "Nume",
+  "Phone": "Telefon",
+  "Address": "Adresă",
+  "EmptyFieldError": "Câmpul nu poate fi gol",
+  "InvalidPhoneNumber": "Numărul de telefon este invalid",
+  "AddClient": "Adaugă client",
+  "AddNewClientTitle": "Adaugă un nou client",
+  "AddNewClientDescription": "Completează informațiile noului client mai jos. Apasă pe butonul Trimite cand ai terminat.",
+  "Submit": "Trimite",
+  "Dashboard": "Tablou de lucru",
+  "ClientAddedSuccess": "Clientul a fost adăugat cu succes.",
+  "GenericError": "Ceva nu a mers bine.",
+  "Clients": "Clienți",
+  "Reports": "Rapoarte",
+  "Settings": "Setări"
 }

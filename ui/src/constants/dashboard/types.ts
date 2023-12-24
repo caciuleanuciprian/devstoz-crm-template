@@ -2,7 +2,7 @@ export interface DropdownMenuItemProps {
   name?: any;
   icon?: any;
   separator?: boolean;
-  fn?: (params?: any) => void;
+  onClick?: (params?: any) => void;
   component?: any;
 }
 

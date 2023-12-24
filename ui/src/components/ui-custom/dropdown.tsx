@@ -33,7 +33,10 @@ const Dropdown = ({ icon, menus }: DropdownProps) => {
             {menu.label && <DropdownMenuSeparator />}
             {menu.items.map((item: DropdownMenuItemProps) => (
               <div key={item.name}>
-                <DropdownMenuItem onClick={item.fn} className="cursor-pointer">
+                <DropdownMenuItem
+                  onClick={item.onClick}
+                  className="cursor-pointer"
+                >
                   {item.icon && <Icon className="mr-2" icon={item.icon} />}
                   <p className="text-xs">{item.name}</p>
                 </DropdownMenuItem>
