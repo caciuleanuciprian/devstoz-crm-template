@@ -1,51 +1,46 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import { ThemeProvider } from "./components/ui-custom/theme-provider.tsx";
+import { ThemeProvider } from "./components/common/theme-provider.tsx";
 import { RecoilRoot } from "recoil";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
-import ErrorPage from "./routes/error-page.tsx";
-import Dashboard from "./routes/dashboard.tsx";
-import Clients from "./routes/clients.tsx";
-import Reports from "./routes/reports.tsx";
-import Settings from "./routes/settings.tsx";
+import "@/index.css";
 
-import Authentication from "./routes/authentication.tsx";
+import { Toaster } from "@/components/ui/toaster.tsx";
+import { LanguageProvider } from "@/i18n/language-context.tsx";
 
-import { Toaster } from "./components/ui/toaster.tsx";
-import { LanguageProvider } from "./i18n/language-context.tsx";
+import { PagesURL } from "@/components/authentication/utils/consts.ts";
+import DashboardPage from "@/routes/dashboard.tsx";
+import AuthenticationPage from "@/routes/authentication.tsx";
+import ClientsPage from "@/routes/clients.tsx";
+import ReportsPage from "@/routes/reports.tsx";
+import SettingsPage from "@/routes/settings.tsx";
+import ErrorPage from "@/routes/error-page.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Authentication />, // redirect to auth
+    path: PagesURL.AUTHENTICATION,
+    element: <AuthenticationPage />, // redirect to auth
     errorElement: <ErrorPage />,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: PagesURL.DASHBOARD,
+    element: <DashboardPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/clients",
-    element: <Clients />,
+    path: PagesURL.CLIENTS,
+    element: <ClientsPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/reports",
-    element: <Reports />,
+    path: PagesURL.REPORTS,
+    element: <ReportsPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/authentication",
-    element: <Authentication />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/settings",
-    element: <Settings />,
+    path: PagesURL.SETTINGS,
+    element: <SettingsPage />,
     errorElement: <ErrorPage />,
   },
 ]);

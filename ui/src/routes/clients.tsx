@@ -1,25 +1,12 @@
-import Navigation from "@/components/navigation/navigation";
-import Page from "@/components/ui-custom/page";
-import SearchBar from "@/components/ui-custom/search-bar";
-import { Table } from "@/components/ui/table";
-import { LinkIDS } from "@/constants/navigation/consts";
-import { activeNavTabAtom } from "@/lib/recoil/navigation.recoil";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import Clients from "@/components/clients/clients";
+import Page from "@/components/common/page";
 
-const Clients = () => {
-  const [, setIsActive] = useRecoilState(activeNavTabAtom);
-
-  useEffect(() => {
-    setIsActive(LinkIDS.CLIENTS);
-  }, []);
-
+const ClientsPage = () => {
   return (
     <Page>
-      <SearchBar />
-      <Table />
+      <Clients />
     </Page>
   );
 };
 
-export default Clients;
+export default ClientsPage;

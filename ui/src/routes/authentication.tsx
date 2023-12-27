@@ -1,14 +1,7 @@
-import Login from "@/components/authentication/login";
-import Register from "@/components/authentication/register";
-import { AuthState } from "@/constants/authentication/types";
-import { authStateAtom } from "@/lib/recoil/authentication.recoil";
-import { useRecoilState } from "recoil";
+import Authentication from "@/components/authentication/authentication";
 
-export default function Authentication() {
-  const [authState, stateAuthState] = useRecoilState<AuthState>(authStateAtom);
+const AuthenticationPage = () => {
+  return <Authentication />;
+};
 
-  const renderAuthState = () => {
-    return authState === AuthState.REGISTER ? <Register /> : <Login />;
-  };
-  return <>{renderAuthState()}</>;
-}
+export default AuthenticationPage;
