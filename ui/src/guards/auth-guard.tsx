@@ -12,9 +12,7 @@ const AuthGuard = ({ children }: any) => {
   // Should be refactored to check if auth cookie is present and not only if localstorage has true property
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate(PagesURL.DASHBOARD);
-    } else {
+    if (!isAuthenticated) {
       navigate(PagesURL.AUTHENTICATION);
     }
   }, []);
