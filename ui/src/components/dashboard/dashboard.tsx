@@ -8,9 +8,9 @@ import { DataTable } from "@/components/dashboard/molecules/data-table";
 import useAxios from "@/lib/axios/useAxios";
 import { GetClients } from "./core/dashboard.service";
 import { Header } from "../common/header";
-import { renderColumnsWithTranslations } from "./molecules/data-table-columns";
 import { TopBanner } from "./molecules/top-banner";
 import { ClientsMockedData } from "../clients/utils/mockedData";
+import { renderColumnsWithTranslations } from "./utils/consts";
 
 const Dashboard = () => {
   const [, setIsActive] = useRecoilState(activeNavTabAtom);
@@ -31,13 +31,13 @@ const Dashboard = () => {
   return (
     <div className="px-8">
       <Header title={dictionary.Dashboard} />
-      <div className="flex h-[95vh] py-4 overflow-auto flex-col gap-4">
+      <div className="flex h-[95vh] py-4  flex-col gap-4">
         <TopBanner />
-        <div className="flex h-[65%] gap-4 overflow-auto w-full bg-background  flex-col pb-2 justify-end">
-          <div className="h-full">
+        <div className="flex h-[65%] gap-4 w-full bg-background  flex-col pb-2 justify-end">
+          <div className="h-full overflow-auto">
             <DataTable
               columns={renderColumnsWithTranslations(dictionary)}
-              data={ClientsMockedData}
+              data={data}
               isLoading={isLoading}
               error={error}
             />

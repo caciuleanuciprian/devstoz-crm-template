@@ -14,7 +14,6 @@ export const ClientSearch = () => {
       </div>
       <div className="w-[10%]">
         <ClientForm
-          fields={[]}
           initialValues={{}}
           sheetProps={{
             trigger: (

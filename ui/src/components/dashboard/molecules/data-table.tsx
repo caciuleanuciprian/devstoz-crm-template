@@ -21,7 +21,7 @@ import { Loader } from "@/components/common/loader";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  data: TData[] | any[];
   isLoading?: boolean;
   error?: any;
 }
@@ -41,7 +41,7 @@ export function DataTable<TData, TValue>({
   const { dictionary } = useContext(LanguageContext);
 
   return (
-    <div className="rounded-md border bg-background h-full">
+    <div className="rounded-md border bg-background h-full overflow-auto">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -87,6 +87,7 @@ export function DataTable<TData, TValue>({
           )}
 
           {/* Display Data */}
+          {/*@ts-ignore*/}
           {data &&
             table.getRowModel().rows?.length &&
             table.getRowModel().rows.map((row) => (
@@ -103,7 +104,7 @@ export function DataTable<TData, TValue>({
             ))}
 
           {/* Display No Results */}
-          {data && !isLoading && !error && (
+          {data?.length === 0 && !isLoading && !error && (
             <TableRow>
               <TableCell
                 className="hover:bg-background border-b-0 text-center"

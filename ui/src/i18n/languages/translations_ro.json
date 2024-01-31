@@ -35,5 +35,7 @@
   "DeleteClient": "Șterge client",
   "DeleteClientConfirmation": "Ești sigur că vrei să ștergi acest client? Nu puteți recupera un client șters.",
   "Delete": "Șterge",
-  "Cancel": "Anulează"
+  "Cancel": "Anulează",
+  "Company": "Companie",
+  "Person": "Persoană"
 }

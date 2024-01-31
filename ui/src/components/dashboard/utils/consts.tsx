@@ -1,13 +1,15 @@
-import { ClientForm } from "@/components/clients/molecules/client-form";
 import { Modal } from "@/components/common/modal";
 import { Button } from "@/components/ui/button";
-import { UserRoundPlus, Trash, ArrowRight } from "lucide-react";
+import { Trash, ArrowRight } from "lucide-react";
 
 export const renderColumnsWithTranslations = (dictionary: any) => {
   return [
     {
       accessorKey: "id",
       header: dictionary.ID,
+      cell: ({ row }: any) => {
+        return row.index + 1;
+      },
     },
     {
       accessorKey: "name",
@@ -18,7 +20,7 @@ export const renderColumnsWithTranslations = (dictionary: any) => {
       header: dictionary.Address,
     },
     {
-      accessorKey: "phone",
+      accessorKey: "telephone",
       header: dictionary.Phone,
     },
     {
@@ -26,8 +28,14 @@ export const renderColumnsWithTranslations = (dictionary: any) => {
       header: dictionary.Email,
     },
     {
-      accessorKey: "type",
+      accessorKey: "clientType",
       header: dictionary.Type,
+      cell: ({ row }: any) => {
+        return (
+          (row.original.clientType === "COMPANY" && dictionary.Company) ||
+          (row.original.clientType === "PERSON" && dictionary.Person)
+        );
+      },
     },
     {
       id: "actions",
@@ -49,11 +57,9 @@ export const renderColumnsWithTranslations = (dictionary: any) => {
               confirmTxt={dictionary.Delete}
               cancelTxt={dictionary.Cancel}
               onConfirm={() => {
-                console.log("deleted!");
+                console.log("deleted!!!");
               }}
-              onCancel={() => {
-                console.log("canceld!");
-              }}
+              onCancel={() => {}}
               isDelete
             />
             <Button size={"xs"} variant={"ghost"}>

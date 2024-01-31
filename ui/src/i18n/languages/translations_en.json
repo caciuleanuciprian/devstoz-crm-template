@@ -35,5 +35,7 @@
   "DeleteClient": "Delete client",
   "DeleteClientConfirmation": "Are you sure you want to delete this client? You cannot recover a deleted client.",
   "Delete": "Delete",
-  "Cancel": "Cancel"
+  "Cancel": "Cancel",
+  "Company": "Company",
+  "Person": "Person"
 }

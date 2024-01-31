@@ -21,10 +21,12 @@ export interface ClientInputProps {
   type: string;
   name: string;
   validations?: any;
+  placeholder?: string;
+  options?: string[];
 }
 
 export interface ClientFormProps {
-  fields: string[];
+  fields?: string[];
   initialValues: {};
   sheetProps: SheetProps;
 }
