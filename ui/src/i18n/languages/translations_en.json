@@ -29,5 +29,11 @@
   "GenericError": "Something went wrong.",
   "Clients": "Clients",
   "Reports": "Reports",
-  "Settings": "Settings"
+  "Settings": "Settings",
+  "Type": "Type",
+  "NoResultsFound": "No results found.",
+  "DeleteClient": "Delete client",
+  "DeleteClientConfirmation": "Are you sure you want to delete this client? You cannot recover a deleted client.",
+  "Delete": "Delete",
+  "Cancel": "Cancel"
 }

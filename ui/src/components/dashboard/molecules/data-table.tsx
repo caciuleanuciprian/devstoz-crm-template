@@ -15,21 +15,30 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useContext } from "react";
+import { LanguageContext } from "@/i18n/language-context";
+import { Loader } from "@/components/common/loader";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  isLoading?: boolean;
+  error?: any;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  isLoading,
+  error,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  const { dictionary } = useContext(LanguageContext);
 
   return (
     <div className="rounded-md border bg-background h-full">
@@ -53,7 +62,33 @@ export function DataTable<TData, TValue>({
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows?.length ? (
+          {/* Display Loader */}
+          {isLoading && (
+            <TableRow>
+              <TableCell
+                className="hover:bg-background border-b-0"
+                colSpan={columns.length}
+              >
+                <Loader />
+              </TableCell>
+            </TableRow>
+          )}
+
+          {/* Display Error */}
+          {!isLoading && error && (
+            <TableRow>
+              <TableCell
+                className="hover:bg-background border-b-0 "
+                colSpan={columns.length}
+              >
+                <div className="text-center">{dictionary.GenericError}</div>
+              </TableCell>
+            </TableRow>
+          )}
+
+          {/* Display Data */}
+          {data &&
+            table.getRowModel().rows?.length &&
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
@@ -65,11 +100,16 @@ export function DataTable<TData, TValue>({
                   </TableCell>
                 ))}
               </TableRow>
-            ))
-          ) : (
+            ))}
+
+          {/* Display No Results */}
+          {data && !isLoading && !error && (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+              <TableCell
+                className="hover:bg-background border-b-0 text-center"
+                colSpan={columns.length}
+              >
+                {dictionary.NoResultsFound}
               </TableCell>
             </TableRow>
           )}

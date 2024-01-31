@@ -9,7 +9,7 @@ interface InfoCardProps {
 
 const InfoCard = ({ data, icon, currencySymbol }: InfoCardProps) => {
   return (
-    <div className="bg-secondary rounded-lg flex flex-col justify-between w-full h-[45%] min-h-[150px] max-h-[150px] p-4">
+    <div className="bg-background mr-2 rounded-lg flex flex-col justify-between w-full h-[45%] min-h-[150px] max-h-[150px] p-4">
       <p className="text-2xl font-medium truncate">{data.label}</p>
       <div>
         <div className="flex gap-2 items-center text-2xl font-medium ">

@@ -1,17 +1,18 @@
-import { Bell, UserRoundPlus } from "lucide-react";
-import Icon from "@/components/common/icons/icon";
-import { ClientForm } from "../../clients/molecules/client-form";
-import { Button } from "../../ui/button";
-import { useContext } from "react";
+import SearchBar from "@/components/common/search-bar";
+import { Button } from "@/components/ui/button";
+import { UserRoundPlus } from "lucide-react";
+import { ClientForm } from "./client-form";
 import { LanguageContext } from "@/i18n/language-context";
+import { useContext } from "react";
 
-const DashboardHeader = () => {
+export const ClientSearch = () => {
   const { dictionary } = useContext(LanguageContext);
   return (
-    <div className="flex justify-between h-[5vh] mb-4 pt-4 items-center ">
-      <p>{dictionary.Dashboard}</p>
-      <div className="flex justify-center items-center gap-2">
-        <Icon icon={<Bell className="h-[1.2rem] w-[1.2rem] " />} />
+    <div className="flex gap-4 justify-between">
+      <div className="w-[90%]">
+        <SearchBar />
+      </div>
+      <div className="w-[10%]">
         <ClientForm
           fields={[]}
           initialValues={{}}
@@ -31,5 +32,3 @@ const DashboardHeader = () => {
     </div>
   );
 };
-
-export default DashboardHeader;

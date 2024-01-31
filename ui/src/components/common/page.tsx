@@ -4,12 +4,10 @@ import Navigation from "@/components/common/navigation/navigation";
 const Page = ({ children }: any) => {
   return (
     <AuthGuard>
-      {/* <DisclaimerGuard> */}
-      <div className="flex h-[100vh]">
+      <div className="flex h-[100vh] ">
         <Navigation />
-        <div className="w-full h-screen">{children}</div>
+        <div className="bg-background w-full h-full">{children}</div>
       </div>
-      {/* <DisclaimerGuard> */}
     </AuthGuard>
   );
 };

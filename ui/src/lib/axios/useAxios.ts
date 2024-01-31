@@ -1,72 +1,66 @@
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { AxiosResponse, AxiosHeaders } from "axios";
 
-axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
+type ExpectedResponse = AxiosResponse | any;
 
-/**
- * Generic T - represents the data returned from API request.
- *
- * Generic D - represents the body data of the Axios
- * request (usually does not exist in GET method).
- *
- * @param {boolean=} manual - represents either if the request should
- * be triggered on mount or manually (on function call).
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useAxios = <T, D = any>(
-  axiosParams: AxiosRequestConfig<D>,
-  manual: boolean = false
-) => {
-  const [response, setResponse] = useState<T | null>(null);
-  const [error, setError] = useState<AxiosError | unknown>();
-  const [loading, setLoading] = useState(true);
-  const controllerRef = useRef(new AbortController());
-  const cancelRequest = () => {
-    controllerRef.current.abort();
-  };
+interface useAxiosProps {
+  fetchFn: (paramsOfFetch: any) => Promise<ExpectedResponse | any>;
+  paramsOfFetch: object;
+  loadOnMount?: boolean;
+}
 
-  const fetchData = async (params: AxiosRequestConfig<D>) => {
+const useAxios = ({
+  loadOnMount = false,
+  fetchFn,
+  paramsOfFetch,
+}: useAxiosProps) => {
+  const [data, setData] = useState<ExpectedResponse | null>(null);
+  const [response, setResponse] = useState<ExpectedResponse>(null);
+  const [headers, setHeaders] = useState<AxiosHeaders>();
+  const [error, setError] = useState(null);
+  const [dataCode, setDataCode] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loadData = async (overwriteParams?: object) => {
+    setIsLoading(true);
+    setError(null);
+    setDataCode(null);
+
+    const params = {
+      ...paramsOfFetch,
+      ...overwriteParams,
+    };
+
     try {
-      const result = await axios.request<T>({
-        ...params,
-        signal: controllerRef.current.signal,
-      });
-      setResponse(result.data);
-    } catch (err: AxiosError | unknown) {
-      if (axios.isAxiosError(err)) {
-        setError(err);
-        // this will narrow the type :)
-        // Access to config, request, and response
-      } else {
-        setError(err);
-        // Just a stock error
-      }
-    } finally {
-      setLoading(false);
+      const response: any = await fetchFn(params);
+      setResponse(response);
+      !response.error
+        ? (setData(response?.data), setDataCode(response.status))
+        : (setError(response.error), setDataCode(response.code));
+      setHeaders(response.headers);
+      setIsLoading(false);
+      return response;
+    } catch (error: any) {
+      setError(error);
+      setDataCode(error.status);
+      setIsLoading(false);
+      return error;
     }
   };
 
-  !manual
-    ? useEffect(() => {
-        fetchData(axiosParams);
-      }, [])
-    : "";
+  useEffect(() => {
+    loadOnMount && loadData();
+  }, []);
 
-  return { cancelRequest, response, error, loading, fetchData };
+  return {
+    data,
+    response,
+    headers,
+    error,
+    dataCode,
+    isLoading,
+    loadData,
+  };
 };
 
-// Usage example:
-//
-// const params = {
-//   method: "POST",
-//   url: "/posts",
-//   headers: { accept: "*/*" },
-//   data: {
-//     userId: 1,
-//     id: 19392,
-//     title: "title",
-//     body: "Sample text",
-//   },
-// };
-//
-// const { response, loading, error, fetchData } = useAxios(params, true);
+export default useAxios;

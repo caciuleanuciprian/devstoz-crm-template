@@ -29,5 +29,11 @@
   "GenericError": "Ceva nu a mers bine.",
   "Clients": "Clienți",
   "Reports": "Rapoarte",
-  "Settings": "Setări"
+  "Settings": "Setări",
+  "Type": "Tip",
+  "NoResultsFound": "Nu au fost găsite rezultate.",
+  "DeleteClient": "Șterge client",
+  "DeleteClientConfirmation": "Ești sigur că vrei să ștergi acest client? Nu puteți recupera un client șters.",
+  "Delete": "Șterge",
+  "Cancel": "Anulează"
 }
