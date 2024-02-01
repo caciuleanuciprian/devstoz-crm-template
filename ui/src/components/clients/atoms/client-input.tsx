@@ -8,6 +8,8 @@ const ClientInput = ({
   type,
   name,
   validations,
+  isDisabled,
+  defaultValue,
 }: ClientInputProps) => {
   return (
     <div>
@@ -23,8 +25,9 @@ const ClientInput = ({
           autoCapitalize="none"
           autoComplete={name}
           autoCorrect="off"
-          disabled={isLoading}
+          disabled={isLoading || isDisabled}
           validations={validations}
+          defaultValue={defaultValue}
         />
       </div>
     </div>

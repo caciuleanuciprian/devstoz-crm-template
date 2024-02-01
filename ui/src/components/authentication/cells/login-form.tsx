@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { UserLoginForm } from "@/components/common/forms/user-login-form";
+import { UserLoginForm } from "@/components/authentication/molecules/user-login-form";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
 

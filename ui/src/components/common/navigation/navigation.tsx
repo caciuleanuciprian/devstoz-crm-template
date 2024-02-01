@@ -4,22 +4,17 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
-import { ModeToggle } from "@/components/common/icons/mode-toggle";
+import { ModeToggle } from "@/components/common/navigation/atoms/mode-toggle";
 import Logo from "./atoms/logo";
 import { useRecoilState } from "recoil";
 import { activeNavTabAtom } from "@/components/common/navigation/utils/navigation.recoil";
-import Logout from "@/components/common/icons/logout";
+import Logout from "@/components/common/navigation/atoms/logout";
 import { useContext } from "react";
 import { LanguageContext } from "@/i18n/language-context";
+import { linksToLabel } from "./utils/consts";
 
 const Navigation = () => {
   const { dictionary } = useContext(LanguageContext);
-  const LINKS = [
-    { id: 0, name: dictionary.Dashboard, href: "/dashboard" },
-    { id: 1, name: dictionary.Clients, href: "/clients" },
-    { id: 2, name: dictionary.Reports, href: "/reports" },
-    { id: 3, name: dictionary.Settings, href: "/settings" },
-  ];
 
   const [isActive] = useRecoilState(activeNavTabAtom);
 
@@ -32,7 +27,7 @@ const Navigation = () => {
         <div className="flex flex-col w-full ">
           <NavigationMenu className="block max-w-full w-full justify-start">
             <NavigationMenuList className="flex flex-col w-full items-start gap-1.5 py-2 px-2">
-              {LINKS.map((link, index) => (
+              {linksToLabel(dictionary).map((link, index) => (
                 <NavigationMenuItem
                   key={index}
                   className={

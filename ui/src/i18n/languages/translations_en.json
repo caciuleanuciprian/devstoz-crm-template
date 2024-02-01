@@ -36,6 +36,12 @@
   "DeleteClientConfirmation": "Are you sure you want to delete this client? You cannot recover a deleted client.",
   "Delete": "Delete",
   "Cancel": "Cancel",
-  "Company": "Company",
-  "Person": "Person"
+  "SRL": "Limited Liability Company",
+  "PFA": "Authorized person",
+  "PF": "Individual",
+  "ClientRemovedSuccesfully": "Client removed succesfully.",
+  "ClientDetails": "Client details",
+  "CreationDate": "Creation date",
+  "Edit": "Edit",
+  "Save": "Save"
 }

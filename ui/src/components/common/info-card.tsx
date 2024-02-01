@@ -1,5 +1,5 @@
 import { InfoCardType } from "@/components/clients/utils/types";
-import Icon from "@/components/common/icons/icon";
+import Icon from "@/components/common/icon";
 
 interface InfoCardProps {
   data: InfoCardType;

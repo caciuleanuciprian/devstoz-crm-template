@@ -19,3 +19,32 @@ export const AddClient = async ({
     return handleError(error);
   }
 };
+
+export const DeleteClient = async ({
+  clientId,
+}: {
+  clientId: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.delete(`${CLIENTS_URL}/${clientId}`);
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetClient = async ({
+  clientId,
+}: {
+  clientId: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    console.log(clientId);
+    const response: any = await axios.get(`${CLIENTS_URL}/${clientId}`);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return handleError(error);
+  }
+};

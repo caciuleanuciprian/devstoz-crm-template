@@ -17,12 +17,14 @@ export interface InfoCardType {
 
 export interface ClientInputProps {
   label: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   type: string;
   name: string;
   validations?: any;
   placeholder?: string;
   options?: string[];
+  isDisabled?: boolean;
+  defaultValue?: string;
 }
 
 export interface ClientFormProps {

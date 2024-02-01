@@ -16,7 +16,8 @@ export const InputField = <FormattedValue = string,>(
     autoCapitalize = "none",
     autoComplete = "false",
     autoCorrect = "false",
-    disabled = "false",
+    disabled = false,
+    defaultValue,
   } = props;
   return (
     <div className="flex flex-col gap-1 min-h-[56px] w-full">
@@ -33,6 +34,7 @@ export const InputField = <FormattedValue = string,>(
         autoCorrect={autoCorrect}
         disabled={disabled}
         onChange={(e) => setValue(e.target.value)}
+        defaultValue={defaultValue}
       />
       {!isValid && (
         <p className="flex items-center gap-1 text-xs text-red-500">

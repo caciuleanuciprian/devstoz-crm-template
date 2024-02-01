@@ -89,6 +89,7 @@ export function DataTable<TData, TValue>({
           {/* Display Data */}
           {/*@ts-ignore*/}
           {data &&
+            data.length > 0 &&
             table.getRowModel().rows?.length &&
             table.getRowModel().rows.map((row) => (
               <TableRow

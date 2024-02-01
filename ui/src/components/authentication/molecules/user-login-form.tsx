@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/icons";
 import { Label } from "@/components/ui/label";
 import { Formiz, useForm, useFormFields } from "@formiz/core";
-import { InputField } from "./input";
+import { InputField } from "../../common/forms/input";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
 import { toast } from "../../ui/use-toast";

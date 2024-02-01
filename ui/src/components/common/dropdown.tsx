@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import Icon from "@/components/common/icons/icon";
+import Icon from "@/components/common/icon";
 import {
   DropdownMenuItemProps,
   DropdownMenuProps,

@@ -36,6 +36,12 @@
   "DeleteClientConfirmation": "Ești sigur că vrei să ștergi acest client? Nu puteți recupera un client șters.",
   "Delete": "Șterge",
   "Cancel": "Anulează",
-  "Company": "Companie",
-  "Person": "Persoană"
+  "SRL": "Societate cu răspundere limitată",
+  "PFA": "Persoană fizică autorizată",
+  "PF": "Persoană fizică",
+  "ClientRemovedSuccesfully": "Clientul a fost șters cu succes.",
+  "ClientDetails": "Detalii client",
+  "CreationDate": "Data creării",
+  "Edit": "Editează",
+  "Save": "Salvează"
 }

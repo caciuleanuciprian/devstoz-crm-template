@@ -30,16 +30,23 @@ import { Label } from "@/components/ui/label";
 import useAxios from "@/lib/axios/useAxios";
 import { AddClient } from "../core/clients.service";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
-import { renderFormFields } from "../utils/consts";
+import {
+  ClientType,
+  renderFormFields,
+  valueToLabelClientType,
+} from "../utils/consts";
 import { useRecoilState } from "recoil";
 import { shouldRefetchAtom } from "../utils/clients.recoil";
+import { Loader } from "@/components/common/loader";
 
 export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
   const { dictionary } = useContext(LanguageContext);
 
+  const { trigger, title, description, submitTxt } = sheetProps;
+
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
-  const [clientType, setClientType] = useState<string>("COMPANY");
+  const [clientType, setClientType] = useState<string>("SRL");
   const clientForm = useForm({
     initialValues: initialValues,
   });
@@ -55,7 +62,6 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
       body: {
         ...values,
         clientType: clientType,
-        creationDate: "2024-01-24T12:00:00Z", // TODO remove this tomorrow 01/02/2024
       },
     },
   });
@@ -84,7 +90,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
             <SelectContent>
               {field?.options?.map((option: string) => (
                 <SelectItem key={option} value={option}>
-                  {option.charAt(0) + option.slice(1).toLowerCase()}
+                  {valueToLabelClientType(option, dictionary)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -118,12 +124,12 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
   return (
     <Sheet>
       <SheetTrigger asChild className="w-full">
-        {sheetProps.trigger}
+        {trigger}
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>{sheetProps.title}</SheetTitle>
-          <SheetDescription>{sheetProps.description}</SheetDescription>
+          <SheetTitle>{title}</SheetTitle>
+          <SheetDescription>{description}</SheetDescription>
         </SheetHeader>
         <Formiz connect={clientForm}>
           <div className="grid gap-4 py-4">
@@ -144,11 +150,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
                 handleAddClient(e);
               }}
             >
-              {isLoading ? (
-                <Icons.spinner className="h-4 w-4 animate-spin" />
-              ) : (
-                sheetProps.submitTxt
-              )}
+              {isLoading ? <Loader /> : submitTxt}
             </Button>
           </SheetClose>
         </SheetFooter>

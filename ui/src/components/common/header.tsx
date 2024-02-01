@@ -1,5 +1,5 @@
 import { Bell } from "lucide-react";
-import Icon from "@/components/common/icons/icon";
+import Icon from "@/components/common/icon";
 
 import { useContext } from "react";
 import { LanguageContext } from "@/i18n/language-context";

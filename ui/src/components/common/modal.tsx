@@ -21,6 +21,7 @@ interface ModalProps {
   onConfirm: (params?: any) => void;
   onCancel: (params?: any) => void;
   isDelete?: boolean;
+  isDisabled?: boolean;
 }
 
 export const Modal = ({
@@ -32,6 +33,7 @@ export const Modal = ({
   onConfirm = () => {},
   onCancel = () => {},
   isDelete,
+  isDisabled = false,
 }: ModalProps) => {
   return (
     <Dialog>
@@ -47,12 +49,18 @@ export const Modal = ({
               variant={isDelete ? "destructive" : "default"}
               onClick={onConfirm}
               type="button"
+              disabled={isDisabled}
             >
               {confirmTxt}
             </Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button variant={"ghost"} onClick={onCancel} type="button">
+            <Button
+              disabled={isDisabled}
+              variant={"ghost"}
+              onClick={onCancel}
+              type="button"
+            >
               {cancelTxt}
             </Button>
           </DialogClose>

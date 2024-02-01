@@ -1,8 +1,14 @@
+import { valueToLabelClientType } from "@/components/clients/utils/consts";
 import { Modal } from "@/components/common/modal";
 import { Button } from "@/components/ui/button";
 import { Trash, ArrowRight } from "lucide-react";
 
-export const renderColumnsWithTranslations = (dictionary: any) => {
+export const renderColumnsWithTranslations = (
+  dictionary: any,
+  onDelete?: (params?: any) => void,
+  navigateToClientDetails?: (params?: any) => void,
+  isLoading?: boolean
+) => {
   return [
     {
       accessorKey: "id",
@@ -31,10 +37,7 @@ export const renderColumnsWithTranslations = (dictionary: any) => {
       accessorKey: "clientType",
       header: dictionary.Type,
       cell: ({ row }: any) => {
-        return (
-          (row.original.clientType === "COMPANY" && dictionary.Company) ||
-          (row.original.clientType === "PERSON" && dictionary.Person)
-        );
+        return valueToLabelClientType(row.original.clientType, dictionary);
       },
     },
     {
@@ -57,61 +60,68 @@ export const renderColumnsWithTranslations = (dictionary: any) => {
               confirmTxt={dictionary.Delete}
               cancelTxt={dictionary.Cancel}
               onConfirm={() => {
-                console.log("deleted!!!");
+                onDelete && onDelete(client);
               }}
+              isDisabled={isLoading}
               onCancel={() => {}}
               isDelete
             />
-            <Button size={"xs"} variant={"ghost"}>
+            <Button
+              onClick={() =>
+                navigateToClientDetails && navigateToClientDetails(client)
+              }
+              size={"xs"}
+              variant={"ghost"}
+            >
               <ArrowRight className="h-[1.2rem] w-[1.2rem]  cursor-pointer" />
             </Button>
 
             {/* <Dropdown
-                  icon={<MoreHorizontal className="h-[1.2rem] w-[1.2rem]" />}
-                  menus={[
+              icon={<MoreHorizontal className="h-[1.2rem] w-[1.2rem]" />}
+              menus={[
+                {
+                  label: "Actions",
+                  items: [
                     {
-                      label: "Actions",
-                      items: [
-                        {
-                          name: "View",
-                          icon: <ArrowRight className="h-[1.2rem] w-[1.2rem]" />,
-                          onClick: () => console.log("navigate to client page"),
-                        },
-                        {
-                          name: "Send email",
-                          icon: <Mail />,
-                          separator: true,
-                          onClick: () => console.log("send email"),
-                        },
-                        {
-                          name: (
-                            <Modal
-                              trigger={
-                                <div className="flex">
-                                  <Trash className="h-[1.2rem] w-[1.2rem] mr-2" />
-                                  {"Delete"}
-                                </div>
-                              }
-                              title={"Delete client"}
-                              description={
-                                "Are you sure you want to delete this client? You cannot recover a deleted client."
-                              }
-                              confirmTxt={"Delete"}
-                              cancelTxt={"Cancel"}
-                              onConfirm={() => {
-                                console.log("deleted!!!");
-                              }}
-                              onCancel={() => {
-                                console.log("canceld!!!!!");
-                              }}
-                            />
-                          ),
-                          onClick: (e) => e.preventDefault(),
-                        },
-                      ],
+                      name: "View",
+                      icon: <ArrowRight className="h-[1.2rem] w-[1.2rem]" />,
+                      onClick: () => console.log("navigate to client page"),
                     },
-                  ]}
-                /> */}
+                    {
+                      name: "Send email",
+                      icon: <Mail />,
+                      separator: true,
+                      onClick: () => console.log("send email"),
+                    },
+                    {
+                      name: (
+                        <Modal
+                          trigger={
+                            <div className="flex">
+                              <Trash className="h-[1.2rem] w-[1.2rem] mr-2" />
+                              {"Delete"}
+                            </div>
+                          }
+                          title={"Delete client"}
+                          description={
+                            "Are you sure you want to delete this client? You cannot recover a deleted client."
+                          }
+                          confirmTxt={"Delete"}
+                          cancelTxt={"Cancel"}
+                          onConfirm={() => {
+                            console.log("deleted!!!");
+                          }}
+                          onCancel={() => {
+                            console.log("canceld!!!!!");
+                          }}
+                        />
+                      ),
+                      onClick: (e) => e.preventDefault(),
+                    },
+                  ],
+                },
+              ]}
+            /> */}
           </div>
         );
       },

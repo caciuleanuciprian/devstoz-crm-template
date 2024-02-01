@@ -16,34 +16,7 @@ import ClientsPage from "@/routes/clients.tsx";
 import ReportsPage from "@/routes/reports.tsx";
 import SettingsPage from "@/routes/settings.tsx";
 import ErrorPage from "@/routes/error-page.tsx";
-
-const router = createBrowserRouter([
-  {
-    path: PagesURL.AUTHENTICATION,
-    element: <AuthenticationPage />, // redirect to auth
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: PagesURL.DASHBOARD,
-    element: <DashboardPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: PagesURL.CLIENTS,
-    element: <ClientsPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: PagesURL.REPORTS,
-    element: <ReportsPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: PagesURL.SETTINGS,
-    element: <SettingsPage />,
-    errorElement: <ErrorPage />,
-  },
-]);
+import { router } from "./routes/routes.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
