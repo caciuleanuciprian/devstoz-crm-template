@@ -39,3 +39,14 @@ export interface SheetProps {
   description: string;
   submitTxt: string;
 }
+
+export interface ClientTransactionProps {
+  id: number;
+  name: string;
+  amount: number;
+  fileName: string;
+}
+
+export interface ClientTransactionsProps {
+  transactions: ClientTransactionProps[];
+}

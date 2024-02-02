@@ -43,5 +43,7 @@
   "ClientDetails": "Client details",
   "CreationDate": "Creation date",
   "Edit": "Edit",
-  "Save": "Save"
+  "Save": "Save",
+  "ClientUpdatedSuccesfully": "Client details updated succesfully.",
+  "ClientUpdatedError": "Client details could not be updated."
 }

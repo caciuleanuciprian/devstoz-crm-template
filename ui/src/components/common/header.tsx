@@ -3,6 +3,7 @@ import Icon from "@/components/common/icon";
 
 import { useContext } from "react";
 import { LanguageContext } from "@/i18n/language-context";
+import { Separator } from "@/components/ui/separator";
 
 interface HeaderProps {
   title: string;
@@ -10,11 +11,11 @@ interface HeaderProps {
 
 export const Header = ({ title }: HeaderProps) => {
   return (
-    <div className="flex justify-between h-[5vh] pt-4 items-center ">
-      <p>{title}</p>
-      <div className="flex justify-center items-center gap-4">
-        <Icon icon={<Bell className="h-[1.2rem] w-[1.2rem] " />} />
+    <div className="flex justify-between pt-4 flex-col">
+      <div className="flex justify-between items-center gap-4">
+        <p>{title}</p>
       </div>
+      <Separator />
     </div>
   );
 };

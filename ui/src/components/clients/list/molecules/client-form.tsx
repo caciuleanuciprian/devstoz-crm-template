@@ -10,15 +10,14 @@ import {
 } from "@/components/ui/sheet";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext, useEffect, useState } from "react";
-import ClientInput from "../atoms/client-input";
+import ClientInput from "../../common/atoms/client-input";
 import {
   ClientFormProps,
   ClientInputProps,
 } from "@/components/clients/utils/types";
 import { Formiz, useForm, useFormFields } from "@formiz/core";
 import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/ui/icons";
-import { toast } from "../../ui/use-toast";
+import { toast } from "../../../ui/use-toast";
 import {
   Select,
   SelectTrigger,
@@ -28,15 +27,15 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import useAxios from "@/lib/axios/useAxios";
-import { AddClient } from "../core/clients.service";
+import { AddClient } from "../../core/clients.service";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import {
   ClientType,
   renderFormFields,
   valueToLabelClientType,
-} from "../utils/consts";
+} from "../../utils/consts";
 import { useRecoilState } from "recoil";
-import { shouldRefetchAtom } from "../utils/clients.recoil";
+import { shouldRefetchAtom } from "../../utils/clients.recoil";
 import { Loader } from "@/components/common/loader";
 
 export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
@@ -46,7 +45,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
 
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
-  const [clientType, setClientType] = useState<string>("SRL");
+  const [clientType, setClientType] = useState<ClientType>(ClientType.SRL);
   const clientForm = useForm({
     initialValues: initialValues,
   });
@@ -79,7 +78,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
       return (
         <div className="col-span-4" key={`${field.label}-${field.type}`}>
           <Select
-            onValueChange={(e) => setClientType(e)}
+            onValueChange={(e: ClientType) => setClientType(e)}
             disabled={field.isLoading}
             defaultValue={clientType}
           >

@@ -4,6 +4,12 @@ export enum ClientType {
   PF = "PF",
 }
 
+export const selectClientTypeOptions = [
+  ClientType.SRL,
+  ClientType.PFA,
+  ClientType.PF,
+];
+
 export const valueToLabelClientType = (option: string, dictionary: any) => {
   switch (option) {
     case ClientType.SRL:
@@ -15,6 +21,10 @@ export const valueToLabelClientType = (option: string, dictionary: any) => {
     default:
       return option;
   }
+};
+
+export const formatData = (data: any) => {
+  return data.split("T")[0];
 };
 
 export const renderFormFields = (dictionary: any, isLoading: boolean) => {
@@ -64,7 +74,7 @@ export const renderFormFields = (dictionary: any, isLoading: boolean) => {
       type: "select",
       name: "type",
       placeholder: dictionary.Type,
-      options: [ClientType.SRL, ClientType.PFA, ClientType.PF],
+      options: selectClientTypeOptions,
     },
   ];
 };

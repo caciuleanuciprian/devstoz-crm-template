@@ -6,7 +6,7 @@ import { TablePagination } from "../common/table/pagination";
 import { DataTable } from "../dashboard/molecules/data-table";
 import useAxios from "@/lib/axios/useAxios";
 import { GetClients } from "../dashboard/core/dashboard.service";
-import { ClientSearch } from "./molecules/client-search";
+import { ClientSearch } from "./list/molecules/client-list-header";
 import { shouldRefetchAtom } from "./utils/clients.recoil";
 import { renderColumnsWithTranslations } from "../dashboard/utils/consts";
 import { DeleteClient } from "./core/clients.service";
@@ -14,6 +14,8 @@ import { AxiosStatusCode } from "@/lib/axios/helpers";
 import { toast } from "../ui/use-toast";
 import { useNavigate } from "react-router-dom";
 import { CLIENTS_PREFIX } from "@/lib/axios/consts";
+import { ClientDataTable } from "./list/molecules/client-data-table";
+import { Loader } from "../common/loader";
 
 const Clients = () => {
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
@@ -88,19 +90,20 @@ const Clients = () => {
     <div className="px-8">
       <Header title={dictionary.Clients} />
       <div className="flex h-[95vh] py-4 overflow-auto flex-col gap-4">
-        <ClientSearch />
         <div className="min-h-[40h]">
-          <DataTable
-            columns={renderColumnsWithTranslations(
-              dictionary,
-              handleDelete,
-              navigateToClientDetails,
-              isLoading
-            )}
-            data={data}
-            isLoading={isLoading}
-            error={error}
-          />
+          {data && (
+            <ClientDataTable
+              columns={renderColumnsWithTranslations(
+                dictionary,
+                handleDelete,
+                navigateToClientDetails,
+                isLoading
+              )}
+              data={data}
+              isLoading={isLoading}
+              error={error}
+            />
+          )}
         </div>
         <TablePagination
           pages={pagesArray()}
