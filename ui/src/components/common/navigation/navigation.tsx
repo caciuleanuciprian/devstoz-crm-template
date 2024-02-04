@@ -11,7 +11,7 @@ import { activeNavTabAtom } from "@/components/common/navigation/utils/navigatio
 import Logout from "@/components/common/navigation/atoms/logout";
 import { useContext } from "react";
 import { LanguageContext } from "@/i18n/language-context";
-import { linksToLabel } from "./utils/consts";
+import { NAVBAR_WIDTH, linksToLabel } from "./utils/consts";
 
 const Navigation = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -19,8 +19,10 @@ const Navigation = () => {
   const [isActive] = useRecoilState(activeNavTabAtom);
 
   return (
-    <div className="flex h-[100vh] w-[256px] flex-col bg-secondary">
-      <div className="flex  h-[5vh] w-full mb-4 pt-4 items-center px-2 py-2">
+    <div
+      className={`flex h-screen w-[${NAVBAR_WIDTH}px] flex-col bg-secondary fixed z-10 top-0`}
+    >
+      <div className="flex  h-[5vh] w-[192px] mb-4 pt-4 items-center px-2 py-2">
         <Logo />
       </div>
       <div className="flex flex-col h-[90vh] w-full justify-between">

@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { CLIENTS_PREFIX } from "@/lib/axios/consts";
 import { ClientDataTable } from "./list/molecules/client-data-table";
 import { Loader } from "../common/loader";
+import { ClientTable } from "./list/molecules/client-table";
 
 const Clients = () => {
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
@@ -89,21 +90,10 @@ const Clients = () => {
   return (
     <div className="px-8">
       <Header title={dictionary.Clients} />
-      <div className="flex h-[95vh] py-4 overflow-auto flex-col gap-4">
-        <div className="min-h-[40h]">
-          {data && (
-            <ClientDataTable
-              columns={renderColumnsWithTranslations(
-                dictionary,
-                handleDelete,
-                navigateToClientDetails,
-                isLoading
-              )}
-              data={data}
-              isLoading={isLoading}
-              error={error}
-            />
-          )}
+      <div className="flex h-[95vh] py-4  flex-col gap-4">
+        <div className="flex flex-col gap-4">
+          <ClientSearch />
+          <ClientTable />
         </div>
         <TablePagination
           pages={pagesArray()}

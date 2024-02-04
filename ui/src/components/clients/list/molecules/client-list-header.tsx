@@ -9,10 +9,25 @@ export const ClientSearch = () => {
   const { dictionary } = useContext(LanguageContext);
   return (
     <div className="flex gap-4 justify-between">
-      <div className="w-[90%]">
+      <div className="w-[100%]">
         <SearchBar />
       </div>
-      <div className="w-[10%]"></div>
+      <div>
+        <ClientForm
+          initialValues={{}}
+          sheetProps={{
+            trigger: (
+              <Button size={"lg"} variant={"default"} className="flex text-xs">
+                <UserRoundPlus className="h-[1.2rem] w-[1.2rem] mr-2" />
+                {dictionary.AddClient}
+              </Button>
+            ),
+            title: `${dictionary.AddNewClientTitle}`,
+            description: `${dictionary.AddNewClientDescription}`,
+            submitTxt: `${dictionary.Submit}`,
+          }}
+        />
+      </div>
     </div>
   );
 };

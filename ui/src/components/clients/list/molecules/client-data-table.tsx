@@ -25,7 +25,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ClientForm } from "./client-form";
 import { UserRoundPlus } from "lucide-react";
+import { DataTablePagination } from "./client-data-table-pagination";
 
+// TODO: Delete this
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[] | any[];
@@ -53,7 +55,7 @@ export function ClientDataTable<TData, TValue>({
   });
 
   const { dictionary } = useContext(LanguageContext);
-
+  console.log(table.getHeaderGroups());
   return (
     <div>
       <div className="flex items-center py-4">
@@ -81,13 +83,16 @@ export function ClientDataTable<TData, TValue>({
         />
       </div>
       <div className="rounded-md border bg-background h-full overflow-auto">
-        <Table>
-          <TableHeader>
+        <Table className="w-full overflow-auto">
+          <TableHeader className="w-full">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className={`width-[${header.column.columnDef.size}%]`}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -114,7 +119,7 @@ export function ClientDataTable<TData, TValue>({
             )}
 
             {/* Display Error */}
-            {!isLoading && error && (
+            {error && (
               <TableRow>
                 <TableCell
                   className="hover:bg-background border-b-0 "
@@ -127,9 +132,9 @@ export function ClientDataTable<TData, TValue>({
 
             {/* Display Data */}
             {/*@ts-ignore*/}
-            {data &&
+            {!isLoading &&
+              data &&
               data.length > 0 &&
-              table.getRowModel().rows?.length &&
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -147,7 +152,7 @@ export function ClientDataTable<TData, TValue>({
               ))}
 
             {/* Display No Results */}
-            {data?.length === 0 && !isLoading && !error && (
+            {!isLoading && !error && data && data.length === 0 && (
               <TableRow>
                 <TableCell
                   className="hover:bg-background border-b-0 text-center"
@@ -160,24 +165,7 @@ export function ClientDataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+      {/* <DataTablePagination table={table} /> */}
     </div>
   );
 }

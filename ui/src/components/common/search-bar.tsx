@@ -1,10 +1,4 @@
-import {
-  Command,
-  CommandEmpty,
-  CommandInput,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command";
+import { Command, CommandInput } from "@/components/ui/command";
 import { useState } from "react";
 
 const SearchBar = () => {
@@ -14,14 +8,8 @@ const SearchBar = () => {
       <CommandInput
         value={searchValue}
         onValueChange={(value: string) => setSearchValue(value)}
-        placeholder="Type a command or search..."
+        placeholder="Search for a client..."
       />
-      {/* {searchValue && (
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandSeparator />
-        </CommandList>
-      )} */}
     </Command>
   );
 };

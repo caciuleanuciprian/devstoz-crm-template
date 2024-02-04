@@ -1,3 +1,5 @@
+import { Building2, User, UserCog } from "lucide-react";
+
 export enum ClientType {
   SRL = "SRL",
   PFA = "PFA",
@@ -18,6 +20,22 @@ export const valueToLabelClientType = (option: string, dictionary: any) => {
       return dictionary.PFA;
     case ClientType.PF:
       return dictionary.PF;
+    default:
+      return option;
+  }
+};
+
+export const iconToLabelClientType = (
+  option: string,
+  className: string = "mr-2 h-4 w-4 text-muted-foreground/70"
+) => {
+  switch (option) {
+    case ClientType.SRL:
+      return <Building2 className={className} />;
+    case ClientType.PFA:
+      return <UserCog className={className} />;
+    case ClientType.PF:
+      return <User className={className} />;
     default:
       return option;
   }

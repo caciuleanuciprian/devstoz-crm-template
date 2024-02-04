@@ -1,4 +1,9 @@
-import { valueToLabelClientType } from "@/components/clients/utils/consts";
+import { DataTableColumnHeader } from "@/components/clients/list/molecules/data-table-column-header";
+import {
+  iconToLabelClientType,
+  selectClientTypeOptions,
+  valueToLabelClientType,
+} from "@/components/clients/utils/consts";
 import { Modal } from "@/components/common/modal";
 import { Button } from "@/components/ui/button";
 import { Trash, ArrowRight } from "lucide-react";
@@ -16,31 +21,58 @@ export const renderColumnsWithTranslations = (
       cell: ({ row }: any) => {
         return row.index + 1;
       },
+      size: 5,
+      minSize: 5,
     },
     {
       accessorKey: "name",
       header: dictionary.Name,
+      size: 10,
+      minSize: 10,
     },
     {
       accessorKey: "address",
       header: dictionary.Address,
+      size: 20,
+      minSize: 20,
     },
     {
       accessorKey: "telephone",
       header: dictionary.Phone,
+      size: 15,
+      minSize: 15,
     },
     {
       accessorKey: "email",
       header: dictionary.Email,
+      size: 15,
+      minSize: 15,
     },
     {
+      size: 20,
+      minSize: 20,
       accessorKey: "clientType",
-      header: dictionary.Type,
+      header: ({ column }: any) => {
+        return (
+          <DataTableColumnHeader
+            column={column}
+            title={dictionary.Type}
+            options={selectClientTypeOptions}
+          />
+        );
+      },
       cell: ({ row }: any) => {
-        return valueToLabelClientType(row.original.clientType, dictionary);
+        return (
+          <div className="flex items-center">
+            {iconToLabelClientType(row.original.clientType)}
+            {valueToLabelClientType(row.original.clientType, dictionary)}
+          </div>
+        );
       },
     },
     {
+      size: 10,
+      minSize: 10,
       id: "actions",
       cell: ({ row }: any) => {
         const client = row.original;

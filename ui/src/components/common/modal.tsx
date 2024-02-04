@@ -16,10 +16,11 @@ interface ModalProps {
   trigger: any;
   title: string;
   description: string;
+  component?: any;
   confirmTxt: string;
   cancelTxt: string;
   onConfirm: (params?: any) => void;
-  onCancel: (params?: any) => void;
+  onCancel?: (params?: any) => void;
   isDelete?: boolean;
   isDisabled?: boolean;
 }
@@ -28,6 +29,7 @@ export const Modal = ({
   trigger = "Open",
   title = "Save changes",
   description = "Your changes will be lost if you don't save them.",
+  component,
   confirmTxt = "Save",
   cancelTxt = "Cancel",
   onConfirm = () => {},
@@ -42,6 +44,7 @@ export const Modal = ({
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
+          {component && component}
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>

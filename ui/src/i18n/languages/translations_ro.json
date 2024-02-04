@@ -43,5 +43,13 @@
   "ClientDetails": "Detalii client",
   "CreationDate": "Data creării",
   "Edit": "Editează",
-  "Save": "Salvează"
+  "Save": "Salvează",
+  "Actions": "Acțiuni",
+  "Amount": "Sumă",
+  "FileType": "Tip fișier",
+  "FileName": "Nume fișier",
+  "Download": "Descarcă",
+  "EditTransaction": "Editează tranzacția",
+  "EditTransactionDescription": "Editează informațiile tranzacției mai jos. Apasă pe butonul Salveaza cand ai terminat.",
+  "UploadFile": "Încarcă fișier"
 }

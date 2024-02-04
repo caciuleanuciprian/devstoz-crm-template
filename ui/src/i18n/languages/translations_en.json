@@ -45,5 +45,13 @@
   "Edit": "Edit",
   "Save": "Save",
   "ClientUpdatedSuccesfully": "Client details updated succesfully.",
-  "ClientUpdatedError": "Client details could not be updated."
+  "ClientUpdatedError": "Client details could not be updated.",
+  "Actions": "Actions",
+  "Amount": "Amount",
+  "FileType": "File type",
+  "FileName": "File name",
+  "Download": "Download",
+  "EditTransaction": "Edit transaction",
+  "EditTransactionDescription": "Edit the details of the transaction below. Click save when you're done.",
+  "UploadFile": "Upload file"
 }

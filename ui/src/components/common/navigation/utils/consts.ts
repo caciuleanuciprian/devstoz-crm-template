@@ -13,3 +13,5 @@ export const linksToLabel = (dictionary: any) => {
     { id: 3, name: dictionary.Settings, href: "/settings" },
   ];
 };
+
+export const NAVBAR_WIDTH = 192;

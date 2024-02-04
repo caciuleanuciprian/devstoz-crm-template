@@ -40,11 +40,15 @@ export interface SheetProps {
   submitTxt: string;
 }
 
-export interface ClientTransactionProps {
-  id: number;
+export interface Transaction {
+  id: string;
   name: string;
   amount: number;
   fileName: string;
+}
+
+export interface ClientTransactionProps {
+  transaction: Transaction;
 }
 
 export interface ClientTransactionsProps {

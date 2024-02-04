@@ -26,9 +26,9 @@ export const ClientDetails = () => {
   return (
     <div className="px-8">
       <Header title={dictionary.ClientDetails} />
-      <div className="flex w-full gap-4 h-full">
-        <div className="flex flex-col gap-4 w-[60%] h-[90vh]">
-          <div className="bg-secondary p-4">
+      <div className="flex flex-col gap-4 py-4 h-[95vh]">
+        <div className="flex w-full gap-4">
+          <div className="bg-secondary p-4 w-[50%]">
             <p className="font-medium text-md">{"Client Details"}</p>
             <ClientDetailsCardForm
               data={data}
@@ -38,11 +38,18 @@ export const ClientDetails = () => {
               isLoading={isLoading}
             />
           </div>
-          <div className="bg-secondary p-4">
+          <div className="bg-secondary p-4 w-[50%]">
             <p className="font-medium text-md">{"Client Details"}</p>
+            <ClientDetailsCardForm
+              data={data}
+              clientId={clientId}
+              dataCode={dataCode}
+              error={error}
+              isLoading={isLoading}
+            />
           </div>
         </div>
-        <div className="bg-secondary p-4 w-[40%] h-full">
+        <div className="bg-secondary p-4 h-full">
           <p className="font-medium text-md">{"Transactions"}</p>
           <ClientTransactions />
         </div>
