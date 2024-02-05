@@ -8,7 +8,7 @@ import { useContext } from "react";
 export const ClientSearch = () => {
   const { dictionary } = useContext(LanguageContext);
   return (
-    <div className="flex gap-4 justify-between">
+    <div className="flex gap-4 justify-between items-end">
       <div className="w-[100%]">
         <SearchBar />
       </div>
@@ -17,7 +17,7 @@ export const ClientSearch = () => {
           initialValues={{}}
           sheetProps={{
             trigger: (
-              <Button size={"lg"} variant={"default"} className="flex text-xs">
+              <Button size={"sm"} variant={"default"} className="flex text-xs">
                 <UserRoundPlus className="h-[1.2rem] w-[1.2rem] mr-2" />
                 {dictionary.AddClient}
               </Button>

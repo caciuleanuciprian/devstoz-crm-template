@@ -51,5 +51,15 @@
   "Download": "Descarcă",
   "EditTransaction": "Editează tranzacția",
   "EditTransactionDescription": "Editează informațiile tranzacției mai jos. Apasă pe butonul Salveaza cand ai terminat.",
-  "UploadFile": "Încarcă fișier"
+  "UploadFile": "Încarcă fișier",
+  "StartingFileDownload": "Descărcare fișier...",
+  "AddTransaction": "Adaugă tranzacție",
+  "AddTransactionDescription": "Completează informațiile tranzacției mai jos. Apasă pe butonul Trimite cand ai terminat.",
+  "TransactionAddedSuccesfully": "Tranzacția a fost adăugată cu succes.",
+  "TransactionDeletedSuccesfully": "Tranzacția a fost ștearsă cu succes.",
+  "TransactionUpdatedSuccesfully": "Tranzacția a fost actualizată cu succes.",
+  "Archive": "Arhivă",
+  "ArchiveClient": "Arhivează client",
+  "ArchiveClientConfirmation": "Ești sigur că vrei să arhivezi acest client? Nu vei putea să editezi sau să adaugi tranzacții pentru un client arhivat.",
+  "ArchiveClientSuccess": "Clientul a fost arhivat cu succes."
 }

@@ -57,10 +57,8 @@ export const ClientTable = () => {
     }
   }, [shouldRefetch]);
 
-  console.log(data);
-
   return (
-    <Table className=" min-h-[82vh]">
+    <Table>
       <TableHeader>
         <TableRow>
           {ClientTableHeaders.map((header) => (
@@ -78,22 +76,31 @@ export const ClientTable = () => {
       </TableHeader>
       <TableBody className="w-full">
         {isLoading && (
-          <TableRow className="hover:!bg-transparent">
-            <TableCell colSpan={ClientTableHeaders.length}>
+          <TableRow className="h-[72.5vh] hover:!bg-transparent">
+            <TableCell
+              className="align-top text-center"
+              colSpan={ClientTableHeaders.length}
+            >
               <Loader />
             </TableCell>
           </TableRow>
         )}
         {error && (
-          <TableRow className="hover:!bg-transparent">
-            <TableCell colSpan={ClientTableHeaders.length}>
+          <TableRow className="h-[72.5vh] hover:!bg-transparent">
+            <TableCell
+              className="align-top text-center"
+              colSpan={ClientTableHeaders.length}
+            >
               <div className="text-center">{dictionary.GenericError}</div>
             </TableCell>
           </TableRow>
         )}
         {!isLoading && data && data.length === 0 && (
-          <TableRow className="hover:!bg-transparent">
-            <TableCell colSpan={ClientTableHeaders.length}>
+          <TableRow className="h-[72.5vh] hover:!bg-transparent">
+            <TableCell
+              className="align-top text-center"
+              colSpan={ClientTableHeaders.length}
+            >
               <div className="text-center">{dictionary.NoResultsFound}</div>
             </TableCell>
           </TableRow>
@@ -102,7 +109,7 @@ export const ClientTable = () => {
           data &&
           data.length > 0 &&
           data.map((client: any) => (
-            <TableRow key={client.id}>
+            <TableRow className="h-[57px]" key={client.id}>
               <TableCell>{client.name}</TableCell>
               <TableCell>{client.address}</TableCell>
               <TableCell>{client.telephone}</TableCell>

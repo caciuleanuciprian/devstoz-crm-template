@@ -69,6 +69,19 @@ export const UpdateClient = async ({
   }
 };
 
+export const ArchiveClient = async ({
+  clientId,
+}: {
+  clientId: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.put(`${CLIENTS_URL}/${clientId}/archive`);
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 export const GetTransactions = async ({
   clientId,
   page = 0,
@@ -92,6 +105,32 @@ export const GetTransactions = async ({
   }
 };
 
+export const AddTransaction = async ({
+  clientId,
+  body,
+}: {
+  clientId: string;
+  body: any;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.post(
+      `${TRANSACTIONS_URL}`,
+      {
+        clientId,
+        ...body,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 export const DeleteTransaction = async ({
   transactionId,
 }: {
@@ -100,6 +139,42 @@ export const DeleteTransaction = async ({
   try {
     const response: any = await axios.delete(
       `${TRANSACTIONS_URL}/${transactionId}`
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetTransactionFile = async ({
+  transactionId,
+}: {
+  transactionId: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.get(
+      `${TRANSACTIONS_URL}/${transactionId}/download`,
+      { responseType: "blob" }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const UpdateTransaction = async ({
+  transactionId,
+  body,
+}: {
+  transactionId: string;
+  body: any;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.put(
+      `${TRANSACTIONS_URL}/${transactionId}`,
+      {
+        ...body,
+      }
     );
     return response;
   } catch (error) {

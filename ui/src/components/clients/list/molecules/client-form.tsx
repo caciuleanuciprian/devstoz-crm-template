@@ -10,10 +10,10 @@ import {
 } from "@/components/ui/sheet";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext, useEffect, useState } from "react";
-import ClientInput from "../../common/atoms/client-input";
+import InputWithLabel from "../../../common/forms/input-with-label";
 import {
   ClientFormProps,
-  ClientInputProps,
+  InputWithLabelProps,
 } from "@/components/clients/utils/types";
 import { Formiz, useForm, useFormFields } from "@formiz/core";
 import { Button } from "@/components/ui/button";
@@ -73,7 +73,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
     setShouldRefetch(true);
   };
 
-  const handleInputType = (field: ClientInputProps) => {
+  const handleInputType = (field: InputWithLabelProps) => {
     if (field.type === "select") {
       return (
         <div className="col-span-4" key={`${field.label}-${field.type}`}>
@@ -99,7 +99,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
     } else {
       return (
         <div className="col-span-4" key={`${field.label}-${field.type}`}>
-          <ClientInput
+          <InputWithLabel
             label={field.label}
             isLoading={field.isLoading}
             type={field.type}
@@ -144,7 +144,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
             <Button
               type="button"
               variant={"default"}
-              className="text-sm"
+              className="text-xs flex items-center px-8"
               onClick={(e) => {
                 handleAddClient(e);
               }}

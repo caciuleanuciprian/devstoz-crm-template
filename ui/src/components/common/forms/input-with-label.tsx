@@ -1,8 +1,8 @@
-import { ClientInputProps } from "@/components/clients/utils/types";
+import { InputWithLabelProps } from "@/components/clients/utils/types";
 import { InputField } from "@/components/common/forms/input";
 import { Label } from "@/components/ui/label";
 
-const ClientInput = ({
+const InputWithLabel = ({
   label,
   isLoading,
   type,
@@ -10,10 +10,10 @@ const ClientInput = ({
   validations,
   isDisabled,
   defaultValue,
-}: ClientInputProps) => {
+}: InputWithLabelProps) => {
   return (
     <div>
-      <Label htmlFor="name" className="text-sm">
+      <Label htmlFor={name} className="text-sm">
         {label}
       </Label>
       <div className="col-span-3 align-middle">
@@ -34,4 +34,4 @@ const ClientInput = ({
   );
 };
 
-export default ClientInput;
+export default InputWithLabel;

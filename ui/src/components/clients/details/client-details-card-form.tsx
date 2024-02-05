@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { Loader } from "@/components/common/loader";
 import { Label } from "@/components/ui/label";
-import ClientInput from "../common/atoms/client-input";
+import InputWithLabel from "../../common/forms/input-with-label";
 import {
   ClientType,
   formatData,
@@ -20,8 +20,7 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "@/i18n/language-context";
 import useAxios from "@/lib/axios/useAxios";
-import { useParams } from "react-router-dom";
-import { GetClient, UpdateClient } from "../core/clients.service";
+import { UpdateClient } from "../core/clients.service";
 import { toast } from "@/components/ui/use-toast";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 
@@ -54,9 +53,7 @@ export const ClientDetailsCardForm = ({
   );
 
   const {
-    data: updateClientData,
     error: updateClientError,
-    isLoading: updateClientIsLoading,
     loadData: updateClientLoadData,
     dataCode: updateClientDataCode,
   } = useAxios({
@@ -102,106 +99,112 @@ export const ClientDetailsCardForm = ({
   }, [data]);
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-background min-h-[25vh] flex flex-col justify-center items-center">
       <Formiz connect={clientForm}>
-        <div className="bg-background p-4">
-          {!isLoading && data ? (
-            <>
-              <div className="flex gap-4 justify-center w-full">
-                <div className="col-span-4 w-full">
-                  <ClientInput
-                    label={dictionary.Name}
-                    isDisabled={InteractionMode.View === interactionMode}
-                    type={"text"}
-                    name={"name"}
-                  />
-                </div>
-                <div className="col-span-4 w-full">
-                  <ClientInput
-                    label={dictionary.Email}
-                    isDisabled={InteractionMode.View === interactionMode}
-                    type={"email"}
-                    name={"email"}
-                  />
-                </div>
+        {!isLoading && data ? (
+          <div className="p-4 w-full">
+            <div className="flex gap-4 justify-center w-full h-full">
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Name}
+                  isDisabled={InteractionMode.View === interactionMode}
+                  type={"text"}
+                  name={"name"}
+                />
               </div>
-              <div className="flex gap-4 justify-center w-full">
-                <div className="col-span-4 w-full">
-                  <ClientInput
-                    label={dictionary.Phone}
-                    isDisabled={InteractionMode.View === interactionMode}
-                    type={"phone"}
-                    name={"telephone"}
-                  />
-                </div>
-                <div className="col-span-4 w-full">
-                  <ClientInput
-                    label={dictionary.Address}
-                    isDisabled={InteractionMode.View === interactionMode}
-                    type={"text"}
-                    name={"address"}
-                  />
-                </div>
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Email}
+                  isDisabled={InteractionMode.View === interactionMode}
+                  type={"email"}
+                  name={"email"}
+                />
               </div>
-              <div className="flex gap-4 justify-center w-full">
-                <div className="col-span-4 w-full">
-                  <Select
-                    onValueChange={(e: ClientType) => setClientType(e)}
-                    disabled={InteractionMode.View === interactionMode}
-                    defaultValue={data?.clientType}
-                  >
-                    <Label>{dictionary.Type}</Label>
-                    <SelectTrigger>
-                      <SelectValue placeholder={dictionary.Type} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {selectClientTypeOptions.map((option: string) => (
-                        <SelectItem key={option} value={option}>
-                          {valueToLabelClientType(option, dictionary)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="col-span-4 w-full">
-                  <ClientInput
-                    label={dictionary.CreationDate}
-                    isDisabled={true}
-                    type={"text"}
-                    name={"creationDate"}
-                  />
-                </div>
+            </div>
+            <div className="flex gap-4 justify-center w-full">
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Phone}
+                  isDisabled={InteractionMode.View === interactionMode}
+                  type={"phone"}
+                  name={"telephone"}
+                />
               </div>
-              <div className="flex justify-end gap-4">
-                {interactionMode === "view" ? (
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Address}
+                  isDisabled={InteractionMode.View === interactionMode}
+                  type={"text"}
+                  name={"address"}
+                />
+              </div>
+            </div>
+            <div className="flex gap-4 justify-center w-full">
+              <div className="col-span-4 w-full">
+                <Select
+                  onValueChange={(e: ClientType) => setClientType(e)}
+                  disabled={InteractionMode.View === interactionMode}
+                  defaultValue={data?.clientType}
+                >
+                  <Label>{dictionary.Type}</Label>
+                  <SelectTrigger>
+                    <SelectValue placeholder={dictionary.Type} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {selectClientTypeOptions.map((option: string) => (
+                      <SelectItem key={option} value={option}>
+                        {valueToLabelClientType(option, dictionary)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.CreationDate}
+                  isDisabled={true}
+                  type={"text"}
+                  name={"creationDate"}
+                />
+              </div>
+            </div>
+            <div className="flex justify-end gap-4">
+              {interactionMode === "view" ? (
+                <Button
+                  variant={"default"}
+                  onClick={() => setInteractionMode(InteractionMode.Edit)}
+                  className="text-xs flex items-center px-8"
+                  size={"sm"}
+                >
+                  {dictionary.Edit}
+                </Button>
+              ) : (
+                <>
                   <Button
-                    variant={"default"}
-                    onClick={() => setInteractionMode(InteractionMode.Edit)}
+                    variant={"destructive"}
+                    onClick={() => setInteractionMode(InteractionMode.View)}
+                    className="text-xs flex items-center px-8"
+                    size={"sm"}
                   >
-                    {dictionary.Edit}
+                    {dictionary.Cancel}
                   </Button>
-                ) : (
-                  <>
-                    <Button
-                      variant={"destructive"}
-                      onClick={() => setInteractionMode(InteractionMode.View)}
-                    >
-                      {dictionary.Cancel}
-                    </Button>
-                    <Button
-                      onClick={() => handleClientUpdate()}
-                      variant={"default"}
-                    >
-                      {dictionary.Save}
-                    </Button>
-                  </>
-                )}
-              </div>
-            </>
-          ) : (
+                  <Button
+                    onClick={() => handleClientUpdate()}
+                    variant={"default"}
+                    className="text-xs flex items-center px-8"
+                    size={"sm"}
+                  >
+                    {dictionary.Save}
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="flex justify-center items-center h-full">
             <Loader />
-          )}
-        </div>
+          </div>
+        )}
       </Formiz>
     </div>
   );

@@ -4,7 +4,7 @@ import { LanguageContext } from "@/i18n/language-context";
 import useAxios from "@/lib/axios/useAxios";
 import { Trash, ArrowRight, Mail, MoreHorizontal, Archive } from "lucide-react";
 import { useContext, useEffect } from "react";
-import { DeleteClient } from "../../core/clients.service";
+import { ArchiveClient, DeleteClient } from "../../core/clients.service";
 import { useNavigate } from "react-router-dom";
 import { CLIENTS_PREFIX } from "@/lib/axios/consts";
 import { toast } from "@/components/ui/use-toast";
@@ -25,18 +25,31 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
   const navigate = useNavigate();
 
   const {
-    data: deleteClientData,
     error: deleteClientError,
     dataCode: deleteClientDataCode,
-    isLoading: deleteClientIsLoading,
     loadData: deleteClient,
   } = useAxios({
     fetchFn: DeleteClient,
     paramsOfFetch: { clientId: id },
   });
 
+  const {
+    error: archiveClientError,
+    dataCode: archiveClientDataCode,
+    loadData: archiveClientLoadData,
+  } = useAxios({
+    fetchFn: ArchiveClient,
+    paramsOfFetch: {
+      clientId: id,
+    },
+  });
+
   const handleDelete = () => {
     deleteClient();
+  };
+
+  const handleArchive = () => {
+    archiveClientLoadData();
   };
 
   const navigateToClientDetails = () => {
@@ -44,16 +57,22 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
   };
 
   useEffect(() => {
-    if (
-      deleteClientData &&
-      deleteClientDataCode === AxiosStatusCode.CODE_200_OK
-    ) {
+    if (deleteClientDataCode === AxiosStatusCode.CODE_200_OK) {
       toast({ title: dictionary.ClientRemovedSuccesfully, variant: "success" });
       setShouldRefetch(true);
     } else if (deleteClientError) {
       toast({ title: dictionary.GenericError, variant: "destructive" });
     }
-  }, [deleteClientData]);
+  }, [deleteClientDataCode, deleteClientError]);
+
+  useEffect(() => {
+    if (archiveClientDataCode === AxiosStatusCode.CODE_200_OK) {
+      toast({ title: dictionary.ArchiveClientSuccess, variant: "success" });
+      setShouldRefetch(true);
+    } else if (archiveClientError) {
+      toast({ title: dictionary.GenericError, variant: "destructive" });
+    }
+  }, [archiveClientDataCode, archiveClientError]);
   return (
     <div className="flex justify-end items-center">
       <Dropdown
@@ -73,11 +92,23 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
                 onClick: () => console.log("send email"),
               },
               {
-                name: "Archive",
-                icon: <Archive className="h-[1.2rem] w-[1.2rem] mr-2" />,
+                name: (
+                  <Modal
+                    trigger={
+                      <div className="flex items-center">
+                        <Archive className="h-[1.2rem] w-[1.2rem] mr-2" />
+                        <p>{dictionary.Archive}</p>
+                      </div>
+                    }
+                    title={dictionary.ArchiveClient}
+                    description={dictionary.ArchiveClientConfirmation}
+                    confirmTxt={dictionary.Archive}
+                    cancelTxt={dictionary.Cancel}
+                    onConfirm={handleArchive}
+                  />
+                ),
+                onClick: (e) => e.preventDefault(),
                 separator: true,
-
-                onClick: () => console.log("archive"),
               },
               {
                 name: (
@@ -93,7 +124,7 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
                     confirmTxt={dictionary.Delete}
                     cancelTxt={dictionary.Cancel}
                     onConfirm={handleDelete}
-                    isDisabled={deleteClientIsLoading}
+                    isDelete
                   />
                 ),
                 onClick: (e) => e.preventDefault(),

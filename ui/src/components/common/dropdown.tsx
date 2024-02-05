@@ -27,18 +27,20 @@ const Dropdown = ({ icon, menus }: DropdownProps) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
-        {menus.map((menu: DropdownMenuProps) => (
+        {menus.map((menu: DropdownMenuProps, index: number) => (
           <div key={menu.label}>
             {menu.label && <DropdownMenuLabel>{menu.label}</DropdownMenuLabel>}
             {menu.label && <DropdownMenuSeparator />}
             {menu.items.map((item: DropdownMenuItemProps) => (
-              <div key={item.name}>
+              <div key={`${Math.random()}-${index}`}>
                 <DropdownMenuItem
                   onClick={item.onClick}
                   className="cursor-pointer"
                 >
-                  {item.icon && <Icon className="mr-2" icon={item.icon} />}
-                  <p className="text-xs">{item.name}</p>
+                  <div className="flex">
+                    {item.icon && <Icon className="mr-2" icon={item.icon} />}
+                    <div className="text-xs">{item.name}</div>
+                  </div>
                 </DropdownMenuItem>
                 {item.separator && <DropdownMenuSeparator />}
               </div>

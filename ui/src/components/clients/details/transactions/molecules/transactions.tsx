@@ -1,5 +1,5 @@
 import { Loader } from "@/components/common/loader";
-import { ClientTransaction } from "../atoms/client-transaction";
+import { Transaction } from "../atoms/transaction";
 import { Button } from "@/components/ui/button";
 import { GetTransactions } from "@/components/clients/core/clients.service";
 import useAxios from "@/lib/axios/useAxios";
@@ -16,9 +16,9 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { LanguageContext } from "@/i18n/language-context";
-import { Transaction } from "@/components/clients/utils/types";
+import { TransactionObject } from "@/components/clients/utils/types";
 
-export const ClientTransactions = () => {
+export const Transactions = () => {
   const { dictionary } = useContext(LanguageContext);
 
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
@@ -39,8 +39,6 @@ export const ClientTransactions = () => {
       setShouldRefetch(false);
     }
   }, [shouldRefetch]);
-
-  console.log("transactions", data);
 
   const TransactionsTableHeaders = [
     { id: "icon", label: dictionary.FileType, size: 10 },
@@ -92,15 +90,9 @@ export const ClientTransactions = () => {
         {!isLoading &&
           data &&
           data.length > 0 &&
-          data.map(
-            (transaction: Transaction) => (
-              <ClientTransaction
-                key={transaction.id}
-                transaction={transaction}
-              />
-            )
-            // console.log(transaction)
-          )}
+          data.map((transaction: TransactionObject) => (
+            <Transaction key={transaction.id} transaction={transaction} />
+          ))}
       </TableBody>
     </Table>
   );

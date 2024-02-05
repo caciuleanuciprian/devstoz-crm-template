@@ -19,7 +19,7 @@ interface ModalProps {
   component?: any;
   confirmTxt: string;
   cancelTxt: string;
-  onConfirm: (params?: any) => void;
+  onConfirm?: (params?: any) => void;
   onCancel?: (params?: any) => void;
   isDelete?: boolean;
   isDisabled?: boolean;
@@ -53,6 +53,7 @@ export const Modal = ({
               onClick={onConfirm}
               type="button"
               disabled={isDisabled}
+              className="text-xs flex items-center px-8"
             >
               {confirmTxt}
             </Button>
@@ -63,6 +64,7 @@ export const Modal = ({
               variant={"ghost"}
               onClick={onCancel}
               type="button"
+              className="text-xs flex items-center px-8"
             >
               {cancelTxt}
             </Button>

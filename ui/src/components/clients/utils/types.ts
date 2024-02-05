@@ -15,7 +15,7 @@ export interface InfoCardType {
   pastAmount: number;
 }
 
-export interface ClientInputProps {
+export interface InputWithLabelProps {
   label: string;
   isLoading?: boolean;
   type: string;
@@ -24,7 +24,7 @@ export interface ClientInputProps {
   placeholder?: string;
   options?: string[];
   isDisabled?: boolean;
-  defaultValue?: string;
+  defaultValue?: string | number;
 }
 
 export interface ClientFormProps {
@@ -40,17 +40,17 @@ export interface SheetProps {
   submitTxt: string;
 }
 
-export interface Transaction {
+export interface TransactionObject {
   id: string;
   name: string;
   amount: number;
   fileName: string;
 }
 
-export interface ClientTransactionProps {
-  transaction: Transaction;
+export interface TransactionProps {
+  transaction: TransactionObject;
 }
 
-export interface ClientTransactionsProps {
-  transactions: ClientTransactionProps[];
+export interface TransactionsProps {
+  transactions: TransactionObject[];
 }

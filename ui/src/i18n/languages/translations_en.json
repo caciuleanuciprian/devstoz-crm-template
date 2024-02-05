@@ -53,5 +53,15 @@
   "Download": "Download",
   "EditTransaction": "Edit transaction",
   "EditTransactionDescription": "Edit the details of the transaction below. Click save when you're done.",
-  "UploadFile": "Upload file"
+  "UploadFile": "Upload file",
+  "StartingFileDownload": "Starting file download...",
+  "AddTransaction": "Add transaction",
+  "AddTransactionDescription": "Fill up the details of the new transaction below. Click submit when you're done.",
+  "TransactionAddedSuccesfully": "Transaction added succesfully.",
+  "TransactionDeletedSuccesfully": "Transaction deleted succesfully.",
+  "TransactionUpdatedSuccesfully": "Transaction updated succesfully.",
+  "Archive": "Archive",
+  "ArchiveClient": "Archive client",
+  "ArchiveClientConfirmation": "Are you sure you want to archive this client? You cannot recover an archived client.",
+  "ArchiveClientSuccess": "Client archived succesfully."
 }
