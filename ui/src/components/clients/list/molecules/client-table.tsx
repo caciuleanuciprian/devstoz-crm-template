@@ -20,8 +20,21 @@ import {
 import { FilterableTableHeader } from "../atoms/client-table-filterable-header";
 import { useRecoilState } from "recoil";
 import { shouldRefetchAtom } from "../../utils/clients.recoil";
+import { toast } from "@/components/ui/use-toast";
 
-export const ClientTable = () => {
+interface ClientTableProps {
+  data: any;
+  error: any;
+  isLoading: boolean;
+  loadData: () => void;
+}
+
+export const ClientTable = ({
+  data,
+  error,
+  isLoading,
+  loadData,
+}: ClientTableProps) => {
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
   const { dictionary } = useContext(LanguageContext);
@@ -40,22 +53,18 @@ export const ClientTable = () => {
     { id: "actions", label: dictionary.Actions, alignRight: true, size: 5 },
   ];
 
-  const { data, error, isLoading, loadData } = useAxios({
-    fetchFn: GetClients,
-    paramsOfFetch: {
-      userId: import.meta.env.VITE_USER_ID,
-      page: 0,
-      size: 15,
-    },
-    loadOnMount: true,
-  });
-
   useEffect(() => {
     if (shouldRefetch) {
       loadData();
       setShouldRefetch(false);
     }
   }, [shouldRefetch]);
+
+  useEffect(() => {
+    if (error) {
+      toast({ title: dictionary.GenericError, variant: "destructive" });
+    }
+  }, [error]);
 
   return (
     <Table>
@@ -95,7 +104,7 @@ export const ClientTable = () => {
             </TableCell>
           </TableRow>
         )}
-        {!isLoading && data && data.length === 0 && (
+        {!isLoading && data?.entries.length === 0 && (
           <TableRow className="h-[72.5vh] hover:!bg-transparent">
             <TableCell
               className="align-top text-center"
@@ -106,9 +115,8 @@ export const ClientTable = () => {
           </TableRow>
         )}
         {!isLoading &&
-          data &&
-          data.length > 0 &&
-          data.map((client: any) => (
+          data?.entries.length > 0 &&
+          data.entries.map((client: any) => (
             <TableRow className="h-[57px]" key={client.id}>
               <TableCell>{client.name}</TableCell>
               <TableCell>{client.address}</TableCell>

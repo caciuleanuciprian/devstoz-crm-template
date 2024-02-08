@@ -16,6 +16,8 @@ import { useRecoilState } from "recoil";
 import { TransactionForm } from "../molecules/transaction-form";
 import { Button } from "@/components/ui/button";
 import { useForm, useFormFields } from "@formiz/core";
+import { transactionTypeSelectAtom } from "@/components/clients/utils/transactions.recoil";
+import { Loader } from "@/components/common/loader";
 
 interface TransactionsActionsProps {
   transaction: TransactionObject;
@@ -24,6 +26,10 @@ interface TransactionsActionsProps {
 export const TransactionsActions = ({
   transaction,
 }: TransactionsActionsProps) => {
+  const [transactionType, setTransactionType] = useRecoilState(
+    transactionTypeSelectAtom
+  );
+
   const { dictionary } = useContext(LanguageContext);
 
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
@@ -46,6 +52,7 @@ export const TransactionsActions = ({
     data: transactionFileData,
     error: transactionFileError,
     dataCode: transactionFileDataCode,
+    isLoading: transactionFileIsLoading,
     loadData: loadTransactionFile,
   } = useAxios({
     fetchFn: GetTransactionFile,
@@ -64,6 +71,7 @@ export const TransactionsActions = ({
       transactionId: transaction.id,
       body: {
         ...values,
+        transactionType: transactionType,
       },
     },
   });
@@ -100,6 +108,7 @@ export const TransactionsActions = ({
         duration: 500,
       });
       setShouldRefetch(true);
+      setTransactionType(null);
     } else if (updateError) {
       toast({ variant: "destructive", title: dictionary.GenericError });
     }
@@ -161,7 +170,11 @@ export const TransactionsActions = ({
         onConfirm={handleEdit}
       />
       <Button size={"xs"} variant="ghost" onClick={handleDownload}>
-        <Download className="h-[1.2rem] w-[1.2rem]" />
+        {transactionFileIsLoading ? (
+          <Loader className={"h-[1.2rem] w-[1.2rem]"} />
+        ) : (
+          <Download className="h-[1.2rem] w-[1.2rem]" />
+        )}
       </Button>
     </div>
   );

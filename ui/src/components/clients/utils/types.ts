@@ -45,6 +45,7 @@ export interface TransactionObject {
   name: string;
   amount: number;
   fileName: string;
+  transactionType: string;
 }
 
 export interface TransactionProps {

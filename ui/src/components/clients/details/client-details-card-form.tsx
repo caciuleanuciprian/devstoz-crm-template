@@ -74,7 +74,7 @@ export const ClientDetailsCardForm = ({
 
   useEffect(() => {
     if (error) {
-      toast({ title: dictionary.ClientUpdatedError, variant: "destructive" });
+      toast({ title: dictionary.GetClientError, variant: "destructive" });
     }
   }, [dataCode, error]);
 
@@ -101,7 +101,7 @@ export const ClientDetailsCardForm = ({
   return (
     <div className="w-full bg-background min-h-[25vh] flex flex-col justify-center items-center">
       <Formiz connect={clientForm}>
-        {!isLoading && data ? (
+        {!isLoading && data && (
           <div className="p-4 w-full">
             <div className="flex gap-4 justify-center w-full h-full">
               <div className="col-span-4 w-full">
@@ -200,7 +200,13 @@ export const ClientDetailsCardForm = ({
               )}
             </div>
           </div>
-        ) : (
+        )}
+        {error && (
+          <div className="flex justify-start items-center h-full">
+            <div className="text-center">{dictionary.GenericError}</div>
+          </div>
+        )}
+        {isLoading && (
           <div className="flex justify-center items-center h-full">
             <Loader />
           </div>

@@ -4,6 +4,7 @@ import { UserRoundPlus } from "lucide-react";
 import { ClientForm } from "./client-form";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
+import { Switch } from "@/components/ui/switch";
 
 export const ClientSearch = () => {
   const { dictionary } = useContext(LanguageContext);

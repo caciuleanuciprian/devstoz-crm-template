@@ -11,10 +11,16 @@ import { useForm, useFormFields } from "@formiz/core";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import { toast } from "@/components/ui/use-toast";
 import { useRecoilState } from "recoil";
-import { fileAtom } from "@/components/clients/utils/transactions.recoil";
+import {
+  fileAtom,
+  transactionTypeSelectAtom,
+} from "@/components/clients/utils/transactions.recoil";
 import { shouldRefetchAtom } from "@/components/clients/utils/clients.recoil";
 
 export const TransactionsHeader = () => {
+  const [transactionType, setTransactionType] = useRecoilState(
+    transactionTypeSelectAtom
+  );
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
   const [file, setFile] = useRecoilState(fileAtom);
 
@@ -36,11 +42,17 @@ export const TransactionsHeader = () => {
       body: {
         ...values,
         file: file,
+        transactionType: transactionType,
       },
     },
   });
 
   const handleSubmit = async () => {
+    console.log({
+      ...values,
+      file: file,
+      transactionType: transactionType,
+    });
     await loadData();
   };
 
@@ -51,6 +63,7 @@ export const TransactionsHeader = () => {
         variant: "success",
       });
       setShouldRefetch(true);
+      setTransactionType(null);
       setFile(null);
     } else if (error) {
       toast({ title: dictionary.GenericError, variant: "destructive" });

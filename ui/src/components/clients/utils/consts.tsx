@@ -1,4 +1,10 @@
-import { Building2, User, UserCog } from "lucide-react";
+import {
+  ArrowDownCircle,
+  ArrowUpCircle,
+  Building2,
+  User,
+  UserCog,
+} from "lucide-react";
 
 export enum ClientType {
   SRL = "SRL",
@@ -6,10 +12,22 @@ export enum ClientType {
   PF = "PF",
 }
 
+export enum TransactionType {
+  INCOME = "INCOME",
+  EXPENSE = "EXPENSE",
+  RECURRING_EXPENSE = "RECURRING_EXPENSE",
+}
+
 export const selectClientTypeOptions = [
   ClientType.SRL,
   ClientType.PFA,
   ClientType.PF,
+];
+
+export const selectTransactionsTypeOptions = [
+  TransactionType.INCOME,
+  TransactionType.EXPENSE,
+  TransactionType.RECURRING_EXPENSE,
 ];
 
 export const valueToLabelClientType = (option: string, dictionary: any) => {
@@ -36,6 +54,53 @@ export const iconToLabelClientType = (
       return <UserCog className={className} />;
     case ClientType.PF:
       return <User className={className} />;
+    default:
+      return option;
+  }
+};
+
+export const valueToLabelTransactionType = (
+  option: string,
+  dictionary: any
+) => {
+  switch (option) {
+    case TransactionType.INCOME:
+      return dictionary.Income;
+    case TransactionType.EXPENSE:
+      return dictionary.Expense;
+    case TransactionType.RECURRING_EXPENSE:
+      return dictionary.RecurringExpense;
+    default:
+      return option;
+  }
+};
+
+export const valueToLabelTabelTransactionType = (
+  option: string,
+  dictionary: any
+) => {
+  switch (option) {
+    case TransactionType.INCOME:
+      return (
+        <div className="flex items-center gap-2">
+          <ArrowUpCircle className="h-[1.2rem] w-[1.2rem] text-green-900" />
+          {dictionary.Income}
+        </div>
+      );
+    case TransactionType.EXPENSE:
+      return (
+        <div className="flex items-center gap-2">
+          <ArrowDownCircle className="h-[1.2rem] w-[1.2rem] text-destructive" />
+          {dictionary.Expense}
+        </div>
+      );
+    case TransactionType.RECURRING_EXPENSE:
+      return (
+        <div className="flex items-center gap-2">
+          <ArrowDownCircle className="h-[1.2rem] w-[1.2rem] text-destructive" />
+          {dictionary.RecurringExpense}
+        </div>
+      );
     default:
       return option;
   }

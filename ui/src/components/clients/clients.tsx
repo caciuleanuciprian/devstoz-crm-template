@@ -10,34 +10,19 @@ import { DeleteClient } from "./core/clients.service";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import { toast } from "../ui/use-toast";
 import { ClientTable } from "./list/molecules/client-table";
+import {
+  GetArchivedClients,
+  GetClients,
+} from "../dashboard/core/dashboard.service";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { ArchivedClientsTable } from "./list/molecules/archived-clients-table";
+import { ActiveClientsTable } from "./list/molecules/active-clients-table";
 
 const Clients = () => {
-  const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [showArchived, setShowArchived] = useState<boolean>(false);
 
   const { dictionary } = useContext(LanguageContext);
-
-  const {
-    data: deleteClientData,
-    error: deleteClientError,
-    dataCode: deleteClientDataCode,
-    loadData: deleteClient,
-  } = useAxios({
-    fetchFn: DeleteClient,
-    paramsOfFetch: {},
-  });
-
-  useEffect(() => {
-    if (
-      deleteClientData &&
-      deleteClientDataCode === AxiosStatusCode.CODE_200_OK
-    ) {
-      toast({ title: dictionary.ClientRemovedSuccesfully, variant: "success" });
-      setShouldRefetch(true);
-    } else if (deleteClientError) {
-      toast({ title: dictionary.GenericError, variant: "destructive" });
-    }
-  }, [deleteClientData]);
 
   const pagesArray = () => {
     const pagesArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -50,16 +35,37 @@ const Clients = () => {
     <div className="px-8">
       <Header title={dictionary.Clients} />
       <div className="flex h-[95vh] py-4 flex-col gap-4 justify-between">
-        <div className="flex flex-col gap-4">
-          <ClientSearch />
-          <ClientTable />
+        <ClientSearch />
+        <div className="flex flex-col justify-between h-full">
+          <Tabs defaultValue="active" className="w-full h-full">
+            <TabsList>
+              <TabsTrigger
+                onClick={() => setShowArchived(false)}
+                value="active"
+              >
+                Active Clients
+              </TabsTrigger>
+              <TabsTrigger
+                onClick={() => setShowArchived(true)}
+                value="archived"
+              >
+                Archived Clients
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="active">
+              <ActiveClientsTable />
+            </TabsContent>
+            <TabsContent value="archived">
+              <ArchivedClientsTable />
+            </TabsContent>
+          </Tabs>
+          <TablePagination
+            pages={pagesArray()}
+            totalPages={9}
+            activePage={currentPage}
+            setPage={setCurrentPage}
+          />
         </div>
-        <TablePagination
-          pages={pagesArray()}
-          totalPages={9}
-          activePage={currentPage}
-          setPage={setCurrentPage}
-        />
       </div>
     </div>
   );

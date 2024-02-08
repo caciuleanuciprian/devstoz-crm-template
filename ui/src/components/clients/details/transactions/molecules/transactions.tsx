@@ -42,10 +42,11 @@ export const Transactions = () => {
 
   const TransactionsTableHeaders = [
     { id: "icon", label: dictionary.FileType, size: 10 },
-    { id: "name", label: dictionary.Name, size: 30 },
+    { id: "name", label: dictionary.Name, size: 20 },
     { id: "amount", label: dictionary.Amount, size: 15 },
+    { id: "transactionType", label: dictionary.TransactionType, size: 20 },
     { id: "fileName", label: dictionary.FileName, size: 15 },
-    { id: "actions", label: dictionary.Actions, alignRight: true, size: 30 },
+    { id: "actions", label: dictionary.Actions, alignRight: true, size: 20 },
   ];
 
   return (
@@ -80,7 +81,7 @@ export const Transactions = () => {
             </TableCell>
           </TableRow>
         )}
-        {!isLoading && data && data.length === 0 && (
+        {!isLoading && data && data.entries.length === 0 && (
           <TableRow className="hover:!bg-transparent">
             <TableCell colSpan={TransactionsTableHeaders.length}>
               <div className="text-center">{dictionary.NoResultsFound}</div>
@@ -89,8 +90,8 @@ export const Transactions = () => {
         )}
         {!isLoading &&
           data &&
-          data.length > 0 &&
-          data.map((transaction: TransactionObject) => (
+          data.entries.length > 0 &&
+          data.entries.map((transaction: TransactionObject) => (
             <Transaction key={transaction.id} transaction={transaction} />
           ))}
       </TableBody>
