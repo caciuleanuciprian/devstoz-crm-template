@@ -9,3 +9,8 @@ export const transactionTypeSelectAtom = atom({
   key: "transactionTypeSelect",
   default: null as string | null,
 });
+
+export const filterTransactionTableByAtom = atom({
+  key: "filterTransactionTableBy",
+  default: null as unknown as any | null,
+});

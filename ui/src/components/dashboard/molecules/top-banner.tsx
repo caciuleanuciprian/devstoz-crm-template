@@ -8,7 +8,7 @@ import { User2 } from "lucide-react";
 
 export const TopBanner = () => {
   return (
-    <div className="flex h-[35%] overflow-auto w-full bg-secondary rounded-lg flex-col">
+    <div className="flex h-[35%] overflow-auto w-full bg-secondary rounded-md flex-col">
       <div className=" flex h-full p-4 gap-4 w-full bg-secondary">
         <ResponsiveBarChart />
         <div className="flex h-full w-[50%] flex-wrap overflow-auto items-center gap-2">

@@ -18,7 +18,7 @@ const Settings = () => {
     <>
       <div className="h-full bg-secondary pr-4">
         <Header title={dictionary.Settings} />
-        <div className="flex h-[90vh] max-h-[90vh] overflow-auto w-full bg-background rounded-lg flex-col">
+        <div className="flex h-[90vh] max-h-[90vh] overflow-auto w-full bg-background rounded-md flex-col">
           <div>Settings</div>
           <LanguageSelector />
         </div>

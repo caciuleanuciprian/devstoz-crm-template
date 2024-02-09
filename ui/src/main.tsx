@@ -19,14 +19,14 @@ import ErrorPage from "@/routes/error-page.tsx";
 import { router } from "./routes/routes.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="ui-theme">
-      <LanguageProvider>
-        <RecoilRoot>
-          <RouterProvider router={router} />
-          <Toaster />
-        </RecoilRoot>
-      </LanguageProvider>
-    </ThemeProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ThemeProvider defaultTheme="dark" storageKey="ui-theme">
+    <LanguageProvider>
+      <RecoilRoot>
+        <RouterProvider router={router} />
+        <Toaster />
+      </RecoilRoot>
+    </LanguageProvider>
+  </ThemeProvider>
+  // </React.StrictMode>
 );

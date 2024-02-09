@@ -17,11 +17,15 @@ import {
 } from "@/components/ui/table";
 import { LanguageContext } from "@/i18n/language-context";
 import { TransactionObject } from "@/components/clients/utils/types";
+import { FilterableTableHeader } from "../atoms/transaction-table-filterable-header";
+import { filterTransactionTableByAtom } from "@/components/clients/utils/transactions.recoil";
 
 export const Transactions = () => {
   const { dictionary } = useContext(LanguageContext);
 
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
+
+  const [filterBy] = useRecoilState(filterTransactionTableByAtom);
 
   const { clientId } = useParams();
 
@@ -29,6 +33,7 @@ export const Transactions = () => {
     fetchFn: GetTransactions,
     paramsOfFetch: {
       clientId: clientId,
+      transactionType: filterBy,
     },
     loadOnMount: true,
   });
@@ -44,7 +49,7 @@ export const Transactions = () => {
     { id: "icon", label: dictionary.FileType, size: 10 },
     { id: "name", label: dictionary.Name, size: 20 },
     { id: "amount", label: dictionary.Amount, size: 15 },
-    { id: "transactionType", label: dictionary.TransactionType, size: 20 },
+    { id: "transactionType", component: <FilterableTableHeader />, size: 20 },
     { id: "fileName", label: dictionary.FileName, size: 15 },
     { id: "actions", label: dictionary.Actions, alignRight: true, size: 20 },
   ];
@@ -61,7 +66,7 @@ export const Transactions = () => {
                 width: header.size + "%",
               }}
             >
-              {header.label}
+              {header.component ? header.component : header.label}
             </TableHead>
           ))}
         </TableRow>

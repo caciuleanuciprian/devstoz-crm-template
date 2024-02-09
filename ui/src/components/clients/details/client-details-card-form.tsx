@@ -99,7 +99,7 @@ export const ClientDetailsCardForm = ({
   }, [data]);
 
   return (
-    <div className="w-full bg-background min-h-[25vh] flex flex-col justify-center items-center">
+    <div className="w-full bg-background min-h-[25vh] flex flex-col justify-center items-center  rounded-md">
       <Formiz connect={clientForm}>
         {!isLoading && data && (
           <div className="p-4 w-full">

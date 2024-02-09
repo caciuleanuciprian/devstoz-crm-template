@@ -1,4 +1,3 @@
-import { GetClients } from "@/components/dashboard/core/dashboard.service";
 import {
   Table,
   TableBody,
@@ -8,7 +7,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { LanguageContext } from "@/i18n/language-context";
-import useAxios from "@/lib/axios/useAxios";
 import { useContext, useEffect } from "react";
 import { ClientTableActions } from "./client-table-actions";
 import { Loader } from "@/components/common/loader";
@@ -19,8 +17,12 @@ import {
 
 import { FilterableTableHeader } from "../atoms/client-table-filterable-header";
 import { useRecoilState } from "recoil";
-import { shouldRefetchAtom } from "../../utils/clients.recoil";
+import {
+  shouldRefetchAtom,
+  totalClientsAtom,
+} from "../../utils/clients.recoil";
 import { toast } from "@/components/ui/use-toast";
+import { filterTransactionTableByAtom } from "../../utils/transactions.recoil";
 
 interface ClientTableProps {
   data: any;
@@ -35,6 +37,10 @@ export const ClientTable = ({
   isLoading,
   loadData,
 }: ClientTableProps) => {
+  const [, setTotalClients] = useRecoilState(totalClientsAtom);
+  const [, setTransactionFilterBy] = useRecoilState(
+    filterTransactionTableByAtom
+  );
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
   const { dictionary } = useContext(LanguageContext);
@@ -65,6 +71,19 @@ export const ClientTable = ({
       toast({ title: dictionary.GenericError, variant: "destructive" });
     }
   }, [error]);
+
+  useEffect(() => {
+    setTransactionFilterBy(null);
+  }, []);
+
+  useEffect(() => {
+    if (isLoading) {
+      setTotalClients(0);
+    }
+    if (data) {
+      setTotalClients(data.numberOfEntries);
+    }
+  }, [data, isLoading]);
 
   return (
     <Table>

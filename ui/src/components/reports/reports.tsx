@@ -18,7 +18,7 @@ const Reports = () => {
     <>
       <div className="h-full bg-secondary pr-4">
         <Header title={dictionary.Reports} />
-        <div className="flex h-[90vh] max-h-[90vh] overflow-auto w-full bg-background rounded-lg flex-col">
+        <div className="flex h-[90vh] max-h-[90vh] overflow-auto w-full bg-background rounded-md flex-col">
           <div>Reports</div>
         </div>
       </div>

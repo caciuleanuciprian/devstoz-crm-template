@@ -86,15 +86,21 @@ export const GetTransactions = async ({
   clientId,
   page = 0,
   size = 10,
+  transactionType,
 }: {
   clientId: string;
   page: number;
   size: number;
+  transactionType?: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   const params = new URLSearchParams({
     page: page.toString(),
     size: size.toString(),
   });
+
+  if (transactionType) {
+    params.append("transactionType", transactionType);
+  }
   try {
     const response: any = await axios.get(
       `${CLIENTS_URL}/${clientId}${TRANSACTIONS_PREFIX}?${params.toString()}`

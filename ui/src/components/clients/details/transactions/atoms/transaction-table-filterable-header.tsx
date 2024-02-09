@@ -8,23 +8,20 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { ListFilter } from "lucide-react";
-import {
-  selectClientTypeOptions,
-  iconToLabelClientType,
-  valueToLabelClientType,
-} from "../../utils/consts";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
 import { useRecoilState } from "recoil";
 import {
-  filterTableByAtom,
-  shouldRefetchAtom,
-} from "../../utils/clients.recoil";
+  selectTransactionsTypeOptions,
+  valueToLabelTabelTransactionType,
+} from "@/components/clients/utils/consts";
+import { shouldRefetchAtom } from "@/components/clients/utils/clients.recoil";
+import { filterTransactionTableByAtom } from "@/components/clients/utils/transactions.recoil";
 
 export const FilterableTableHeader = () => {
   const { dictionary } = useContext(LanguageContext);
 
-  const [filterBy, setFilterBy] = useRecoilState(filterTableByAtom);
+  const [filterBy, setFilterBy] = useRecoilState(filterTransactionTableByAtom);
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
   const handleFilterChange = (option: string | null) => {
@@ -40,21 +37,20 @@ export const FilterableTableHeader = () => {
           size="sm"
           className="-ml-3 h-8 data-[state=open]:bg-accent"
         >
-          <span>{dictionary.Type}</span>
+          <span>{dictionary.TransactionType}</span>
           <ListFilter className="ml-2 h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
         <DropdownMenuLabel>{dictionary.FilterBy}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {selectClientTypeOptions.map((option: string, index: number) => (
+        {selectTransactionsTypeOptions.map((option: string, index: number) => (
           <DropdownMenuCheckboxItem
             key={`${option}-${index}`}
             checked={filterBy === option}
             onCheckedChange={() => handleFilterChange(option)}
           >
-            {iconToLabelClientType(option)}
-            {valueToLabelClientType(option, dictionary)}
+            {valueToLabelTabelTransactionType(option, dictionary)}
           </DropdownMenuCheckboxItem>
         ))}
         <DropdownMenuSeparator />

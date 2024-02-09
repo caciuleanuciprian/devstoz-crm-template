@@ -64,9 +64,17 @@
   "ArchiveClient": "Archive client",
   "ArchiveClientConfirmation": "Are you sure you want to archive this client? You cannot recover an archived client.",
   "ArchiveClientSuccess": "Client archived succesfully.",
+
   "Income": "Income",
   "Expense": "Expense",
   "TransactionType": "Transaction type",
   "RecurringExpense": "Recurring expense",
-  "GetClientError": "There was an error getting the client details."
+  "GetClientError": "There was an error getting the client details.",
+  "ActiveClients": "Active clients",
+  "ArchivedClients": "Archived clients",
+  "NoFilters": "No filters",
+  "FilterBy": "Filter by",
+  "TotalClients": "Total clients",
+  "SearchFromAList": "Search from a list of",
+  "ClientsDots": "clients..."
 }
