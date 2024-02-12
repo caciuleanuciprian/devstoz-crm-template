@@ -109,6 +109,7 @@ export const ArchiveClient = async ({
   try {
     const response: any = await axios.put(
       `${CLIENTS_URL}/${clientId}/archive`,
+      {},
       {
         headers: {
           Authorization:

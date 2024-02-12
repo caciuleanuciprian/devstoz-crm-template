@@ -19,3 +19,13 @@ export const totalClientsAtom = atom({
   key: "totalClients",
   default: null as number | any | null,
 });
+
+export const totalPagesAtom = atom({
+  key: "totalPages",
+  default: 0 as number,
+});
+
+export const currentPageAtom = atom({
+  key: "currentPage",
+  default: 0 as number,
+});

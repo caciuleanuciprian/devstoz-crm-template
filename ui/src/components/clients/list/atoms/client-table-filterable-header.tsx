@@ -16,20 +16,15 @@ import {
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
 import { useRecoilState } from "recoil";
-import {
-  filterTableByAtom,
-  shouldRefetchAtom,
-} from "../../utils/clients.recoil";
+import { filterTableByAtom } from "../../utils/clients.recoil";
 
 export const FilterableTableHeader = () => {
   const { dictionary } = useContext(LanguageContext);
 
   const [filterBy, setFilterBy] = useRecoilState(filterTableByAtom);
-  const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
   const handleFilterChange = (option: string | null) => {
     setFilterBy(option);
-    setShouldRefetch(true);
   };
 
   return (

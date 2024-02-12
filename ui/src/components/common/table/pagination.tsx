@@ -1,116 +1,107 @@
 import {
+  currentPageAtom,
+  shouldRefetchAtom,
+  totalPagesAtom,
+} from "@/components/clients/utils/clients.recoil";
+import { Button } from "@/components/ui/button";
+import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useEffect, useState } from "react";
+import { LanguageContext } from "@/i18n/language-context";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
+import { useContext, useEffect } from "react";
+import { useRecoilState } from "recoil";
 
-interface TablePaginationProps {
-  pages: any[]; // not sure if needed
-  activePage: any;
-  setPage: (page: number) => void;
-  totalPages: number;
-}
+export const TablePagination = () => {
+  const [totalPages] = useRecoilState(totalPagesAtom);
+  const [currentPage, setCurrentPage] = useRecoilState(currentPageAtom);
+  const { dictionary } = useContext(LanguageContext);
+  const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
-// TODO Should refactor / rethink this component
-export function TablePagination({
-  pages,
-  activePage = 0,
-  setPage,
-  totalPages = 9,
-}: TablePaginationProps) {
-  const [elipsisLeft, setElipsisLeft] = useState<boolean>(false);
-  const [elipsisRight, setElipsisRight] = useState<boolean>(false);
-  const firstPage = 0;
-  const secondPage = 1;
-  const finalPage = totalPages - 1;
-
-  useEffect(() => {
-    if (activePage > 1) {
-      setElipsisLeft(true);
-    } else {
-      setElipsisLeft(false);
+  const handleGoToFirstPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(0);
+      setShouldRefetch(true);
     }
+  };
 
-    if (activePage < finalPage) {
-      setElipsisRight(true);
-    } else {
-      setElipsisRight(false);
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+      setShouldRefetch(true);
     }
-  }, [activePage]);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+      setShouldRefetch(true);
+    }
+  };
+
+  const handleGoToLastPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(totalPages - 1);
+      setShouldRefetch(true);
+    }
+  };
 
   return (
     <Pagination>
+      <div className="flex w-full justify-between text-xs text-muted-foreground">{`${
+        dictionary.Page
+      } ${currentPage + 1} ${dictionary.OutOf} ${
+        totalPages > 0 ? totalPages : 1
+      }`}</div>
       <PaginationContent>
-        <PaginationPrevious
-          onClick={() => activePage > firstPage && setPage(activePage - 1)}
-          className="cursor-pointer"
-        />
-        <PaginationLink
-          className="cursor-pointer"
-          isActive={activePage === firstPage}
-          onClick={() => setPage(firstPage)}
-        >
-          {firstPage + 1}
-        </PaginationLink>
-
-        {elipsisLeft && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
-
-        {activePage <= secondPage && (
-          <PaginationLink
-            className="cursor-pointer"
-            isActive={activePage === secondPage}
-            onClick={() => setPage(secondPage)}
+        <PaginationItem>
+          <Button
+            onClick={handleGoToFirstPage}
+            variant="ghost"
+            size={"sm"}
+            disabled={currentPage <= 0}
           >
-            {secondPage + 1}
-          </PaginationLink>
-        )}
-
-        {/* TODO Breaks on final page. Fix!!! */}
-        {activePage > secondPage && activePage < finalPage - 1 && (
-          <PaginationLink className="cursor-pointer" isActive>
-            {activePage + 1}
-          </PaginationLink>
-        )}
-
-        {elipsisRight && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
-
-        {/* 
-        {activePage >= totalPages - 1 && (
-          <PaginationLink
-            className="cursor-pointer"
-            isActive={activePage === totalPages - 1}
-            onClick={() => setPage(totalPages - 1)}
+            <ChevronsLeft className="w-[1.2rem] h-[1.2rem]" />
+          </Button>
+        </PaginationItem>
+        <PaginationItem>
+          <Button
+            onClick={handlePreviousPage}
+            variant="ghost"
+            size={"sm"}
+            disabled={currentPage <= 0}
           >
-            {totalPages - 1}
-          </PaginationLink>
-        )} */}
-
-        <PaginationLink
-          className="cursor-pointer"
-          isActive={activePage === finalPage}
-          onClick={() => setPage(finalPage)}
-        >
-          {finalPage}
-        </PaginationLink>
-
-        <PaginationNext
-          onClick={() => activePage < finalPage && setPage(activePage + 1)}
-          className="cursor-pointer"
-        />
+            <ChevronLeft className="w-[1.2rem] h-[1.2rem]" />
+          </Button>
+        </PaginationItem>
+        <PaginationItem>
+          <Button
+            onClick={handleNextPage}
+            variant="ghost"
+            size={"sm"}
+            disabled={currentPage >= totalPages - 1}
+          >
+            <ChevronRight className="w-[1.2rem] h-[1.2rem]" />
+          </Button>
+        </PaginationItem>
+        <PaginationItem>
+          <Button
+            onClick={handleGoToLastPage}
+            variant="ghost"
+            size={"sm"}
+            disabled={currentPage >= totalPages - 1}
+          >
+            <ChevronsRight className="w-[1.2rem] h-[1.2rem]" />
+          </Button>
+        </PaginationItem>
       </PaginationContent>
     </Pagination>
   );
-}
+};

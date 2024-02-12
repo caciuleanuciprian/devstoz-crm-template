@@ -8,23 +8,17 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArchivedClientsTable } from "./list/molecules/archived-clients-table";
 import { ActiveClientsTable } from "./list/molecules/active-clients-table";
 import { useRecoilState } from "recoil";
-import { filterTableByAtom, searchValueAtom } from "./utils/clients.recoil";
+import {
+  currentPageAtom,
+  filterTableByAtom,
+  searchValueAtom,
+} from "./utils/clients.recoil";
 
 const Clients = () => {
   const [, setFilterBy] = useRecoilState(filterTableByAtom);
-
   const [, setSearchValue] = useRecoilState(searchValueAtom);
-
-  const [currentPage, setCurrentPage] = useState<number>(0);
-
+  const [, setCurrentPage] = useRecoilState(currentPageAtom);
   const { dictionary } = useContext(LanguageContext);
-
-  const pagesArray = () => {
-    const pagesArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    pagesArr.shift();
-    pagesArr.pop();
-    return pagesArr;
-  };
 
   const handleResetFilters = () => {
     setFilterBy(null);
@@ -34,9 +28,14 @@ const Clients = () => {
     setSearchValue("");
   };
 
+  const handleResetPage = () => {
+    setCurrentPage(0);
+  };
+
   const handleResetsOnTabChange = () => {
     handleResetFilters();
     handleResetSearch();
+    handleResetPage();
   };
 
   return (
@@ -65,12 +64,7 @@ const Clients = () => {
               <ArchivedClientsTable />
             </TabsContent>
           </Tabs>
-          <TablePagination
-            pages={pagesArray()}
-            totalPages={9}
-            activePage={currentPage}
-            setPage={setCurrentPage}
-          />
+          <TablePagination />
         </div>
       </div>
     </div>

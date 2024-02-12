@@ -28,20 +28,13 @@ interface ClientTableProps {
   data: any;
   error: any;
   isLoading: boolean;
-  loadData: () => void;
 }
 
-export const ClientTable = ({
-  data,
-  error,
-  isLoading,
-  loadData,
-}: ClientTableProps) => {
+export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
   const [, setTotalClients] = useRecoilState(totalClientsAtom);
   const [, setTransactionFilterBy] = useRecoilState(
     filterTransactionTableByAtom
   );
-  const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
   const { dictionary } = useContext(LanguageContext);
 
@@ -58,13 +51,6 @@ export const ClientTable = ({
     },
     { id: "actions", label: dictionary.Actions, alignRight: true, size: 5 },
   ];
-
-  useEffect(() => {
-    if (shouldRefetch) {
-      loadData();
-      setShouldRefetch(false);
-    }
-  }, [shouldRefetch]);
 
   useEffect(() => {
     if (error) {

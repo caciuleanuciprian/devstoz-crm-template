@@ -53,12 +53,7 @@ export const ClientDetails = () => {
             <TransactionsHeader />
             <Transactions />
           </div>
-          <TablePagination
-            pages={[0, 1, 2, 3, 4]}
-            totalPages={5}
-            activePage={0}
-            setPage={() => {}}
-          />
+          <TablePagination />
         </div>
       </div>
     </div>

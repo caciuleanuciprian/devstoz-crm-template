@@ -77,5 +77,9 @@
   "SearchFromAList": "Search from a list of",
   "ClientsDots": "clients...",
   "SignInWith": "Sign in with",
-  "SignInWithGoogleDescription": "Sign in with your Google account to access the application."
+  "SignInWithGoogleDescription": "Sign in with your Google account to access the application.",
+  "Page": "Page",
+  "OutOf": "out of",
+  "Previous": "Previous",
+  "Next": "Next"
 }

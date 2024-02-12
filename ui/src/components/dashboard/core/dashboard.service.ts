@@ -1,3 +1,4 @@
+import { BASE_URL_AUTHORIZED } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
@@ -35,9 +36,7 @@ export const GetClients = async ({
 
   try {
     const response: any = await axios.get(
-      `${
-        import.meta.env.VITE_BASE_URL
-      }/users/${userId}/clients?${params.toString()}`,
+      `${BASE_URL_AUTHORIZED}/users/${userId}/clients?${params.toString()}`,
       {
         headers: {
           Authorization:

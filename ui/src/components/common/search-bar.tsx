@@ -2,7 +2,6 @@ import { Command, CommandInput } from "@/components/ui/command";
 import { useRecoilState } from "recoil";
 import {
   searchValueAtom,
-  shouldRefetchAtom,
   totalClientsAtom,
 } from "../clients/utils/clients.recoil";
 import { useContext, useEffect, useState } from "react";
@@ -13,7 +12,6 @@ import { LanguageContext } from "@/i18n/language-context";
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useRecoilState(searchValueAtom);
   const [totalClients] = useRecoilState(totalClientsAtom);
-  const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
   const [searchText, setSearchText] = useState<string>("");
   const { dictionary } = useContext(LanguageContext);
 
@@ -21,7 +19,6 @@ const SearchBar = () => {
     if ((searchValue !== null && searchValue !== "") || searchText !== "") {
       setSearchText("");
       setSearchValue(null);
-      setShouldRefetch(true);
     }
   };
 
@@ -34,7 +31,6 @@ const SearchBar = () => {
   useEffect(() => {
     if (searchText === "" && searchValue !== null) {
       setSearchValue(searchText);
-      setShouldRefetch(true);
     }
   }, [searchText]);
 
@@ -46,7 +42,6 @@ const SearchBar = () => {
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               setSearchValue(searchText);
-              setShouldRefetch(true);
             }
           }}
           onValueChange={(e) => {
