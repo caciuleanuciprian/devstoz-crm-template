@@ -7,7 +7,6 @@
   "Register": "Register",
   "Login": "Login",
   "CreateAnAccount": "Create an account",
-  "EnterEmailBelow": "Enter your email below to create your account",
   "SignInWithEmail": "Sign In with Email",
   "OrContinueWith": "Or continue with",
   "Tos": "Terms of Service",
@@ -76,5 +75,7 @@
   "FilterBy": "Filter by",
   "TotalClients": "Total clients",
   "SearchFromAList": "Search from a list of",
-  "ClientsDots": "clients..."
+  "ClientsDots": "clients...",
+  "SignInWith": "Sign in with",
+  "SignInWithGoogleDescription": "Sign in with your Google account to access the application."
 }

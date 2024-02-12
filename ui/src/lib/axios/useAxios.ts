@@ -1,5 +1,10 @@
+import { FRONT_END_BASE_URL } from "./consts";
 import { useEffect, useState } from "react";
 import { AxiosResponse, AxiosHeaders } from "axios";
+import { AxiosStatusCode } from "./helpers";
+import { useRecoilState } from "recoil";
+import { idTokenAtom } from "@/components/authentication/utils/authentication.recoil";
+import { PagesURL } from "@/components/authentication/utils/consts";
 
 type ExpectedResponse = AxiosResponse | any;
 
@@ -14,6 +19,7 @@ const useAxios = ({
   fetchFn,
   paramsOfFetch,
 }: useAxiosProps) => {
+  const [, setIdToken] = useRecoilState(idTokenAtom);
   const [data, setData] = useState<ExpectedResponse | null>(null);
   const [response, setResponse] = useState<ExpectedResponse>(null);
   const [headers, setHeaders] = useState<AxiosHeaders>();
@@ -51,6 +57,14 @@ const useAxios = ({
   useEffect(() => {
     loadOnMount && loadData();
   }, []);
+
+  useEffect(() => {
+    if (dataCode === AxiosStatusCode.CODE_401_UNAUTHORIZED) {
+      setIdToken(null);
+      localStorage.removeItem("idToken");
+      location.href = `${FRONT_END_BASE_URL}${PagesURL.AUTHENTICATION}`;
+    }
+  }, [dataCode]);
 
   return {
     data,

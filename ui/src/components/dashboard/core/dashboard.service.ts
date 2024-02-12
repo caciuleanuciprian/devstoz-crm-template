@@ -37,8 +37,16 @@ export const GetClients = async ({
     const response: any = await axios.get(
       `${
         import.meta.env.VITE_BASE_URL
-      }/users/${userId}/clients?${params.toString()}`
+      }/users/${userId}/clients?${params.toString()}`,
+      {
+        headers: {
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
     );
+
     return response;
   } catch (error) {
     return handleError(error);

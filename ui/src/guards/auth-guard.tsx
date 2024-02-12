@@ -1,23 +1,20 @@
-import { isAuthenticatedAtom } from "@/components/authentication/utils/authentication.recoil";
+import { idTokenAtom } from "@/components/authentication/utils/authentication.recoil";
 import { PagesURL } from "@/components/authentication/utils/consts";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 const AuthGuard = ({ children }: any) => {
+  const [idToken] = useRecoilState(idTokenAtom);
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] =
-    useRecoilState<boolean>(isAuthenticatedAtom);
-
-  // Should be refactored to check if auth cookie is present and not only if localstorage has true property
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!idToken) {
       navigate(PagesURL.AUTHENTICATION);
     }
   }, []);
 
-  return <>{!isAuthenticated ? null : children}</>;
+  return <>{!idToken ? null : children}</>;
 };
 
 export default AuthGuard;

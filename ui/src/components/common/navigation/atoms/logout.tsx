@@ -1,16 +1,16 @@
 import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRecoilState } from "recoil";
-import { isAuthenticatedAtom } from "@/components/authentication/utils/authentication.recoil";
 import { useNavigate } from "react-router-dom";
 import { PagesURL } from "@/components/authentication/utils/consts";
+import { idTokenAtom } from "@/components/authentication/utils/authentication.recoil";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const [, setIsAuthenticated] = useRecoilState(isAuthenticatedAtom);
+  const [, setIdToken] = useRecoilState(idTokenAtom);
   const logoutAndRedirect = () => {
-    setIsAuthenticated(false);
-    console.log("remove auth cookie");
+    setIdToken(null);
+    localStorage.removeItem("idToken");
     navigate(PagesURL.AUTHENTICATION);
   };
   return (

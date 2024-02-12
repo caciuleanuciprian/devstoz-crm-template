@@ -7,6 +7,7 @@ import ErrorPage from "./error-page";
 import ReportsPage from "./reports";
 import SettingsPage from "./settings";
 import { ClientDetailsPage } from "./client-details";
+import { OauthRedirectPage } from "./oauth-redirect";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
   {
     path: PagesURL.SETTINGS,
     element: <SettingsPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: PagesURL.OAUTH2_REDIRECT,
+    element: <OauthRedirectPage />,
     errorElement: <ErrorPage />,
   },
 ]);
