@@ -49,6 +49,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
   const clientForm = useForm({
     initialValues: initialValues,
   });
+
   const values = useFormFields({
     connect: clientForm,
     selector: (field) => field.value,
@@ -68,9 +69,11 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
   const handleAddClient = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    e.preventDefault();
-    await loadData();
-    setShouldRefetch(true);
+    if (clientForm.isValid) {
+      e.preventDefault();
+      await loadData();
+      setShouldRefetch(true);
+    }
   };
 
   const handleInputType = (field: InputWithLabelProps) => {
@@ -105,6 +108,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
             type={field.type}
             name={field.name}
             validations={field.validations}
+            required={field.required}
           />
         </div>
       );
@@ -130,7 +134,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
           <SheetTitle>{title}</SheetTitle>
           <SheetDescription>{description}</SheetDescription>
         </SheetHeader>
-        <Formiz connect={clientForm}>
+        <Formiz connect={clientForm} autoForm>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4">
               {renderFormFields(dictionary, isLoading).map((field: any) =>
@@ -148,6 +152,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
               onClick={(e) => {
                 handleAddClient(e);
               }}
+              disabled={isLoading || !clientForm.isValid}
             >
               {isLoading ? <Loader /> : submitTxt}
             </Button>

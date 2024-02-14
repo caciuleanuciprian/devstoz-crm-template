@@ -85,6 +85,7 @@ export const TransactionsActions = ({
   };
 
   const handleEdit = async () => {
+    if (!updateTransactionForm.isValid || !transactionType) return;
     await updateTransaction();
   };
 
@@ -168,6 +169,7 @@ export const TransactionsActions = ({
         confirmTxt={dictionary.Save}
         cancelTxt={dictionary.Cancel}
         onConfirm={handleEdit}
+        isDisabled={!updateTransactionForm.isValid || !transactionType}
       />
       <Button size={"xs"} variant="ghost" onClick={handleDownload}>
         {transactionFileIsLoading ? (

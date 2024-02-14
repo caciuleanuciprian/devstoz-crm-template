@@ -18,6 +18,7 @@ export const InputField = <FormattedValue = string,>(
     autoCorrect = "false",
     disabled = false,
     defaultValue,
+    required,
   } = props;
   return (
     <div className="flex flex-col gap-1 min-h-[56px] w-full">
@@ -35,6 +36,7 @@ export const InputField = <FormattedValue = string,>(
         disabled={disabled}
         onChange={(e) => setValue(e.target.value)}
         defaultValue={defaultValue}
+        required={required}
       />
       {!isValid && (
         <p className="flex items-center gap-1 text-xs text-red-500">

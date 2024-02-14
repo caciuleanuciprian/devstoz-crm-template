@@ -48,11 +48,7 @@ export const TransactionsHeader = () => {
   });
 
   const handleSubmit = async () => {
-    console.log({
-      ...values,
-      file: file,
-      transactionType: transactionType,
-    });
+    if (!addTransactionForm.isValid || !transactionType || !file) return;
     await loadData();
   };
 
@@ -93,6 +89,7 @@ export const TransactionsHeader = () => {
           confirmTxt={dictionary.Submit}
           cancelTxt={dictionary.Cancel}
           onConfirm={handleSubmit}
+          isDisabled={!addTransactionForm.isValid || !transactionType || !file}
         />
       </div>
     </div>

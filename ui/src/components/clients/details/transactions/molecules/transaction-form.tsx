@@ -3,7 +3,7 @@ import { TransactionObject } from "@/components/clients/utils/types";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LanguageContext } from "@/i18n/language-context";
-import { Form, Formiz } from "@formiz/core";
+import { Form, Formiz, useFormFields } from "@formiz/core";
 import { useContext, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import {
@@ -22,6 +22,12 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import {
+  isMinNumber,
+  isNotEmptyString,
+  isNumber,
+  isRequired,
+} from "@formiz/validations";
 
 interface TransactionFormProps {
   form: Form;
@@ -42,6 +48,13 @@ export const TransactionForm = ({ form, data }: TransactionFormProps) => {
     }
   }, [data]);
 
+  useEffect(() => {
+    form.setValues({
+      ...data,
+      transactionType: data?.transactionType,
+    });
+  }, [data]);
+
   return (
     <Formiz connect={form}>
       <div className="col-span-4 w-full">
@@ -49,7 +62,13 @@ export const TransactionForm = ({ form, data }: TransactionFormProps) => {
           label={dictionary.Name}
           type={"text"}
           name={"name"}
-          defaultValue={data?.name}
+          required={dictionary.FieldCannotBeEmpty}
+          validations={[
+            {
+              handler: isRequired() && isNotEmptyString(),
+              message: `${dictionary.InvalidName}`,
+            },
+          ]}
         />
       </div>
       <div className="col-span-4 w-full">
@@ -57,11 +76,20 @@ export const TransactionForm = ({ form, data }: TransactionFormProps) => {
           label={dictionary.Amount}
           type={"number"}
           name={"amount"}
-          defaultValue={data?.amount}
+          required={dictionary.FieldCannotBeEmpty}
+          validations={[
+            {
+              handler: isRequired() && isNumber() && isMinNumber(0),
+              message: `${dictionary.InvalidAmount}`,
+            },
+          ]}
         />
       </div>
       <div className="col-span-4 w-full pb-4">
-        <Select onValueChange={(e: any) => setTransactionType(e)}>
+        <Select
+          onValueChange={(e: any) => setTransactionType(e)}
+          defaultValue={data?.transactionType}
+        >
           <Label>{dictionary.TransactionType}</Label>
           <SelectTrigger>
             <SelectValue placeholder={dictionary.Income} />
@@ -75,6 +103,8 @@ export const TransactionForm = ({ form, data }: TransactionFormProps) => {
           </SelectContent>
         </Select>
       </div>
+
+      {/* TODO Add validation to this filed */}
       {!data && (
         <div className="col-span-4 w-full">
           <Label>{dictionary.UploadFile}</Label>

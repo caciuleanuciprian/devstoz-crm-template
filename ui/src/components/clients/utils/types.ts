@@ -25,6 +25,7 @@ export interface InputWithLabelProps {
   options?: string[];
   isDisabled?: boolean;
   defaultValue?: string | number;
+  required?: boolean | string;
 }
 
 export interface ClientFormProps {

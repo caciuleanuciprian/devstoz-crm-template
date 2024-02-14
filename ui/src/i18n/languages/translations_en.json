@@ -81,5 +81,11 @@
   "Page": "Page",
   "OutOf": "out of",
   "Previous": "Previous",
-  "Next": "Next"
+  "Next": "Next",
+  "InvalidName": "Name is invalid.",
+  "InvalidAddress": "Address is invalid.",
+  "InvalidPhone": "Phone is invalid.",
+  "InvalidPhoneLength": "Phone number should be 10 characters long.",
+  "FieldCannotBeEmpty": "Field cannot be empty.",
+  "InvalidAmount": "Amount is invalid."
 }

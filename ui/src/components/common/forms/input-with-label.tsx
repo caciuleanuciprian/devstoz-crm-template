@@ -10,6 +10,7 @@ const InputWithLabel = ({
   validations,
   isDisabled,
   defaultValue,
+  required,
 }: InputWithLabelProps) => {
   return (
     <div>
@@ -28,6 +29,7 @@ const InputWithLabel = ({
           disabled={isLoading || isDisabled}
           validations={validations}
           defaultValue={defaultValue}
+          required={required}
         />
       </div>
     </div>

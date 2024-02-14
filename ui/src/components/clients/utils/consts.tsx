@@ -5,6 +5,14 @@ import {
   User,
   UserCog,
 } from "lucide-react";
+import {
+  isEmail,
+  isMaxLength,
+  isMinLength,
+  isNotEmptyString,
+  isNumber,
+  isRequired,
+} from "@formiz/validations";
 
 export enum ClientType {
   SRL = "SRL",
@@ -117,25 +125,45 @@ export const renderFormFields = (dictionary: any, isLoading: boolean) => {
       isLoading: isLoading,
       type: "text",
       name: "name",
+      required: dictionary.FieldCannotBeEmpty,
+      validations: [
+        {
+          handler: isRequired() && isNotEmptyString(),
+          message: `${dictionary.InvalidName}`,
+        },
+      ],
     },
     {
       label: dictionary.Address,
       isLoading: isLoading,
       type: "text",
       name: "address",
+      required: dictionary.FieldCannotBeEmpty,
+      validations: [
+        {
+          handler: isRequired() && isNotEmptyString(),
+          message: `${dictionary.InvalidAddress}`,
+        },
+      ],
     },
     {
       label: dictionary.Phone,
       isLoading: isLoading,
       type: "phone",
       name: "telephone",
+      required: dictionary.FieldCannotBeEmpty,
       validations: [
         {
-          handler: (value: string) =>
-            /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(
-              value
-            ),
-          message: `${dictionary.InvalidPhoneNumber}`,
+          handler: isRequired() && isNumber(),
+          message: `${dictionary.InvalidPhone}`,
+        },
+        {
+          handler: isMaxLength(10),
+          message: `${dictionary.InvalidPhoneLength}`,
+        },
+        {
+          handler: isMinLength(10),
+          message: `${dictionary.InvalidPhoneLength}`,
         },
       ],
     },
@@ -144,9 +172,10 @@ export const renderFormFields = (dictionary: any, isLoading: boolean) => {
       isLoading: isLoading,
       type: "email",
       name: "email",
+      required: dictionary.FieldCannotBeEmpty,
       validations: [
         {
-          handler: (value: string) => value.includes("@"),
+          handler: isRequired() && isEmail(),
           message: `${dictionary.InvalidEmail}`,
         },
       ],
