@@ -22,7 +22,7 @@ const Navigation = () => {
     <div
       className={`flex h-screen w-[192px] flex-col bg-secondary fixed z-10 top-0`}
     >
-      <div className="flex  h-[5vh] w-[192px] mb-4 pt-4 items-center px-2 py-2">
+      <div className="flex h-[5vh] w-[192px] mb-4 pt-4 items-center px-2 py-2">
         <Logo />
       </div>
       <div className="flex flex-col h-[90vh] w-full justify-between">

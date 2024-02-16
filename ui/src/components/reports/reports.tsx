@@ -3,7 +3,7 @@ import { LinkIDS } from "@/components/common/navigation/utils/consts";
 import { activeNavTabAtom } from "@/components/common/navigation/utils/navigation.recoil";
 import { useContext, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { Header } from "../common/header";
+import { Header } from "../common/header/header";
 import { LanguageContext } from "@/i18n/language-context";
 
 const Reports = () => {

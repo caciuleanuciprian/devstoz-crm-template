@@ -37,6 +37,7 @@ import {
 import { useRecoilState } from "recoil";
 import { shouldRefetchAtom } from "../../utils/clients.recoil";
 import { Loader } from "@/components/common/loader";
+import { userDetailsAtom } from "@/components/authentication/utils/authentication.recoil";
 
 export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
   const { dictionary } = useContext(LanguageContext);
@@ -44,6 +45,8 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
   const { trigger, title, description, submitTxt } = sheetProps;
 
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
+
+  const [userDetails] = useRecoilState(userDetailsAtom);
 
   const [clientType, setClientType] = useState<ClientType>(ClientType.SRL);
   const clientForm = useForm({
@@ -58,7 +61,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
   const { data, error, isLoading, loadData, dataCode } = useAxios({
     fetchFn: AddClient,
     paramsOfFetch: {
-      userId: import.meta.env.VITE_USER_ID,
+      userId: userDetails?.id,
       body: {
         ...values,
         clientType: clientType,

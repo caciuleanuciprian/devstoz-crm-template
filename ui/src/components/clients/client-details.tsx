@@ -1,4 +1,4 @@
-import { Header } from "../common/header";
+import { Header } from "../common/header/header";
 import { ClientDetailsCardForm } from "./details/client-details-card-form";
 import { Transactions } from "./details/transactions/molecules/transactions";
 import { LanguageContext } from "@/i18n/language-context";

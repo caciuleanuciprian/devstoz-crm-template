@@ -5,6 +5,8 @@ export enum PagesURL {
   SETTINGS = "/settings",
   AUTHENTICATION = "/",
   OAUTH2_REDIRECT = "/oauth/callback",
+  INITIAL_SETTINGS = "/initial-settings",
+  ORGANIZATION_SELECTION = "/organization-selection",
 }
 
 function dec2hex(dec: any) {

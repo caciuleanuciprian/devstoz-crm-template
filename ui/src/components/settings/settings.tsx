@@ -4,7 +4,7 @@ import { activeNavTabAtom } from "@/components/common/navigation/utils/navigatio
 import { useContext, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import LanguageSelector from "@/components/settings/atoms/language-selector";
-import { Header } from "../common/header";
+import { Header } from "../common/header/header";
 import { LanguageContext } from "@/i18n/language-context";
 
 const Settings = () => {

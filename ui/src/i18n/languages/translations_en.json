@@ -87,5 +87,19 @@
   "InvalidPhone": "Phone is invalid.",
   "InvalidPhoneLength": "Phone number should be 10 characters long.",
   "FieldCannotBeEmpty": "Field cannot be empty.",
-  "InvalidAmount": "Amount is invalid."
+  "InvalidAmount": "Amount is invalid.",
+  "UserDetailsError": "There was an error getting the user details.",
+  "OrganizationLogo": "Organization Logo",
+  "OrganizationLogoName": "Organization Logo Name",
+  "OrganizationName": "Organization Name",
+  "Language": "Language",
+  "English": "English",
+  "Romanian": "Romanian",
+  "Currency": "Currency",
+  "RON": "RON (lei)",
+  "USD": "USD ($)",
+  "EUR": "EUR (€)",
+  "GBP": "GBP (£)",
+  "AddMembers": "Add members",
+  "Reset": "Reset"
 }

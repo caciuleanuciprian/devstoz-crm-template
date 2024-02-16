@@ -10,6 +10,7 @@ import {
   totalPagesAtom,
 } from "../../utils/clients.recoil";
 import { useEffect } from "react";
+import { userDetailsAtom } from "@/components/authentication/utils/authentication.recoil";
 
 export const ArchivedClientsTable = () => {
   const [filterBy] = useRecoilState(filterTableByAtom);
@@ -17,11 +18,12 @@ export const ArchivedClientsTable = () => {
   const [, setTotalPages] = useRecoilState(totalPagesAtom);
   const [currentPage, setCurrentPage] = useRecoilState(currentPageAtom);
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
+  const [userDetails] = useRecoilState(userDetailsAtom);
 
   const { data, error, isLoading, loadData } = useAxios({
     fetchFn: GetClients,
     paramsOfFetch: {
-      userId: import.meta.env.VITE_USER_ID,
+      userId: userDetails?.id,
       page: currentPage,
       size: 15,
       active: false,
