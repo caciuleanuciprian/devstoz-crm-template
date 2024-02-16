@@ -50,7 +50,7 @@ export const UserInfoGuard = ({ children }: any) => {
   return (
     <>
       {!userDetails ? (
-        <div className="w-[100vw] h-[100vh] flex justify-center items-center">
+        <div className="w-[100vw] h-[100vh] flex flex-col justify-center items-center">
           <Loader />
           <p>Loading User Info</p>
         </div>
