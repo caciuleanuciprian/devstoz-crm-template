@@ -47,12 +47,10 @@ export const InitialSettings = () => {
       userId: userDetails?.id,
       body: {
         organizationLogo: file,
-        organization: {
-          name: values.name,
-          language,
-          currency,
-          logoName: values.logoName,
-        },
+        name: values.name,
+        language,
+        currency,
+        logoName: values.logoName,
       },
     },
   });
