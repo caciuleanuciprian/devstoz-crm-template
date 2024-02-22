@@ -8,7 +8,7 @@ import { useContext } from "react";
 export const ClientSearch = () => {
   const { dictionary } = useContext(LanguageContext);
   return (
-    <div className="flex gap-4 justify-between items-center">
+    <div className="flex gap-4 mx-4 justify-between items-center">
       <div className="w-[95%]">
         <SearchBar />
       </div>

@@ -118,8 +118,10 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
     }
   };
 
+  console.log(dataCode);
+
   useEffect(() => {
-    if (data && dataCode === AxiosStatusCode.CODE_200_OK) {
+    if (data && dataCode === AxiosStatusCode.CODE_201_CREATED) {
       toast({ title: dictionary.ClientAddedSuccess, variant: "success" });
       clientForm.reset();
     } else if (error) {

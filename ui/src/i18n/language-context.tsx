@@ -1,5 +1,11 @@
 import React, { useState, createContext, useContext } from "react";
 import { dictionaryList, languageOptions } from "./languages";
+import {
+  selectedOrganizationAtom,
+  userDetailsAtom,
+} from "@/components/authentication/utils/authentication.recoil";
+import { useRecoilState } from "recoil";
+import { UserOrganization } from "@/components/authentication/utils/types";
 
 // create the language context with default selected language
 export const LanguageContext = createContext({
@@ -9,7 +15,11 @@ export const LanguageContext = createContext({
 
 // it provides the language context to app
 export function LanguageProvider({ children }: any) {
-  const defaultLanguage = window.localStorage.getItem("rcml-lang");
+  const [selectedOrganization, setSelectedOrganization] = useRecoilState(
+    selectedOrganizationAtom
+  );
+  const defaultLanguage =
+    selectedOrganization?.language || window.localStorage.getItem("rcml-lang");
   const [userLanguage, setUserLanguage] = useState(defaultLanguage || "en");
 
   const provider = {
@@ -19,6 +29,10 @@ export function LanguageProvider({ children }: any) {
     userLanguageChange: (selected: string) => {
       const newLanguage = languageOptions[selected] ? selected : "en";
       setUserLanguage(newLanguage);
+      setSelectedOrganization({
+        ...(selectedOrganization as UserOrganization),
+        language: newLanguage,
+      });
       window.localStorage.setItem("rcml-lang", newLanguage);
     },
   };

@@ -12,12 +12,14 @@ import { AxiosStatusCode } from "@/lib/axios/helpers";
 import useAxios from "@/lib/axios/useAxios";
 import { jwtDecode } from "jwt-decode";
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 export const UserInfoGuard = ({ children }: any) => {
   const [userDetails, setUserDetails] = useRecoilState(userDetailsAtom);
   const [idToken, setIdToken] = useRecoilState(idTokenAtom);
   const { dictionary } = useContext(LanguageContext);
+  const navigate = useNavigate();
 
   const { data, loadData, error, dataCode } = useAxios({
     fetchFn: GetUserByEmail,
@@ -40,10 +42,10 @@ export const UserInfoGuard = ({ children }: any) => {
 
   useEffect(() => {
     if (dataCode === AxiosStatusCode.CODE_401_UNAUTHORIZED || error) {
-      location.href = `${FRONT_END_BASE_URL}${PagesURL.AUTHENTICATION}`;
+      navigate(PagesURL.AUTHENTICATION);
+      toast({ title: dictionary.UserDetailsError, variant: "destructive" });
       setIdToken(null);
       setUserDetails(null);
-      toast({ title: dictionary.UserDetailsError, variant: "destructive" });
     }
   }, [dataCode, error]);
 
@@ -52,7 +54,7 @@ export const UserInfoGuard = ({ children }: any) => {
       {!userDetails ? (
         <div className="w-[100vw] h-[100vh] flex flex-col justify-center items-center">
           <Loader />
-          <p>Loading User Info</p>
+          <p>{dictionary.LoadingUserDetails}</p>
         </div>
       ) : (
         children

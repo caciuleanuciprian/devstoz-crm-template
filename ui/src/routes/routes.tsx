@@ -9,6 +9,7 @@ import SettingsPage from "./settings";
 import { ClientDetailsPage } from "./client-details";
 import { OauthRedirectPage } from "./oauth-redirect";
 import { InitialSettingsPage } from "./initial-settings";
+import { OrganizationSelectionPage } from "./organization-selection";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,11 @@ export const router = createBrowserRouter([
   {
     path: PagesURL.INITIAL_SETTINGS,
     element: <InitialSettingsPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: PagesURL.ORGANIZATION_SELECTION,
+    element: <OrganizationSelectionPage />,
     errorElement: <ErrorPage />,
   },
 ]);

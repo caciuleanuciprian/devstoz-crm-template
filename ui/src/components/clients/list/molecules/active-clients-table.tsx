@@ -20,8 +20,6 @@ export const ActiveClientsTable = () => {
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
   const [userDetails] = useRecoilState(userDetailsAtom);
 
-  console.log(userDetails);
-
   const { data, error, isLoading, loadData } = useAxios({
     fetchFn: GetClients,
     paramsOfFetch: {

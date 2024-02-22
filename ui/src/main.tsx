@@ -21,12 +21,12 @@ import { router } from "./routes/routes.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
   <ThemeProvider defaultTheme="dark" storageKey="ui-theme">
-    <LanguageProvider>
-      <RecoilRoot>
+    <RecoilRoot>
+      <LanguageProvider>
         <RouterProvider router={router} />
         <Toaster />
-      </RecoilRoot>
-    </LanguageProvider>
+      </LanguageProvider>
+    </RecoilRoot>
   </ThemeProvider>
   // </React.StrictMode>
 );

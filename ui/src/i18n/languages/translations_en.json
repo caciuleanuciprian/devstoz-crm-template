@@ -101,5 +101,21 @@
   "EUR": "EUR (€)",
   "GBP": "GBP (£)",
   "AddMembers": "Add members",
-  "Reset": "Reset"
+  "AddMembersDescription": "Add members to your organization. They will be able to access the application.",
+  "Reset": "Reset",
+  "OrganizationUpdated": "Organization details updated succesfully.",
+  "OrganizationUpdateError": "Organization details could not be updated.",
+  "LoadingOrganizations": "Loading organizations...",
+  "LoadingAuthentication": "Loading authentication...",
+  "LoadingUserDetails": "Loading user details...",
+  "LoadingInitialSettings": "Loading initial settings...",
+  "Role": "Role",
+  "DeleteMember": "Delete member",
+  "DeleteMemberConfirmation": "Are you sure you want to delete this member? You cannot recover a deleted member.",
+  "Administrator": "Administrator",
+  "Member": "Member",
+  "DragAndDrop": "Drag 'n' drop a file here, or click to select file",
+  "OnlyOneFile": "You can upload only one file.",
+  "OrganizationCreated": "Organization created succesfully.",
+  "OrganizationCreateError": "Organization could not be created."
 }

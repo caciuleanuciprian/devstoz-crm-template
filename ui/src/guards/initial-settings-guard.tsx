@@ -12,6 +12,7 @@ import { FRONT_END_BASE_URL } from "@/lib/axios/consts";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import useAxios from "@/lib/axios/useAxios";
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 export const InitialSettingsGuard = ({ children }: any) => {
@@ -20,7 +21,10 @@ export const InitialSettingsGuard = ({ children }: any) => {
   const [selectedOrganization, setSelectedOrganization] = useRecoilState(
     selectedOrganizationAtom
   );
-  const { dictionary } = useContext(LanguageContext);
+
+  const navigate = useNavigate();
+
+  const { dictionary, userLanguageChange }: any = useContext(LanguageContext);
 
   const { data, loadData, error, dataCode } = useAxios({
     fetchFn: GetUserOrganizations,
@@ -28,6 +32,8 @@ export const InitialSettingsGuard = ({ children }: any) => {
       userId: userDetails?.id,
     },
   });
+
+  console.log(data);
 
   useEffect(() => {
     if (idToken && userDetails && !selectedOrganization) {
@@ -38,9 +44,9 @@ export const InitialSettingsGuard = ({ children }: any) => {
   useEffect(() => {
     if (data) {
       if (data.length < 1) {
-        location.href = `${FRONT_END_BASE_URL}${PagesURL.INITIAL_SETTINGS}`;
+        navigate(PagesURL.INITIAL_SETTINGS);
       } else if (data.length > 1) {
-        location.href = `${FRONT_END_BASE_URL}${PagesURL.ORGANIZATION_SELECTION}`;
+        navigate(PagesURL.ORGANIZATION_SELECTION);
       } else if (data.length === 1) {
         setSelectedOrganization(data[0]);
       }
@@ -58,7 +64,7 @@ export const InitialSettingsGuard = ({ children }: any) => {
       {!selectedOrganization ? (
         <div className="w-[100vw] h-[100vh] flex flex-col justify-center items-center">
           <Loader />
-          <p>Loading Initial Settings</p>
+          <p>{dictionary.LoadingInitialSettings}</p>
         </div>
       ) : (
         children

@@ -21,7 +21,7 @@ const getFileExtension = (fileName: string) => {
   return fileName.split(".").pop();
 };
 
-const getIcon = (fileName: string) => {
+export const getIcon = (fileName: string) => {
   const extension = getFileExtension(fileName);
   switch (extension) {
     case FileExtensions.PDF:

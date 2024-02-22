@@ -90,7 +90,7 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
       </TableHeader>
       <TableBody className="w-full">
         {isLoading && (
-          <TableRow className="h-[72.5vh] hover:!bg-transparent">
+          <TableRow className=" hover:!bg-transparent">
             <TableCell
               className="align-top text-center"
               colSpan={ClientTableHeaders.length}
@@ -100,7 +100,7 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
           </TableRow>
         )}
         {error && (
-          <TableRow className="h-[72.5vh] hover:!bg-transparent">
+          <TableRow className=" hover:!bg-transparent">
             <TableCell
               className="align-top text-center"
               colSpan={ClientTableHeaders.length}
@@ -110,7 +110,7 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
           </TableRow>
         )}
         {!isLoading && data?.entries.length === 0 && (
-          <TableRow className="h-[72.5vh] hover:!bg-transparent">
+          <TableRow className=" hover:!bg-transparent">
             <TableCell
               className="align-top text-center"
               colSpan={ClientTableHeaders.length}
@@ -122,7 +122,7 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
         {!isLoading &&
           data?.entries.length > 0 &&
           data.entries.map((client: any) => (
-            <TableRow className="h-[57px]" key={client.id}>
+            <TableRow key={client.id}>
               <TableCell>{client.name}</TableCell>
               <TableCell>{client.address}</TableCell>
               <TableCell>{client.telephone}</TableCell>

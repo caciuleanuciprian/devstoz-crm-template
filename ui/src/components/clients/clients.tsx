@@ -41,26 +41,28 @@ const Clients = () => {
   return (
     <div className="px-8">
       <Header title={dictionary.Clients} />
-      <div className="flex h-[95vh] py-4 flex-col gap-4 justify-between">
+      <div className="flex h-[90vh] pt-4 my-4 flex-col bg-secondary  rounded-md">
         <ClientSearch />
-        <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col gap-4 h-full overflow-auto justify-between bg-background rounded-md m-4">
           <Tabs
             onValueChange={handleResetsOnTabChange}
             defaultValue="active"
-            className="w-full h-full"
+            className="w-full flex flex-col"
           >
-            <TabsList>
-              <TabsTrigger value="active">
-                {dictionary.ActiveClients}
-              </TabsTrigger>
-              <TabsTrigger value="archived">
-                {dictionary.ArchivedClients}
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="active">
+            <div>
+              <TabsList className="m-4 justify-start">
+                <TabsTrigger value="active">
+                  {dictionary.ActiveClients}
+                </TabsTrigger>
+                <TabsTrigger value="archived">
+                  {dictionary.ArchivedClients}
+                </TabsTrigger>
+              </TabsList>
+            </div>
+            <TabsContent value="active" className="mx-4">
               <ActiveClientsTable />
             </TabsContent>
-            <TabsContent value="archived">
+            <TabsContent value="archived" className="mx-4">
               <ArchivedClientsTable />
             </TabsContent>
           </Tabs>

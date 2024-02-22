@@ -1,22 +1,6 @@
 import { localStorageEffect } from "@/lib/recoil/persistAtom";
 import { atom } from "recoil";
-
-interface UserDetails {
-  email: string;
-  name: string;
-  id: string;
-  clients: string[];
-  roles: string[];
-}
-
-interface UserOrganization {
-  id: string;
-  name: string;
-  language: string;
-  currency: string;
-  logoName: string;
-  logo: File;
-}
+import { UserDetails, UserOrganization } from "./types";
 
 export const idTokenAtom = atom({
   key: "idToken",
