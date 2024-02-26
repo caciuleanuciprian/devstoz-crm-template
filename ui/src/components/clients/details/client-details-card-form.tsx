@@ -20,28 +20,15 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "@/i18n/language-context";
 import useAxios from "@/lib/axios/useAxios";
-import { UpdateClient } from "../core/clients.service";
+import { GetClient, UpdateClient } from "../core/clients.service";
 import { toast } from "@/components/ui/use-toast";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
+import { useParams } from "react-router-dom";
 
-interface ClientDetailsCardFormProps {
-  data: any;
-  clientId: string | undefined;
-  dataCode: number | null;
-  error: any;
-  isLoading: boolean;
-}
-
-export const ClientDetailsCardForm = ({
-  data,
-  clientId,
-  dataCode,
-  error,
-  isLoading,
-}: ClientDetailsCardFormProps) => {
+export const ClientDetailsCardForm = () => {
   const { dictionary } = useContext(LanguageContext);
+  const { clientId } = useParams();
 
-  const [clientType, setClientType] = useState<string>(data?.clientType);
   const clientForm = useForm();
   const values = useFormFields({
     connect: clientForm,
@@ -51,6 +38,16 @@ export const ClientDetailsCardForm = ({
   const [interactionMode, setInteractionMode] = useState<InteractionMode>(
     InteractionMode.View
   );
+
+  const { data, error, isLoading, dataCode } = useAxios({
+    fetchFn: GetClient,
+    paramsOfFetch: {
+      clientId: clientId,
+    },
+    loadOnMount: true,
+  });
+
+  const [clientType, setClientType] = useState<string>(data?.clientType);
 
   const {
     error: updateClientError,

@@ -6,6 +6,7 @@ import {
 } from "@/components/authentication/utils/authentication.recoil";
 import { PagesURL } from "@/components/authentication/utils/consts";
 import { Loader } from "@/components/common/loader";
+import { shouldRefetchOrganizationAtom } from "@/components/settings/core/settings.recoil";
 import { toast } from "@/components/ui/use-toast";
 import { LanguageContext } from "@/i18n/language-context";
 import { FRONT_END_BASE_URL } from "@/lib/axios/consts";
@@ -22,9 +23,12 @@ export const InitialSettingsGuard = ({ children }: any) => {
     selectedOrganizationAtom
   );
 
+  const [shouldRefetchOrganization, setShouldRefetchOrganization] =
+    useRecoilState(shouldRefetchOrganizationAtom);
+
   const navigate = useNavigate();
 
-  const { dictionary, userLanguageChange }: any = useContext(LanguageContext);
+  const { dictionary }: any = useContext(LanguageContext);
 
   const { data, loadData, error, dataCode } = useAxios({
     fetchFn: GetUserOrganizations,
@@ -33,7 +37,12 @@ export const InitialSettingsGuard = ({ children }: any) => {
     },
   });
 
-  console.log(data);
+  useEffect(() => {
+    if (shouldRefetchOrganization) {
+      loadData();
+      setShouldRefetchOrganization(false);
+    }
+  }, [shouldRefetchOrganization]);
 
   useEffect(() => {
     if (idToken && userDetails && !selectedOrganization) {
@@ -45,10 +54,9 @@ export const InitialSettingsGuard = ({ children }: any) => {
     if (data) {
       if (data.length < 1) {
         navigate(PagesURL.INITIAL_SETTINGS);
-      } else if (data.length > 1) {
-        navigate(PagesURL.ORGANIZATION_SELECTION);
-      } else if (data.length === 1) {
+      } else if (data.length >= 1) {
         setSelectedOrganization(data[0]);
+        navigate(PagesURL.DASHBOARD);
       }
     } else if (dataCode === AxiosStatusCode.CODE_401_UNAUTHORIZED || error) {
       location.href = `${FRONT_END_BASE_URL}${PagesURL.AUTHENTICATION}`;

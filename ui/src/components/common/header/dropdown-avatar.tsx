@@ -1,6 +1,6 @@
 import { userDetailsAtom } from "@/components/authentication/utils/authentication.recoil";
+import { UserRoles } from "@/components/settings/utils/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -11,11 +11,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { useRecoilState } from "recoil";
-
-enum UserRoles {
-  ADMIN = "Administrator",
-  USER = "User",
-}
 
 export const HeaderAvatar = () => {
   const [userDetails] = useRecoilState(userDetailsAtom);

@@ -1,9 +1,8 @@
-import { USERS_URL } from "@/lib/axios/consts";
+import { ORGANIZATION_URL, ROLES_URL, USERS_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
 export const UpdateUserOrganization = async ({
-  userId,
   body,
   organizationId,
 }: {
@@ -11,10 +10,10 @@ export const UpdateUserOrganization = async ({
   body: any;
   organizationId: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  console.log(body);
+  console.log("UpdateUserOrganization", body);
   try {
     const response: any = axios.put(
-      `${USERS_URL}/${userId}/organizations/${organizationId}`,
+      `${ORGANIZATION_URL}/${organizationId}`,
       body,
       {
         headers: {
@@ -31,7 +30,6 @@ export const UpdateUserOrganization = async ({
 };
 
 export const UpdateOrganizationLogo = async ({
-  userId,
   body,
   organizationId,
 }: {
@@ -39,11 +37,58 @@ export const UpdateOrganizationLogo = async ({
   body: any;
   organizationId: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  console.log(body);
+  console.log("UpdateOrganizationLogo", body);
   try {
     const response: any = axios.put(
-      `${USERS_URL}/${userId}/organizations/${organizationId}`,
+      `${ORGANIZATION_URL}/${organizationId}/logo`,
       body,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const AddMember = async ({
+  adminId,
+  body,
+}: {
+  adminId: string;
+  body: any;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  console.log("AddMember", body);
+  try {
+    const response: any = axios.put(`${ROLES_URL}/${adminId}`, body, {
+      headers: {
+        Authorization:
+          //@ts-ignore
+          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+      },
+    });
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetMembers = async ({
+  adminId,
+  organizationId,
+}: {
+  adminId: string;
+  organizationId: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = axios.get(
+      `${ROLES_URL}/${organizationId}/${adminId}`,
       {
         headers: {
           Authorization:

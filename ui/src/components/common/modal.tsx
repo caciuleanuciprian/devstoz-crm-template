@@ -49,6 +49,17 @@ export const Modal = ({
         <DialogFooter>
           <DialogClose asChild>
             <Button
+              disabled={isDisabled}
+              variant={"outline"}
+              onClick={onCancel}
+              type="button"
+              className="text-xs flex items-center px-8"
+            >
+              {cancelTxt}
+            </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button
               variant={isDelete ? "destructive" : "default"}
               onClick={onConfirm}
               type="button"
@@ -56,17 +67,6 @@ export const Modal = ({
               className="text-xs flex items-center px-8"
             >
               {confirmTxt}
-            </Button>
-          </DialogClose>
-          <DialogClose asChild>
-            <Button
-              disabled={isDisabled}
-              variant={"ghost"}
-              onClick={onCancel}
-              type="button"
-              className="text-xs flex items-center px-8"
-            >
-              {cancelTxt}
             </Button>
           </DialogClose>
         </DialogFooter>

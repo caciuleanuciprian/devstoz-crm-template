@@ -48,8 +48,10 @@ const Settings = () => {
           <SettingsOrganizationDetails />
           <SettingsOrganizationLogo />
         </div>
-
-        <SettingsMembersSection />
+        <div className="flex gap-4 xs:flex-col">
+          <SettingsMembersSection />
+          <SettingsMembersSection />
+        </div>
         <LanguageSelector />
       </div>
     </div>

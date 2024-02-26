@@ -31,7 +31,7 @@ const Navigation = () => {
         <div className="flex flex-col w-full ">
           <NavigationMenu className="block max-w-full w-full justify-start">
             <NavigationMenuList className="flex flex-col w-full items-start gap-1.5 py-2 px-2">
-              {linksToLabel(dictionary).map((link, index) => (
+              {linksToLabel(dictionary)?.map((link, index) => (
                 <NavigationMenuItem
                   key={index}
                   className={

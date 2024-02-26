@@ -1,23 +1,23 @@
-import { BASE_URL_AUTHORIZED, USERS_URL } from "@/lib/axios/consts";
+import { ORGANIZATION_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
 export const GetClients = async ({
-  userId,
+  organizationId,
   page = 0,
   size = 10,
   active,
   clientType,
   nameSearchText = "",
 }: {
-  userId: string;
+  organizationId: string;
   page: number;
   size: number;
   active: boolean;
   clientType?: string;
   nameSearchText?: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  console.log(userId);
+  console.log(organizationId);
   const params = new URLSearchParams({
     page: page.toString(),
     size: size.toString(),
@@ -37,7 +37,7 @@ export const GetClients = async ({
 
   try {
     const response: any = await axios.get(
-      `${USERS_URL}/${userId}/clients?${params.toString()}`,
+      `${ORGANIZATION_URL}/${organizationId}/clients?${params.toString()}`,
       {
         headers: {
           Authorization:

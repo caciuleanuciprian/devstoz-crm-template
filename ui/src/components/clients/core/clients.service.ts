@@ -1,6 +1,7 @@
 import {
   CLIENTS_PREFIX,
   CLIENTS_URL,
+  REPORTS_URL,
   TRANSACTIONS_PREFIX,
   TRANSACTIONS_URL,
 } from "@/lib/axios/consts";
@@ -8,17 +9,17 @@ import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
 export const AddClient = async ({
-  userId,
+  organizationId,
   body,
 }: {
-  userId: string;
+  organizationId: string;
   body: any;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
     const response: any = await axios.post(
       `${CLIENTS_URL}`,
       {
-        userId,
+        organizationId,
         ...body,
       },
       {
@@ -247,6 +248,32 @@ export const UpdateTransaction = async ({
       {
         ...body,
       },
+      {
+        headers: {
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetClientReport = async ({
+  clientId,
+  month,
+  year,
+}: {
+  clientId: string;
+  month: number;
+  year: number;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.get(
+      `${REPORTS_URL}/client/${clientId}/monthly?month=${month}&year=${year}`,
       {
         headers: {
           Authorization:

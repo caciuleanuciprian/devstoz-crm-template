@@ -1,4 +1,4 @@
-import { USERS_URL } from "@/lib/axios/consts";
+import { ORGANIZATION_URL, USERS_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
@@ -75,7 +75,6 @@ export const GetUserOrganizations = async ({
 };
 
 export const CreateUserOrganization = async ({
-  userId,
   body,
 }: {
   userId: string;
@@ -83,18 +82,14 @@ export const CreateUserOrganization = async ({
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   console.log(body);
   try {
-    const response: any = axios.post(
-      `${USERS_URL}/${userId}/organizations`,
-      body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
-        },
-      }
-    );
+    const response: any = axios.post(`${ORGANIZATION_URL}`, body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization:
+          //@ts-ignore
+          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+      },
+    });
     return response;
   } catch (error) {
     return handleError(error);

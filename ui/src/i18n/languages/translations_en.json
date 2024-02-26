@@ -117,5 +117,15 @@
   "DragAndDrop": "Drag 'n' drop a file here, or click to select file",
   "OnlyOneFile": "You can upload only one file.",
   "OrganizationCreated": "Organization created succesfully.",
-  "OrganizationCreateError": "Organization could not be created."
+  "OrganizationCreateError": "Organization could not be created.",
+  "AddMember": "Add member",
+  "AddMemberDescription": "Fill up the details of the new member below. Click submit when you're done.",
+  "MemberAddedSuccesfully": "Member added succesfully.",
+  "MemberUpdatedSuccesfully": "Member details updated succesfully.",
+  "MemberUpdatedError": "Member details could not be updated.",
+  "MemberRemovedSuccesfully": "Member removed succesfully.",
+  "MemberDetails": "Member details",
+  "NumberOfTransactions": "Number of transactions",
+  "TotalExpenses": "Total expenses",
+  "TotalIncome": "Total income"
 }

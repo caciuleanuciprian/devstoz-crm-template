@@ -1,5 +1,4 @@
 import InputWithLabel from "@/components/common/forms/input-with-label";
-import { UploadImage } from "@/components/common/settings/molecules/upload-image";
 import { Formiz, useForm, useFormFields } from "@formiz/core";
 import { isRequired, isNotEmptyString } from "@formiz/validations";
 
@@ -18,6 +17,7 @@ import { useRecoilState } from "recoil";
 import {
   settingsCurrencyAtom,
   settingsLanguageAtom,
+  shouldRefetchOrganizationAtom,
 } from "../core/settings.recoil";
 import {
   SelectCurrencyOptions,
@@ -31,10 +31,7 @@ import { toast } from "@/components/ui/use-toast";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import useAxios from "@/lib/axios/useAxios";
 import { UpdateUserOrganization } from "../core/settings.service";
-import {
-  selectedOrganizationAtom,
-  userDetailsAtom,
-} from "@/components/authentication/utils/authentication.recoil";
+import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/common/loader";
 import { Slot } from "../atoms/slot";
@@ -42,9 +39,8 @@ import { Slot } from "../atoms/slot";
 export const SettingsOrganizationDetails = () => {
   const settingsForm = useForm();
 
+  // see this again
   const { dictionary } = useContext(LanguageContext);
-
-  const [userDetails] = useRecoilState(userDetailsAtom);
 
   const [selectedOrganization, setSelectedOrganization] = useRecoilState(
     selectedOrganizationAtom
@@ -53,6 +49,10 @@ export const SettingsOrganizationDetails = () => {
     useRecoilState(settingsCurrencyAtom);
   const [selectedLanguage, setSelectedLanguage] =
     useRecoilState(settingsLanguageAtom);
+
+  const [, setShouldRefetchOrganization] = useRecoilState(
+    shouldRefetchOrganizationAtom
+  );
 
   const values = useFormFields({
     connect: settingsForm,
@@ -70,12 +70,11 @@ export const SettingsOrganizationDetails = () => {
   } = useAxios({
     fetchFn: UpdateUserOrganization,
     paramsOfFetch: {
-      userId: userDetails?.id,
       body: {
         name: values.name,
         language: selectedLanguage || selectedOrganization?.language,
         currency: selectedCurrency || selectedOrganization?.currency,
-        logoName: values.logoName,
+        logoName: "test", // TODO should remove this line
       },
       organizationId: selectedOrganization?.id,
     },
@@ -86,7 +85,9 @@ export const SettingsOrganizationDetails = () => {
   };
 
   const resetForm = () => {
-    settingsForm.reset({ only: ["values"] });
+    settingsForm.setValues({
+      name: selectedOrganization?.name,
+    });
     setSelectedLanguage(
       selectedOrganization?.language || SelectLanguageOptions.en
     );
@@ -105,6 +106,7 @@ export const SettingsOrganizationDetails = () => {
   useEffect(() => {
     if (updatedDataCode === AxiosStatusCode.CODE_200_OK) {
       toast({ title: dictionary.OrganizationUpdated, variant: "success" });
+      setShouldRefetchOrganization(true);
     } else if (updatedError) {
       toast({
         title: dictionary.OrganizationUpdateError,
@@ -188,6 +190,7 @@ export const SettingsOrganizationDetails = () => {
                   onClick={() => setIsReadonly(false)}
                   variant={"outline"}
                   disabled={updatedIsLoading}
+                  className="text-xs"
                 >
                   {dictionary.Edit}
                 </Button>
@@ -198,10 +201,15 @@ export const SettingsOrganizationDetails = () => {
                   onClick={resetForm}
                   variant={"outline"}
                   disabled={updatedIsLoading}
+                  className="text-xs"
                 >
                   {dictionary.Cancel}
                 </Button>
-                <Button onClick={handleUpdate} disabled={updatedIsLoading}>
+                <Button
+                  className="text-xs"
+                  onClick={handleUpdate}
+                  disabled={updatedIsLoading}
+                >
                   {updatedIsLoading ? <Loader /> : dictionary.Submit}
                 </Button>
               </>

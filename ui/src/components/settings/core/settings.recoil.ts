@@ -18,3 +18,8 @@ export const settingsCurrencyAtom = atom({
   key: "settingsCurrency",
   default: null as string | null,
 });
+
+export const shouldRefetchOrganizationAtom = atom({
+  key: "shouldRefetchOrganization",
+  default: false,
+});

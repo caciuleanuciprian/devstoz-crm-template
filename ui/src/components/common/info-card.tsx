@@ -1,26 +1,68 @@
-import { InfoCardType } from "@/components/clients/utils/types";
-import Icon from "@/components/common/icon";
+import { useRecoilState } from "recoil";
+import {
+  SelectCurrencyOptions,
+  valueToLabelCurrencySymbol,
+} from "../initial-settings/utils/consts";
+import { selectedOrganizationAtom } from "../authentication/utils/authentication.recoil";
+import { Loader } from "./loader";
 
 interface InfoCardProps {
-  data: InfoCardType;
   icon: any;
-  currencySymbol?: string;
+  currency?: string;
+  label?: string;
+  amount?: number;
+  pastAmount?: number;
+  isCurrency?: boolean;
 }
 
-const InfoCard = ({ data, icon, currencySymbol }: InfoCardProps) => {
+const usdFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
+const eurFormatter = new Intl.NumberFormat("de-DE", {
+  style: "currency",
+  currency: "EUR",
+});
+
+const formatCurrency = (amount: number, currency: string) => {
+  switch (currency) {
+    case "USD":
+      return usdFormatter.format(amount);
+    case "EUR":
+      return eurFormatter.format(amount);
+    default:
+      return amount;
+  }
+};
+
+const InfoCard = ({
+  icon,
+  label,
+  amount,
+  isCurrency = true,
+  pastAmount,
+}: InfoCardProps) => {
+  const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
+
   return (
-    <div className="bg-secondary rounded-md flex flex-col w-full min-h-[150px] justify-center p-4">
-      <div className="flex gap-2 items-center">
-        <div>{icon}</div>
-        <p className="text-2xl font-medium truncate">{data.label}</p>
+    <div className="flex flex-col justify-center items-center gap-2 h-[250px] p-8 bg-secondary rounded-md w-full">
+      <div className="flex items-center gap-2">
+        {icon}
+        <p className="text-2xl">{label}</p>
       </div>
       <div>
-        <div className="flex gap-2 items-center text-3xl font-medium ">
-          {`${currencySymbol ? currencySymbol : ""}${data.amount}`}
-        </div>
-        <p className="font-thin text-xs opacity-50">{`*${Math.floor(
-          (data.amount / data.pastAmount) * 100
-        )}% more than last month`}</p>
+        <p className="text-xl text-muted-foreground">
+          {selectedOrganization ? (
+            isCurrency ? (
+              formatCurrency(amount as number, selectedOrganization?.currency)
+            ) : (
+              amount
+            )
+          ) : (
+            <Loader />
+          )}
+        </p>
       </div>
     </div>
   );

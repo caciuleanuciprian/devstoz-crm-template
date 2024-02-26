@@ -22,6 +22,13 @@ export const selectCurrencyOptions = [
   SelectCurrencyOptions.GBP,
 ];
 
+export enum SelectCurrencySymbolOptions {
+  RON = "lei",
+  EUR = "€",
+  USD = "$",
+  GBP = "£",
+}
+
 export const valueToLabelLanguage = (value: string, dictionary: any) => {
   switch (value) {
     case "en":
@@ -45,6 +52,21 @@ export const valueToLabelCurrency = (value: string, dictionary: any) => {
       return dictionary.GBP;
     default:
       return "";
+  }
+};
+
+export const valueToLabelCurrencySymbol = (value: string) => {
+  switch (value) {
+    case SelectCurrencyOptions.RON:
+      return SelectCurrencySymbolOptions.RON;
+    case SelectCurrencyOptions.EUR:
+      return SelectCurrencySymbolOptions.EUR;
+    case SelectCurrencyOptions.USD:
+      return SelectCurrencySymbolOptions.USD;
+    case SelectCurrencyOptions.GBP:
+      return SelectCurrencySymbolOptions.GBP;
+    default:
+      return SelectCurrencySymbolOptions.USD;
   }
 };
 

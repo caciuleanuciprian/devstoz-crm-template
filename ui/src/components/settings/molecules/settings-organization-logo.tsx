@@ -20,7 +20,8 @@ interface SettingsOrganizationLogoProps {
 export const SettingsOrganizationLogo = () => {
   const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
   const [userDetails] = useRecoilState(userDetailsAtom);
-  const [file, setFile] = useRecoilState(organizationLogoAtom);
+  const [fileURL, setFileURL] = useRecoilState(organizationLogoAtom);
+  const [file, setFile] = useState<File | null>(null);
   const [isReadonly, setIsReadonly] = useState(true);
   const { dictionary } = useContext(LanguageContext);
 
@@ -33,8 +34,10 @@ export const SettingsOrganizationLogo = () => {
   } = useAxios({
     fetchFn: UpdateOrganizationLogo,
     paramsOfFetch: {
-      userId: userDetails?.id,
       organizationId: selectedOrganization?.id,
+      body: {
+        organizationLogo: file,
+      },
     },
   });
 
@@ -43,7 +46,7 @@ export const SettingsOrganizationLogo = () => {
   };
 
   const resetForm = () => {
-    setFile(selectedOrganization?.logo);
+    setFile(null);
     setIsReadonly(true);
   };
 
@@ -53,10 +56,12 @@ export const SettingsOrganizationLogo = () => {
     }
   }, []);
 
+  console.log(file);
+
   return (
     <Slot>
       <div className="col-span-4 bg-background p-4 rounded-md w-full h-full">
-        <UploadImage isReadonly={true} file={file} setFile={setFile} />
+        <UploadImage isReadonly={isReadonly} file={file} setFile={setFile} />
 
         <div className="flex gap-4 justify-end mt-6">
           {isReadonly ? (

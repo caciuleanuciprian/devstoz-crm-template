@@ -10,7 +10,7 @@ import {
   totalPagesAtom,
 } from "../../utils/clients.recoil";
 import { useEffect } from "react";
-import { userDetailsAtom } from "@/components/authentication/utils/authentication.recoil";
+import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
 
 export const ArchivedClientsTable = () => {
   const [filterBy] = useRecoilState(filterTableByAtom);
@@ -18,12 +18,12 @@ export const ArchivedClientsTable = () => {
   const [, setTotalPages] = useRecoilState(totalPagesAtom);
   const [currentPage, setCurrentPage] = useRecoilState(currentPageAtom);
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
-  const [userDetails] = useRecoilState(userDetailsAtom);
+  const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
 
   const { data, error, isLoading, loadData } = useAxios({
     fetchFn: GetClients,
     paramsOfFetch: {
-      userId: userDetails?.id,
+      organizationId: selectedOrganization?.id,
       page: currentPage,
       size: 15,
       active: false,

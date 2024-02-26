@@ -1,9 +1,6 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import { dictionaryList, languageOptions } from "./languages";
-import {
-  selectedOrganizationAtom,
-  userDetailsAtom,
-} from "@/components/authentication/utils/authentication.recoil";
+import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
 import { useRecoilState } from "recoil";
 import { UserOrganization } from "@/components/authentication/utils/types";
 

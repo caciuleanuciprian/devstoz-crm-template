@@ -40,7 +40,7 @@ export const InputField = <FormattedValue = string,>(
         required={required}
       />
       {!isValid && (
-        <p className="flex items-center gap-1 text-xs text-red-500">
+        <p className="flex items-center gap-1 text-xs text-destructive">
           <AlertCircle className="h-4 w-4" />
           {errorMessage}
         </p>

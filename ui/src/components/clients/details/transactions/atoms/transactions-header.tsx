@@ -53,7 +53,7 @@ export const TransactionsHeader = () => {
   };
 
   useEffect(() => {
-    if (data && dataCode === AxiosStatusCode.CODE_200_OK) {
+    if (data && dataCode === AxiosStatusCode.CODE_201_CREATED) {
       toast({
         title: dictionary.TransactionAddedSuccesfully,
         variant: "success",
@@ -67,7 +67,7 @@ export const TransactionsHeader = () => {
   }, [dataCode, error]);
 
   return (
-    <div className="flex gap-4 justify-between items-center">
+    <div className="flex gap-4 justify-between items-end">
       <div className="w-[100%]">
         <p className="font-medium text-md">{"Transactions"}</p>
       </div>

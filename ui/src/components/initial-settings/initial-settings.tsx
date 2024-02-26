@@ -5,10 +5,7 @@ import useAxios from "@/lib/axios/useAxios";
 import { useContext, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { CreateUserOrganization } from "../authentication/core/authentication.service";
-import {
-  selectedOrganizationAtom,
-  userDetailsAtom,
-} from "../authentication/utils/authentication.recoil";
+import { selectedOrganizationAtom } from "../authentication/utils/authentication.recoil";
 import { Button } from "../ui/button";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import { toast } from "../ui/use-toast";
@@ -22,10 +19,9 @@ import { PagesURL } from "../authentication/utils/consts";
 import { Loader } from "../common/loader";
 
 export const InitialSettings = () => {
-  const [userDetails] = useRecoilState(userDetailsAtom);
   const initialSettingsForm = useForm();
   const [file, setFile] = useState<File | null>(null);
-  const { dictionary } = useContext(LanguageContext);
+  const { dictionary, userLanguageChange }: any = useContext(LanguageContext);
   const [, setSelectedOrganization] = useRecoilState(selectedOrganizationAtom);
   const navigate = useNavigate();
 
@@ -44,7 +40,6 @@ export const InitialSettings = () => {
   const { data, loadData, error, dataCode, isLoading } = useAxios({
     fetchFn: CreateUserOrganization,
     paramsOfFetch: {
-      userId: userDetails?.id,
       body: {
         organizationLogo: file,
         name: values.name,
@@ -83,6 +78,7 @@ export const InitialSettings = () => {
     if (dataCode === AxiosStatusCode.CODE_201_CREATED) {
       toast({ title: dictionary.OrganizationCreated, variant: "success" });
       setSelectedOrganization(data);
+      userLanguageChange(data.language);
       navigate(PagesURL.DASHBOARD);
     } else if (dataCode === AxiosStatusCode.CODE_401_UNAUTHORIZED) {
       toast({ title: dictionary.UserDetailsError, variant: "destructive" });

@@ -91,7 +91,7 @@ export const valueToLabelTabelTransactionType = (
     case TransactionType.INCOME:
       return (
         <div className="flex items-center gap-2">
-          <ArrowUpCircle className="h-[1.2rem] w-[1.2rem] text-green-900" />
+          <ArrowUpCircle className="h-[1.2rem] w-[1.2rem] text-green-500" />
           {dictionary.Income}
         </div>
       );
