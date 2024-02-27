@@ -21,7 +21,7 @@ export const ClientDetails = () => {
       <div className="flex flex-col gap-4 py-4 h-[90vh]">
         <div className="flex w-full gap-4">
           <div className="bg-secondary p-4 w-[50%] rounded-md">
-            <p className="font-medium text-md">{"Client Details"}</p>
+            <p className="font-medium text-md">{dictionary.ClientDetails}</p>
             <ClientDetailsCardForm />
           </div>
           <div className="bg-secondary p-4 w-[50%] rounded-md">

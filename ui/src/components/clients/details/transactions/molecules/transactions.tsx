@@ -19,6 +19,7 @@ import { LanguageContext } from "@/i18n/language-context";
 import { TransactionObject } from "@/components/clients/utils/types";
 import { FilterableTableHeader } from "../atoms/transaction-table-filterable-header";
 import { filterTransactionTableByAtom } from "@/components/clients/utils/transactions.recoil";
+import { transactionHeaders } from "../utils/consts";
 
 export const Transactions = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -28,6 +29,11 @@ export const Transactions = () => {
   const [filterBy] = useRecoilState(filterTransactionTableByAtom);
 
   const { clientId } = useParams();
+
+  const TransactionsTableHeaders = transactionHeaders(
+    dictionary,
+    <FilterableTableHeader />
+  );
 
   const { data, error, isLoading, loadData } = useAxios({
     fetchFn: GetTransactions,
@@ -44,15 +50,6 @@ export const Transactions = () => {
       setShouldRefetch(false);
     }
   }, [shouldRefetch]);
-
-  const TransactionsTableHeaders = [
-    { id: "icon", label: dictionary.FileType, size: 10 },
-    { id: "name", label: dictionary.Name, size: 20 },
-    { id: "amount", label: dictionary.Amount, size: 15 },
-    { id: "transactionType", component: <FilterableTableHeader />, size: 20 },
-    { id: "fileName", label: dictionary.FileName, size: 15 },
-    { id: "actions", label: dictionary.Actions, alignRight: true, size: 20 },
-  ];
 
   return (
     <Table className="bg-background">

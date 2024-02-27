@@ -1,6 +1,7 @@
-import { ORGANIZATION_URL } from "@/lib/axios/consts";
+import { ORGANIZATION_URL, REPORTS_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
+import { MonthlyReportResponse } from "../utils/types";
 
 export const GetClients = async ({
   organizationId,
@@ -47,6 +48,80 @@ export const GetClients = async ({
       }
     );
 
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetOrganizationLastTransactions = async ({
+  organizationId,
+  transactions = 5,
+}: {
+  organizationId: string;
+  transactions: number;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.get(
+      `${REPORTS_URL}/organization/${organizationId}/last?transactions=${transactions}`,
+      {
+        headers: {
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetOrganizationReportMonthly = async ({
+  organizationId,
+  month,
+  year,
+}: {
+  organizationId: string;
+  month: number;
+  year: number;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: MonthlyReportResponse = await axios.get(
+      `${REPORTS_URL}/organization/${organizationId}/monthly?month=${month}&year=${year}`,
+      {
+        headers: {
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetOrganizationReportYearly = async ({
+  organizationId,
+  year,
+}: {
+  organizationId: string;
+  year: number;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.get(
+      `${REPORTS_URL}/organization/${organizationId}/yearly?&year=${year}`,
+      {
+        headers: {
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
     return response;
   } catch (error) {
     return handleError(error);

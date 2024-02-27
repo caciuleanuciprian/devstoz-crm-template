@@ -11,3 +11,10 @@ export interface DropdownMenuProps {
   items: DropdownMenuItemProps[];
   fn?: (params?: any) => void;
 }
+
+export interface MonthlyReportResponse {
+  numberOfClients: number;
+  numberOfTransactions: number;
+  totalIncome: number;
+  totalExpenses: number;
+}

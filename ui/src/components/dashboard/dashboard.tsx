@@ -1,10 +1,21 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LanguageContext } from "@/i18n/language-context";
 import { Header } from "../common/header/header";
 import { TopBanner } from "./molecules/top-banner";
 import InfoCard from "../common/info-card";
 import { User2 } from "lucide-react";
 import ResponsiveBarChart from "../common/charts/responsive-bar-chart";
+import useAxios from "@/lib/axios/useAxios";
+import {
+  GetOrganizationLastTransactions,
+  GetOrganizationReportMonthly,
+  GetOrganizationReportYearly,
+} from "./core/dashboard.service";
+import { useRecoilState } from "recoil";
+import { selectedOrganizationAtom } from "../authentication/utils/authentication.recoil";
+import { LastNTransactions } from "./molecules/last-n-transactions";
+import { MonthlyCards } from "./molecules/monthly-cards";
+import { YearlyReport } from "./molecules/yearly-report";
 
 const Dashboard = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -12,61 +23,14 @@ const Dashboard = () => {
   return (
     <div className="px-8">
       <Header title={dictionary.Dashboard} />
-      <div className="flex h-[95vh] py-4 flex-col gap-4">
-        <div className="flex gap-4 w-full justify-between bg-background lg:flex-row md:flex-col">
-          <InfoCard
-            data={{
-              id: 1,
-              label: dictionary.Clients,
-              amount: 500,
-              pastAmount: 250,
-            }}
-            currencySymbol="$"
-            icon={<User2 />}
-          />
-          <InfoCard
-            data={{
-              id: 1,
-              label: dictionary.Clients,
-              amount: 500,
-              pastAmount: 250,
-            }}
-            currencySymbol="$"
-            icon={<User2 />}
-          />
-          <InfoCard
-            data={{
-              id: 1,
-              label: dictionary.Clients,
-              amount: 500,
-              pastAmount: 250,
-            }}
-            currencySymbol="$"
-            icon={<User2 />}
-          />
+      <div className="flex h-[90vh] py-4 flex-col gap-4">
+        <div className="flex bg-secondary rounded-md p-4 flex-col gap-4 max-h-[750px]">
+          <TopBanner />
         </div>
-        <TopBanner />
+        <LastNTransactions />
+        {/* <TopBanner /> */}
         <div className="flex gap-4 w-full justify-between bg-background">
-          <InfoCard
-            data={{
-              id: 1,
-              label: dictionary.Clients,
-              amount: 500,
-              pastAmount: 250,
-            }}
-            currencySymbol="$"
-            icon={<User2 />}
-          />
-          <InfoCard
-            data={{
-              id: 1,
-              label: dictionary.Clients,
-              amount: 500,
-              pastAmount: 250,
-            }}
-            currencySymbol="$"
-            icon={<User2 />}
-          />
+          asd
         </div>
       </div>
     </div>

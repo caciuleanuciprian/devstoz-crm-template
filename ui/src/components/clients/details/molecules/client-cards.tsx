@@ -45,16 +45,19 @@ export const ClientCards = () => {
             amount={data?.numberOfTransactions}
             icon={<CreditCard />}
             isCurrency={false}
+            isLoading={isLoading}
           />
           <InfoCard
             label={dictionary.TotalExpenses}
             amount={data?.totalExpenses}
             icon={<Receipt className="text-destructive" />}
+            isLoading={isLoading}
           />
           <InfoCard
             label={dictionary.TotalIncome}
             amount={data?.totalIncome}
             icon={<Coins className="text-green-500" />}
+            isLoading={isLoading}
           />
         </>
       )}
