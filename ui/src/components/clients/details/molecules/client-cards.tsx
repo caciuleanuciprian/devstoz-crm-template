@@ -7,35 +7,18 @@ import { useRecoilState } from "recoil";
 import { LanguageContext } from "@/i18n/language-context";
 import { Receipt, Coins, CreditCard } from "lucide-react";
 import { Loader } from "@/components/common/loader";
-import { shouldRefetchAtom } from "../../utils/clients.recoil";
+import { shouldRefetchAtom } from "../../list/utils/clients.recoil";
+import { transactionChangedAtom } from "../transactions/utils/transactions.recoil";
 
-export const ClientCards = () => {
-  const { clientId } = useParams();
+interface ClientCardsProps {
+  data: any;
+  isLoading: boolean;
+  error: any;
+}
 
-  const [currMonth, setCurrMonth] = useState(new Date().getMonth() + 1);
-  const [currYear, setCurrYear] = useState(new Date().getFullYear());
-
+export const ClientCards = ({ data, isLoading, error }: ClientCardsProps) => {
   const { dictionary } = useContext(LanguageContext);
 
-  const [shouldRefetch] = useRecoilState(shouldRefetchAtom);
-
-  const { data, error, isLoading, loadData } = useAxios({
-    fetchFn: GetClientReport,
-    paramsOfFetch: {
-      clientId: clientId,
-      month: currMonth,
-      year: currYear,
-    },
-    loadOnMount: true,
-  });
-
-  useEffect(() => {
-    if (shouldRefetch) {
-      loadData();
-    }
-  }, [shouldRefetch]);
-
-  console.log(data);
   return (
     <div className="flex h-[250px] w-full gap-4">
       {!isLoading && !error && data && (

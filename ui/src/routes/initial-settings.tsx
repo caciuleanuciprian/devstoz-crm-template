@@ -8,7 +8,7 @@ export const InitialSettingsPage = () => {
   return (
     <AuthGuard>
       <UserInfoGuard>
-        <div className="px-8">
+        <div className="px-8 pb-4">
           <div className="pt-4">
             <Logo />
             <Header shouldDisplayAvatar={false} title={"Initial Settings"} />

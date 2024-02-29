@@ -58,10 +58,9 @@ const InfoCard = ({
   isLoading,
 }: InfoCardProps) => {
   const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
-  const { dictionary } = useContext(LanguageContext);
 
   return (
-    <div className="flex flex-col justify-center items-center h-[150px] p-8 bg-secondary rounded-md w-full">
+    <div className="flex flex-col justify-center items-center min-h-[200px] h-full p-8 bg-secondary rounded-md w-full">
       <div className="flex items-center gap-2">
         {icon}
         <p className="text-2xl text-center">{label}</p>

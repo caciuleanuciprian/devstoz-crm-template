@@ -1,4 +1,4 @@
-import Clients from "@/components/clients/clients";
+import Clients from "@/components/clients/list/clients";
 import { LinkIDS } from "@/components/common/navigation/utils/consts";
 import { activeNavTabAtom } from "@/components/common/navigation/utils/navigation.recoil";
 import Page from "@/components/common/page";

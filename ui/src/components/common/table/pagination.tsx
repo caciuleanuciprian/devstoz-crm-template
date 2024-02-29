@@ -2,7 +2,7 @@ import {
   currentPageAtom,
   shouldRefetchAtom,
   totalPagesAtom,
-} from "@/components/clients/utils/clients.recoil";
+} from "@/components/clients/list/utils/clients.recoil";
 import { Button } from "@/components/ui/button";
 import {
   Pagination,
@@ -16,7 +16,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useRecoilState } from "recoil";
 
 export const TablePagination = () => {

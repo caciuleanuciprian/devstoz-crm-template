@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import {
   searchValueAtom,
   totalClientsAtom,
-} from "../clients/utils/clients.recoil";
+} from "../clients/list/utils/clients.recoil";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { X } from "lucide-react";

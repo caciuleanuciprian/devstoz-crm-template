@@ -1,20 +1,14 @@
 import InputWithLabel from "@/components/common/forms/input-with-label";
-import { TransactionObject } from "@/components/clients/utils/types";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LanguageContext } from "@/i18n/language-context";
-import { Form, Formiz, useFormFields } from "@formiz/core";
-import { useContext, useEffect, useState } from "react";
+import { Form, Formiz } from "@formiz/core";
+import { useContext, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import {
   fileAtom,
   transactionTypeSelectAtom,
-} from "@/components/clients/utils/transactions.recoil";
-import {
-  TransactionType,
-  selectTransactionsTypeOptions,
-  valueToLabelTransactionType,
-} from "@/components/clients/utils/consts";
+} from "@/components/clients/details/transactions/utils/transactions.recoil";
 import {
   Select,
   SelectTrigger,
@@ -28,6 +22,11 @@ import {
   isNumber,
   isRequired,
 } from "@formiz/validations";
+import {
+  selectTransactionsTypeOptions,
+  valueToLabelTransactionType,
+} from "../utils/consts";
+import { TransactionObject, TransactionType } from "../utils/types";
 
 interface TransactionFormProps {
   form: Form;

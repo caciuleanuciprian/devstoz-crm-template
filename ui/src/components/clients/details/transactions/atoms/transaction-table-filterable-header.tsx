@@ -11,12 +11,13 @@ import { ListFilter } from "lucide-react";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
 import { useRecoilState } from "recoil";
+
+import { shouldRefetchAtom } from "@/components/clients/list/utils/clients.recoil";
+import { filterTransactionTableByAtom } from "@/components/clients/details/transactions/utils/transactions.recoil";
 import {
   selectTransactionsTypeOptions,
   valueToLabelTabelTransactionType,
-} from "@/components/clients/utils/consts";
-import { shouldRefetchAtom } from "@/components/clients/utils/clients.recoil";
-import { filterTransactionTableByAtom } from "@/components/clients/utils/transactions.recoil";
+} from "../utils/consts";
 
 export const FilterableTableHeader = () => {
   const { dictionary } = useContext(LanguageContext);

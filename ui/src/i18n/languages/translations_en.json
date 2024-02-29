@@ -146,5 +146,22 @@
   "MonthlyStats": "Monthly stats",
   "YearlyStats": "Yearly stats",
   "NoOfClients": "No. of clients",
-  "NoOfTransactions": "No. of transactions"
+  "NoOfTransactions": "No. of transactions",
+  "YearlyClientsChart": "Yearly clients chart",
+  "YearlyTransactionsChart": "Yearly transactions chart",
+  "YearlyIncomeChart": "Yearly income chart",
+  "YearlyExpensesChart": "Yearly expenses chart",
+  "YearlyReportSituation": "Yearly report situation",
+  "YearlyReportSituationDescription": "This is the situation of your organization for the current year. You can see the number of clients, transactions, income and expenses.",
+  "Line": "Line",
+  "Bar": "Bar",
+  "Pie": "Pie",
+  "Area": "Area",
+  "ChartType": "Chart type",
+  "ClientMonthlyReport": "Client monthly report",
+  "Expenses": "Expenses",
+  "CreatedBy": "Created by",
+  "CreatedOn": "Created on",
+  "EditedOn": "Edited on",
+  "EditedBy": "Edited by"
 }

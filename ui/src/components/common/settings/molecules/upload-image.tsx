@@ -1,4 +1,4 @@
-import { getIcon } from "@/components/clients/details/transactions/atoms/transaction";
+import { getIcon } from "@/components/clients/details/transactions/utils/consts";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { LanguageContext } from "@/i18n/language-context";

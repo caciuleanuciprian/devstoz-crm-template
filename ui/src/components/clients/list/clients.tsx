@@ -1,23 +1,25 @@
-import { useContext, useState } from "react";
-import { Header } from "../common/header/header";
+import { useContext, useEffect } from "react";
+import { Header } from "../../common/header/header";
 import { LanguageContext } from "@/i18n/language-context";
-import { TablePagination } from "../common/table/pagination";
-import { ClientSearch } from "./list/molecules/client-list-header";
+import { TablePagination } from "../../common/table/pagination";
+import { ClientSearch } from "./atoms/client-list-header";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArchivedClientsTable } from "./list/molecules/archived-clients-table";
-import { ActiveClientsTable } from "./list/molecules/active-clients-table";
+import { ArchivedClientsTable } from "./molecules/archived-clients-table";
+import { ActiveClientsTable } from "./molecules/active-clients-table";
 import { useRecoilState } from "recoil";
 import {
   currentPageAtom,
   filterTableByAtom,
   searchValueAtom,
+  totalPagesAtom,
 } from "./utils/clients.recoil";
 
 const Clients = () => {
   const [, setFilterBy] = useRecoilState(filterTableByAtom);
   const [, setSearchValue] = useRecoilState(searchValueAtom);
   const [, setCurrentPage] = useRecoilState(currentPageAtom);
+  const [, setTotalPages] = useRecoilState(totalPagesAtom);
   const { dictionary } = useContext(LanguageContext);
 
   const handleResetFilters = () => {
@@ -38,10 +40,15 @@ const Clients = () => {
     handleResetPage();
   };
 
+  useEffect(() => {
+    setTotalPages(0);
+    setCurrentPage(0);
+  }, []);
+
   return (
-    <div className="px-8">
+    <div className="px-8 pb-4">
       <Header title={dictionary.Clients} />
-      <div className="flex h-[90vh] pt-4 my-4 flex-col bg-secondary  rounded-md">
+      <div className="flex min-h-[90vh] pt-4 mt-4 flex-col bg-secondary rounded-md">
         <ClientSearch />
         <div className="flex flex-col gap-4 h-full overflow-auto justify-between bg-background rounded-md m-4">
           <Tabs

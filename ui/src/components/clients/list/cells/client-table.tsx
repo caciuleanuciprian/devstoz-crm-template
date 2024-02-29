@@ -8,21 +8,16 @@ import {
 } from "@/components/ui/table";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext, useEffect } from "react";
-import { ClientTableActions } from "./client-table-actions";
+import { ClientTableActions } from "../atoms/client-table-actions";
 import { Loader } from "@/components/common/loader";
-import {
-  iconToLabelClientType,
-  valueToLabelClientType,
-} from "../../utils/consts";
+import { iconToLabelClientType, valueToLabelClientType } from "../utils/consts";
 
 import { FilterableTableHeader } from "../atoms/client-table-filterable-header";
 import { useRecoilState } from "recoil";
-import {
-  shouldRefetchAtom,
-  totalClientsAtom,
-} from "../../utils/clients.recoil";
+import { totalClientsAtom } from "../utils/clients.recoil";
 import { toast } from "@/components/ui/use-toast";
-import { filterTransactionTableByAtom } from "../../utils/transactions.recoil";
+import { filterTransactionTableByAtom } from "../../details/transactions/utils/transactions.recoil";
+import { CellWithHelper } from "../atoms/cell-with-helper";
 
 interface ClientTableProps {
   data: any;
@@ -40,14 +35,34 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
 
   const ClientTableHeaders = [
     { id: "name", label: dictionary.Name, size: 15 },
-    { id: "address", label: dictionary.Address, size: 25 },
+    { id: "address", label: dictionary.Address, size: 15 },
     { id: "phone", label: dictionary.Phone, size: 15 },
     { id: "email", label: dictionary.Email, size: 15 },
     {
       id: "type",
       label: dictionary.Type,
       component: <FilterableTableHeader />,
-      size: 25,
+      size: 15,
+    },
+    {
+      id: "createdBy",
+      component: (
+        <CellWithHelper
+          label={dictionary.CreatedBy}
+          helper={dictionary.CreatedOn}
+        />
+      ),
+      size: 10,
+    },
+    {
+      id: "editedBy",
+      component: (
+        <CellWithHelper
+          label={dictionary.EditedBy}
+          helper={dictionary.EditedOn}
+        />
+      ),
+      size: 10,
     },
     { id: "actions", label: dictionary.Actions, alignRight: true, size: 5 },
   ];
@@ -127,11 +142,21 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
               <TableCell>{client.address}</TableCell>
               <TableCell>{client.telephone}</TableCell>
               <TableCell>{client.email}</TableCell>
+
               <TableCell>
                 <div className="flex items-center">
                   {iconToLabelClientType(client.clientType)}{" "}
                   {valueToLabelClientType(client.clientType, dictionary)}
                 </div>
+              </TableCell>
+              <TableCell>
+                <CellWithHelper
+                  label={client.createdBy}
+                  helper={client.creationDate}
+                />
+              </TableCell>
+              <TableCell>
+                {client.lastUpdatedBy} - {client.lastUpdatedDate}
               </TableCell>
               <TableCell>
                 <ClientTableActions id={client.id} />

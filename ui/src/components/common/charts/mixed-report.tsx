@@ -22,7 +22,7 @@ export default function MixedReport({ data }: MixedReportProps) {
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
         width={500}
-        height={300}
+        height={350}
         data={data}
         margin={{
           top: 5,
@@ -31,7 +31,7 @@ export default function MixedReport({ data }: MixedReportProps) {
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="6" className="opacity-10" />
+        <CartesianGrid strokeDasharray="6" className="opacity-50" />
         <XAxis className="text-xs font-semibold" dataKey="name" />
         <YAxis className="text-xs font-semibold" />
         <Tooltip

@@ -1,27 +1,33 @@
 import {
-  CLIENTS_PREFIX,
   CLIENTS_URL,
-  REPORTS_URL,
   TRANSACTIONS_PREFIX,
   TRANSACTIONS_URL,
 } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
-export const AddClient = async ({
-  organizationId,
-  body,
+export const GetTransactions = async ({
+  clientId,
+  page = 0,
+  size = 10,
+  transactionType,
 }: {
-  organizationId: string;
-  body: any;
+  clientId: string;
+  page: number;
+  size: number;
+  transactionType?: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    size: size.toString(),
+  });
+
+  if (transactionType) {
+    params.append("transactionType", transactionType);
+  }
   try {
-    const response: any = await axios.post(
-      `${CLIENTS_URL}`,
-      {
-        organizationId,
-        ...body,
-      },
+    const response: any = await axios.get(
+      `${CLIENTS_URL}/${clientId}${TRANSACTIONS_PREFIX}?${params.toString()}`,
       {
         headers: {
           Authorization:
@@ -36,45 +42,7 @@ export const AddClient = async ({
   }
 };
 
-export const DeleteClient = async ({
-  clientId,
-}: {
-  clientId: string;
-}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  try {
-    const response: any = await axios.delete(`${CLIENTS_URL}/${clientId}`, {
-      headers: {
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
-      },
-    });
-    return response;
-  } catch (error) {
-    return handleError(error);
-  }
-};
-
-export const GetClient = async ({
-  clientId,
-}: {
-  clientId: string;
-}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  try {
-    const response: any = await axios.get(`${CLIENTS_URL}/${clientId}`, {
-      headers: {
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
-      },
-    });
-    return response;
-  } catch (error) {
-    return handleError(error);
-  }
-};
-
-export const UpdateClient = async ({
+export const AddTransaction = async ({
   clientId,
   body,
 }: {
@@ -82,14 +50,15 @@ export const UpdateClient = async ({
   body: any;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
-    const response: any = await axios.put(
-      `${CLIENTS_URL}/${clientId}`,
+    const response: any = await axios.post(
+      `${TRANSACTIONS_URL}`,
       {
         clientId,
         ...body,
       },
       {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization:
             //@ts-ignore
             "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
@@ -102,15 +71,14 @@ export const UpdateClient = async ({
   }
 };
 
-export const ArchiveClient = async ({
-  clientId,
+export const DeleteTransaction = async ({
+  transactionId,
 }: {
-  clientId: string;
+  transactionId: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
-    const response: any = await axios.put(
-      `${CLIENTS_URL}/${clientId}/archive`,
-      {},
+    const response: any = await axios.delete(
+      `${TRANSACTIONS_URL}/${transactionId}`,
       {
         headers: {
           Authorization:
@@ -125,18 +93,42 @@ export const ArchiveClient = async ({
   }
 };
 
-export const GetClientReport = async ({
-  clientId,
-  month,
-  year,
+export const GetTransactionFile = async ({
+  transactionId,
 }: {
-  clientId: string;
-  month: number;
-  year: number;
+  transactionId: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
     const response: any = await axios.get(
-      `${REPORTS_URL}/client/${clientId}/monthly?month=${month}&year=${year}`,
+      `${TRANSACTIONS_URL}/${transactionId}/download`,
+      {
+        responseType: "blob",
+        headers: {
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const UpdateTransaction = async ({
+  transactionId,
+  body,
+}: {
+  transactionId: string;
+  body: any;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.put(
+      `${TRANSACTIONS_URL}/${transactionId}`,
+      {
+        ...body,
+      },
       {
         headers: {
           Authorization:

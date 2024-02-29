@@ -1,10 +1,3 @@
-import {
-  InfoCardDataMocked1,
-  InfoCardDataMocked2,
-} from "@/components/clients/utils/mockedData";
-import ResponsiveBarChart from "@/components/common/charts/responsive-bar-chart";
-import InfoCard from "@/components/common/info-card";
-import { User2 } from "lucide-react";
 import { MonthlyCards } from "./monthly-cards";
 import { YearlyReport } from "./yearly-report";
 import { DatePicker } from "@/components/common/date-picker";

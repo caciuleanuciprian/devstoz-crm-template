@@ -4,7 +4,7 @@ import { LanguageContext } from "@/i18n/language-context";
 import { useContext, useEffect } from "react";
 import { Modal } from "@/components/common/modal";
 import { TransactionForm } from "../molecules/transaction-form";
-import { AddTransaction } from "@/components/clients/core/clients.service";
+import { AddTransaction } from "@/components/clients/core/transactions.service";
 import useAxios from "@/lib/axios/useAxios";
 import { useParams } from "react-router-dom";
 import { useForm, useFormFields } from "@formiz/core";
@@ -13,9 +13,10 @@ import { toast } from "@/components/ui/use-toast";
 import { useRecoilState } from "recoil";
 import {
   fileAtom,
+  transactionChangedAtom,
   transactionTypeSelectAtom,
-} from "@/components/clients/utils/transactions.recoil";
-import { shouldRefetchAtom } from "@/components/clients/utils/clients.recoil";
+} from "@/components/clients/details/transactions/utils/transactions.recoil";
+import { shouldRefetchAtom } from "@/components/clients/list/utils/clients.recoil";
 
 export const TransactionsHeader = () => {
   const [transactionType, setTransactionType] = useRecoilState(
@@ -30,12 +31,14 @@ export const TransactionsHeader = () => {
 
   const addTransactionForm = useForm();
 
+  const [, setTransactionChanged] = useRecoilState(transactionChangedAtom);
+
   const values = useFormFields({
     connect: addTransactionForm,
     selector: (field) => field.value,
   });
 
-  const { data, error, loadData, dataCode } = useAxios({
+  const { data, error, loadData, dataCode, isLoading } = useAxios({
     fetchFn: AddTransaction,
     paramsOfFetch: {
       clientId: clientId,
@@ -58,6 +61,7 @@ export const TransactionsHeader = () => {
         title: dictionary.TransactionAddedSuccesfully,
         variant: "success",
       });
+      setTransactionChanged(true);
       setShouldRefetch(true);
       setTransactionType(null);
       setFile(null);
@@ -90,6 +94,7 @@ export const TransactionsHeader = () => {
           cancelTxt={dictionary.Cancel}
           onConfirm={handleSubmit}
           isDisabled={!addTransactionForm.isValid || !transactionType || !file}
+          isLoading={isLoading}
         />
       </div>
     </div>

@@ -2,9 +2,8 @@ import {
   DeleteTransaction,
   GetTransactionFile,
   UpdateTransaction,
-} from "@/components/clients/core/clients.service";
-import { shouldRefetchAtom } from "@/components/clients/utils/clients.recoil";
-import { TransactionObject } from "@/components/clients/utils/types";
+} from "@/components/clients/core/transactions.service";
+import { shouldRefetchAtom } from "@/components/clients/list/utils/clients.recoil";
 import { Modal } from "@/components/common/modal";
 import { toast } from "@/components/ui/use-toast";
 import { LanguageContext } from "@/i18n/language-context";
@@ -16,8 +15,12 @@ import { useRecoilState } from "recoil";
 import { TransactionForm } from "../molecules/transaction-form";
 import { Button } from "@/components/ui/button";
 import { useForm, useFormFields } from "@formiz/core";
-import { transactionTypeSelectAtom } from "@/components/clients/utils/transactions.recoil";
+import {
+  transactionChangedAtom,
+  transactionTypeSelectAtom,
+} from "@/components/clients/details/transactions/utils/transactions.recoil";
 import { Loader } from "@/components/common/loader";
+import { TransactionObject } from "../utils/types";
 
 interface TransactionsActionsProps {
   transaction: TransactionObject;
@@ -33,6 +36,7 @@ export const TransactionsActions = ({
   const { dictionary } = useContext(LanguageContext);
 
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
+  const [, setTransactionChanged] = useRecoilState(transactionChangedAtom);
 
   const updateTransactionForm = useForm();
 
@@ -41,7 +45,7 @@ export const TransactionsActions = ({
     selector: (field) => field.value,
   });
 
-  const { error, dataCode, loadData } = useAxios({
+  const { error, dataCode, loadData, isLoading } = useAxios({
     fetchFn: DeleteTransaction,
     paramsOfFetch: {
       transactionId: transaction.id,
@@ -65,6 +69,7 @@ export const TransactionsActions = ({
     error: updateError,
     loadData: updateTransaction,
     dataCode: updateDataCode,
+    isLoading: updateIsLoading,
   } = useAxios({
     fetchFn: UpdateTransaction,
     paramsOfFetch: {
@@ -108,6 +113,7 @@ export const TransactionsActions = ({
         title: dictionary.TransactionUpdatedSuccesfully,
         duration: 500,
       });
+      setTransactionChanged(true);
       setShouldRefetch(true);
       setTransactionType(null);
     } else if (updateError) {
@@ -134,6 +140,7 @@ export const TransactionsActions = ({
         variant: "success",
         title: dictionary.TransactionDeletedSuccesfully,
       });
+      setTransactionChanged(true);
       setShouldRefetch(true);
     } else if (error) {
       toast({ variant: "destructive", title: dictionary.GenericError });
@@ -153,6 +160,7 @@ export const TransactionsActions = ({
         confirmTxt={dictionary.Delete}
         cancelTxt={dictionary.Cancel}
         onConfirm={handleDelete}
+        isLoading={isLoading}
         isDelete
       />
       <Modal
@@ -170,6 +178,7 @@ export const TransactionsActions = ({
         cancelTxt={dictionary.Cancel}
         onConfirm={handleEdit}
         isDisabled={!updateTransactionForm.isValid || !transactionType}
+        isLoading={updateIsLoading}
       />
       <Button size={"xs"} variant="ghost" onClick={handleDownload}>
         {transactionFileIsLoading ? (

@@ -41,7 +41,7 @@ const Settings = () => {
   }, []);
 
   return (
-    <div className="px-8">
+    <div className="px-8 pb-4">
       <Header title={dictionary.Settings} />
       <div className="flex flex-col gap-4 mt-4 ">
         <div className="flex gap-4 xs:flex-col">

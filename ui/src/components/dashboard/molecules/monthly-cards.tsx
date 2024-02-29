@@ -23,7 +23,6 @@ export const MonthlyCards = ({ currMonth, currYear }: MonthlyCardsProps) => {
       month: currMonth,
       year: currYear,
     },
-    loadOnMount: true,
   });
 
   useEffect(() => {

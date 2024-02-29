@@ -23,7 +23,6 @@ export const YearlyReport = ({ currYear }: YearlyReportProps) => {
       organizationId: selectedOrganization?.id,
       year: currYear,
     },
-    loadOnMount: true,
   });
 
   const formatData = () => {
@@ -54,7 +53,7 @@ export const YearlyReport = ({ currYear }: YearlyReportProps) => {
 
   return (
     <>
-      <div className="flex py-8  h-full bg-background min-h-[350px] rounded-md flex-col justify-center items-center">
+      <div className="flex pb-4 pt-8  h-full bg-background min-h-[350px] rounded-md flex-col justify-center items-center">
         {isLoading ? <Loader /> : <MixedReport data={memoizedChartValues} />}
       </div>
     </>

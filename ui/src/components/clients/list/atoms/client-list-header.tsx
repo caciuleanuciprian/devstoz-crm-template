@@ -1,7 +1,7 @@
 import SearchBar from "@/components/common/search-bar";
 import { Button } from "@/components/ui/button";
 import { UserRoundPlus } from "lucide-react";
-import { ClientForm } from "./client-form";
+import { ClientForm } from "../cells/client-form";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
 

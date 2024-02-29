@@ -1,4 +1,4 @@
-import { InputWithLabelProps } from "@/components/clients/utils/types";
+import { InputWithLabelProps } from "@/components/clients/list/utils/types";
 import { InputField } from "@/components/common/forms/input";
 import { Label } from "@/components/ui/label";
 

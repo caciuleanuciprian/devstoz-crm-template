@@ -1,6 +1,6 @@
 import { GetClients } from "@/components/dashboard/core/dashboard.service";
 import useAxios from "@/lib/axios/useAxios";
-import { ClientTable } from "./client-table";
+import { ClientTable } from "../cells/client-table";
 import { useRecoilState } from "recoil";
 import {
   currentPageAtom,
@@ -8,7 +8,7 @@ import {
   searchValueAtom,
   shouldRefetchAtom,
   totalPagesAtom,
-} from "../../utils/clients.recoil";
+} from "../utils/clients.recoil";
 import { useEffect } from "react";
 import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
 

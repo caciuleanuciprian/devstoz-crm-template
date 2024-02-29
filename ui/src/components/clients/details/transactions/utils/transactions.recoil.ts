@@ -14,3 +14,8 @@ export const filterTransactionTableByAtom = atom({
   key: "filterTransactionTableBy",
   default: null as unknown as any | null,
 });
+
+export const transactionChangedAtom = atom({
+  key: "transactionChanged",
+  default: null as unknown as any | null,
+});

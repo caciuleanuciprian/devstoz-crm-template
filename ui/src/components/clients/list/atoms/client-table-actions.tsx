@@ -1,5 +1,4 @@
 import { Modal } from "@/components/common/modal";
-import { Button } from "@/components/ui/button";
 import { LanguageContext } from "@/i18n/language-context";
 import useAxios from "@/lib/axios/useAxios";
 import { Trash, ArrowRight, Mail, MoreHorizontal, Archive } from "lucide-react";
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { CLIENTS_PREFIX } from "@/lib/axios/consts";
 import { toast } from "@/components/ui/use-toast";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
-import { shouldRefetchAtom } from "../../utils/clients.recoil";
+import { shouldRefetchAtom } from "../utils/clients.recoil";
 import { useRecoilState } from "recoil";
 import Dropdown from "@/components/common/dropdown";
 
@@ -28,6 +27,7 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
     error: deleteClientError,
     dataCode: deleteClientDataCode,
     loadData: deleteClient,
+    isLoading: deleteIsLoading,
   } = useAxios({
     fetchFn: DeleteClient,
     paramsOfFetch: { clientId: id },
@@ -37,6 +37,7 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
     error: archiveClientError,
     dataCode: archiveClientDataCode,
     loadData: archiveClientLoadData,
+    isLoading: archiveIsLoading,
   } = useAxios({
     fetchFn: ArchiveClient,
     paramsOfFetch: {
@@ -44,12 +45,12 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
     },
   });
 
-  const handleDelete = () => {
-    deleteClient();
+  const handleDelete = async () => {
+    await deleteClient();
   };
 
-  const handleArchive = () => {
-    archiveClientLoadData();
+  const handleArchive = async () => {
+    await archiveClientLoadData();
   };
 
   const navigateToClientDetails = () => {
@@ -105,6 +106,7 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
                     confirmTxt={dictionary.Archive}
                     cancelTxt={dictionary.Cancel}
                     onConfirm={handleArchive}
+                    isLoading={archiveIsLoading}
                   />
                 ),
                 onClick: (e) => e.preventDefault(),
@@ -125,6 +127,7 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
                     cancelTxt={dictionary.Cancel}
                     onConfirm={handleDelete}
                     isDelete
+                    isLoading={deleteIsLoading}
                   />
                 ),
                 onClick: (e) => e.preventDefault(),

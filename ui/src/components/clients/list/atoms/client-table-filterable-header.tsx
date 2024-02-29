@@ -12,11 +12,11 @@ import {
   selectClientTypeOptions,
   iconToLabelClientType,
   valueToLabelClientType,
-} from "../../utils/consts";
+} from "../utils/consts";
 import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
 import { useRecoilState } from "recoil";
-import { filterTableByAtom } from "../../utils/clients.recoil";
+import { filterTableByAtom } from "../utils/clients.recoil";
 
 export const FilterableTableHeader = () => {
   const { dictionary } = useContext(LanguageContext);

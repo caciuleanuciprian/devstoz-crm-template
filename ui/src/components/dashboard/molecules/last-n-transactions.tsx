@@ -3,7 +3,6 @@ import useAxios from "@/lib/axios/useAxios";
 import { useRecoilState } from "recoil";
 import { GetOrganizationLastTransactions } from "../core/dashboard.service";
 import { Transaction } from "@/components/clients/details/transactions/atoms/transaction";
-import { TransactionObject } from "@/components/clients/utils/types";
 import {
   TableHeader,
   TableRow,
@@ -17,6 +16,7 @@ import { useContext } from "react";
 import { LanguageContext } from "@/i18n/language-context";
 import { Loader } from "@/components/common/loader";
 import { FilterableTableHeader } from "@/components/clients/details/transactions/atoms/transaction-table-filterable-header";
+import { TransactionObject } from "@/components/clients/details/transactions/utils/types";
 
 export const LastNTransactions = () => {
   const { dictionary } = useContext(LanguageContext);

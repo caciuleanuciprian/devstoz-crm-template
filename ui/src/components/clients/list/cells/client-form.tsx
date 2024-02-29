@@ -14,7 +14,7 @@ import InputWithLabel from "../../../common/forms/input-with-label";
 import {
   ClientFormProps,
   InputWithLabelProps,
-} from "@/components/clients/utils/types";
+} from "@/components/clients/list/utils/types";
 import { Formiz, useForm, useFormFields } from "@formiz/core";
 import { Button } from "@/components/ui/button";
 import { toast } from "../../../ui/use-toast";
@@ -33,9 +33,9 @@ import {
   ClientType,
   renderFormFields,
   valueToLabelClientType,
-} from "../../utils/consts";
+} from "../utils/consts";
 import { useRecoilState } from "recoil";
-import { shouldRefetchAtom } from "../../utils/clients.recoil";
+import { shouldRefetchAtom } from "../utils/clients.recoil";
 import { Loader } from "@/components/common/loader";
 import {
   selectedOrganizationAtom,

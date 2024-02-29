@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { Loader } from "./loader";
 
 interface ModalProps {
   trigger: any;
@@ -19,10 +21,11 @@ interface ModalProps {
   component?: any;
   confirmTxt: string;
   cancelTxt: string;
-  onConfirm?: (params?: any) => void;
+  onConfirm?: (params?: any) => Promise<void>;
   onCancel?: (params?: any) => void;
   isDelete?: boolean;
   isDisabled?: boolean;
+  isLoading?: boolean;
 }
 
 export const Modal = ({
@@ -32,13 +35,20 @@ export const Modal = ({
   component,
   confirmTxt = "Save",
   cancelTxt = "Cancel",
-  onConfirm = () => {},
+  onConfirm = async () => {},
   onCancel = () => {},
   isDelete,
   isDisabled = false,
+  isLoading = false,
 }: ModalProps) => {
+  const [open, setOpen] = useState(false);
+
+  const handleConfirm = async () => {
+    await onConfirm();
+    setOpen(false);
+  };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -49,7 +59,6 @@ export const Modal = ({
         <DialogFooter>
           <DialogClose asChild>
             <Button
-              disabled={isDisabled}
               variant={"outline"}
               onClick={onCancel}
               type="button"
@@ -58,17 +67,15 @@ export const Modal = ({
               {cancelTxt}
             </Button>
           </DialogClose>
-          <DialogClose asChild>
-            <Button
-              variant={isDelete ? "destructive" : "default"}
-              onClick={onConfirm}
-              type="button"
-              disabled={isDisabled}
-              className="text-xs flex items-center px-8"
-            >
-              {confirmTxt}
-            </Button>
-          </DialogClose>
+          <Button
+            variant={isDelete ? "destructive" : "default"}
+            onClick={handleConfirm}
+            type="button"
+            disabled={isLoading || isDisabled}
+            className="text-xs flex items-center px-8"
+          >
+            {isLoading ? <Loader /> : confirmTxt}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

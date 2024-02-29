@@ -1,11 +1,14 @@
 import { Loader } from "@/components/common/loader";
 import { Transaction } from "../atoms/transaction";
-import { Button } from "@/components/ui/button";
-import { GetTransactions } from "@/components/clients/core/clients.service";
+import { GetTransactions } from "@/components/clients/core/transactions.service";
 import useAxios from "@/lib/axios/useAxios";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { shouldRefetchAtom } from "@/components/clients/utils/clients.recoil";
+import {
+  currentPageAtom,
+  shouldRefetchAtom,
+  totalPagesAtom,
+} from "@/components/clients/list/utils/clients.recoil";
 import { useRecoilState } from "recoil";
 import {
   Table,
@@ -16,17 +19,20 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { LanguageContext } from "@/i18n/language-context";
-import { TransactionObject } from "@/components/clients/utils/types";
 import { FilterableTableHeader } from "../atoms/transaction-table-filterable-header";
-import { filterTransactionTableByAtom } from "@/components/clients/utils/transactions.recoil";
+import { filterTransactionTableByAtom } from "@/components/clients/details/transactions/utils/transactions.recoil";
 import { transactionHeaders } from "../utils/consts";
+import { TransactionObject } from "../utils/types";
 
-export const Transactions = () => {
+export const TransactionsTable = () => {
   const { dictionary } = useContext(LanguageContext);
 
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
   const [filterBy] = useRecoilState(filterTransactionTableByAtom);
+
+  const [, setTotalPages] = useRecoilState(totalPagesAtom);
+  const [currentPage, setCurrentPage] = useRecoilState(currentPageAtom);
 
   const { clientId } = useParams();
 
@@ -40,9 +46,26 @@ export const Transactions = () => {
     paramsOfFetch: {
       clientId: clientId,
       transactionType: filterBy,
+      page: currentPage,
     },
     loadOnMount: true,
   });
+
+  useEffect(() => {
+    setTotalPages(0);
+    setCurrentPage(0);
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      setTotalPages(data.numberOfPages);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    setCurrentPage(0);
+    setShouldRefetch(true);
+  }, [filterBy]);
 
   useEffect(() => {
     if (shouldRefetch) {

@@ -40,19 +40,3 @@ export interface SheetProps {
   description: string;
   submitTxt: string;
 }
-
-export interface TransactionObject {
-  id: string;
-  name: string;
-  amount: number;
-  fileName: string;
-  transactionType: string;
-}
-
-export interface TransactionProps {
-  transaction: TransactionObject;
-}
-
-export interface TransactionsProps {
-  transactions: TransactionObject[];
-}

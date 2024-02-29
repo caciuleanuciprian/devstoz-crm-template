@@ -42,7 +42,7 @@ export const Member = ({ isReadonly, name, email, role }: MemberProps) => {
   const handleAddMember = async () => {
     await loadData();
   };
-  const handleDelete = () => {
+  const handleDelete = async () => {
     console.log("delete");
   };
   return (
@@ -72,7 +72,7 @@ export const Member = ({ isReadonly, name, email, role }: MemberProps) => {
           description={dictionary.ArchiveClientConfirmation}
           confirmTxt={dictionary.Archive}
           cancelTxt={dictionary.Cancel}
-          onConfirm={() => console.log("archive")}
+          onConfirm={async () => console.log("archive")}
         />
         <Modal
           trigger={

@@ -1,4 +1,12 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const data = [
   {
@@ -51,28 +59,32 @@ const data = [
   },
 ];
 
-const ResponsiveBarChart = () => {
+export default function BarReport({
+  data,
+  datakey,
+}: {
+  data: any[];
+  datakey: string;
+}) {
   return (
     <ResponsiveContainer width="100%" height={"100%"}>
-      <BarChart data={data}>
-        <XAxis
-          dataKey="name"
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-        />
-        <YAxis
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={(value) => `$${value}`}
-        />
-        <Bar dataKey="total" fill={"lightblue"} radius={[4, 4, 0, 0]} />
+      <BarChart
+        width={500}
+        height={350}
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 10,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="6" className="opacity-50" />
+        <XAxis dataKey="name" className="text-xs font-semibold" />
+        <YAxis className="text-xs font-semibold" />
+        <Bar dataKey={datakey} fill={"lightblue"} radius={[4, 4, 0, 0]} />
+        <Legend />
       </BarChart>
     </ResponsiveContainer>
   );
-};
-
-export default ResponsiveBarChart;
+}

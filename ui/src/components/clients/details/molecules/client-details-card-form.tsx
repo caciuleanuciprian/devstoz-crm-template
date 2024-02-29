@@ -10,17 +10,17 @@ import {
 } from "@/components/ui/select";
 import { Loader } from "@/components/common/loader";
 import { Label } from "@/components/ui/label";
-import InputWithLabel from "../../common/forms/input-with-label";
+import InputWithLabel from "../../../common/forms/input-with-label";
 import {
   ClientType,
   formatData,
   selectClientTypeOptions,
   valueToLabelClientType,
-} from "../utils/consts";
+} from "../../list/utils/consts";
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "@/i18n/language-context";
 import useAxios from "@/lib/axios/useAxios";
-import { GetClient, UpdateClient } from "../core/clients.service";
+import { GetClient, UpdateClient } from "../../core/clients.service";
 import { toast } from "@/components/ui/use-toast";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import { useParams } from "react-router-dom";
