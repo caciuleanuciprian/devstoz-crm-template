@@ -34,10 +34,10 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
   const { dictionary } = useContext(LanguageContext);
 
   const ClientTableHeaders = [
-    { id: "name", label: dictionary.Name, size: 15 },
-    { id: "address", label: dictionary.Address, size: 15 },
-    { id: "phone", label: dictionary.Phone, size: 15 },
-    { id: "email", label: dictionary.Email, size: 15 },
+    { id: "name", label: dictionary.Name, size: 10 },
+    { id: "address", label: dictionary.Address, size: 20 },
+    { id: "phone", label: dictionary.Phone, size: 10 },
+    { id: "email", label: dictionary.Email, size: 10 },
     {
       id: "type",
       label: dictionary.Type,
@@ -52,7 +52,7 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
           helper={dictionary.CreatedOn}
         />
       ),
-      size: 10,
+      size: 15,
     },
     {
       id: "editedBy",
@@ -62,7 +62,7 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
           helper={dictionary.EditedOn}
         />
       ),
-      size: 10,
+      size: 15,
     },
     { id: "actions", label: dictionary.Actions, alignRight: true, size: 5 },
   ];
@@ -95,7 +95,7 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
               key={header.id}
               className={`${header.alignRight ? "text-right" : "text-left"}`}
               style={{
-                width: header.size + "%",
+                width: `${header.size}%`,
               }}
             >
               {header.component ? header.component : header.label}
@@ -152,11 +152,14 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
               <TableCell>
                 <CellWithHelper
                   label={client.createdBy}
-                  helper={client.creationDate}
+                  value={client.creationDate}
                 />
               </TableCell>
               <TableCell>
-                {client.lastUpdatedBy} - {client.lastUpdatedDate}
+                <CellWithHelper
+                  label={client.lastUpdatedBy}
+                  value={client.lastUpdatedDate}
+                />
               </TableCell>
               <TableCell>
                 <ClientTableActions id={client.id} />
