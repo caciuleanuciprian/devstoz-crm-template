@@ -5,7 +5,7 @@ import { useEffect } from "react";
 function App() {
   const [atomEx, setAtomEx] = useRecoilState(atomExample);
   useEffect(() => {
-    setAtomEx("penis");
+    setAtomEx("test");
   });
 
   return "Should be removed.";
