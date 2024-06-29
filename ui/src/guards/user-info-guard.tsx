@@ -7,7 +7,6 @@ import { PagesURL } from "@/components/authentication/utils/consts";
 import { Loader } from "@/components/common/loader";
 import { toast } from "@/components/ui/use-toast";
 import { LanguageContext } from "@/i18n/language-context";
-import { FRONT_END_BASE_URL } from "@/lib/axios/consts";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import useAxios from "@/lib/axios/useAxios";
 import { jwtDecode } from "jwt-decode";
@@ -32,12 +31,14 @@ export const UserInfoGuard = ({ children }: any) => {
     if (idToken && !userDetails) {
       loadData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idToken]);
 
   useEffect(() => {
     if (data) {
       setUserDetails(data);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   useEffect(() => {
@@ -47,6 +48,7 @@ export const UserInfoGuard = ({ children }: any) => {
       setIdToken(null);
       setUserDetails(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataCode, error]);
 
   return (

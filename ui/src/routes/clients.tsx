@@ -10,6 +10,7 @@ const ClientsPage = () => {
 
   useEffect(() => {
     setIsActive(LinkIDS.CLIENTS);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

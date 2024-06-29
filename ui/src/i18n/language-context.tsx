@@ -1,4 +1,5 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React, { useState, createContext, useContext } from "react";
 import { dictionaryList, languageOptions } from "./languages";
 import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
 import { useRecoilState } from "recoil";

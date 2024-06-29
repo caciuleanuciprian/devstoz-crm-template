@@ -3,7 +3,7 @@ import { atomExample } from "./lib/recoil/example.recoil";
 import { useEffect } from "react";
 
 function App() {
-  const [atomEx, setAtomEx] = useRecoilState(atomExample);
+  const [, setAtomEx] = useRecoilState(atomExample);
   useEffect(() => {
     setAtomEx("test");
   });

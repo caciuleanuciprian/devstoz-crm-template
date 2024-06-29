@@ -28,6 +28,7 @@ export const OauthRedirectPage = () => {
       setIdToken(data.id_token);
       location.href = `${FRONT_END_BASE_URL}${PagesURL.DASHBOARD}`;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return <div>Redirecting...</div>;

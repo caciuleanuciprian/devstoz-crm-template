@@ -56,6 +56,7 @@ const useAxios = ({
 
   useEffect(() => {
     loadOnMount && loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -64,6 +65,7 @@ const useAxios = ({
       localStorage.removeItem("idToken");
       location.href = `${FRONT_END_BASE_URL}${PagesURL.AUTHENTICATION}`;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataCode]);
 
   return {

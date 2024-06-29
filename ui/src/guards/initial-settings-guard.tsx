@@ -42,12 +42,14 @@ export const InitialSettingsGuard = ({ children }: any) => {
       loadData();
       setShouldRefetchOrganization(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldRefetchOrganization]);
 
   useEffect(() => {
     if (idToken && userDetails && !selectedOrganization) {
       loadData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idToken, userDetails, selectedOrganization]);
 
   useEffect(() => {
@@ -65,6 +67,7 @@ export const InitialSettingsGuard = ({ children }: any) => {
       setSelectedOrganization(null);
       toast({ title: dictionary.UserDetailsError, variant: "destructive" });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (

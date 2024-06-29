@@ -20,7 +20,7 @@ import {
 import { useRecoilState } from "recoil";
 import Dropdown from "@/components/common/dropdown";
 
-export const Member = ({ isReadonly, name, email, role }: MemberProps) => {
+export const Member = ({ name, email, role }: MemberProps) => {
   const [memberRole, setMemberRole] = useState<string>(
     role || UserRoles.MEMBER
   );

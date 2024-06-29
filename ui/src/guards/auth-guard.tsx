@@ -20,6 +20,7 @@ const AuthGuard = ({ children }: any) => {
       setUserDetails(null);
       navigate(PagesURL.AUTHENTICATION);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
