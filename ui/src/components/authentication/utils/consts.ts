@@ -2,6 +2,7 @@ export enum PagesURL {
   DASHBOARD = "/dashboard",
   CLIENTS = "/clients",
   REPORTS = "/reports",
+  DOCUMENTS = "/documents",
   SETTINGS = "/settings",
   AUTHENTICATION = "/",
   OAUTH2_REDIRECT = "/oauth/callback",

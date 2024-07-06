@@ -11,7 +11,7 @@ export const OauthRedirectPage = () => {
 
   const [, setIdToken] = useRecoilState(idTokenAtom);
 
-  const { data } = useAxios({
+  const { data, response, error, dataCode } = useAxios({
     fetchFn: GetGoogleAuth,
     paramsOfFetch: {
       code: queryParameters.get("code"),
@@ -22,6 +22,8 @@ export const OauthRedirectPage = () => {
     },
     loadOnMount: true,
   });
+
+  console.log(response, error, dataCode);
 
   useEffect(() => {
     if (data) {

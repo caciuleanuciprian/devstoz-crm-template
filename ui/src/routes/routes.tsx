@@ -10,6 +10,7 @@ import { ClientDetailsPage } from "./client-details";
 import { OauthRedirectPage } from "./oauth-redirect";
 import { InitialSettingsPage } from "./initial-settings";
 import { OrganizationSelectionPage } from "./organization-selection";
+import DocumentsPage from "./documents";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,11 @@ export const router = createBrowserRouter([
   {
     path: PagesURL.REPORTS,
     element: <ReportsPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: PagesURL.DOCUMENTS,
+    element: <DocumentsPage />,
     errorElement: <ErrorPage />,
   },
   {
