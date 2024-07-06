@@ -11,7 +11,7 @@ export const UpdateUserOrganization = async ({
   organizationId: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
-    const response: any = axios.put(
+    const response: any = axios.patch(
       `${ORGANIZATION_URL}/${organizationId}`,
       body,
       {
