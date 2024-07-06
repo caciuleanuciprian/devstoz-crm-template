@@ -1,10 +1,4 @@
-import {
-  CLIENTS_PREFIX,
-  CLIENTS_URL,
-  REPORTS_URL,
-  TRANSACTIONS_PREFIX,
-  TRANSACTIONS_URL,
-} from "@/lib/axios/consts";
+import { CLIENTS_URL, REPORTS_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 

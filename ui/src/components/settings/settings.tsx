@@ -5,31 +5,10 @@ import { useRecoilState } from "recoil";
 import LanguageSelector from "@/components/settings/atoms/language-selector";
 import { Header } from "../common/header/header";
 import { LanguageContext } from "@/i18n/language-context";
-import { InitialSettings } from "../initial-settings/initial-settings";
-import { AxiosStatusCode } from "@/lib/axios/helpers";
-import useAxios from "@/lib/axios/useAxios";
-import { useForm, useFormFields } from "@formiz/core";
-import {
-  userDetailsAtom,
-  selectedOrganizationAtom,
-} from "../authentication/utils/authentication.recoil";
-import {
-  SelectLanguageOptions,
-  SelectCurrencyOptions,
-} from "../initial-settings/utils/consts";
-import { toast } from "../ui/use-toast";
-import {
-  organizationLogoAtom,
-  settingsCurrencyAtom,
-  settingsLanguageAtom,
-} from "./core/settings.recoil";
 import { SettingsOrganizationDetails } from "./molecules/settings-organization-details";
 import { SettingsOrganizationLogo } from "./molecules/settings-organization-logo";
-import {
-  UpdateUserOrganization,
-  UpdateOrganizationLogo,
-} from "./core/settings.service";
 import { SettingsMembersSection } from "./molecules/settings-members-section";
+import { Slot } from "./atoms/slot";
 
 const Settings = () => {
   const [, setIsActive] = useRecoilState(activeNavTabAtom);
@@ -48,11 +27,9 @@ const Settings = () => {
           <SettingsOrganizationDetails />
           <SettingsOrganizationLogo />
         </div>
-        <div className="flex gap-4 xs:flex-col">
-          <SettingsMembersSection />
+        <div className="flex w-full gap-4 xs:flex-col">
           <SettingsMembersSection />
         </div>
-        <LanguageSelector />
       </div>
     </div>
   );

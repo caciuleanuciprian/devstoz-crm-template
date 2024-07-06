@@ -37,7 +37,6 @@ export const ChartSlot = ({
   dataKey,
 }: ChartSlotProps) => {
   const [reportType, setReportType] = useState<string>(ReportType.LINE);
-  console.log("data", data);
   const { dictionary } = useContext(LanguageContext);
   return (
     <div className="p-4 h-[400px] flex flex-col gap-2">

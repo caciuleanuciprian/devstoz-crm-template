@@ -80,7 +80,6 @@ export const CreateUserOrganization = async ({
   userId: string;
   body: any;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  console.log(body);
   try {
     const response: any = axios.post(`${ORGANIZATION_URL}`, body, {
       headers: {

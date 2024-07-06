@@ -6,6 +6,4 @@ export const dictionaryList = { en, ro };
 export const languageOptions: any = {
   en: "English",
   ro: "Romanian",
-  //   tr: "Türkçe",
-  //   de: "Deutsch",
 };

@@ -1,4 +1,4 @@
-import { LogOut } from "lucide-react";
+import { DoorOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ const Logout = () => {
   return (
     <>
       <Button variant="outline" size="icon" onClick={logoutAndRedirect}>
-        <LogOut className="h-[1.2rem] w-[1.2rem]" />
+        <DoorOpen className="h-[1.2rem] w-[1.2rem]" />
         <span className="sr-only">Logout</span>
       </Button>
     </>

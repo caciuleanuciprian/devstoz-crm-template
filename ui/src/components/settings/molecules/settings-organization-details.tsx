@@ -74,7 +74,7 @@ export const SettingsOrganizationDetails = () => {
         name: values.name,
         language: selectedLanguage || selectedOrganization?.language,
         currency: selectedCurrency || selectedOrganization?.currency,
-        logoName: "test", // TODO should remove this line
+        logoName: "test", // TODO: should remove this line
       },
       organizationId: selectedOrganization?.id,
     },
@@ -84,7 +84,7 @@ export const SettingsOrganizationDetails = () => {
     await updateOrganization();
   };
 
-  const resetForm = () => {
+  const resetForm = async () => {
     settingsForm.setValues({
       name: selectedOrganization?.name,
     });
@@ -128,8 +128,9 @@ export const SettingsOrganizationDetails = () => {
 
   return (
     <Slot>
+      <p className="font-semibold text-lg">{dictionary.OrganizationSettings}</p>
       <Formiz connect={settingsForm}>
-        <div className="flex bg-background flex-col p-4 rounded-md w-full h-full">
+        <div className="flex bg-background flex-col p-4 mt-4 rounded-md w-full h-full">
           <div className="col-span-4 w-full h-full">
             <InputWithLabel
               label={dictionary.OrganizationName}

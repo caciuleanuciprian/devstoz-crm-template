@@ -13,4 +13,5 @@ export interface UserOrganization {
   currency: string;
   logoName: string;
   logo: File;
+  clients: Array<any>;
 }

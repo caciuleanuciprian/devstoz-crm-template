@@ -57,8 +57,9 @@ export const SettingsMembersSection = () => {
   };
 
   return (
-    <Slot>
-      <div className="flex bg-background flex-col p-4 rounded-md w-full h-full">
+    <Slot className="w-full">
+      <p className="font-semibold text-lg">{dictionary.OrganizationMembers}</p>
+      <div className="flex bg-background flex-col p-4 mt-4 rounded-md w-full h-full">
         <Card className="h-full">
           <CardHeader className="p-4 flex flex-row justify-between items-center">
             <div>

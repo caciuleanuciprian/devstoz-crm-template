@@ -10,7 +10,6 @@ export const UpdateUserOrganization = async ({
   body: any;
   organizationId: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  console.log("UpdateUserOrganization", body);
   try {
     const response: any = axios.put(
       `${ORGANIZATION_URL}/${organizationId}`,
@@ -37,7 +36,6 @@ export const UpdateOrganizationLogo = async ({
   body: any;
   organizationId: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  console.log("UpdateOrganizationLogo", body);
   try {
     const response: any = axios.put(
       `${ORGANIZATION_URL}/${organizationId}/logo`,
@@ -64,7 +62,6 @@ export const AddMember = async ({
   adminId: string;
   body: any;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  console.log("AddMember", body);
   try {
     const response: any = axios.put(`${ROLES_URL}/${adminId}`, body, {
       headers: {

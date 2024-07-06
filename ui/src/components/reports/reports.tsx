@@ -108,7 +108,7 @@ const Reports = () => {
           <div className="pt-4 px-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
-                <p className="font-semibold text-2xl">
+                <p className="font-semibold text-xl">
                   {dictionary.YearlyReportSituation}
                 </p>
                 <p className="font-semibold text-xs text-muted-foreground">

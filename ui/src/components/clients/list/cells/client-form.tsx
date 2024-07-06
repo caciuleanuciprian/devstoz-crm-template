@@ -37,10 +37,7 @@ import {
 import { useRecoilState } from "recoil";
 import { shouldRefetchAtom } from "../utils/clients.recoil";
 import { Loader } from "@/components/common/loader";
-import {
-  selectedOrganizationAtom,
-  userDetailsAtom,
-} from "@/components/authentication/utils/authentication.recoil";
+import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
 
 export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
   const { dictionary } = useContext(LanguageContext);
@@ -120,8 +117,6 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
       );
     }
   };
-
-  console.log(dataCode);
 
   useEffect(() => {
     if (data && dataCode === AxiosStatusCode.CODE_201_CREATED) {

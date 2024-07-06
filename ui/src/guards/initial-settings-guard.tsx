@@ -28,7 +28,7 @@ export const InitialSettingsGuard = ({ children }: any) => {
 
   const navigate = useNavigate();
 
-  const { dictionary }: any = useContext(LanguageContext);
+  const { dictionary, userLanguageChange }: any = useContext(LanguageContext);
 
   const { data, loadData, error, dataCode } = useAxios({
     fetchFn: GetUserOrganizations,
@@ -40,6 +40,7 @@ export const InitialSettingsGuard = ({ children }: any) => {
   useEffect(() => {
     if (shouldRefetchOrganization) {
       loadData();
+      userLanguageChange(selectedOrganization?.language);
       setShouldRefetchOrganization(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

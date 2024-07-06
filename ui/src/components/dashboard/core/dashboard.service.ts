@@ -1,3 +1,4 @@
+import { ORGANIZATION_PREFIX } from "./../../../lib/axios/consts";
 import { ORGANIZATION_URL, REPORTS_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
@@ -18,7 +19,6 @@ export const GetClients = async ({
   clientType?: string;
   nameSearchText?: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  console.log(organizationId);
   const params = new URLSearchParams({
     page: page.toString(),
     size: size.toString(),
@@ -63,7 +63,7 @@ export const GetOrganizationLastTransactions = async ({
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
     const response: any = await axios.get(
-      `${REPORTS_URL}/organization/${organizationId}/last?transactions=${transactions}`,
+      `${REPORTS_URL}${ORGANIZATION_PREFIX}/${organizationId}/last?transactions=${transactions}`,
       {
         headers: {
           Authorization:
@@ -89,7 +89,7 @@ export const GetOrganizationReportMonthly = async ({
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
     const response: MonthlyReportResponse = await axios.get(
-      `${REPORTS_URL}/organization/${organizationId}/monthly?month=${month}&year=${year}`,
+      `${REPORTS_URL}${ORGANIZATION_PREFIX}/${organizationId}/monthly?month=${month}&year=${year}`,
       {
         headers: {
           Authorization:
@@ -113,7 +113,7 @@ export const GetOrganizationReportYearly = async ({
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
     const response: any = await axios.get(
-      `${REPORTS_URL}/organization/${organizationId}/yearly?&year=${year}`,
+      `${REPORTS_URL}${ORGANIZATION_PREFIX}/${organizationId}/yearly?&year=${year}`,
       {
         headers: {
           Authorization:

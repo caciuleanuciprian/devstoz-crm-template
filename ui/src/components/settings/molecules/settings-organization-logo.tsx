@@ -56,11 +56,10 @@ export const SettingsOrganizationLogo = () => {
     }
   }, []);
 
-  console.log(file);
-
   return (
     <Slot>
-      <div className="col-span-4 bg-background p-4 rounded-md w-full h-full">
+      <p className="font-semibold text-lg">{dictionary.OrganizationLogo}</p>
+      <div className="col-span-4 bg-background p-4 mt-4 rounded-md w-full h-full">
         <UploadImage isReadonly={isReadonly} file={file} setFile={setFile} />
 
         <div className="flex gap-4 justify-end mt-6">
