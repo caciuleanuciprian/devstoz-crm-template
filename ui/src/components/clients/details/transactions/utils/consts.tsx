@@ -2,11 +2,15 @@ import { Icons } from "@/components/ui/icons";
 import { ArrowUpCircle, ArrowDownCircle } from "lucide-react";
 import { FileExtensions, TransactionType } from "./types";
 
-export const transactionHeaders = (dictionary: any, component?: any) => {
+export const transactionHeaders = (
+  dictionary: any,
+  component?: any,
+  hasAmount: boolean = true
+) => {
   return [
     { id: "icon", label: dictionary.FileType, size: 10 },
     { id: "name", label: dictionary.Name, size: 20 },
-    { id: "amount", label: dictionary.Amount, size: 15 },
+    hasAmount ? { id: "amount", label: dictionary.Amount, size: 15 } : {},
     { id: "transactionType", component: component, size: 20 },
     { id: "fileName", label: dictionary.FileName, size: 15 },
     { id: "actions", label: dictionary.Actions, alignRight: true, size: 20 },

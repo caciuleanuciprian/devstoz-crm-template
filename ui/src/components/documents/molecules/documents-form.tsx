@@ -122,185 +122,190 @@ export const DocumentsForm = () => {
   }, [dataCode, error]);
 
   return (
-    <div className="flex w-full p-4 flex-col rounded-md gap-2">
-      <Formiz connect={pdfForm}>
-        <div className="flex w-full gap-2">
-          <div className="col-span-4 w-full">
-            <InputWithLabel
-              label={dictionary.FirstName}
-              type={"text"}
-              name={"firstName"}
-              required={dictionary.FieldCannotBeEmpty}
-              validations={[
-                {
-                  handler: isRequired() && isNotEmptyString(),
-                  message: `${dictionary.InvalidFirstName}`,
-                },
-              ]}
-            />
-          </div>
-          <div className="col-span-4 w-full">
-            <InputWithLabel
-              label={dictionary.LastName}
-              type={"text"}
-              name={"lastName"}
-              required={dictionary.FieldCannotBeEmpty}
-              validations={[
-                {
-                  handler: isRequired() && isNotEmptyString(),
-                  message: `${dictionary.InvalidLastName}`,
-                },
-              ]}
-            />
-          </div>
+    <>
+      <p className="font-semibold text-lg">{dictionary.GenerateDocument}</p>
+      <div className="flex flex-col w-full justify-between rounded-md bg-background">
+        <div className="flex w-full p-4 flex-col rounded-md gap-2">
+          <Formiz connect={pdfForm}>
+            <div className="flex w-full gap-2">
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.FirstName}
+                  type={"text"}
+                  name={"firstName"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isRequired() && isNotEmptyString(),
+                      message: `${dictionary.InvalidFirstName}`,
+                    },
+                  ]}
+                />
+              </div>
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.LastName}
+                  type={"text"}
+                  name={"lastName"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isRequired() && isNotEmptyString(),
+                      message: `${dictionary.InvalidLastName}`,
+                    },
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="flex w-full gap-2">
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Day}
+                  type={"number"}
+                  name={"day"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler:
+                        isRequired() &&
+                        isNumber() &&
+                        isMaxNumber(31) &&
+                        isMinNumber(1),
+                      message: `${dictionary.InvalidDay}`,
+                    },
+                  ]}
+                />
+              </div>
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Month}
+                  type={"number"}
+                  name={"month"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isRequired(),
+                      message: `${dictionary.InvalidMonth}`,
+                    },
+                    {
+                      handler: isMinNumber(1) && isMaxNumber(12) && isNumber(),
+                      message: `${dictionary.InvalidMonth}`,
+                    },
+                  ]}
+                />
+              </div>
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Year}
+                  type={"number"}
+                  name={"year"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isRequired() && isNumber() && isMinNumber(1),
+                      message: `${dictionary.InvalidYear}`,
+                    },
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="flex w-full gap-2">
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Address1}
+                  type={"text"}
+                  name={"address1"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isRequired() && isNotEmptyString(),
+                      message: `${dictionary.InvalidAddress}`,
+                    },
+                  ]}
+                />
+              </div>
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Address2}
+                  type={"text"}
+                  name={"address2"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isRequired() && isNotEmptyString(),
+                      message: `${dictionary.InvalidAddress}`,
+                    },
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="flex w-full gap-2">
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Destination}
+                  type={"text"}
+                  name={"destination"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isRequired() && isNotEmptyString(),
+                      message: `${dictionary.InvalidDestination}`,
+                    },
+                  ]}
+                />
+              </div>
+              <div className="col-span-4 w-full">
+                <InputWithLabel
+                  label={dictionary.Date}
+                  type={"date"}
+                  name={"date"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isRequired() && isNotEmptyString(),
+                      message: `${dictionary.InvalidDate}`,
+                    },
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="flex w-full flex-col justify-end gap-2 pt-4">
+              {checkboxes.map((checkbox) => (
+                <CheckboxWithText
+                  name={checkbox.name}
+                  label={checkbox.label}
+                  checked={checkbox.value}
+                  onCheckedChange={() => handleCheckedChange(checkbox)}
+                />
+              ))}
+            </div>
+            <div className="flex w-full justify-end gap-2">
+              <Button
+                type="button"
+                className="text-xs flex items-center px-8"
+                variant={"outline"}
+                onClick={() => {
+                  handleReset();
+                }}
+                disabled={pdfForm.isPristine}
+              >
+                {dictionary.Reset}
+              </Button>
+              <Button
+                type="button"
+                variant={"default"}
+                className="text-xs flex items-center px-8"
+                onClick={() => {
+                  handleSubmit();
+                }}
+                disabled={isLoading || !pdfForm.isValid}
+              >
+                {isLoading ? <Loader /> : dictionary.Submit}
+              </Button>
+            </div>
+          </Formiz>
         </div>
-        <div className="flex w-full gap-2">
-          <div className="col-span-4 w-full">
-            <InputWithLabel
-              label={dictionary.Day}
-              type={"number"}
-              name={"day"}
-              required={dictionary.FieldCannotBeEmpty}
-              validations={[
-                {
-                  handler:
-                    isRequired() &&
-                    isNumber() &&
-                    isMaxNumber(31) &&
-                    isMinNumber(1),
-                  message: `${dictionary.InvalidDay}`,
-                },
-              ]}
-            />
-          </div>
-          <div className="col-span-4 w-full">
-            <InputWithLabel
-              label={dictionary.Month}
-              type={"number"}
-              name={"month"}
-              required={dictionary.FieldCannotBeEmpty}
-              validations={[
-                {
-                  handler: isRequired(),
-                  message: `${dictionary.InvalidMonth}`,
-                },
-                {
-                  handler: isMinNumber(1) && isMaxNumber(12) && isNumber(),
-                  message: `${dictionary.InvalidMonth}`,
-                },
-              ]}
-            />
-          </div>
-          <div className="col-span-4 w-full">
-            <InputWithLabel
-              label={dictionary.Year}
-              type={"number"}
-              name={"year"}
-              required={dictionary.FieldCannotBeEmpty}
-              validations={[
-                {
-                  handler: isRequired() && isNumber() && isMinNumber(1),
-                  message: `${dictionary.InvalidYear}`,
-                },
-              ]}
-            />
-          </div>
-        </div>
-        <div className="flex w-full gap-2">
-          <div className="col-span-4 w-full">
-            <InputWithLabel
-              label={dictionary.Address1}
-              type={"text"}
-              name={"address1"}
-              required={dictionary.FieldCannotBeEmpty}
-              validations={[
-                {
-                  handler: isRequired() && isNotEmptyString(),
-                  message: `${dictionary.InvalidAddress}`,
-                },
-              ]}
-            />
-          </div>
-          <div className="col-span-4 w-full">
-            <InputWithLabel
-              label={dictionary.Address2}
-              type={"text"}
-              name={"address2"}
-              required={dictionary.FieldCannotBeEmpty}
-              validations={[
-                {
-                  handler: isRequired() && isNotEmptyString(),
-                  message: `${dictionary.InvalidAddress}`,
-                },
-              ]}
-            />
-          </div>
-        </div>
-        <div className="flex w-full gap-2">
-          <div className="col-span-4 w-full">
-            <InputWithLabel
-              label={dictionary.Destination}
-              type={"text"}
-              name={"destination"}
-              required={dictionary.FieldCannotBeEmpty}
-              validations={[
-                {
-                  handler: isRequired() && isNotEmptyString(),
-                  message: `${dictionary.InvalidDestination}`,
-                },
-              ]}
-            />
-          </div>
-          <div className="col-span-4 w-full">
-            <InputWithLabel
-              label={dictionary.Date}
-              type={"date"}
-              name={"date"}
-              required={dictionary.FieldCannotBeEmpty}
-              validations={[
-                {
-                  handler: isRequired() && isNotEmptyString(),
-                  message: `${dictionary.InvalidDate}`,
-                },
-              ]}
-            />
-          </div>
-        </div>
-        <div className="flex w-full flex-col justify-end gap-2 pt-4">
-          {checkboxes.map((checkbox) => (
-            <CheckboxWithText
-              name={checkbox.name}
-              label={checkbox.label}
-              checked={checkbox.value}
-              onCheckedChange={() => handleCheckedChange(checkbox)}
-            />
-          ))}
-        </div>
-        <div className="flex w-full justify-end gap-2">
-          <Button
-            type="button"
-            className="text-xs flex items-center px-8"
-            variant={"outline"}
-            onClick={() => {
-              handleReset();
-            }}
-            disabled={pdfForm.isPristine}
-          >
-            {dictionary.Reset}
-          </Button>
-          <Button
-            type="button"
-            variant={"default"}
-            className="text-xs flex items-center px-8"
-            onClick={() => {
-              handleSubmit();
-            }}
-            disabled={isLoading || !pdfForm.isValid}
-          >
-            {isLoading ? <Loader /> : dictionary.Submit}
-          </Button>
-        </div>
-      </Formiz>
-    </div>
+      </div>
+    </>
   );
 };

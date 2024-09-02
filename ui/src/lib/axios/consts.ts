@@ -3,7 +3,8 @@ export const CLIENTS_PREFIX = "/clients";
 export const TRANSACTIONS_PREFIX = "/transactions";
 export const ROLES_PREFIX = "/roles";
 export const ORGANIZATION_PREFIX = "/organizations";
-export const DOCUMENTS_PREFIX = "/pdfs"; // TODO: Replace with /documents/pdfs when BE is ready
+export const DOCUMENTS_PREFIX_TEMP = "/pdfs"; // TODO: Replace with /documents/pdfs when BE is ready
+export const DOCUMENTS_PREFIX = "/documents";
 export const REPORTS_PREFIX = "/reports";
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -16,6 +17,7 @@ export const CLIENTS_URL = `${BASE_URL_AUTHORIZED}${CLIENTS_PREFIX}`;
 export const TRANSACTIONS_URL = `${BASE_URL_AUTHORIZED}${TRANSACTIONS_PREFIX}`;
 export const ROLES_URL = `${BASE_URL_AUTHORIZED}${ROLES_PREFIX}`;
 export const ORGANIZATION_URL = `${BASE_URL_AUTHORIZED}${ORGANIZATION_PREFIX}`;
+export const DOCUMENTS_URL_TEMP = `${BASE_URL_AUTHORIZED}${DOCUMENTS_PREFIX_TEMP}`;
 export const DOCUMENTS_URL = `${BASE_URL_AUTHORIZED}${DOCUMENTS_PREFIX}`;
 export const REPORTS_URL = `${BASE_URL_AUTHORIZED}${REPORTS_PREFIX}`;
 
