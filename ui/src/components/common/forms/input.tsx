@@ -7,7 +7,8 @@ type MyFieldProps<FormattedValue> = FieldProps<string, FormattedValue>;
 export const InputField = <FormattedValue = string,>(
   props: MyFieldProps<FormattedValue> | any
 ) => {
-  const { value, setValue, isValid, errorMessage } = useField(props);
+  const { value, setValue, isValid, errorMessage, isPristine } =
+    useField(props);
   const {
     id,
     name,
@@ -40,7 +41,7 @@ export const InputField = <FormattedValue = string,>(
         defaultValue={defaultValue}
         required={required}
       />
-      {!isValid && (
+      {!isValid && !isPristine && (
         <p className="flex items-center gap-1 text-xs text-destructive">
           <AlertCircle className="h-4 w-4" />
           {errorMessage}

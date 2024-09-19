@@ -18,18 +18,27 @@ import { totalClientsAtom } from "../utils/clients.recoil";
 import { toast } from "@/components/ui/use-toast";
 import { filterTransactionTableByAtom } from "../../details/transactions/utils/transactions.recoil";
 import { CellWithHelper } from "../atoms/cell-with-helper";
+import { useNavigate } from "react-router-dom";
+import { CLIENTS_PREFIX } from "@/lib/axios/consts";
 
 interface ClientTableProps {
   data: any;
   error: any;
   isLoading: boolean;
+  isArchived?: boolean;
 }
 
-export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
+export const ClientTable = ({
+  data,
+  error,
+  isLoading,
+  isArchived,
+}: ClientTableProps) => {
   const [, setTotalClients] = useRecoilState(totalClientsAtom);
   const [, setTransactionFilterBy] = useRecoilState(
     filterTransactionTableByAtom
   );
+  const navigate = useNavigate();
 
   const { dictionary } = useContext(LanguageContext);
 
@@ -137,7 +146,11 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
         {!isLoading &&
           data?.entries.length > 0 &&
           data.entries.map((client: any) => (
-            <TableRow key={client.id}>
+            <TableRow
+              key={client.id}
+              onClick={() => navigate(`${CLIENTS_PREFIX}/${client.id}`)}
+              className="cursor-pointer"
+            >
               <TableCell>{client.name}</TableCell>
               <TableCell>{client.address}</TableCell>
               <TableCell>{client.telephone}</TableCell>
@@ -145,7 +158,7 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
 
               <TableCell>
                 <div className="flex items-center">
-                  {iconToLabelClientType(client.clientType)}{" "}
+                  {iconToLabelClientType(client.clientType)}
                   {valueToLabelClientType(client.clientType, dictionary)}
                 </div>
               </TableCell>
@@ -162,7 +175,7 @@ export const ClientTable = ({ data, error, isLoading }: ClientTableProps) => {
                 />
               </TableCell>
               <TableCell>
-                <ClientTableActions id={client.id} />
+                <ClientTableActions id={client.id} isArchived={isArchived} />
               </TableCell>
             </TableRow>
           ))}

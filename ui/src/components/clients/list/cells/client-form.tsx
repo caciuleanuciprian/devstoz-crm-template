@@ -69,11 +69,8 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
     },
   });
 
-  const handleAddClient = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleAddClient = async () => {
     if (clientForm.isValid) {
-      e.preventDefault();
       await loadData();
       setShouldRefetch(true);
     }
@@ -149,11 +146,11 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
         <SheetFooter>
           <SheetClose asChild>
             <Button
-              type="button"
+              type="submit"
               variant={"default"}
               className="text-xs flex items-center px-8"
-              onClick={(e) => {
-                handleAddClient(e);
+              onClick={() => {
+                handleAddClient();
               }}
               disabled={isLoading || !clientForm.isValid}
             >

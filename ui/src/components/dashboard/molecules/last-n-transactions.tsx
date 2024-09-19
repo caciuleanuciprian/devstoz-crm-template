@@ -12,15 +12,17 @@ import {
   Table,
 } from "@/components/ui/table";
 import { transactionHeaders } from "@/components/clients/details/transactions/utils/consts";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { LanguageContext } from "@/i18n/language-context";
 import { Loader } from "@/components/common/loader";
 import { FilterableTableHeader } from "@/components/clients/details/transactions/atoms/transaction-table-filterable-header";
 import { TransactionObject } from "@/components/clients/details/transactions/utils/types";
+import { shouldRefetchAtom } from "@/components/clients/list/utils/clients.recoil";
 
 export const LastNTransactions = () => {
   const { dictionary } = useContext(LanguageContext);
   const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
+  const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
   const { data, loadData, error, dataCode, isLoading } = useAxios({
     fetchFn: GetOrganizationLastTransactions,
@@ -31,15 +33,24 @@ export const LastNTransactions = () => {
     loadOnMount: true,
   });
 
+  useEffect(() => {
+    if (shouldRefetch) {
+      loadData();
+      setShouldRefetch(false);
+    }
+  }, [shouldRefetch]);
+
   const TransactionsTableHeaders = transactionHeaders(
     dictionary,
     <FilterableTableHeader />
   );
 
   return (
-    <div className="flex flex-col w-full min-h-[350px] bg-secondary p-4 rounded-md">
-      <p className="font-semibold pb-4 text-lg">{dictionary.ClientDetails}</p>
-      <Table className="bg-background">
+    <div className="flex flex-col w-full min-h-[355px] bg-secondary p-4 rounded-md">
+      <p className="font-semibold pb-4 text-lg">
+        {dictionary.Last5Transactions}
+      </p>
+      <Table className="bg-background h-full">
         <TableHeader>
           <TableRow>
             {TransactionsTableHeaders.map((header) => (

@@ -24,10 +24,17 @@ import { GetClient, UpdateClient } from "../../core/clients.service";
 import { toast } from "@/components/ui/use-toast";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import { useParams } from "react-router-dom";
+import {
+  isEmail,
+  isNotEmptyString,
+  isNumber,
+  isRequired,
+} from "@formiz/validations";
 
 export const ClientDetailsCardForm = () => {
   const { dictionary } = useContext(LanguageContext);
   const { clientId } = useParams();
+  const [isResetting, setIsResetting] = useState<boolean>(false);
 
   const clientForm = useForm();
   const values = useFormFields({
@@ -39,7 +46,7 @@ export const ClientDetailsCardForm = () => {
     InteractionMode.View
   );
 
-  const { data, error, isLoading, dataCode } = useAxios({
+  const { data, error, isLoading, dataCode, loadData } = useAxios({
     fetchFn: GetClient,
     paramsOfFetch: {
       clientId: clientId,
@@ -93,7 +100,21 @@ export const ClientDetailsCardForm = () => {
         creationDate: formatData(data.creationDate),
       });
     }
-  }, [data]);
+  }, [data, isResetting]);
+
+  useEffect(() => {
+    if (isResetting) {
+      loadData();
+      clientForm.setValues({
+        name: data.name,
+        email: data.email,
+        telephone: data.telephone,
+        address: data.address,
+        creationDate: formatData(data.creationDate),
+      });
+      setIsResetting(false);
+    }
+  }, [isResetting]);
 
   return (
     <div className="w-full bg-background min-h-[25vh] flex flex-col justify-center items-center  rounded-md">
@@ -107,6 +128,17 @@ export const ClientDetailsCardForm = () => {
                   isDisabled={InteractionMode.View === interactionMode}
                   type={"text"}
                   name={"name"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isRequired() && isNotEmptyString(),
+                      message: `${dictionary.InvalidName}`,
+                    },
+                    {
+                      handler: isNotEmptyString(),
+                      message: `${dictionary.InvalidName}`,
+                    },
+                  ]}
                 />
               </div>
               <div className="col-span-4 w-full">
@@ -115,6 +147,13 @@ export const ClientDetailsCardForm = () => {
                   isDisabled={InteractionMode.View === interactionMode}
                   type={"email"}
                   name={"email"}
+                  required={dictionary.FieldCannotBeEmpty}
+                  validations={[
+                    {
+                      handler: isEmail(),
+                      message: `${dictionary.InvalidEmail}`,
+                    },
+                  ]}
                 />
               </div>
             </div>
@@ -125,6 +164,7 @@ export const ClientDetailsCardForm = () => {
                   isDisabled={InteractionMode.View === interactionMode}
                   type={"phone"}
                   name={"telephone"}
+                  required={dictionary.FieldCannotBeEmpty}
                 />
               </div>
               <div className="col-span-4 w-full">
@@ -133,6 +173,7 @@ export const ClientDetailsCardForm = () => {
                   isDisabled={InteractionMode.View === interactionMode}
                   type={"text"}
                   name={"address"}
+                  required={dictionary.FieldCannotBeEmpty}
                 />
               </div>
             </div>
@@ -162,6 +203,7 @@ export const ClientDetailsCardForm = () => {
                   isDisabled={true}
                   type={"text"}
                   name={"creationDate"}
+                  required={dictionary.FieldCannotBeEmpty}
                 />
               </div>
             </div>
@@ -179,7 +221,10 @@ export const ClientDetailsCardForm = () => {
                 <>
                   <Button
                     variant={"destructive"}
-                    onClick={() => setInteractionMode(InteractionMode.View)}
+                    onClick={() => {
+                      setIsResetting(true);
+                      setInteractionMode(InteractionMode.View);
+                    }}
                     className="text-xs flex items-center px-8"
                     size={"sm"}
                   >
@@ -190,6 +235,7 @@ export const ClientDetailsCardForm = () => {
                     variant={"default"}
                     className="text-xs flex items-center px-8"
                     size={"sm"}
+                    disabled={!clientForm.isValid}
                   >
                     {dictionary.Save}
                   </Button>

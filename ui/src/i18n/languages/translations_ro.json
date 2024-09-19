@@ -36,8 +36,8 @@
   "DeleteClientConfirmation": "Ești sigur că vrei să ștergi acest client? Nu puteți recupera un client șters.",
   "Delete": "Șterge",
   "Cancel": "Anulează",
-  "SRL": "Societate cu răspundere limitată",
-  "PFA": "Persoană fizică autorizată",
+  "SRL": "SRL",
+  "PFA": "PFA",
   "PF": "Persoană fizică",
   "ClientRemovedSuccesfully": "Clientul a fost șters cu succes.",
   "ClientDetails": "Detalii client",
@@ -200,5 +200,7 @@
   "DECLARATIE_UNICA_CHECK7": "7. Donarea de sânge, la centrele de transfuzie sanguină.",
   "DECLARATIE_UNICA_CHECK8": "8. Scopuri umanitare sau de voluntariat.",
   "DECLARATIE_UNICA_CHECK9": "9. Comercializarea de produse agroalimentare (în cazul producătorilor agricoli).",
-  "DECLARATIE_UNICA_CHECK10": "10. Asigurarea de bunuri necesare desfășurării activității profesionale."
+  "DECLARATIE_UNICA_CHECK10": "10. Asigurarea de bunuri necesare desfășurării activității profesionale.",
+
+  "Last5Transactions": "Ultimele cinci tranzacții"
 }

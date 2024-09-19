@@ -135,7 +135,7 @@ export const TransactionsActions = ({
   }, [transactionFileDataCode, transactionFileError]);
 
   useEffect(() => {
-    if (dataCode === AxiosStatusCode.CODE_200_OK) {
+    if (dataCode === AxiosStatusCode.CODE_204_NO_CONTENT) {
       toast({
         variant: "success",
         title: dictionary.TransactionDeletedSuccesfully,

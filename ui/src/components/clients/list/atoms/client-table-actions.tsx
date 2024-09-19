@@ -14,9 +14,13 @@ import Dropdown from "@/components/common/dropdown";
 
 interface ClientTableActionsProps {
   id: string;
+  isArchived?: boolean;
 }
 
-export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
+export const ClientTableActions = ({
+  id,
+  isArchived,
+}: ClientTableActionsProps) => {
   const { dictionary } = useContext(LanguageContext);
 
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
@@ -58,7 +62,7 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
   };
 
   useEffect(() => {
-    if (deleteClientDataCode === AxiosStatusCode.CODE_200_OK) {
+    if (deleteClientDataCode === AxiosStatusCode.CODE_204_NO_CONTENT) {
       toast({ title: dictionary.ClientRemovedSuccesfully, variant: "success" });
       setShouldRefetch(true);
     } else if (deleteClientError) {
@@ -91,27 +95,30 @@ export const ClientTableActions = ({ id }: ClientTableActionsProps) => {
                 name: "Send email",
                 icon: <Mail className="h-[1.2rem] w-[1.2rem] mr-2" />,
                 onClick: () => console.log("send email"),
+                separator: isArchived,
               },
-              {
-                name: (
-                  <Modal
-                    trigger={
-                      <div className="flex items-center">
-                        <Archive className="h-[1.2rem] w-[1.2rem] mr-2" />
-                        <p>{dictionary.Archive}</p>
-                      </div>
-                    }
-                    title={dictionary.ArchiveClient}
-                    description={dictionary.ArchiveClientConfirmation}
-                    confirmTxt={dictionary.Archive}
-                    cancelTxt={dictionary.Cancel}
-                    onConfirm={handleArchive}
-                    isLoading={archiveIsLoading}
-                  />
-                ),
-                onClick: (e) => e.preventDefault(),
-                separator: true,
-              },
+              !isArchived
+                ? {
+                    name: (
+                      <Modal
+                        trigger={
+                          <div className="flex items-center">
+                            <Archive className="h-[1.2rem] w-[1.2rem] mr-2" />
+                            <p>{dictionary.Archive}</p>
+                          </div>
+                        }
+                        title={dictionary.ArchiveClient}
+                        description={dictionary.ArchiveClientConfirmation}
+                        confirmTxt={dictionary.Archive}
+                        cancelTxt={dictionary.Cancel}
+                        onConfirm={handleArchive}
+                        isLoading={archiveIsLoading}
+                      />
+                    ),
+                    onClick: (e) => e.preventDefault(),
+                    separator: true,
+                  }
+                : null,
               {
                 name: (
                   <Modal

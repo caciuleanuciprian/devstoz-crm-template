@@ -57,5 +57,12 @@ export const ArchivedClientsTable = () => {
     }
   }, [shouldRefetch]);
 
-  return <ClientTable data={data} error={error} isLoading={isLoading} />;
+  return (
+    <ClientTable
+      data={data}
+      error={error}
+      isLoading={isLoading}
+      isArchived={true}
+    />
+  );
 };

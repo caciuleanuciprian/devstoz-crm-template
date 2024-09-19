@@ -1,7 +1,7 @@
 import {
-  DOCUMENTS_URL,
-  DOCUMENTS_URL_TEMP,
+  BASE_URL_AUTHORIZED,
   ORGANIZATION_PREFIX,
+  ORGANIZATION_URL,
 } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
@@ -18,7 +18,7 @@ export const ExportPDF = async ({
   });
   try {
     const response: any = await axios.post(
-      `${DOCUMENTS_URL_TEMP}?${params.toString()}`,
+      `${BASE_URL_AUTHORIZED}/pdfs?${params.toString()}`,
       {
         ...body,
       },
@@ -47,7 +47,7 @@ export const GetOrganizationsDocuments = async ({
   });
   try {
     const response: any = await axios.get(
-      `${DOCUMENTS_URL}${ORGANIZATION_PREFIX}?${params.toString()}`,
+      `${ORGANIZATION_URL}/${organizationId}/documents`,
       {
         headers: {
           Authorization:
@@ -74,7 +74,7 @@ export const UploadOrganizationsDocuments = async ({
   });
   try {
     const response: any = await axios.post(
-      `${DOCUMENTS_URL}${ORGANIZATION_PREFIX}?${params.toString()}`,
+      `${ORGANIZATION_URL}/${organizationId}/documents`,
       body,
       {
         responseType: "blob",

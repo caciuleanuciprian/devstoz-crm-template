@@ -1,16 +1,16 @@
-export interface DropdownMenuItemProps {
+export type DropdownMenuItemProps = {
   name?: any;
   icon?: any;
   separator?: boolean;
   onClick?: (params?: any) => void;
   component?: any;
-}
+} | null;
 
-export interface DropdownMenuProps {
+export type DropdownMenuProps = {
   label?: string;
   items: DropdownMenuItemProps[];
   fn?: (params?: any) => void;
-}
+};
 
 export interface MonthlyReportResponse {
   numberOfClients: number;

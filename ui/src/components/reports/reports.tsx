@@ -22,11 +22,11 @@ const Reports = () => {
   }, []);
 
   const [date, setDate] = useState<Date>(new Date(Date.now()));
-  const [currYear, setCurrYear] = useState(date.getFullYear());
 
-  useEffect(() => {
-    setCurrYear(date.getFullYear());
-  }, [date]);
+  const currYear = useMemo(
+    () => (date ? date?.getFullYear() : new Date(Date.now()).getFullYear()),
+    [date]
+  );
 
   const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
 

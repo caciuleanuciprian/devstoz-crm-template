@@ -1,19 +1,22 @@
 import { MonthlyCards } from "./monthly-cards";
 import { YearlyReport } from "./yearly-report";
 import { DatePicker } from "@/components/common/date-picker";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext, useMemo } from "react";
 import { LanguageContext } from "@/i18n/language-context";
 
 export const TopBanner = () => {
   const { dictionary } = useContext(LanguageContext);
   const [date, setDate] = useState<Date>(new Date(Date.now()));
-  const [currMonth, setCurrMonth] = useState(date.getMonth() + 1);
-  const [currYear, setCurrYear] = useState(date.getFullYear());
 
-  useEffect(() => {
-    setCurrMonth(date.getMonth() + 1);
-    setCurrYear(date.getFullYear());
-  }, [date]);
+  const currMonth = useMemo(
+    () => (date ? date?.getMonth() + 1 : new Date(Date.now()).getMonth() + 1),
+    [date]
+  );
+  const currYear = useMemo(
+    () => (date ? date?.getFullYear() : new Date(Date.now()).getFullYear()),
+    [date]
+  );
+
   return (
     <>
       <div className="flex w-full justify-between items-center">

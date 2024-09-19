@@ -21,30 +21,41 @@ interface DropdownProps {
 const Dropdown = ({ icon, menus }: DropdownProps) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild onClick={(e) => e.preventDefault()}>
         <Button variant="ghost" size="icon" className="p-0">
           <Icon icon={icon} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
+      <DropdownMenuContent
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+        onCloseAutoFocus={(e) => e.preventDefault()}
+      >
         {menus.map((menu: DropdownMenuProps, index: number) => (
           <div key={menu.label}>
             {menu.label && <DropdownMenuLabel>{menu.label}</DropdownMenuLabel>}
             {menu.label && <DropdownMenuSeparator />}
-            {menu.items.map((item: DropdownMenuItemProps) => (
-              <div key={`${Math.random()}-${index}`}>
-                <DropdownMenuItem
-                  onClick={item.onClick}
-                  className="cursor-pointer"
-                >
-                  <div className="flex">
-                    {item.icon && <Icon className="mr-2" icon={item.icon} />}
-                    <div className="text-xs">{item.name}</div>
-                  </div>
-                </DropdownMenuItem>
-                {item.separator && <DropdownMenuSeparator />}
-              </div>
-            ))}
+            {menu.items.map((item: DropdownMenuItemProps) =>
+              item ? (
+                <>
+                  <DropdownMenuItem
+                    onClick={item.onClick}
+                    className="cursor-pointer w-full"
+                    key={`${Math.random()}-${index}`}
+                  >
+                    <div className="flex w-full">
+                      {item.icon && <Icon className="mr-2" icon={item.icon} />}
+                      <div className="text-xs w-full">{item.name}</div>
+                    </div>
+                  </DropdownMenuItem>
+                  {item.separator && <DropdownMenuSeparator />}
+                </>
+              ) : (
+                <></>
+              )
+            )}
           </div>
         ))}
       </DropdownMenuContent>
