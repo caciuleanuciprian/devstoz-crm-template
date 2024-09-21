@@ -26,7 +26,7 @@ export const ClientDetails = () => {
     fetchFn: GetClientReport,
     paramsOfFetch: {
       clientId: clientId,
-      month: new Date().getMonth() + 1,
+      month: 1,
       year: new Date().getFullYear(),
     },
     loadOnMount: true,

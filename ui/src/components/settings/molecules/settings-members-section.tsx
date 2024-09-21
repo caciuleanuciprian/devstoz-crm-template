@@ -9,7 +9,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { LanguageContext } from "@/i18n/language-context";
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { Member } from "../atoms/member";
 import useAxios from "@/lib/axios/useAxios";
 import { AddMember, GetMembers } from "../core/settings.service";
@@ -22,26 +22,13 @@ import { Modal } from "@/components/common/modal";
 import { UserRoles } from "../utils/types";
 import { Slot } from "../atoms/slot";
 import { Loader } from "@/components/common/loader";
+import { roleToLabel } from "../utils/consts";
 
 export const SettingsMembersSection = () => {
   const { dictionary } = useContext(LanguageContext);
   const [userDetails] = useRecoilState(userDetailsAtom);
   const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
   const [isReadonly, setIsReadonly] = useState<boolean>(true);
-  const MEMBERS = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@gmail.com",
-      role: SelectRoleOptions.Administrator,
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-      email: "jane.doe@gmail.com",
-      role: SelectRoleOptions.Member,
-    },
-  ];
 
   const { data, loadData, error, dataCode, isLoading } = useAxios({
     fetchFn: GetMembers,
@@ -49,8 +36,24 @@ export const SettingsMembersSection = () => {
       adminId: userDetails?.id,
       organizationId: selectedOrganization?.id,
     },
-    // loadOnMount: true,
+    loadOnMount: true,
   });
+
+  const formatMembers = useMemo(
+    () =>
+      data?.map((member: any) => ({
+        id: member.id,
+        name: member.name,
+        email: member.email,
+        role: roleToLabel(
+          member.roles.filter(
+            (org: any) => org.organizationId === selectedOrganization?.id
+          )[0].name,
+          dictionary
+        ),
+      })) ?? [],
+    [data]
+  );
 
   const handleAddMember = async () => {
     await loadData();
@@ -83,21 +86,12 @@ export const SettingsMembersSection = () => {
             />
           </CardHeader>
           <CardContent className="flex flex-col gap-4 p-4 pt-0">
-            {/* {isLoading && <Loader />}
+            {isLoading && <Loader />}
             {error && <p className="text-red-500">Error retrieving members.</p>}
-            {data?.length < 1 && (
+            {formatMembers.length < 1 && (
               <p className="text-muted-foreground">There is no member.</p>
             )}
-            {data?.map((member: any) => (
-              <Member
-                key={member.id}
-                isReadonly={true}
-                name={member.name}
-                email={member.email}
-                role={member.role}
-              />
-            ))} */}
-            {MEMBERS.map((member: any) => (
+            {formatMembers.map((member: any) => (
               <Member
                 key={member.id}
                 isReadonly={true}

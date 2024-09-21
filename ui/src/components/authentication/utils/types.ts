@@ -3,7 +3,7 @@ export interface UserDetails {
   name: string;
   id: string;
   clients: string[];
-  roles: string[];
+  roles: any;
 }
 
 export interface UserOrganization {

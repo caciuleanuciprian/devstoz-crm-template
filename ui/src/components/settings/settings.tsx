@@ -25,7 +25,7 @@ const Settings = () => {
       <div className="flex flex-col gap-4 mt-4 ">
         <div className="flex gap-4 xs:flex-col">
           <SettingsOrganizationDetails />
-          <SettingsOrganizationLogo />
+          {/* <SettingsOrganizationLogo /> */}
         </div>
         <div className="flex w-full gap-4 xs:flex-col">
           <SettingsMembersSection />

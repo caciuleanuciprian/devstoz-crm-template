@@ -184,12 +184,12 @@ export const DocumentsForm = () => {
                   required={dictionary.FieldCannotBeEmpty}
                   validations={[
                     {
-                      handler: isRequired(),
-                      message: `${dictionary.InvalidMonth}`,
-                    },
-                    {
-                      handler: isMinNumber(1) && isMaxNumber(12) && isNumber(),
-                      message: `${dictionary.InvalidMonth}`,
+                      handler:
+                        isRequired() &&
+                        isNumber() &&
+                        isMaxNumber(12) &&
+                        isMinNumber(1),
+                      message: `${dictionary.InvalidDay}`,
                     },
                   ]}
                 />

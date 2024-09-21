@@ -127,7 +127,7 @@ export const SettingsOrganizationDetails = () => {
   }, []);
 
   return (
-    <Slot>
+    <Slot className="w-full">
       <p className="font-semibold text-lg">{dictionary.OrganizationSettings}</p>
       <Formiz connect={settingsForm}>
         <div className="flex bg-background flex-col p-4 mt-4 rounded-md w-full h-full">

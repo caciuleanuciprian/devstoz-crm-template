@@ -26,12 +26,26 @@ const eurFormatter = new Intl.NumberFormat("de-DE", {
   currency: "EUR",
 });
 
+const leiFormatter = new Intl.NumberFormat("ro-RO", {
+  style: "currency",
+  currency: "RON",
+});
+
+const gbpFormatter = new Intl.NumberFormat("gb-GB", {
+  style: "currency",
+  currency: "GBP",
+});
+
 const formatCurrency = (amount: number, currency: string) => {
   switch (currency) {
     case "USD":
       return usdFormatter.format(amount);
     case "EUR":
       return eurFormatter.format(amount);
+    case "RON":
+      return leiFormatter.format(amount);
+    case "GBP":
+      return gbpFormatter.format(amount);
     default:
       return amount;
   }

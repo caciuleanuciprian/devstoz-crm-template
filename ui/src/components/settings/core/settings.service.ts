@@ -77,7 +77,6 @@ export const AddMember = async ({
 };
 
 export const GetMembers = async ({
-  adminId,
   organizationId,
 }: {
   adminId: string;
@@ -85,7 +84,7 @@ export const GetMembers = async ({
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
     const response: any = axios.get(
-      `${ROLES_URL}/${organizationId}/${adminId}`,
+      `${ORGANIZATION_URL}/${organizationId}/members`,
       {
         headers: {
           Authorization:

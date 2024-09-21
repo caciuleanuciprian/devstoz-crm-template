@@ -19,10 +19,17 @@ import {
 } from "@/components/authentication/utils/authentication.recoil";
 import { useRecoilState } from "recoil";
 import Dropdown from "@/components/common/dropdown";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-export const Member = ({ name, email, role }: MemberProps) => {
+export const Member = ({ name, email, role, isReadonly }: MemberProps) => {
   const [memberRole, setMemberRole] = useState<string>(
-    role || UserRoles.MEMBER
+    role || UserRoles.ORG_MEMBER
   );
   const { dictionary } = useContext(LanguageContext);
   const [userDetails] = useRecoilState(userDetailsAtom);
@@ -32,9 +39,9 @@ export const Member = ({ name, email, role }: MemberProps) => {
     paramsOfFetch: {
       adminId: userDetails?.id,
       body: {
-        userEmail: email,
+        userEmail: "asd@gmail.com",
         organizationId: selectedOrganization?.id,
-        role: memberRole,
+        role: "ORG_VIEWER",
       },
     },
   });
@@ -62,7 +69,24 @@ export const Member = ({ name, email, role }: MemberProps) => {
         </div>
       </div>
       <div className="flex w-full gap-4 items-center justify-end">
-        <Modal
+        {/* TODO: Modify this */}
+        <Select
+          onValueChange={(e: any) => setMemberRole(e)}
+          value={memberRole}
+          disabled={isReadonly}
+        >
+          <SelectTrigger className="h-9">
+            <SelectValue placeholder={dictionary.Role} />
+          </SelectTrigger>
+          <SelectContent>
+            {selectRoleOptions.map((option: string) => (
+              <SelectItem key={option} value={option}>
+                {valueToLabelRole(option, dictionary)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        {/* <Modal
           trigger={
             <Button variant="ghost" size="xs">
               <Pencil className="h-[1.2rem] w-[1.2rem]" />
@@ -86,24 +110,7 @@ export const Member = ({ name, email, role }: MemberProps) => {
           cancelTxt={dictionary.Cancel}
           onConfirm={handleDelete}
           isDelete
-        />
-
-        {/* <Select
-          onValueChange={(e: any) => setMemberRole(e)}
-          value={memberRole}
-          disabled={isReadonly}
-        >
-          <SelectTrigger className="h-9">
-            <SelectValue placeholder={dictionary.Role} />
-          </SelectTrigger>
-          <SelectContent>
-            {selectRoleOptions.map((option: string) => (
-              <SelectItem key={option} value={option}>
-                {valueToLabelRole(option, dictionary)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select> */}
+        /> */}
       </div>
     </div>
   );

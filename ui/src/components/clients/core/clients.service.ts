@@ -100,11 +100,15 @@ export const ArchiveClient = async ({
   clientId,
 }: {
   clientId: string;
+  body: any;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
     const response: any = await axios.put(
-      `${CLIENTS_URL}/${clientId}/archive`,
-      {},
+      `${CLIENTS_URL}/${clientId}`,
+      {
+        clientId,
+        active: false,
+      },
       {
         headers: {
           Authorization:
