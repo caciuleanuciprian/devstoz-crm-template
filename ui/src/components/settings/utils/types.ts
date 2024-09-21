@@ -1,6 +1,0 @@
-export enum UserRoles {
-  ORG_ADMIN = "ORG_ADMIN",
-  ORG_MEMBER = "ORG_MEMBER",
-  ORG_VIEWER = "ORG_VIEWER",
-  ANONYMOUS = "ANONYMOUS",
-}
