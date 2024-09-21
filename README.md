@@ -20,4 +20,4 @@ FRONTEND
 - nu inteleg rolul la "ADMIN" din meniul din dreapta sus, cred ca e ok sa-l scoti si sa lasi doar logout
 - la sectiunea "Setari", sub "Sigla organizatiei, nu primesti eroare daca incerci sa apesi "Trimite" fara sa incarci nimic, se incarca butonul pentru o milisecunda si atat
 - la sectiunea "Documente" orice valoarea pozitiva este valabila la "Zi", "Luna", "An", ar trebui limitate
-- la sectiunea "Documente", la "Nume" si "Prenume", "Adresa1", "Adresa2", "Destinatie" poti introduce orice caracter
+- la sectiunea "Documente", la "Nume" si "Prenume", "Adresa1", "Adresa2", "Destinatie" poti introduce orice caracte
