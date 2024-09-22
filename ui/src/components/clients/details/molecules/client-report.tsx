@@ -1,10 +1,4 @@
-import useAxios from "@/lib/axios/useAxios";
-import { GetClientReport } from "../../core/clients.service";
-import { useParams } from "react-router-dom";
-import { useContext, useEffect, useMemo, useState } from "react";
 import PieReport from "@/components/common/charts/pie-report";
-import { LanguageContext } from "@/i18n/language-context";
-import { toast } from "@/components/ui/use-toast";
 import { Loader } from "@/components/common/loader";
 
 interface ClientReportProps {

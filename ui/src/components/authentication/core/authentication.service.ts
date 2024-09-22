@@ -81,14 +81,18 @@ export const CreateUserOrganization = async ({
   body: any;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
-    const response: any = axios.post(`${ORGANIZATION_URL}`, body, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
-      },
-    });
+    const response: any = axios.post(
+      `${ORGANIZATION_URL}`,
+      { ...body, organizationLogo: null },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
     return response;
   } catch (error) {
     return handleError(error);

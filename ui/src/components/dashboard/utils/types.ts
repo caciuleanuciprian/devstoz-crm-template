@@ -4,6 +4,7 @@ export type DropdownMenuItemProps = {
   separator?: boolean;
   onClick?: (params?: any) => void;
   component?: any;
+  isDisabled?: boolean;
 } | null;
 
 export type DropdownMenuProps = {

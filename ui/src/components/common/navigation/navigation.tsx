@@ -38,7 +38,11 @@ const Navigation = () => {
         expandedNavBar ? "w-[192px]" : "w-[60px]"
       } flex-col bg-secondary fixed z-10 top-0`}
     >
-      <div className="flex h-[5vh] mb-4 pt-4 items-center px-2 py-2">
+      <div
+        className={`flex w-full h-[5vh] mb-4 pt-4 items-center ${
+          !expandedNavBar ? "justify-center" : "justify-start px-2 "
+        }`}
+      >
         <Logo title={expandedNavBar ? selectedOrganization?.name : ""} />
       </div>
       <div className="flex flex-col h-[90vh] w-full justify-between">
@@ -74,7 +78,7 @@ const Navigation = () => {
         </div>
         <div className="flex flex-col gap-2">
           {expandedNavBar ? (
-            <div className="flex flex-row items-center justify-start gap-2 px-4">
+            <div className="flex flex-row items-center justify-between gap-2 px-4">
               <LanguageSelector />
               <ModeToggle />
               <Logout />

@@ -102,6 +102,7 @@ export const ClientTableActions = ({
                 name: <EmailForm email={email ?? ""} />,
                 onClick: (e) => e.preventDefault(),
                 separator: isArchived,
+                isDisabled: true,
               },
               !isArchived
                 ? {

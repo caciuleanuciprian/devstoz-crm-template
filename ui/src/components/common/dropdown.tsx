@@ -46,6 +46,7 @@ const Dropdown = ({ icon, menus }: DropdownProps) => {
                     onClick={item.onClick}
                     className="cursor-pointer w-full"
                     key={`${Math.random()}-${index}`}
+                    disabled={item.isDisabled}
                   >
                     <div className="flex w-full">
                       {item.icon && <Icon className="mr-2" icon={item.icon} />}

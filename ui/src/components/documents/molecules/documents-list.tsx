@@ -1,10 +1,4 @@
 import { CellWithHelper } from "@/components/clients/list/atoms/cell-with-helper";
-import { ClientTableActions } from "@/components/clients/list/atoms/client-table-actions";
-import { FilterableTableHeader } from "@/components/clients/list/atoms/client-table-filterable-header";
-import {
-  iconToLabelClientType,
-  valueToLabelClientType,
-} from "@/components/clients/list/utils/consts";
 import {
   TableHeader,
   TableRow,
@@ -15,22 +9,28 @@ import {
 } from "@/components/ui/table";
 import { LanguageContext } from "@/i18n/language-context";
 import useAxios from "@/lib/axios/useAxios";
-import { Loader } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { GetOrganizationsDocuments } from "../core/documents.service";
 import { useRecoilState } from "recoil";
 import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
-import { transactionHeaders } from "@/components/clients/details/transactions/utils/consts";
+import {
+  documentsHeader,
+  getIcon,
+} from "@/components/clients/details/transactions/utils/consts";
 import { DocumentsListHeader } from "./documents-list-header";
 import { TablePagination } from "@/components/common/table/pagination";
+import { DocumentsActions } from "./documents-actions";
+import { shouldRefetchAtom } from "@/components/clients/list/utils/clients.recoil";
+import { Loader } from "@/components/common/loader";
 
 const DocumentsList = () => {
   const { dictionary } = useContext(LanguageContext);
 
   const [organizationId] = useRecoilState(selectedOrganizationAtom);
+  const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  const { data, error, isLoading } = useAxios({
+  const { data, error, isLoading, loadData } = useAxios({
     fetchFn: GetOrganizationsDocuments,
     paramsOfFetch: {
       organizationId: organizationId?.id,
@@ -40,11 +40,14 @@ const DocumentsList = () => {
     loadOnMount: true,
   });
 
-  const ClientTableHeaders = transactionHeaders(
-    dictionary,
-    <FilterableTableHeader />,
-    false
-  );
+  useEffect(() => {
+    if (shouldRefetch) {
+      loadData();
+      setShouldRefetch(false);
+    }
+  }, [shouldRefetch]);
+
+  const DocumentsTableHeaders = documentsHeader(dictionary);
   return (
     <>
       <DocumentsListHeader />
@@ -52,7 +55,7 @@ const DocumentsList = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              {ClientTableHeaders.map((header) => (
+              {DocumentsTableHeaders.map((header) => (
                 <TableHead
                   key={header.id}
                   className={`${
@@ -72,7 +75,7 @@ const DocumentsList = () => {
               <TableRow className=" hover:!bg-transparent">
                 <TableCell
                   className="align-top text-center"
-                  colSpan={ClientTableHeaders.length}
+                  colSpan={DocumentsTableHeaders.length}
                 >
                   <Loader />
                 </TableCell>
@@ -82,7 +85,7 @@ const DocumentsList = () => {
               <TableRow className=" hover:!bg-transparent">
                 <TableCell
                   className="align-top text-center"
-                  colSpan={ClientTableHeaders.length}
+                  colSpan={DocumentsTableHeaders.length}
                 >
                   <div className="text-center">{dictionary.GenericError}</div>
                 </TableCell>
@@ -92,7 +95,7 @@ const DocumentsList = () => {
               <TableRow className=" hover:!bg-transparent">
                 <TableCell
                   className="align-top text-center"
-                  colSpan={ClientTableHeaders.length}
+                  colSpan={DocumentsTableHeaders.length}
                 >
                   <div className="text-center">{dictionary.NoResultsFound}</div>
                 </TableCell>
@@ -100,33 +103,27 @@ const DocumentsList = () => {
             )}
             {!isLoading &&
               data?.entries.length > 0 &&
-              data.entries.map((client: any) => (
-                <TableRow key={client.id}>
-                  <TableCell>{client.name}</TableCell>
-                  <TableCell>{client.address}</TableCell>
-                  <TableCell>{client.telephone}</TableCell>
-                  <TableCell>{client.email}</TableCell>
-
-                  <TableCell>
-                    <div className="flex items-center">
-                      {iconToLabelClientType(client.clientType)}{" "}
-                      {valueToLabelClientType(client.clientType, dictionary)}
-                    </div>
-                  </TableCell>
+              data.entries.map((document: any) => (
+                <TableRow key={document.id}>
+                  <TableCell>{getIcon(document.fileName)}</TableCell>
+                  <TableCell>{document.name}</TableCell>
                   <TableCell>
                     <CellWithHelper
-                      label={client.createdBy}
-                      value={client.creationDate}
+                      label={document.createdBy}
+                      value={document.creationDate}
                     />
                   </TableCell>
                   <TableCell>
                     <CellWithHelper
-                      label={client.lastUpdatedBy}
-                      value={client.lastUpdatedDate}
+                      label={document.lastUpdatedBy}
+                      value={document.lastUpdatedDate}
                     />
                   </TableCell>
                   <TableCell>
-                    <ClientTableActions id={client.id} />
+                    <DocumentsActions
+                      document_id={document.id}
+                      document_name={document.fileName}
+                    />
                   </TableCell>
                 </TableRow>
               ))}

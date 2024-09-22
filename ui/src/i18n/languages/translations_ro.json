@@ -33,7 +33,7 @@
   "Type": "Tip",
   "NoResultsFound": "Nu au fost găsite rezultate.",
   "DeleteClient": "Șterge client",
-  "DeleteClientConfirmation": "Ești sigur că vrei să ștergi acest client? Nu puteți recupera un client șters.",
+  "DeleteClientConfirmation": "Sunteți sigur că vreți să ștergeți acest client? Nu puteți recupera un client șters.",
   "Delete": "Șterge",
   "Cancel": "Anulează",
   "SRL": "Societate cu răspundere limitată",
@@ -94,7 +94,7 @@
   "OrganizationLogo": "Sigla organizației",
   "OrganizationLogoName": "Numele siglei organizației",
   "OrganizationName": "Numele organizatiei",
-  "Language": "Limba",
+  "Language": "Limbă",
   "English": "Engleză",
   "Romanian": "Română",
   "Currency": "Valută",
@@ -203,7 +203,7 @@
   "DECLARATIE_UNICA_CHECK10": "10. Asigurarea de bunuri necesare desfășurării activității profesionale.",
 
   "Last5Transactions": "Ultimele cinci tranzacții",
-  "Theme": "Tema",
+  "Theme": "Temă",
   "Logout": "Deconectare",
   "Collapse": "Ascunde",
   "Expand": "Extinde",
@@ -223,5 +223,8 @@
   "AddDocuments": "Adaugă Documente",
   "AddDocumentsDescription": "Încărcați sau trageți și plasați fișierul pe care doriți să îl încărcați.",
   "DECLARATIE_UNICA": "Declarație unică - ANAF",
-  "DECLARATIE_UNICA_DESCRIPTION": "Declaraţie unică (212) - privind impozitul pe venit şi contribuţiile sociale datorate de persoanele fizice"
+  "DECLARATIE_UNICA_DESCRIPTION": "Declaraţie unică (212) - privind impozitul pe venit şi contribuţiile sociale datorate de persoanele fizice",
+
+  "DeleteDocument": "Șterge document",
+  "DeleteDocumentConfirmation": "Sunteți sigur că vreți să ștergeți acest document? Nu puteți recupera un document șters."
 }

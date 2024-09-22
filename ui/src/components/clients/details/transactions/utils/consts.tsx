@@ -1,6 +1,7 @@
 import { Icons } from "@/components/ui/icons";
 import { ArrowUpCircle, ArrowDownCircle } from "lucide-react";
 import { FileExtensions, TransactionType } from "./types";
+import { CellWithHelper } from "@/components/clients/list/atoms/cell-with-helper";
 
 export const transactionHeaders = (
   dictionary: any,
@@ -14,6 +15,34 @@ export const transactionHeaders = (
     { id: "transactionType", component: component, size: 20 },
     { id: "fileName", label: dictionary.FileName, size: 15 },
     { id: "actions", label: dictionary.Actions, alignRight: true, size: 20 },
+  ];
+};
+
+export const documentsHeader = (dictionary: any) => {
+  return [
+    { id: "icon", label: dictionary.FileType, size: 10 },
+    { id: "name", label: dictionary.Name, size: 30 },
+    {
+      id: "createdBy",
+      component: (
+        <CellWithHelper
+          label={dictionary.CreatedBy}
+          helper={dictionary.CreatedOn}
+        />
+      ),
+      size: 25,
+    },
+    {
+      id: "editedBy",
+      component: (
+        <CellWithHelper
+          label={dictionary.EditedBy}
+          helper={dictionary.EditedOn}
+        />
+      ),
+      size: 25,
+    },
+    { id: "actions", label: dictionary.Actions, alignRight: true, size: 10 },
   ];
 };
 

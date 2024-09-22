@@ -1,10 +1,7 @@
 import { useRecoilState } from "recoil";
 import { selectedOrganizationAtom } from "../authentication/utils/authentication.recoil";
 import { Loader } from "./loader";
-import { LanguageContext } from "@/i18n/language-context";
-import { useContext } from "react";
 import { Badge } from "../ui/badge";
-import { cn } from "@/lib/utils";
 
 interface InfoCardProps {
   icon: any;
@@ -74,7 +71,7 @@ const InfoCard = ({
   const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-[200px] h-full p-8 bg-secondary rounded-md w-full">
+    <div className="flex flex-col justify-center items-center min-h-[100px] md:min-h-[200px] h-full p-8 bg-secondary rounded-md w-full">
       <div className="flex items-center gap-2">
         {icon}
         <p className="text-2xl text-center">{label}</p>

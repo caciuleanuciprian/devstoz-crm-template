@@ -26,7 +26,7 @@ export const DocumentCard = ({
       <CardHeader className="p-4 h-2/8 flex justify-center items-center text-center font-bold">
         {title}
       </CardHeader>
-      <CardContent className="p-4 w-full h-5/8 justify-center items-center text-sm text-foreground">
+      <CardContent className="p-4 w-full h-full justify-center items-center text-sm text-foreground">
         {description}
       </CardContent>
       <CardFooter className="p-2 h-1/8 flex justify-end items-end text-muted-foreground font-semibold text-xs">

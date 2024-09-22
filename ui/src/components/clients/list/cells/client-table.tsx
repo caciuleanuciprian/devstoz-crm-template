@@ -16,7 +16,7 @@ import {
 } from "react";
 import { ClientTableActions } from "../atoms/client-table-actions";
 import { Loader } from "@/components/common/loader";
-import { iconToLabelClientType, valueToLabelClientType } from "../utils/consts";
+import { valueToLabelClientType } from "../utils/consts";
 
 import { FilterableTableHeader } from "../atoms/client-table-filterable-header";
 import { useRecoilState } from "recoil";
@@ -179,13 +179,13 @@ export const ClientTable = ({
                 </TableCell>
                 <TableCell>
                   <CellWithHelper
-                    label={client.createdBy}
+                    label={client.createdByName}
                     value={client.creationDate}
                   />
                 </TableCell>
                 <TableCell>
                   <CellWithHelper
-                    label={client.lastUpdatedBy}
+                    label={client.lastUpdatedByName}
                     value={client.lastUpdatedDate}
                   />
                 </TableCell>

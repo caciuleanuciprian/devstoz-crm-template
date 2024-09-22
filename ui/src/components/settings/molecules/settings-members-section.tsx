@@ -73,7 +73,7 @@ export const SettingsMembersSection = () => {
             }`
           )}
         >
-          <CardContent className="flex flex-wrap justify-between gap-4 p-4">
+          <CardContent className="flex flex-wrap w-full justify-between gap-4 p-4">
             {formatMembers.length < 1 && (
               <p className="text-muted-foreground">There is no member.</p>
             )}

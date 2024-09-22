@@ -79,12 +79,62 @@ export const UploadOrganizationsDocuments = async ({
       `${ORGANIZATION_URL}/${organizationId}/documents`,
       {
         file: body.file,
-        document: { name: body.file.name, type: body.file.type },
+        name: body.file.name,
+        type: "TYPE1",
       },
       {
         responseType: "blob",
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetDocumentFile = async ({
+  organizationId,
+  documentId,
+}: {
+  organizationId: string;
+  documentId: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.get(
+      `${ORGANIZATION_URL}/${organizationId}/documents/${documentId}`,
+      {
+        responseType: "blob",
+        headers: {
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const DeleteDocument = async ({
+  organizationId,
+  documentId,
+}: {
+  organizationId: string;
+  documentId: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.delete(
+      `${ORGANIZATION_URL}/${organizationId}/documents/${documentId}`,
+      {
+        headers: {
           Authorization:
             //@ts-ignore
             "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),

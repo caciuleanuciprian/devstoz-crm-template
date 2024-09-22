@@ -1,4 +1,5 @@
 import { LanguageContext } from "@/i18n/language-context";
+import useWindowDimensions from "@/lib/hooks/useWindowDimensions";
 import { cn } from "@/lib/utils";
 import { useContext } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
@@ -37,14 +38,15 @@ export default function PieReport({
   datakey: string;
 }) {
   const { dictionary } = useContext(LanguageContext);
+  const windowDimensions = useWindowDimensions();
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" minHeight="300px" height="100%">
       <PieChart
-        width={400}
-        height={400}
+        width={300}
+        height={300}
         margin={{
           top: 5,
-          right: 30,
+          right: 10,
           left: 10,
           bottom: 5,
         }}
@@ -54,15 +56,15 @@ export default function PieReport({
           dataKey={datakey}
           cx="50%"
           cy="50%"
-          outerRadius={120}
+          outerRadius={windowDimensions.width <= 600 ? 90 : 120}
           fill="#ffffff"
           label={renderCustomizedLabel}
           labelLine={false}
         >
           {data.map((entry, index) =>
-            entry.name === dictionary.Expenses ? (
+            entry.name === dictionary.Income ? (
               <Cell key={`cell-${index}`} fill="rgb(34 197 94)" />
-            ) : entry.name === dictionary.Income ? (
+            ) : entry.name === dictionary.Expense ? (
               <Cell key={`cell-${index}`} fill="hsl(0 84.2% 60.2%)" />
             ) : (
               <Cell key={`cell-${index}`} fill={"lightblue"} />

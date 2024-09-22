@@ -41,11 +41,11 @@ export const ChartSlot = ({
   const { dictionary } = useContext(LanguageContext);
   return (
     <div className="p-4 h-[400px] flex flex-col gap-2">
-      <div className="flex items-center justify-center">
-        <p className="font-semibold text-lg text-muted-foreground w-full pointer-events-none">
+      <div className="flex items-center gap-2 justify-start sm:justify-center flex-wrap sm:flex-nowrap">
+        <p className="font-semibold text-base sm:text-lg text-muted-foreground w-full pointer-events-none">
           {label}
         </p>
-        <div className="min-w-[200px] flex flex-col">
+        <div className="min-w-[200px] flex flex-col gap-1">
           <Label>{dictionary.ChartType}</Label>
           <Select
             onValueChange={(e: string) => setReportType(e)}

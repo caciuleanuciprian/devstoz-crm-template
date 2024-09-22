@@ -37,7 +37,7 @@ export const MonthlyCards = ({ currMonth, currYear }: MonthlyCardsProps) => {
 
   return (
     <div className="flex w-full flex-col p-4 rounded-md gap-2">
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-col md:flex-row">
         <InfoCard
           label={dictionary.NumberOfClients}
           icon={undefined}

@@ -12,6 +12,7 @@ import { useRecoilState } from "recoil";
 import { transactionChangedAtom } from "./transactions/utils/transactions.recoil";
 import { Transactions } from "./transactions/transactions";
 import clsx from "clsx";
+import { DatePicker } from "@/components/common/date-picker";
 
 export const ClientDetails = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -22,15 +23,30 @@ export const ClientDetails = () => {
     transactionChangedAtom
   );
 
+  const [date, setDate] = useState<Date>(new Date(Date.now()));
+
+  const currMonth = useMemo(
+    () => (date ? date?.getMonth() + 1 : new Date(Date.now()).getMonth() + 1),
+    [date]
+  );
+  const currYear = useMemo(
+    () => (date ? date?.getFullYear() : new Date(Date.now()).getFullYear()),
+    [date]
+  );
+
   const { data, error, isLoading, loadData } = useAxios({
     fetchFn: GetClientReport,
     paramsOfFetch: {
       clientId: clientId,
-      month: 1,
-      year: new Date().getFullYear(),
+      month: currMonth,
+      year: currYear,
     },
     loadOnMount: true,
   });
+
+  useEffect(() => {
+    loadData();
+  }, [currMonth, currYear]);
 
   useEffect(() => {
     if (transactionChanged) {
@@ -72,20 +88,19 @@ export const ClientDetails = () => {
     <div className="px-8 pb-4">
       <Header title={dictionary.ClientDetails} />
       <div className="flex flex-col gap-4 py-4 min-h-[90vh]">
-        <div className="flex w-full gap-4">
-          {/* <div className="bg-secondary p-4 w-[67%] rounded-md max-h-[400px]"> */}
+        <div className="flex w-full gap-4 flex-col lg:flex-row">
           <div
             className={clsx(
               `bg-secondary p-4 ${
-                isDataEmpty ? "w-full" : "w-[67%]"
-              } rounded-md max-h-[400px]`
+                isDataEmpty ? "w-full" : "w-full lg:w-[67%]"
+              } rounded-md h-full md:max-h-[400px]`
             )}
           >
             <p className="font-medium text-md">{dictionary.ClientDetails}</p>
             <ClientDetailsCardForm />
           </div>
           {!isDataEmpty && (
-            <div className="bg-secondary p-4 w-[33%] rounded-md flex flex-col">
+            <div className="bg-secondary p-4 w-full lg:w-[33%] rounded-md flex flex-col min-h-[250px]">
               <p className="font-medium text-md">
                 {dictionary.ClientMonthlyReport}
               </p>
@@ -98,7 +113,13 @@ export const ClientDetails = () => {
             </div>
           )}
         </div>
-        <div className="bg-background w-full h-[250px] rounded-md">
+        <div className="bg-background w-full h-full rounded-md gap-2 flex flex-col justify-center items-end">
+          <DatePicker
+            date={date as Date}
+            setDate={
+              setDate as React.Dispatch<React.SetStateAction<Date | undefined>>
+            }
+          />
           <ClientCards data={data} isLoading={isLoading} error={error} />
         </div>
         <Transactions />

@@ -106,24 +106,23 @@ const Reports = () => {
         <Header title={dictionary.Reports} />
         <div className="flex bg-secondary my-4 flex-col rounded-md">
           <div className="pt-4 px-4">
-            <div className="flex items-center justify-between">
-              <div className="flex flex-col">
-                <p className="font-semibold text-xl pointer-events-none">
-                  {dictionary.YearlyReportSituation}
-                </p>
-                <p className="font-semibold text-xs text-muted-foreground pointer-events-none">
-                  {dictionary.YearlyReportSituationDescription}
-                </p>
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col gap-2 w-full">
+                <div className="flex justify-between items-center flex-wrap sm:flex-nowrap">
+                  <p className="font-semibold text-xl pointer-events-none">
+                    {dictionary.YearlyReportSituation}
+                  </p>
+                  <DatePicker
+                    date={date as Date}
+                    setDate={
+                      setDate as React.Dispatch<
+                        React.SetStateAction<Date | undefined>
+                      >
+                    }
+                    dateFormat={"yyyy"}
+                  />
+                </div>
               </div>
-              <DatePicker
-                date={date as Date}
-                setDate={
-                  setDate as React.Dispatch<
-                    React.SetStateAction<Date | undefined>
-                  >
-                }
-                dateFormat={"yyyy"}
-              />
             </div>
           </div>
           <div className="flex flex-col gap-4">

@@ -10,17 +10,11 @@ import {
 import useAxios from "@/lib/axios/useAxios";
 import { UpdateOrganizationLogo } from "../core/settings.service";
 import { Button } from "@/components/ui/button";
-import { Loader } from "lucide-react";
 import { LanguageContext } from "@/i18n/language-context";
-
-interface SettingsOrganizationLogoProps {
-  isReadonly: boolean;
-}
+import { Loader } from "@/components/common/loader";
 
 export const SettingsOrganizationLogo = () => {
   const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
-  const [userDetails] = useRecoilState(userDetailsAtom);
-  const [fileURL, setFileURL] = useRecoilState(organizationLogoAtom);
   const [file, setFile] = useState<File | null>(null);
   const [isReadonly, setIsReadonly] = useState(true);
   const { dictionary } = useContext(LanguageContext);

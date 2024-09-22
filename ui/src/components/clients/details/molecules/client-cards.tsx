@@ -14,7 +14,7 @@ export const ClientCards = ({ data, isLoading, error }: ClientCardsProps) => {
   const { dictionary } = useContext(LanguageContext);
 
   return (
-    <div className="flex h-[250px] w-full gap-4">
+    <div className="flex w-full gap-4 flex-col md:flex-row h-full md:h-[250px]">
       {!isLoading && !error && data && (
         <>
           <InfoCard

@@ -112,11 +112,11 @@ export const ClientDetailsCardForm = () => {
   }, [isResetting]);
 
   return (
-    <div className="w-full bg-background h-[310px] flex flex-col justify-center items-center  rounded-md">
+    <div className="w-full bg-background h-full md:h-[310px] flex flex-col justify-center items-center  rounded-md">
       <Formiz connect={clientForm}>
         {!isLoading && data && (
           <div className="p-4 w-full flex flex-col h-full">
-            <div className="flex gap-4 justify-center w-full">
+            <div className="flex gap-4 justify-center w-full flex-wrap md:flex-nowrap">
               <div className="col-span-4 w-full">
                 <InputWithLabel
                   label={dictionary.Name}
@@ -152,7 +152,7 @@ export const ClientDetailsCardForm = () => {
                 />
               </div>
             </div>
-            <div className="flex gap-4 justify-center w-full">
+            <div className="flex gap-4 justify-center w-full flex-wrap md:flex-nowrap">
               <div className="col-span-4 w-full">
                 <InputWithLabel
                   label={dictionary.Phone}
@@ -172,7 +172,7 @@ export const ClientDetailsCardForm = () => {
                 />
               </div>
             </div>
-            <div className="flex gap-4 justify-center w-full">
+            <div className="flex gap-4 justify-center w-full flex-wrap md:flex-nowrap">
               <div className="col-span-4 w-full">
                 <Select
                   onValueChange={(e: ClientType) => setClientType(e)}

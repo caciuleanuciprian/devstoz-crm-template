@@ -221,5 +221,8 @@
   "AddDocuments": "Add Documents",
   "AddDocumentsDescription": "Upload or drag and drop the file you want to upload.",
   "DECLARATIE_UNICA": "Single Declaration - ANAF",
-  "DECLARATIE_UNICA_DESCRIPTION": "Single declaration (212) - regarding income tax and social contributions owed by natural persons"
+  "DECLARATIE_UNICA_DESCRIPTION": "Single declaration (212) - regarding income tax and social contributions owed by natural persons",
+
+  "DeleteDocument": "Delete document",
+  "DeleteDocumentConfirmation": "Are you sure you want to delete this document? You cannot recover a deleted document."
 }

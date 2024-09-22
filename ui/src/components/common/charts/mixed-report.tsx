@@ -1,5 +1,6 @@
 import { LanguageContext } from "@/i18n/language-context";
-import { useContext } from "react";
+import useWindowDimensions from "@/lib/hooks/useWindowDimensions";
+import { useContext, useMemo } from "react";
 import {
   BarChart,
   Bar,
@@ -18,8 +19,20 @@ interface MixedReportProps {
 
 export default function MixedReport({ data }: MixedReportProps) {
   const { dictionary } = useContext(LanguageContext);
+  const windowDimensions = useWindowDimensions();
+  const aspectRatio = useMemo(() => {
+    if (windowDimensions.width <= 500) {
+      return 4 / 3;
+    } else if (windowDimensions.width > 500 && windowDimensions.width <= 768) {
+      return 16 / 9;
+    } else if (windowDimensions.width > 768 && windowDimensions.width <= 1024) {
+      return 21 / 9;
+    } else {
+      return 34 / 9;
+    }
+  }, [windowDimensions]);
   return (
-    <ResponsiveContainer width="100%" height="100%" aspect={34 / 9}>
+    <ResponsiveContainer width="100%" height="100%" aspect={aspectRatio}>
       <BarChart
         width={500}
         height={350}

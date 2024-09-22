@@ -11,7 +11,7 @@ const Dashboard = () => {
     <div className="px-8 pb-4">
       <Header title={dictionary.Dashboard} />
       <div className="flex min-h-[90vh] py-4 flex-col gap-4">
-        <div className="flex bg-secondary rounded-md p-4 flex-col gap-4 max-h-[750px]">
+        <div className="flex bg-secondary rounded-md p-4 flex-col gap-4">
           <TopBanner />
         </div>
         <LastNTransactions />
