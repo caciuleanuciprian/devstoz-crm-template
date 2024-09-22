@@ -200,5 +200,26 @@
   "DECLARATIE_UNICA_CHECK9": "9. Commercialization of agri-food products (in the case of agricultural producers).",
   "DECLARATIE_UNICA_CHECK10": "10. The provision of goods necessary for carrying out the professional activity.",
 
-  "Last5Transactions": "Last five transactions"
+  "Last5Transactions": "Last five transactions",
+  "Theme": "Theme",
+  "Logout": "Logout",
+  "Collapse": "Collapse",
+  "Expand": "Expand",
+  "SendEmail": "Send Email",
+  "View": "View",
+  "Send": "Send",
+  "SendEmailDescription": "Fill up the details in the form to send an email to the selected client. Click submit when you're done.",
+  "PostEmailSuccess": "Email was sent succesfully",
+  "PostEmailError": "There was an error while trying to send the email",
+  "Subject": "Subject",
+  "InvalidSubject": "Subject is invalid.",
+  "To": "To",
+  "EmailMessage": "Message",
+  "EmailMessagePlaceholder": "Enter your message here...",
+  "DocumentAddedSuccesfully": "Document was added succesfully",
+  "Transactions": "Transactions",
+  "AddDocuments": "Add Documents",
+  "AddDocumentsDescription": "Upload or drag and drop the file you want to upload.",
+  "DECLARATIE_UNICA": "Single Declaration - ANAF",
+  "DECLARATIE_UNICA_DESCRIPTION": "Single declaration (212) - regarding income tax and social contributions owed by natural persons"
 }

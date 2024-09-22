@@ -9,8 +9,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useContext } from "react";
+import { LanguageContext } from "@/i18n/language-context";
 
 const TableDropDownMenu = () => {
+  const { dictionary } = useContext(LanguageContext);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -22,17 +25,17 @@ const TableDropDownMenu = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <ArrowRight className="mr-2 h-[1.2rem] w-[1.2rem]" />
-            <span>View</span>
+            <span>{dictionary.View}</span>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Mail className="mr-2 h-[1.2rem] w-[1.2rem]" />
-            <span>Send email</span>
+            <span>{dictionary.SendEmail}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Trash className="mr-2 h-[1.2rem] w-[1.2rem]" />
-          <span>Delete</span>
+          <span>{dictionary.Delete}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -24,12 +24,7 @@ import { GetClient, UpdateClient } from "../../core/clients.service";
 import { toast } from "@/components/ui/use-toast";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
 import { useParams } from "react-router-dom";
-import {
-  isEmail,
-  isNotEmptyString,
-  isNumber,
-  isRequired,
-} from "@formiz/validations";
+import { isEmail, isNotEmptyString, isRequired } from "@formiz/validations";
 
 export const ClientDetailsCardForm = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -117,11 +112,11 @@ export const ClientDetailsCardForm = () => {
   }, [isResetting]);
 
   return (
-    <div className="w-full bg-background min-h-[25vh] flex flex-col justify-center items-center  rounded-md">
+    <div className="w-full bg-background h-[310px] flex flex-col justify-center items-center  rounded-md">
       <Formiz connect={clientForm}>
         {!isLoading && data && (
-          <div className="p-4 w-full">
-            <div className="flex gap-4 justify-center w-full h-full">
+          <div className="p-4 w-full flex flex-col h-full">
+            <div className="flex gap-4 justify-center w-full">
               <div className="col-span-4 w-full">
                 <InputWithLabel
                   label={dictionary.Name}

@@ -19,13 +19,14 @@ interface ModalProps {
   title: string;
   description: string;
   component?: any;
-  confirmTxt: string;
-  cancelTxt: string;
+  confirmTxt?: string;
+  cancelTxt?: string;
   onConfirm?: (params?: any) => Promise<void>;
   onCancel?: (params?: any) => void;
   isDelete?: boolean;
   isDisabled?: boolean;
   isLoading?: boolean;
+  customFooter?: boolean;
 }
 
 export const Modal = ({

@@ -26,11 +26,10 @@ export const HeaderAvatar = () => {
     () =>
       userDetails?.roles.find(
         (role: any) => role.organizationId === selectedOrganization?.id
-      ).name,
+      )?.name,
     [selectedOrganization, userDetails]
   );
 
-  console.log(userRole);
   return (
     <div className="flex items-center gap-2 p-2 rounded-md bg-background ">
       <Avatar>

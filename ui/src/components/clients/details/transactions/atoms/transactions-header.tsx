@@ -73,7 +73,7 @@ export const TransactionsHeader = () => {
   return (
     <div className="flex gap-4 justify-between items-end">
       <div className="w-[100%]">
-        <p className="font-medium text-md">{"Transactions"}</p>
+        <p className="font-medium text-md">{dictionary.Transactions}</p>
       </div>
       <div>
         <Modal

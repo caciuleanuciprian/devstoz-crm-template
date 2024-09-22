@@ -38,9 +38,9 @@ export const InitialSettingsGuard = ({ children }: any) => {
   });
 
   useEffect(() => {
-    if (shouldRefetchOrganization) {
+    if (shouldRefetchOrganization && selectedOrganization) {
       loadData();
-      userLanguageChange(selectedOrganization?.language);
+      userLanguageChange(selectedOrganization.language);
       setShouldRefetchOrganization(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

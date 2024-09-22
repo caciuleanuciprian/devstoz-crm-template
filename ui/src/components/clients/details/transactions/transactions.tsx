@@ -1,4 +1,3 @@
-import { TablePagination } from "@/components/common/table/pagination";
 import { TransactionsHeader } from "./atoms/transactions-header";
 import { TransactionsTable } from "./molecules/transactions-table";
 
@@ -10,7 +9,6 @@ export const Transactions = () => {
         <div className="flex flex-col gap-4">
           <TransactionsTable />
         </div>
-        <TablePagination />
       </div>
     </div>
   );

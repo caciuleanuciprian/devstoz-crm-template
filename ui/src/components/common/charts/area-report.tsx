@@ -58,9 +58,11 @@ const data = [
 export default function AreaReport({
   data,
   datakey,
+  name,
 }: {
   data: any[];
   datakey: string;
+  name: string;
 }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -87,6 +89,7 @@ export default function AreaReport({
           dataKey={datakey}
           stroke="lightblue"
           fill="lightblue"
+          name={name}
         />
         <Legend />
       </AreaChart>

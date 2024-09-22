@@ -35,13 +35,14 @@ export const ChartSlot = ({
   isLoading,
   label,
   dataKey,
+  name,
 }: ChartSlotProps) => {
   const [reportType, setReportType] = useState<string>(ReportType.LINE);
   const { dictionary } = useContext(LanguageContext);
   return (
     <div className="p-4 h-[400px] flex flex-col gap-2">
       <div className="flex items-center justify-center">
-        <p className="font-semibold text-lg text-muted-foreground w-full">
+        <p className="font-semibold text-lg text-muted-foreground w-full pointer-events-none">
           {label}
         </p>
         <div className="min-w-[200px] flex flex-col">
@@ -68,6 +69,7 @@ export const ChartSlot = ({
         dataKey={dataKey}
         data={data}
         isLoading={isLoading}
+        name={name}
       />
     </div>
   );

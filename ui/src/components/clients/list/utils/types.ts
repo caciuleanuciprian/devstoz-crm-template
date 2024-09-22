@@ -28,6 +28,15 @@ export interface InputWithLabelProps {
   required?: boolean | string;
 }
 
+export interface TextareaWithLabelProps {
+  label: string;
+  isLoading?: boolean;
+  name: string;
+  placeholder?: string;
+  isDisabled?: boolean;
+  defaultValue?: string | number;
+}
+
 export interface ClientFormProps {
   fields?: string[];
   initialValues: {};

@@ -62,9 +62,11 @@ const data = [
 export default function BarReport({
   data,
   datakey,
+  name,
 }: {
   data: any[];
   datakey: string;
+  name: string;
 }) {
   return (
     <ResponsiveContainer width="100%" height={"100%"}>
@@ -82,7 +84,12 @@ export default function BarReport({
         <CartesianGrid strokeDasharray="6" className="opacity-50" />
         <XAxis dataKey="name" className="text-xs font-semibold" />
         <YAxis className="text-xs font-semibold" />
-        <Bar dataKey={datakey} fill={"lightblue"} radius={[4, 4, 0, 0]} />
+        <Bar
+          dataKey={datakey}
+          fill={"lightblue"}
+          radius={[4, 4, 0, 0]}
+          name={name}
+        />
         <Legend />
       </BarChart>
     </ResponsiveContainer>

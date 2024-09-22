@@ -9,16 +9,15 @@ import {
   shouldRefetchAtom,
   totalPagesAtom,
 } from "../utils/clients.recoil";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
 
 export const ActiveClientsTable = () => {
   const [filterBy] = useRecoilState(filterTableByAtom);
   const [searchValue] = useRecoilState(searchValueAtom);
-  const [, setTotalPages] = useRecoilState(totalPagesAtom);
-  const [currentPage, setCurrentPage] = useRecoilState(currentPageAtom);
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
   const [selectedOrganization] = useRecoilState(selectedOrganizationAtom);
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   const { data, error, isLoading, loadData } = useAxios({
     fetchFn: GetClients,
@@ -30,12 +29,6 @@ export const ActiveClientsTable = () => {
       nameSearchText: searchValue,
     },
   });
-
-  useEffect(() => {
-    if (data) {
-      setTotalPages(data.numberOfPages);
-    }
-  }, [data]);
 
   useEffect(() => {
     setCurrentPage(0);
@@ -56,5 +49,13 @@ export const ActiveClientsTable = () => {
     }
   }, [shouldRefetch]);
 
-  return <ClientTable data={data} error={error} isLoading={isLoading} />;
+  return (
+    <ClientTable
+      data={data}
+      error={error}
+      isLoading={isLoading}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+    />
+  );
 };

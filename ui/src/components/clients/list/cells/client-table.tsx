@@ -7,7 +7,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { LanguageContext } from "@/i18n/language-context";
-import { useContext, useEffect } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { ClientTableActions } from "../atoms/client-table-actions";
 import { Loader } from "@/components/common/loader";
 import { iconToLabelClientType, valueToLabelClientType } from "../utils/consts";
@@ -20,12 +26,15 @@ import { filterTransactionTableByAtom } from "../../details/transactions/utils/t
 import { CellWithHelper } from "../atoms/cell-with-helper";
 import { useNavigate } from "react-router-dom";
 import { CLIENTS_PREFIX } from "@/lib/axios/consts";
+import { TablePagination } from "@/components/common/table/pagination";
 
 interface ClientTableProps {
   data: any;
   error: any;
   isLoading: boolean;
   isArchived?: boolean;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 export const ClientTable = ({
@@ -33,6 +42,8 @@ export const ClientTable = ({
   error,
   isLoading,
   isArchived,
+  currentPage,
+  setCurrentPage,
 }: ClientTableProps) => {
   const [, setTotalClients] = useRecoilState(totalClientsAtom);
   const [, setTransactionFilterBy] = useRecoilState(
@@ -96,90 +107,106 @@ export const ClientTable = ({
   }, [data, isLoading]);
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          {ClientTableHeaders.map((header) => (
-            <TableHead
-              key={header.id}
-              className={`${header.alignRight ? "text-right" : "text-left"}`}
-              style={{
-                width: `${header.size}%`,
-              }}
-            >
-              {header.component ? header.component : header.label}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody className="w-full">
-        {isLoading && (
-          <TableRow className=" hover:!bg-transparent">
-            <TableCell
-              className="align-top text-center"
-              colSpan={ClientTableHeaders.length}
-            >
-              <Loader />
-            </TableCell>
+    <>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            {ClientTableHeaders.map((header) => (
+              <TableHead
+                key={header.id}
+                className={`${header.alignRight ? "text-right" : "text-left"}`}
+                style={{
+                  width: `${header.size}%`,
+                }}
+              >
+                {header.component ? (
+                  header.component
+                ) : (
+                  <p className="pointer-events-none">{header.label}</p>
+                )}
+              </TableHead>
+            ))}
           </TableRow>
-        )}
-        {error && (
-          <TableRow className=" hover:!bg-transparent">
-            <TableCell
-              className="align-top text-center"
-              colSpan={ClientTableHeaders.length}
-            >
-              <div className="text-center">{dictionary.GenericError}</div>
-            </TableCell>
-          </TableRow>
-        )}
-        {!isLoading && data?.entries.length === 0 && (
-          <TableRow className=" hover:!bg-transparent">
-            <TableCell
-              className="align-top text-center"
-              colSpan={ClientTableHeaders.length}
-            >
-              <div className="text-center">{dictionary.NoResultsFound}</div>
-            </TableCell>
-          </TableRow>
-        )}
-        {!isLoading &&
-          data?.entries.length > 0 &&
-          data.entries.map((client: any) => (
-            <TableRow
-              key={client.id}
-              onClick={() => navigate(`${CLIENTS_PREFIX}/${client.id}`)}
-              className="cursor-pointer"
-            >
-              <TableCell>{client.name}</TableCell>
-              <TableCell>{client.address}</TableCell>
-              <TableCell>{client.telephone}</TableCell>
-              <TableCell>{client.email}</TableCell>
-
-              <TableCell>
-                <div className="flex items-center">
-                  {iconToLabelClientType(client.clientType)}
-                  {valueToLabelClientType(client.clientType, dictionary)}
-                </div>
-              </TableCell>
-              <TableCell>
-                <CellWithHelper
-                  label={client.createdBy}
-                  value={client.creationDate}
-                />
-              </TableCell>
-              <TableCell>
-                <CellWithHelper
-                  label={client.lastUpdatedBy}
-                  value={client.lastUpdatedDate}
-                />
-              </TableCell>
-              <TableCell>
-                <ClientTableActions id={client.id} isArchived={isArchived} />
+        </TableHeader>
+        <TableBody className="w-full">
+          {isLoading && (
+            <TableRow className=" hover:!bg-transparent">
+              <TableCell
+                className="align-top text-center"
+                colSpan={ClientTableHeaders.length}
+              >
+                <Loader />
               </TableCell>
             </TableRow>
-          ))}
-      </TableBody>
-    </Table>
+          )}
+          {error && (
+            <TableRow className=" hover:!bg-transparent">
+              <TableCell
+                className="align-top text-center"
+                colSpan={ClientTableHeaders.length}
+              >
+                <div className="text-center">{dictionary.GenericError}</div>
+              </TableCell>
+            </TableRow>
+          )}
+          {!isLoading && data?.entries.length === 0 && (
+            <TableRow className=" hover:!bg-transparent">
+              <TableCell
+                className="align-top text-center"
+                colSpan={ClientTableHeaders.length}
+              >
+                <div className="text-center">{dictionary.NoResultsFound}</div>
+              </TableCell>
+            </TableRow>
+          )}
+          {!isLoading &&
+            data?.entries.length > 0 &&
+            data.entries.map((client: any) => (
+              <TableRow
+                key={client.id}
+                onClick={() => navigate(`${CLIENTS_PREFIX}/${client.id}`)}
+                className="cursor-pointer"
+              >
+                <TableCell>{client.name}</TableCell>
+                <TableCell>{client.address}</TableCell>
+                <TableCell>{client.telephone}</TableCell>
+                <TableCell>{client.email}</TableCell>
+
+                <TableCell>
+                  <div className="flex items-center">
+                    {valueToLabelClientType(client.clientType, dictionary)}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <CellWithHelper
+                    label={client.createdBy}
+                    value={client.creationDate}
+                  />
+                </TableCell>
+                <TableCell>
+                  <CellWithHelper
+                    label={client.lastUpdatedBy}
+                    value={client.lastUpdatedDate}
+                  />
+                </TableCell>
+                <TableCell>
+                  <ClientTableActions
+                    id={client.id}
+                    isArchived={isArchived}
+                    email={client.email}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+      {!isLoading && data && (
+        <TablePagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={data.numberOfPages}
+        />
+      )}
+    </>
   );
 };

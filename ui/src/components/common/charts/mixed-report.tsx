@@ -19,7 +19,7 @@ interface MixedReportProps {
 export default function MixedReport({ data }: MixedReportProps) {
   const { dictionary } = useContext(LanguageContext);
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" aspect={34 / 9}>
       <BarChart
         width={500}
         height={350}

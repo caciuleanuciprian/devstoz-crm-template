@@ -12,6 +12,8 @@ import {
   DropdownMenuItemProps,
   DropdownMenuProps,
 } from "@/components/dashboard/utils/types";
+import { randomUUID } from "crypto";
+import { uuidv4 } from "@/lib/utils";
 
 interface DropdownProps {
   icon: any;
@@ -34,12 +36,12 @@ const Dropdown = ({ icon, menus }: DropdownProps) => {
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
         {menus.map((menu: DropdownMenuProps, index: number) => (
-          <div key={menu.label}>
+          <div key={uuidv4()}>
             {menu.label && <DropdownMenuLabel>{menu.label}</DropdownMenuLabel>}
             {menu.label && <DropdownMenuSeparator />}
             {menu.items.map((item: DropdownMenuItemProps) =>
               item ? (
-                <>
+                <div key={uuidv4()}>
                   <DropdownMenuItem
                     onClick={item.onClick}
                     className="cursor-pointer w-full"
@@ -51,7 +53,7 @@ const Dropdown = ({ icon, menus }: DropdownProps) => {
                     </div>
                   </DropdownMenuItem>
                   {item.separator && <DropdownMenuSeparator />}
-                </>
+                </div>
               ) : (
                 <></>
               )

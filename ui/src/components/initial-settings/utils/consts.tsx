@@ -40,6 +40,17 @@ export const valueToLabelLanguage = (value: string, dictionary: any) => {
   }
 };
 
+export const valueToLabelLanguageShort = (value: string) => {
+  switch (value) {
+    case "en":
+      return "EN";
+    case "ro":
+      return "RO";
+    default:
+      return "EN";
+  }
+};
+
 export const valueToLabelCurrency = (value: string, dictionary: any) => {
   switch (value) {
     case "RON":

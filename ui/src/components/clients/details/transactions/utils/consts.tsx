@@ -71,7 +71,8 @@ export const valueToLabelTabelTransactionType = (
 };
 
 export const getFileExtension = (fileName: string) => {
-  return fileName.split(".").pop();
+  const splitArr = fileName.split(".");
+  return splitArr[splitArr.length - 1];
 };
 
 export const getIcon = (fileName: string) => {

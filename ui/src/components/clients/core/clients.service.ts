@@ -148,3 +148,28 @@ export const GetClientReport = async ({
     return handleError(error);
   }
 };
+
+export const PostEmail = async ({
+  body,
+}: {
+  body: any;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = await axios.post(
+      `${CLIENTS_URL}`,
+      {
+        ...body,
+      },
+      {
+        headers: {
+          Authorization:
+            //@ts-ignore
+            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};

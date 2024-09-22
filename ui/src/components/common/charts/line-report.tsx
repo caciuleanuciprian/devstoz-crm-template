@@ -12,9 +12,11 @@ import {
 export default function LineReport({
   data,
   datakey,
+  name,
 }: {
   data: any[];
   datakey: string;
+  name: string;
 }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -43,6 +45,7 @@ export default function LineReport({
           dataKey={datakey}
           stroke="lightblue"
           activeDot={{ r: 8 }}
+          name={name}
         />
       </LineChart>
     </ResponsiveContainer>

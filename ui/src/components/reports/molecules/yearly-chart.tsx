@@ -9,6 +9,7 @@ interface YearlyChartProps {
   isLoading: boolean;
   dataKey: string;
   reportType: string;
+  name: string;
 }
 
 export const YearlyChart = ({
@@ -16,6 +17,7 @@ export const YearlyChart = ({
   isLoading,
   dataKey,
   reportType,
+  name,
 }: YearlyChartProps) => {
   return (
     <div className="h-full bg-background rounded-md">
@@ -27,13 +29,13 @@ export const YearlyChart = ({
         ) : (
           <>
             {reportType === ReportType.LINE && (
-              <LineReport datakey={dataKey} data={data} />
+              <LineReport datakey={dataKey} data={data} name={name} />
             )}
             {reportType === ReportType.BAR && (
-              <BarReport datakey={dataKey} data={data} />
+              <BarReport datakey={dataKey} data={data} name={name} />
             )}
             {reportType === ReportType.AREA && (
-              <AreaReport datakey={dataKey} data={data} />
+              <AreaReport datakey={dataKey} data={data} name={name} />
             )}
           </>
         )}

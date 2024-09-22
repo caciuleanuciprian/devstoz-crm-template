@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Header } from "../../common/header/header";
 import { LanguageContext } from "@/i18n/language-context";
-import { TablePagination } from "../../common/table/pagination";
 import { ClientSearch } from "./atoms/client-list-header";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -73,7 +72,6 @@ const Clients = () => {
               <ArchivedClientsTable />
             </TabsContent>
           </Tabs>
-          <TablePagination />
         </div>
       </div>
     </div>

@@ -23,6 +23,7 @@ import { UserRoles } from "../utils/types";
 import { Slot } from "../atoms/slot";
 import { Loader } from "@/components/common/loader";
 import { roleToLabel } from "../utils/consts";
+import clsx from "clsx";
 
 export const SettingsMembersSection = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -61,45 +62,33 @@ export const SettingsMembersSection = () => {
 
   return (
     <Slot className="w-full">
-      <p className="font-semibold text-lg">{dictionary.OrganizationMembers}</p>
-      <div className="flex bg-background flex-col p-4 mt-4 rounded-md w-full h-full">
-        <Card className="h-full">
-          <CardHeader className="p-4 flex flex-row justify-between items-center">
-            <div>
-              <CardTitle className="text-lg">{dictionary.AddMembers}</CardTitle>
-              <CardDescription>
-                {dictionary.AddMembersDescription}
-              </CardDescription>
-            </div>
-            <Modal
-              trigger={
-                <Button className="text-xs" variant="default">
-                  {dictionary.AddMember}
-                </Button>
-              }
-              title={dictionary.AddMember}
-              description={dictionary.AddMemberDescription}
-              component={<></>}
-              confirmTxt={dictionary.Submit}
-              cancelTxt={dictionary.Cancel}
-              onConfirm={handleAddMember}
-            />
-          </CardHeader>
-          <CardContent className="flex flex-col gap-4 p-4 pt-0">
-            {isLoading && <Loader />}
-            {error && <p className="text-red-500">Error retrieving members.</p>}
+      <p className="font-semibold text-lg pointer-events-none">
+        {dictionary.OrganizationMembers}
+      </p>
+      <div className="flex bg-background flex-col p-4 mt-4 rounded-md w-full">
+        <Card
+          className={clsx(
+            `h-full flex justify-center ${
+              !isLoading ? "items-start" : "items-center"
+            }`
+          )}
+        >
+          <CardContent className="flex flex-wrap justify-between gap-4 p-4">
             {formatMembers.length < 1 && (
               <p className="text-muted-foreground">There is no member.</p>
             )}
-            {formatMembers.map((member: any) => (
-              <Member
-                key={member.id}
-                isReadonly={true}
-                name={member.name}
-                email={member.email}
-                role={member.role}
-              />
-            ))}
+            {!isLoading &&
+              formatMembers.map((member: any) => (
+                <Member
+                  key={member.id}
+                  isReadonly={true}
+                  name={member.name}
+                  email={member.email}
+                  role={member.role}
+                />
+              ))}
+            {error && <p className="text-red-500">Error retrieving members.</p>}
+            {isLoading && <Loader />}
           </CardContent>
         </Card>
       </div>

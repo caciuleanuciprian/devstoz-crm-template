@@ -17,7 +17,9 @@ import { LanguageContext } from "@/i18n/language-context";
 import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
 import { linksToLabel } from "./utils/consts";
 import { Button } from "@/components/ui/button";
-import { ArrowRightFromLine } from "lucide-react";
+import { Maximize2 } from "lucide-react";
+import LanguageSelector from "@/components/settings/atoms/language-selector";
+import { CustomTooltip } from "../tooltip";
 
 const Navigation = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -44,25 +46,28 @@ const Navigation = () => {
           <NavigationMenu className="block max-w-full w-full justify-start">
             <NavigationMenuList className="flex flex-col w-full items-start gap-1.5 py-2 px-2">
               {linksToLabel(dictionary)?.map((link, index) => (
-                <NavigationMenuItem
-                  key={index}
-                  className={
-                    isActive === index
-                      ? "bg-accent-links w-full !m-0 rounded"
-                      : "!m-0 cursor-pointer ease-in-out w-full rounded hover:bg-accent-links"
-                  }
-                >
-                  <Link
-                    key={`${link.id}-${link.name}`}
-                    to={link.href}
-                    className={`w-full flex ${
-                      expandedNavBar ? "justify-start" : "justify-center"
-                    } items-center px-2 py-2 h-[40px]`}
+                <CustomTooltip content={link.tooltipContent} key={index}>
+                  <NavigationMenuItem
+                    className={
+                      isActive === index
+                        ? "bg-accent-links w-full !m-0 rounded"
+                        : "!m-0 cursor-pointer ease-in-out w-full rounded hover:bg-accent-links"
+                    }
                   >
-                    {link.icon}
-                    <p className={`${expandedNavBar && "ml-2"}`}>{link.name}</p>
-                  </Link>
-                </NavigationMenuItem>
+                    <Link
+                      key={`${link.id}-${link.name}`}
+                      to={link.href}
+                      className={`w-full flex ${
+                        expandedNavBar ? "justify-start" : "justify-center"
+                      } items-center px-2 py-2 h-[40px]`}
+                    >
+                      {link.icon}
+                      <p className={`${expandedNavBar && "ml-2"}`}>
+                        {link.name}
+                      </p>
+                    </Link>
+                  </NavigationMenuItem>
+                </CustomTooltip>
               ))}
             </NavigationMenuList>
           </NavigationMenu>
@@ -70,11 +75,13 @@ const Navigation = () => {
         <div className="flex flex-col gap-2">
           {expandedNavBar ? (
             <div className="flex flex-row items-center justify-start gap-2 px-4">
+              <LanguageSelector />
               <ModeToggle />
               <Logout />
             </div>
           ) : (
             <div className="flex flex-col items-center justify-start gap-2 px-4">
+              <LanguageSelector />
               <ModeToggle />
               <Logout />
             </div>
@@ -91,9 +98,11 @@ const Navigation = () => {
               onClick={toggleNavBar}
             >
               {expandedNavBar ? (
-                "Collapse"
+                dictionary.Collapse
               ) : (
-                <ArrowRightFromLine className="h-[1.2rem] w-[1.2rem]" />
+                <CustomTooltip content={dictionary.Expand}>
+                  <Maximize2 className="h-[1.2rem] w-[1.2rem]" />
+                </CustomTooltip>
               )}
             </Button>
           </div>

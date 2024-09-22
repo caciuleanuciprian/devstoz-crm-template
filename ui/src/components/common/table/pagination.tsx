@@ -16,12 +16,20 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import { useContext } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import { useRecoilState } from "recoil";
 
-export const TablePagination = () => {
-  const [totalPages] = useRecoilState(totalPagesAtom);
-  const [currentPage, setCurrentPage] = useRecoilState(currentPageAtom);
+type TablePaginationProps = {
+  totalPages: number;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+};
+
+export const TablePagination = ({
+  totalPages,
+  currentPage,
+  setCurrentPage,
+}: TablePaginationProps) => {
   const { dictionary } = useContext(LanguageContext);
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 

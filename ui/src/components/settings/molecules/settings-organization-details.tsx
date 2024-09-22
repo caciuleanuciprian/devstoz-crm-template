@@ -16,16 +16,12 @@ import { Label } from "@/components/ui/label";
 import { useRecoilState } from "recoil";
 import {
   settingsCurrencyAtom,
-  settingsLanguageAtom,
   shouldRefetchOrganizationAtom,
 } from "../core/settings.recoil";
 import {
   SelectCurrencyOptions,
-  SelectLanguageOptions,
   selectCurrencyOptions,
-  selectLanguageOptions,
   valueToLabelCurrency,
-  valueToLabelLanguage,
 } from "@/components/initial-settings/utils/consts";
 import { toast } from "@/components/ui/use-toast";
 import { AxiosStatusCode } from "@/lib/axios/helpers";
@@ -47,8 +43,6 @@ export const SettingsOrganizationDetails = () => {
   );
   const [selectedCurrency, setSelectedCurrency] =
     useRecoilState(settingsCurrencyAtom);
-  const [selectedLanguage, setSelectedLanguage] =
-    useRecoilState(settingsLanguageAtom);
 
   const [, setShouldRefetchOrganization] = useRecoilState(
     shouldRefetchOrganizationAtom
@@ -72,9 +66,7 @@ export const SettingsOrganizationDetails = () => {
     paramsOfFetch: {
       body: {
         name: values.name,
-        language: selectedLanguage || selectedOrganization?.language,
         currency: selectedCurrency || selectedOrganization?.currency,
-        logoName: "test", // TODO: should remove this line
       },
       organizationId: selectedOrganization?.id,
     },
@@ -88,9 +80,6 @@ export const SettingsOrganizationDetails = () => {
     settingsForm.setValues({
       name: selectedOrganization?.name,
     });
-    setSelectedLanguage(
-      selectedOrganization?.language || SelectLanguageOptions.en
-    );
     setSelectedCurrency(
       selectedOrganization?.currency || SelectCurrencyOptions.USD
     );
@@ -121,16 +110,17 @@ export const SettingsOrganizationDetails = () => {
       settingsForm.setValues({
         name: selectedOrganization.name,
       });
-      setSelectedLanguage(selectedOrganization.language);
       setSelectedCurrency(selectedOrganization.currency);
     }
   }, []);
 
   return (
     <Slot className="w-full">
-      <p className="font-semibold text-lg">{dictionary.OrganizationSettings}</p>
+      <p className="font-semibold text-lg pointer-events-none">
+        {dictionary.OrganizationSettings}
+      </p>
       <Formiz connect={settingsForm}>
-        <div className="flex bg-background flex-col p-4 mt-4 rounded-md w-full h-full">
+        <div className="flex bg-background flex-col p-4 mt-4 rounded-md w-full ">
           <div className="col-span-4 w-full h-full">
             <InputWithLabel
               label={dictionary.OrganizationName}
@@ -145,25 +135,6 @@ export const SettingsOrganizationDetails = () => {
               ]}
               isDisabled={isReadonly}
             />
-            <div className="col-span-4 w-full pb-5">
-              <Select
-                onValueChange={(e: any) => setSelectedLanguage(e)}
-                value={selectedLanguage as SelectLanguageOptions}
-                disabled={isReadonly}
-              >
-                <Label>{dictionary.Language}</Label>
-                <SelectTrigger className="h-9">
-                  <SelectValue placeholder={dictionary.Language} />
-                </SelectTrigger>
-                <SelectContent>
-                  {selectLanguageOptions.map((option: string) => (
-                    <SelectItem key={option} value={option}>
-                      {valueToLabelLanguage(option, dictionary)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
             <div className="col-span-4 w-full pb-5">
               <Select
                 onValueChange={(e: any) => setSelectedCurrency(e)}
@@ -208,7 +179,7 @@ export const SettingsOrganizationDetails = () => {
                 </Button>
                 <Button
                   className="text-xs"
-                  onClick={handleUpdate}
+                  onClick={() => handleUpdate()}
                   disabled={updatedIsLoading}
                 >
                   {updatedIsLoading ? <Loader /> : dictionary.Submit}

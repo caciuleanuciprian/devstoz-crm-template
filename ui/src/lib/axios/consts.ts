@@ -10,7 +10,7 @@ export const REPORTS_PREFIX = "/reports";
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const BASE_URL_AUTHORIZED = `${BASE_URL}/authorized`;
 
-export const FRONT_END_BASE_URL = import.meta.env.VITE_FRONT_END_BASE_URL;
+export const FRONT_END_BASE_URL = `${window.location.origin}`;
 
 export const USERS_URL = `${BASE_URL_AUTHORIZED}${USERS_PREFIX}`;
 export const CLIENTS_URL = `${BASE_URL_AUTHORIZED}${CLIENTS_PREFIX}`;

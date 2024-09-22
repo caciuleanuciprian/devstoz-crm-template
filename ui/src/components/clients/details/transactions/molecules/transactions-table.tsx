@@ -3,12 +3,8 @@ import { Transaction } from "../atoms/transaction";
 import { GetTransactions } from "@/components/clients/core/transactions.service";
 import useAxios from "@/lib/axios/useAxios";
 import { useParams } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import {
-  currentPageAtom,
-  shouldRefetchAtom,
-  totalPagesAtom,
-} from "@/components/clients/list/utils/clients.recoil";
+import { useContext, useEffect, useState } from "react";
+import { shouldRefetchAtom } from "@/components/clients/list/utils/clients.recoil";
 import { useRecoilState } from "recoil";
 import {
   Table,
@@ -23,6 +19,7 @@ import { FilterableTableHeader } from "../atoms/transaction-table-filterable-hea
 import { filterTransactionTableByAtom } from "@/components/clients/details/transactions/utils/transactions.recoil";
 import { transactionHeaders } from "../utils/consts";
 import { TransactionObject } from "../utils/types";
+import { TablePagination } from "@/components/common/table/pagination";
 
 export const TransactionsTable = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -31,8 +28,7 @@ export const TransactionsTable = () => {
 
   const [filterBy] = useRecoilState(filterTransactionTableByAtom);
 
-  const [, setTotalPages] = useRecoilState(totalPagesAtom);
-  const [currentPage, setCurrentPage] = useRecoilState(currentPageAtom);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const { clientId } = useParams();
 
@@ -52,15 +48,8 @@ export const TransactionsTable = () => {
   });
 
   useEffect(() => {
-    setTotalPages(0);
     setCurrentPage(0);
   }, []);
-
-  useEffect(() => {
-    if (data) {
-      setTotalPages(data.numberOfPages);
-    }
-  }, [data]);
 
   useEffect(() => {
     setCurrentPage(0);
@@ -75,51 +64,60 @@ export const TransactionsTable = () => {
   }, [shouldRefetch]);
 
   return (
-    <Table className="bg-background">
-      <TableHeader>
-        <TableRow>
-          {TransactionsTableHeaders.map((header) => (
-            <TableHead
-              key={header.id}
-              className={`${header.alignRight ? "text-right" : "text-left"}`}
-              style={{
-                width: header.size + "%",
-              }}
-            >
-              {header.component ? header.component : header.label}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody className="w-full">
-        {isLoading && (
-          <TableRow className="hover:!bg-transparent">
-            <TableCell colSpan={TransactionsTableHeaders.length}>
-              <Loader />
-            </TableCell>
+    <>
+      <Table className="bg-background">
+        <TableHeader>
+          <TableRow>
+            {TransactionsTableHeaders.map((header) => (
+              <TableHead
+                key={header.id}
+                className={`${header.alignRight ? "text-right" : "text-left"}`}
+                style={{
+                  width: header.size + "%",
+                }}
+              >
+                {header.component ? header.component : header.label}
+              </TableHead>
+            ))}
           </TableRow>
-        )}
-        {error && (
-          <TableRow className="hover:!bg-transparent">
-            <TableCell colSpan={TransactionsTableHeaders.length}>
-              <div className="text-center">{dictionary.GenericError}</div>
-            </TableCell>
-          </TableRow>
-        )}
-        {!isLoading && data && data.entries.length === 0 && (
-          <TableRow className="hover:!bg-transparent">
-            <TableCell colSpan={TransactionsTableHeaders.length}>
-              <div className="text-center">{dictionary.NoResultsFound}</div>
-            </TableCell>
-          </TableRow>
-        )}
-        {!isLoading &&
-          data &&
-          data.entries.length > 0 &&
-          data.entries.map((transaction: TransactionObject) => (
-            <Transaction key={transaction.id} transaction={transaction} />
-          ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody className="w-full">
+          {isLoading && (
+            <TableRow className="hover:!bg-transparent">
+              <TableCell colSpan={TransactionsTableHeaders.length}>
+                <Loader />
+              </TableCell>
+            </TableRow>
+          )}
+          {error && (
+            <TableRow className="hover:!bg-transparent">
+              <TableCell colSpan={TransactionsTableHeaders.length}>
+                <div className="text-center">{dictionary.GenericError}</div>
+              </TableCell>
+            </TableRow>
+          )}
+          {!isLoading && data && data.entries.length === 0 && (
+            <TableRow className="hover:!bg-transparent">
+              <TableCell colSpan={TransactionsTableHeaders.length}>
+                <div className="text-center">{dictionary.NoResultsFound}</div>
+              </TableCell>
+            </TableRow>
+          )}
+          {!isLoading &&
+            data &&
+            data.entries.length > 0 &&
+            data.entries.map((transaction: TransactionObject) => (
+              <Transaction key={transaction.id} transaction={transaction} />
+            ))}
+        </TableBody>
+      </Table>
+      {!isLoading && data && (
+        <TablePagination
+          currentPage={currentPage}
+          totalPages={data.numberOfPages}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
+    </>
   );
 };

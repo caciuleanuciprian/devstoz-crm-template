@@ -12,7 +12,7 @@ export const CellWithHelper = ({
   value,
 }: CellWithHelperProps) => {
   return (
-    <div>
+    <div className="pointer-events-none">
       <p>{label}</p>
       {helper && (
         <p className="text-xs text-muted-foreground opacity-50 font-semibold">

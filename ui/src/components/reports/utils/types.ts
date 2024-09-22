@@ -3,6 +3,7 @@ export interface ChartSlotProps {
   isLoading: boolean;
   label: string;
   dataKey: string;
+  name: string;
 }
 
 export enum ReportType {

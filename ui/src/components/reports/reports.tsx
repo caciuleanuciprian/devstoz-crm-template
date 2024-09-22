@@ -108,10 +108,10 @@ const Reports = () => {
           <div className="pt-4 px-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
-                <p className="font-semibold text-xl">
+                <p className="font-semibold text-xl pointer-events-none">
                   {dictionary.YearlyReportSituation}
                 </p>
-                <p className="font-semibold text-xs text-muted-foreground">
+                <p className="font-semibold text-xs text-muted-foreground pointer-events-none">
                   {dictionary.YearlyReportSituationDescription}
                 </p>
               </div>
@@ -132,24 +132,28 @@ const Reports = () => {
               isLoading={isLoading}
               label={dictionary.YearlyClientsChart}
               dataKey="noOfClients"
+              name={dictionary.NoOfClients}
             />
             <ChartSlot
               data={memoizedNoTransactions}
               isLoading={isLoading}
               label={dictionary.YearlyTransactionsChart}
               dataKey="noOfTransactions"
+              name={dictionary.NoOfTransactions}
             />
             <ChartSlot
               data={memoizedTotalIncome}
               isLoading={isLoading}
               label={dictionary.YearlyIncomeChart}
               dataKey="totalIncome"
+              name={dictionary.TotalIncome}
             />
             <ChartSlot
               data={memoizedTotalExpenses}
               isLoading={isLoading}
               label={dictionary.YearlyExpensesChart}
               dataKey="totalExpenses"
+              name={dictionary.TotalExpenses}
             />
           </div>
         </div>

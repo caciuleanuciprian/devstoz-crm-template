@@ -39,15 +39,20 @@ export const ExportPDF = async ({
 
 export const GetOrganizationsDocuments = async ({
   organizationId,
+  page,
+  size,
 }: {
   organizationId: string;
+  page: number;
+  size: number;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   const params = new URLSearchParams({
-    organizationId: organizationId,
+    page: `${page}`,
+    size: `${size}`,
   });
   try {
     const response: any = await axios.get(
-      `${ORGANIZATION_URL}/${organizationId}/documents`,
+      `${ORGANIZATION_URL}/${organizationId}/documents?${params}`,
       {
         headers: {
           Authorization:
@@ -67,18 +72,19 @@ export const UploadOrganizationsDocuments = async ({
   body,
 }: {
   organizationId: string;
-  body: { name: string; type: string; file: File };
+  body: { file: File };
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
-  const params = new URLSearchParams({
-    organizationId: organizationId,
-  });
   try {
     const response: any = await axios.post(
       `${ORGANIZATION_URL}/${organizationId}/documents`,
-      body,
+      {
+        file: body.file,
+        document: { name: body.file.name, type: body.file.type },
+      },
       {
         responseType: "blob",
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization:
             //@ts-ignore
             "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),

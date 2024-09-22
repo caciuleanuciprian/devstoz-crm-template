@@ -68,12 +68,10 @@ export const ClientDetails = () => {
     [memoizedChartValues]
   );
 
-  console.log("DATA", memoizedChartValues);
-
   return (
     <div className="px-8 pb-4">
       <Header title={dictionary.ClientDetails} />
-      <div className="flex flex-col gap-4 py-4 h-[90vh]">
+      <div className="flex flex-col gap-4 py-4 min-h-[90vh]">
         <div className="flex w-full gap-4">
           {/* <div className="bg-secondary p-4 w-[67%] rounded-md max-h-[400px]"> */}
           <div

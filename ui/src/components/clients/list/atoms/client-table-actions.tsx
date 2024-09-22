@@ -11,15 +11,18 @@ import { AxiosStatusCode } from "@/lib/axios/helpers";
 import { shouldRefetchAtom } from "../utils/clients.recoil";
 import { useRecoilState } from "recoil";
 import Dropdown from "@/components/common/dropdown";
+import { EmailForm } from "../../email/email-form";
 
 interface ClientTableActionsProps {
   id: string;
   isArchived?: boolean;
+  email?: string;
 }
 
 export const ClientTableActions = ({
   id,
   isArchived,
+  email,
 }: ClientTableActionsProps) => {
   const { dictionary } = useContext(LanguageContext);
 
@@ -57,6 +60,10 @@ export const ClientTableActions = ({
     await archiveClientLoadData();
   };
 
+  const handleSendEmail = async () => {
+    console.log("to be implemented");
+  };
+
   const navigateToClientDetails = () => {
     navigate(`${CLIENTS_PREFIX}/${id}`);
   };
@@ -84,17 +91,16 @@ export const ClientTableActions = ({
         icon={<MoreHorizontal className="h-[1.2rem] w-[1.2rem]" />}
         menus={[
           {
-            label: "Actions",
+            label: dictionary.Actions,
             items: [
               {
-                name: "View",
+                name: dictionary.View,
                 icon: <ArrowRight className="h-[1.2rem] w-[1.2rem]" />,
                 onClick: () => navigateToClientDetails(),
               },
               {
-                name: "Send email",
-                icon: <Mail className="h-[1.2rem] w-[1.2rem] mr-2" />,
-                onClick: () => console.log("send email"),
+                name: <EmailForm email={email ?? ""} />,
+                onClick: (e) => e.preventDefault(),
                 separator: isArchived,
               },
               !isArchived

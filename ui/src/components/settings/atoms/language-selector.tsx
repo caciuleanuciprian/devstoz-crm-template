@@ -1,23 +1,37 @@
+import { CustomTooltip } from "@/components/common/tooltip";
+import { valueToLabelLanguageShort } from "@/components/initial-settings/utils/consts";
+import { Button } from "@/components/ui/button";
 import { LanguageContext } from "@/i18n/language-context";
-import { languageOptions } from "@/i18n/languages";
-import { ReactNode, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function LanguageSelector() {
-  const handleLanguageChange = (e: any) => userLanguageChange(e.target.value);
+  const { userLanguage, userLanguageChange, dictionary }: any =
+    useContext(LanguageContext);
+  const [currentLanguage, setCurrentLanguage] = useState<"ro" | "en">(
+    userLanguage
+  );
 
-  const { userLanguage, userLanguageChange }: any = useContext(LanguageContext);
+  console.log(userLanguage);
+
+  const handleLanguageChange = () => {
+    if (currentLanguage === "en") {
+      setCurrentLanguage("ro");
+    } else if (currentLanguage === "ro") {
+      setCurrentLanguage("en");
+    }
+  };
+
+  useEffect(() => {
+    currentLanguage === "en"
+      ? userLanguageChange("en")
+      : userLanguageChange("ro");
+  }, [currentLanguage]);
 
   return (
-    <select
-      onChange={handleLanguageChange}
-      value={userLanguage}
-      className="text-slate-500"
-    >
-      {Object.entries(languageOptions).map(([id, name]) => (
-        <option key={id} value={id}>
-          {name as ReactNode}
-        </option>
-      ))}
-    </select>
+    <CustomTooltip content={dictionary.Language}>
+      <Button onClick={handleLanguageChange} variant="outline" size="icon">
+        {valueToLabelLanguageShort(currentLanguage)}
+      </Button>
+    </CustomTooltip>
   );
 }

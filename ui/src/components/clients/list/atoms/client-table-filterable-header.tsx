@@ -48,7 +48,6 @@ export const FilterableTableHeader = () => {
             checked={filterBy === option}
             onCheckedChange={() => handleFilterChange(option)}
           >
-            {iconToLabelClientType(option)}
             {valueToLabelClientType(option, dictionary)}
           </DropdownMenuCheckboxItem>
         ))}

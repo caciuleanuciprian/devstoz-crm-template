@@ -10,14 +10,11 @@ const Dashboard = () => {
   return (
     <div className="px-8 pb-4">
       <Header title={dictionary.Dashboard} />
-      <div className="flex h-[90vh] py-4 flex-col gap-4">
+      <div className="flex min-h-[90vh] py-4 flex-col gap-4">
         <div className="flex bg-secondary rounded-md p-4 flex-col gap-4 max-h-[750px]">
           <TopBanner />
         </div>
         <LastNTransactions />
-        {/* <div className="flex gap-4 w-full justify-between bg-background">
-          asd
-        </div> */}
       </div>
     </div>
   );

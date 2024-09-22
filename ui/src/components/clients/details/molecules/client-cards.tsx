@@ -1,14 +1,8 @@
 import InfoCard from "@/components/common/info-card";
-import { GetClientReport } from "../../core/clients.service";
-import useAxios from "@/lib/axios/useAxios";
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useContext } from "react";
 import { LanguageContext } from "@/i18n/language-context";
-import { Receipt, Coins, CreditCard } from "lucide-react";
+import { Receipt, Coins, ArrowRightLeft } from "lucide-react";
 import { Loader } from "@/components/common/loader";
-import { shouldRefetchAtom } from "../../list/utils/clients.recoil";
-import { transactionChangedAtom } from "../transactions/utils/transactions.recoil";
 
 interface ClientCardsProps {
   data: any;
@@ -26,20 +20,20 @@ export const ClientCards = ({ data, isLoading, error }: ClientCardsProps) => {
           <InfoCard
             label={dictionary.NumberOfTransactions}
             amount={data?.numberOfTransactions}
-            icon={<CreditCard />}
+            icon={<ArrowRightLeft />}
             isCurrency={false}
             isLoading={isLoading}
           />
           <InfoCard
             label={dictionary.TotalExpenses}
             amount={data?.totalExpenses}
-            icon={<Receipt className="text-destructive" />}
+            icon={<Receipt />}
             isLoading={isLoading}
           />
           <InfoCard
             label={dictionary.TotalIncome}
             amount={data?.totalIncome}
-            icon={<Coins className="text-green-500" />}
+            icon={<Coins />}
             isLoading={isLoading}
           />
         </>
