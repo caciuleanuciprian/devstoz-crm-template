@@ -27,7 +27,7 @@ const LoginForm = ({ onClick }: LoginFormProps) => {
             <Icons.google className="mr-2 h-4 w-4" />
             {dictionary.SignInWith} {dictionary.Google}
           </Button>
-          <p className="flex justify-center gap-4 text-center text-sm text-muted-foreground">
+          {/* <p className="flex justify-center gap-4 text-center text-sm text-muted-foreground">
             <Link
               to="/"
               className="underline underline-offset-4 hover:text-primary"
@@ -40,7 +40,7 @@ const LoginForm = ({ onClick }: LoginFormProps) => {
             >
               {dictionary.Privacy}
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
