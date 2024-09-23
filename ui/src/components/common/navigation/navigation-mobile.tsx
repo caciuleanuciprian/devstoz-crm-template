@@ -46,7 +46,6 @@ const NavigationMobile = () => {
                       className={`w-full flex justify-center items-center px-2 py-2 h-[40px]`}
                     >
                       {link.icon}
-                      <p>{link.name}</p>
                     </Link>
                   </NavigationMenuItem>
                 </CustomTooltip>
