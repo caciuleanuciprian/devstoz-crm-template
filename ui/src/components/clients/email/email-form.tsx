@@ -6,7 +6,13 @@ import { AxiosStatusCode } from "@/lib/axios/helpers";
 import useAxios from "@/lib/axios/useAxios";
 import { Formiz, useForm, useFormFields } from "@formiz/core";
 import { isNotEmptyString, isRequired } from "@formiz/validations";
-import { useContext, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { PostEmail } from "../core/clients.service";
 import {
   Dialog,
@@ -23,16 +29,16 @@ import { Button } from "@/components/ui/button";
 
 type EmailFormProps = {
   email: string;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export const EmailForm = ({ email }: EmailFormProps) => {
-  const [open, setOpen] = useState(false);
-
+export const EmailForm = ({ email, open = false, setOpen }: EmailFormProps) => {
   const { dictionary } = useContext(LanguageContext);
   const emailForm = useForm({
     initialValues: {
       subject: "",
-      email: email,
+      to: email,
       message: "",
     },
   });
@@ -51,7 +57,8 @@ export const EmailForm = ({ email }: EmailFormProps) => {
   });
 
   useEffect(() => {
-    if (dataCode === AxiosStatusCode.CODE_201_CREATED) {
+    // TODO: Change to 201 when BE supports it
+    if (dataCode === AxiosStatusCode.CODE_200_OK) {
       toast({ title: dictionary.PostEmailSuccess, variant: "success" });
     } else if (error) {
       toast({ title: dictionary.PostEmailError, variant: "destructive" });
@@ -69,13 +76,12 @@ export const EmailForm = ({ email }: EmailFormProps) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <div className="flex items-center">
-          <Mail className="h-[1.2rem] w-[1.2rem] mr-2" />
-          <p>{dictionary.SendEmail}</p>
-        </div>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent
+        className="max-w-[350px] md:max-w-[500px] max-h-[80vh] overflow-auto"
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
+        onPointerMove={(e) => e.stopPropagation()}
+      >
         <DialogHeader>
           <DialogTitle>{dictionary.SendEmail}</DialogTitle>
           <DialogDescription>
@@ -113,7 +119,7 @@ export const EmailForm = ({ email }: EmailFormProps) => {
             />
           </Formiz>
         </DialogHeader>
-        <DialogFooter>
+        <DialogFooter className="gap-2">
           <DialogClose asChild>
             <Button
               variant={"outline"}
@@ -128,7 +134,7 @@ export const EmailForm = ({ email }: EmailFormProps) => {
             variant={"default"}
             onClick={handleSubmit}
             type="button"
-            disabled={isLoading}
+            disabled={isLoading || !emailForm.isValid}
             className="text-xs flex items-center px-8"
           >
             {isLoading ? <Loader /> : dictionary.SendEmail}

@@ -47,7 +47,7 @@ export const LastNTransactions = () => {
 
   return (
     <div className="flex flex-col w-full min-h-[355px] bg-secondary p-4 rounded-md">
-      <p className="font-semibold pb-4 text-lg">
+      <p className="font-semibold pb-4 text-md sm:text-lg">
         {dictionary.Last5Transactions}
       </p>
       <Table className="bg-background h-full">

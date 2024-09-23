@@ -129,7 +129,7 @@ export function ClientForm({ initialValues, sheetProps }: ClientFormProps) {
       <SheetTrigger asChild className="w-full">
         {trigger}
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="overflow-auto">
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>
           <SheetDescription>{description}</SheetDescription>

@@ -1,6 +1,7 @@
 import { TextareaWithLabelProps } from "@/components/clients/list/utils/types";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { InputTextarea } from "./input";
 
 const TextareaWithLabel = ({
   label,
@@ -16,15 +17,15 @@ const TextareaWithLabel = ({
         {label}
       </Label>
       <div className="col-span-3 align-middle">
-        <Textarea
+        <InputTextarea
           id={name}
           name={name}
-          placeholder={placeholder}
           autoCapitalize="none"
           autoComplete={name}
           autoCorrect="off"
           disabled={isLoading || isDisabled}
           defaultValue={defaultValue}
+          placeholder={placeholder}
           className="resize-none h-[250px]"
         />
       </div>

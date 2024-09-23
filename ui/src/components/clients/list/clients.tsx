@@ -45,7 +45,7 @@ const Clients = () => {
   }, []);
 
   return (
-    <div className="px-8 pb-4">
+    <div className="px-4 md:px-8 pb-4">
       <Header title={dictionary.Clients} />
       <div className="flex min-h-[90vh] pt-4 mt-4 flex-col bg-secondary rounded-md">
         <ClientSearch />

@@ -85,7 +85,7 @@ export const ClientDetails = () => {
   );
 
   return (
-    <div className="px-8 pb-4">
+    <div className="px-4 md:px-8 pb-4">
       <Header title={dictionary.ClientDetails} />
       <div className="flex flex-col gap-4 py-4 min-h-[90vh]">
         <div className="flex w-full gap-4 flex-col lg:flex-row">

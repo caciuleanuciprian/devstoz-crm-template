@@ -8,7 +8,7 @@ const Documents = () => {
   const { dictionary } = useContext(LanguageContext);
 
   return (
-    <div className="px-8 pb-4">
+    <div className="px-4 md:px-8 pb-4">
       <Header title={dictionary.Documents} />
       <div className="flex min-h-[85vh] py-4 flex-col gap-4">
         <div className="flex bg-secondary rounded-md p-4 flex-col gap-4 ">

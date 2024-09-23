@@ -6,6 +6,7 @@ export const ORGANIZATION_PREFIX = "/organizations";
 export const DOCUMENTS_PREFIX_TEMP = "/pdfs"; // TODO: Replace with /documents/pdfs when BE is ready
 export const DOCUMENTS_PREFIX = "/documents";
 export const REPORTS_PREFIX = "/reports";
+export const MAIL_PREFIX = "/mail";
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const BASE_URL_AUTHORIZED = `${BASE_URL}/authorized`;
@@ -18,5 +19,6 @@ export const TRANSACTIONS_URL = `${BASE_URL_AUTHORIZED}${TRANSACTIONS_PREFIX}`;
 export const ROLES_URL = `${BASE_URL_AUTHORIZED}${ROLES_PREFIX}`;
 export const ORGANIZATION_URL = `${BASE_URL_AUTHORIZED}${ORGANIZATION_PREFIX}`;
 export const REPORTS_URL = `${BASE_URL_AUTHORIZED}${REPORTS_PREFIX}`;
+export const MAIL_URL = `${BASE_URL_AUTHORIZED}${MAIL_PREFIX}`;
 
 export const GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";

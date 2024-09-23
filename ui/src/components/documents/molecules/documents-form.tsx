@@ -142,11 +142,11 @@ export const DocumentsForm = () => {
           onClick={() => setOpen(true)}
         />
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-[350px] md:max-w-[500px] max-h-[80vh] overflow-auto">
         <DialogHeader>
           <DialogTitle>{dictionary.GenerateDocument}</DialogTitle>
           <div className="flex flex-col w-full justify-between rounded-md bg-background">
-            <div className="flex w-full p-4 flex-col rounded-md gap-2">
+            <div className="flex w-full pt-2 flex-col rounded-md gap-2">
               <Formiz connect={pdfForm}>
                 <div className="flex w-full gap-2">
                   <div className="col-span-4 w-full">
@@ -304,7 +304,7 @@ export const DocumentsForm = () => {
             </div>
           </div>
         </DialogHeader>
-        <DialogFooter>
+        <DialogFooter className="gap-2">
           <DialogClose asChild>
             <Button
               variant={"outline"}

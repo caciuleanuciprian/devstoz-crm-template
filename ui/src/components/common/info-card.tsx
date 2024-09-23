@@ -74,10 +74,10 @@ const InfoCard = ({
     <div className="flex flex-col justify-center items-center min-h-[100px] md:min-h-[200px] h-full p-8 bg-secondary rounded-md w-full">
       <div className="flex items-center gap-2">
         {icon}
-        <p className="text-2xl text-center">{label}</p>
+        <p className="text-lg md:text-2xl text-center">{label}</p>
       </div>
       <div className="flex flex-col items-center gap-4">
-        <div className="text-xl text-muted-foreground flex w-full justify-center">
+        <div className="text-sm md:text-xl text-muted-foreground flex w-full justify-center">
           {!isLoading ? (
             isCurrency ? (
               formatCurrency(

@@ -11,8 +11,6 @@ export default function LanguageSelector() {
     userLanguage
   );
 
-  console.log(userLanguage);
-
   const handleLanguageChange = () => {
     if (currentLanguage === "en") {
       setCurrentLanguage("ro");

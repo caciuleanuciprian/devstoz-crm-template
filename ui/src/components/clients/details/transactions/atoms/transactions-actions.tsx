@@ -177,7 +177,11 @@ export const TransactionsActions = ({
         confirmTxt={dictionary.Save}
         cancelTxt={dictionary.Cancel}
         onConfirm={handleEdit}
-        isDisabled={!updateTransactionForm.isValid || !transactionType}
+        isDisabled={
+          !updateTransactionForm.isValid ||
+          !transactionType ||
+          updateTransactionForm.isPristine
+        }
         isLoading={updateIsLoading}
       />
       <Button size={"xs"} variant="ghost" onClick={handleDownload}>

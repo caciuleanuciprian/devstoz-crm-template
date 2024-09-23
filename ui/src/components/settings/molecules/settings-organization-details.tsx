@@ -116,7 +116,7 @@ export const SettingsOrganizationDetails = () => {
 
   return (
     <Slot className="w-full">
-      <p className="font-semibold text-lg pointer-events-none">
+      <p className="font-semibold text-md sm:text-lg pointer-events-none">
         {dictionary.OrganizationSettings}
       </p>
       <Formiz connect={settingsForm}>
@@ -180,7 +180,7 @@ export const SettingsOrganizationDetails = () => {
                 <Button
                   className="text-xs"
                   onClick={() => handleUpdate()}
-                  disabled={updatedIsLoading}
+                  disabled={updatedIsLoading || settingsForm.isPristine}
                 >
                   {updatedIsLoading ? <Loader /> : dictionary.Submit}
                 </Button>

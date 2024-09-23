@@ -102,14 +102,14 @@ const Reports = () => {
 
   return (
     <>
-      <div className="px-8 pb-4">
+      <div className="px-4 md:px-8 pb-4">
         <Header title={dictionary.Reports} />
         <div className="flex bg-secondary my-4 flex-col rounded-md">
           <div className="pt-4 px-4">
             <div className="flex items-center justify-between gap-4">
               <div className="flex flex-col gap-2 w-full">
                 <div className="flex justify-between items-center flex-wrap sm:flex-nowrap">
-                  <p className="font-semibold text-xl pointer-events-none">
+                  <p className="font-semibold text-md md:text-xl pointer-events-none">
                     {dictionary.YearlyReportSituation}
                   </p>
                   <DatePicker

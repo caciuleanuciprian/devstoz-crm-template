@@ -19,8 +19,10 @@ export const TopBanner = () => {
 
   return (
     <>
-      <div className="flex w-full justify-between items-center">
-        <p className="font-semibold text-lg">{dictionary.MonthlyStats}</p>
+      <div className="flex w-full justify-between items-center flex-wrap">
+        <p className="font-semibold text-md sm:text-lg">
+          {dictionary.MonthlyStats}
+        </p>
         <DatePicker
           date={date as Date}
           setDate={
@@ -31,7 +33,9 @@ export const TopBanner = () => {
       <div className="flex flex-col w-full justify-between rounded-md bg-background">
         <MonthlyCards currMonth={currMonth} currYear={currYear} />
       </div>
-      <p className="font-semibold text-lg">{dictionary.YearlyStats}</p>
+      <p className="font-semibold text-md sm:text-lg">
+        {dictionary.YearlyStats}
+      </p>
       <div className="flex flex-col gap-4 w-full justify-between rounded-md bg-background">
         <YearlyReport currYear={currYear} />
       </div>

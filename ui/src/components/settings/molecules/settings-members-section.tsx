@@ -62,7 +62,7 @@ export const SettingsMembersSection = () => {
 
   return (
     <Slot className="w-full">
-      <p className="font-semibold text-lg pointer-events-none">
+      <p className="font-semibold text-md sm:text-lg pointer-events-none">
         {dictionary.OrganizationMembers}
       </p>
       <div className="flex bg-background flex-col p-4 mt-4 rounded-md w-full">

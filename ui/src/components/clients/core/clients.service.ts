@@ -1,4 +1,4 @@
-import { CLIENTS_URL, REPORTS_URL } from "@/lib/axios/consts";
+import { CLIENTS_URL, MAIL_URL, REPORTS_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
@@ -152,16 +152,22 @@ export const GetClientReport = async ({
 export const PostEmail = async ({
   body,
 }: {
-  body: any;
+  body: { to: string; subject: string; message: string };
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
     const response: any = await axios.post(
-      `${CLIENTS_URL}`,
+      `${MAIL_URL}`,
       {
-        ...body,
+        senderId: 2, // has to be hardcoded for now
+        recipients: [body.to],
+        ccRecipients: [body.to],
+        bccRecipients: [body.to],
+        subject: body.subject,
+        body: body.message,
       },
       {
         headers: {
+          "Content-Type": "application/json",
           Authorization:
             //@ts-ignore
             "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),

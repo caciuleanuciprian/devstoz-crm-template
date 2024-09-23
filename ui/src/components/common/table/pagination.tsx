@@ -65,9 +65,7 @@ export const TablePagination = ({
     <Pagination>
       <div className="flex w-full justify-between text-xs text-muted-foreground mx-4 mb-4">{`${
         dictionary.Page
-      } ${currentPage + 1} ${dictionary.OutOf} ${
-        totalPages > 0 ? totalPages : 1
-      }`}</div>
+      } ${currentPage + 1}/${totalPages > 0 ? totalPages : 1}`}</div>
       <PaginationContent className="mx-4 mb-4">
         <PaginationItem>
           <Button

@@ -6,6 +6,7 @@ import { roleToLabel } from "@/components/settings/utils/consts";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { LanguageContext } from "@/i18n/language-context";
+import useWindowDimensions from "@/lib/hooks/useWindowDimensions";
 import { useContext, useMemo } from "react";
 import { useRecoilState } from "recoil";
 
@@ -20,8 +21,9 @@ export const HeaderAvatar = () => {
       )?.name,
     [selectedOrganization, userDetails]
   );
+  const windowDimensions = useWindowDimensions();
 
-  return (
+  return windowDimensions.width > 500 ? (
     <div className="flex items-center gap-2 p-2 rounded-md bg-background ">
       <Avatar>
         <AvatarFallback className="text-sm md:text-lg !bg-secondary">
@@ -40,5 +42,7 @@ export const HeaderAvatar = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   );
 };

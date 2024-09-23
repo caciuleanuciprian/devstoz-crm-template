@@ -52,7 +52,7 @@ export const DocumentsListHeader = () => {
   return (
     <div className="flex gap-4 justify-between items-end">
       <div className="w-[100%]">
-        <p className="font-medium text-md">{dictionary.Documents}</p>
+        <p className="font-medium text-md sm:text-lg">{dictionary.Documents}</p>
       </div>
       <div>
         <Modal

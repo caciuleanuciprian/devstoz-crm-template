@@ -2,7 +2,7 @@ import { Modal } from "@/components/common/modal";
 import { LanguageContext } from "@/i18n/language-context";
 import useAxios from "@/lib/axios/useAxios";
 import { Trash, ArrowRight, Mail, MoreHorizontal, Archive } from "lucide-react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ArchiveClient, DeleteClient } from "../../core/clients.service";
 import { useNavigate } from "react-router-dom";
 import { CLIENTS_PREFIX } from "@/lib/axios/consts";
@@ -25,6 +25,7 @@ export const ClientTableActions = ({
   email,
 }: ClientTableActionsProps) => {
   const { dictionary } = useContext(LanguageContext);
+  const [emailOpen, setEmailOpen] = useState<boolean>(false);
 
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
 
@@ -60,10 +61,6 @@ export const ClientTableActions = ({
     await archiveClientLoadData();
   };
 
-  const handleSendEmail = async () => {
-    console.log("to be implemented");
-  };
-
   const navigateToClientDetails = () => {
     navigate(`${CLIENTS_PREFIX}/${id}`);
   };
@@ -96,13 +93,18 @@ export const ClientTableActions = ({
               {
                 name: dictionary.View,
                 icon: <ArrowRight className="h-[1.2rem] w-[1.2rem]" />,
-                onClick: () => navigateToClientDetails(),
+                onClick: () => {
+                  navigateToClientDetails();
+                },
               },
               {
-                name: <EmailForm email={email ?? ""} />,
-                onClick: (e) => e.preventDefault(),
+                name: dictionary.SendEmail,
+                icon: <Mail className="h-[1.2rem] w-[1.2rem]" />,
+                onClick: (e) => {
+                  e.preventDefault();
+                  setEmailOpen(true);
+                },
                 separator: isArchived,
-                isDisabled: true,
               },
               !isArchived
                 ? {
@@ -150,6 +152,7 @@ export const ClientTableActions = ({
           },
         ]}
       />
+      <EmailForm email={email ?? ""} open={emailOpen} setOpen={setEmailOpen} />
     </div>
   );
 };
