@@ -22,7 +22,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Loader, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -68,7 +67,7 @@ export const EmailForm = ({
 
   useEffect(() => {
     setFiles(null);
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     // TODO: Change to 201 when BE supports it

@@ -176,7 +176,7 @@ export const PostEmail = async ({
   try {
     const response: any = await axios.post(`${MAIL_URL}`, formData, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         Authorization:
           //@ts-ignore
           "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
