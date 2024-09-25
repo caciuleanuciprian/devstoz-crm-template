@@ -152,28 +152,36 @@ export const GetClientReport = async ({
 export const PostEmail = async ({
   body,
 }: {
-  body: { to: string; subject: string; message: string };
+  body: {
+    to: string;
+    subject: string;
+    message: string;
+    clientName: string;
+    files: File[];
+  };
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  const files = body.files;
+  const formData = new FormData();
+  formData.append("senderId", "2");
+  formData.append("recipient", body.to);
+  formData.append("subject", body.subject);
+  formData.append("title", "");
+  formData.append("client", body.clientName);
+  formData.append("templateId", "2");
+  formData.append("body", body.message);
+  files.forEach((file) => {
+    formData.append("files", file);
+  });
+  console.log(body);
   try {
-    const response: any = await axios.post(
-      `${MAIL_URL}`,
-      {
-        senderId: 2, // has to be hardcoded for now
-        recipients: [body.to],
-        ccRecipients: [body.to],
-        bccRecipients: [body.to],
-        subject: body.subject,
-        body: body.message,
+    const response: any = await axios.post(`${MAIL_URL}`, formData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          //@ts-ignore
+          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
-        },
-      }
-    );
+    });
     return response;
   } catch (error) {
     return handleError(error);

@@ -17,12 +17,14 @@ interface ClientTableActionsProps {
   id: string;
   isArchived?: boolean;
   email?: string;
+  clientName?: string;
 }
 
 export const ClientTableActions = ({
   id,
   isArchived,
   email,
+  clientName,
 }: ClientTableActionsProps) => {
   const { dictionary } = useContext(LanguageContext);
   const [emailOpen, setEmailOpen] = useState<boolean>(false);
@@ -152,7 +154,12 @@ export const ClientTableActions = ({
           },
         ]}
       />
-      <EmailForm email={email ?? ""} open={emailOpen} setOpen={setEmailOpen} />
+      <EmailForm
+        email={email ?? ""}
+        clientName={clientName ?? ""}
+        open={emailOpen}
+        setOpen={setEmailOpen}
+      />
     </div>
   );
 };

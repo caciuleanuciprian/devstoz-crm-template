@@ -21,7 +21,15 @@ import { transactionHeaders } from "../utils/consts";
 import { TransactionObject } from "../utils/types";
 import { TablePagination } from "@/components/common/table/pagination";
 
-export const TransactionsTable = () => {
+export const TransactionsTable = ({
+  day,
+  month,
+  year,
+}: {
+  day: number;
+  month: number;
+  year: number;
+}) => {
   const { dictionary } = useContext(LanguageContext);
 
   const [shouldRefetch, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
@@ -43,9 +51,16 @@ export const TransactionsTable = () => {
       clientId: clientId,
       transactionType: filterBy,
       page: currentPage,
+      day: day,
+      month: month,
+      year: year,
     },
     loadOnMount: true,
   });
+
+  useEffect(() => {
+    loadData();
+  }, [day, month, year]);
 
   useEffect(() => {
     setCurrentPage(0);

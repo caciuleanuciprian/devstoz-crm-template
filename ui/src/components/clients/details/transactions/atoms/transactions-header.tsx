@@ -44,9 +44,9 @@ export const TransactionsHeader = () => {
       clientId: clientId,
       body: {
         ...values,
-        file: file,
         transactionType: transactionType,
       },
+      files: file,
     },
   });
 

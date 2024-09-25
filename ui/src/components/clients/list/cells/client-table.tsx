@@ -194,6 +194,7 @@ export const ClientTable = ({
                     id={client.id}
                     isArchived={isArchived}
                     email={client.email}
+                    clientName={client.name}
                   />
                 </TableCell>
               </TableRow>

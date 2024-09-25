@@ -26,15 +26,23 @@ import {
 } from "@/components/ui/dialog";
 import { Loader, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { UploadFiles } from "@/components/common/settings/molecules/upload-image";
 
 type EmailFormProps = {
   email: string;
+  clientName: string;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export const EmailForm = ({ email, open = false, setOpen }: EmailFormProps) => {
+export const EmailForm = ({
+  email,
+  clientName,
+  open = false,
+  setOpen,
+}: EmailFormProps) => {
   const { dictionary } = useContext(LanguageContext);
+  const [files, setFiles] = useState<File[] | null>(null);
   const emailForm = useForm({
     initialValues: {
       subject: "",
@@ -52,9 +60,15 @@ export const EmailForm = ({ email, open = false, setOpen }: EmailFormProps) => {
     paramsOfFetch: {
       body: {
         ...values,
+        clientName: clientName,
+        files: files,
       },
     },
   });
+
+  useEffect(() => {
+    setFiles(null);
+  }, []);
 
   useEffect(() => {
     // TODO: Change to 201 when BE supports it
@@ -116,6 +130,12 @@ export const EmailForm = ({ email, open = false, setOpen }: EmailFormProps) => {
               label={dictionary.EmailMessage}
               name="message"
               placeholder={dictionary.EmailMessagePlaceholder}
+            />
+            <UploadFiles
+              files={files}
+              setFiles={setFiles}
+              isReadonly={false}
+              accept={{}}
             />
           </Formiz>
         </DialogHeader>

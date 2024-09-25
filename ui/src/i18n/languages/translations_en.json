@@ -116,6 +116,7 @@
   "Member": "Member",
   "DragAndDrop": "Drag 'n' drop a file here, or click to select file",
   "OnlyOneFile": "You can upload only one file.",
+  "MaxFileSize": "Max Files Size: 50MB",
   "OrganizationCreated": "Organization created succesfully.",
   "OrganizationCreateError": "Organization could not be created.",
   "AddMember": "Add member",

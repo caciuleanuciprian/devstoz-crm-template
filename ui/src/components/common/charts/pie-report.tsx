@@ -64,7 +64,7 @@ export default function PieReport({
           {data.map((entry, index) =>
             entry.name === dictionary.Income ? (
               <Cell key={`cell-${index}`} fill="rgb(34 197 94)" />
-            ) : entry.name === dictionary.Expense ? (
+            ) : entry.name === dictionary.Expenses ? (
               <Cell key={`cell-${index}`} fill="hsl(0 84.2% 60.2%)" />
             ) : (
               <Cell key={`cell-${index}`} fill={"lightblue"} />

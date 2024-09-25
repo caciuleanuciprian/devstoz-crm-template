@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export const fileAtom = atom({
   key: "file",
-  default: null as File | null,
+  default: null as File[] | null,
 });
 
 export const transactionTypeSelectAtom = atom({

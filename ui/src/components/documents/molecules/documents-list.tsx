@@ -105,7 +105,9 @@ const DocumentsList = () => {
               data?.entries.length > 0 &&
               data.entries.map((document: any) => (
                 <TableRow key={document.id}>
-                  <TableCell>{getIcon(document.fileName)}</TableCell>
+                  <TableCell>
+                    {getIcon(document.fileName.split(",")[0])}
+                  </TableCell>
                   <TableCell>{document.name}</TableCell>
                   <TableCell>
                     <CellWithHelper

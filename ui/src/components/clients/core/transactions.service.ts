@@ -11,15 +11,24 @@ export const GetTransactions = async ({
   page = 0,
   size = 10,
   transactionType,
+  day,
+  month,
+  year,
 }: {
   clientId: string;
   page: number;
   size: number;
   transactionType?: string;
+  day: number;
+  month: number;
+  year: number;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   const params = new URLSearchParams({
     page: page.toString(),
     size: size.toString(),
+    day: day.toString(),
+    month: month.toString(),
+    year: year.toString(),
   });
 
   if (transactionType) {
@@ -45,26 +54,31 @@ export const GetTransactions = async ({
 export const AddTransaction = async ({
   clientId,
   body,
+  files,
 }: {
   clientId: string;
   body: any;
+  files: File[];
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  const payload = new FormData();
+  payload.append("clientId", clientId);
+  payload.append("name", body.name);
+  payload.append("amount", body.amount);
+  payload.append("transactionType", body.transactionType);
+  files.forEach((file) => {
+    payload.append("files", file);
+  });
+
+  console.log(payload);
   try {
-    const response: any = await axios.post(
-      `${TRANSACTIONS_URL}`,
-      {
-        clientId,
-        ...body,
+    const response: any = await axios.post(`${TRANSACTIONS_URL}`, payload, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization:
+          //@ts-ignore
+          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
       },
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
-        },
-      }
-    );
+    });
     return response;
   } catch (error) {
     return handleError(error);

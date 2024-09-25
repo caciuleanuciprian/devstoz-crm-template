@@ -25,6 +25,10 @@ export const ClientDetails = () => {
 
   const [date, setDate] = useState<Date>(new Date(Date.now()));
 
+  const currDay = useMemo(
+    () => (date ? date.getDate() : new Date(Date.now()).getDate()),
+    [date]
+  );
   const currMonth = useMemo(
     () => (date ? date?.getMonth() + 1 : new Date(Date.now()).getMonth() + 1),
     [date]
@@ -115,14 +119,15 @@ export const ClientDetails = () => {
         </div>
         <div className="bg-background w-full h-full rounded-md gap-2 flex flex-col justify-center items-end">
           <DatePicker
-            date={date as Date}
+            date={date}
             setDate={
               setDate as React.Dispatch<React.SetStateAction<Date | undefined>>
             }
+            dateFormat="dd MMM yyyy"
           />
           <ClientCards data={data} isLoading={isLoading} error={error} />
         </div>
-        <Transactions />
+        <Transactions day={currDay} month={currMonth} year={currYear} />
       </div>
     </div>
   );

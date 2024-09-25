@@ -19,7 +19,7 @@ export interface TransactionObject {
   id: string;
   name: string;
   amount: number;
-  fileName: string;
+  fileNames: string;
   transactionType: string;
 }
 

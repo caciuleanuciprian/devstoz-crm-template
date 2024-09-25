@@ -97,7 +97,10 @@ export const TransactionsActions = ({
   const handleDownloadFile = () => {
     const link = document.createElement("a");
     link.target = "_blank";
-    link.download = transaction.fileName;
+    link.download =
+      transaction.fileNames.split(",").length > 0
+        ? `${transaction.fileNames.split(",").length} files.zip`
+        : transaction.fileNames;
     const URL = window.URL || window.webkitURL;
     link.href = URL.createObjectURL(transactionFileData);
     document.body.append(link);

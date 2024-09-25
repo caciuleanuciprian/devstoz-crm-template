@@ -27,6 +27,7 @@ import {
   valueToLabelTransactionType,
 } from "../utils/consts";
 import { TransactionObject, TransactionType } from "../utils/types";
+import { UploadFiles } from "@/components/common/settings/molecules/upload-image";
 
 interface TransactionFormProps {
   form: Form;
@@ -34,7 +35,7 @@ interface TransactionFormProps {
 }
 
 export const TransactionForm = ({ form, data }: TransactionFormProps) => {
-  const [, setFile] = useRecoilState(fileAtom);
+  const [files, setFiles] = useRecoilState(fileAtom);
   const [, setTransactionType] = useRecoilState(transactionTypeSelectAtom);
 
   const { dictionary } = useContext(LanguageContext);
@@ -46,6 +47,10 @@ export const TransactionForm = ({ form, data }: TransactionFormProps) => {
       setTransactionType(TransactionType.INCOME);
     }
   }, [data]);
+
+  useEffect(() => {
+    setFiles(null);
+  }, []);
 
   useEffect(() => {
     form.setValues({
@@ -105,14 +110,12 @@ export const TransactionForm = ({ form, data }: TransactionFormProps) => {
 
       {/* TODO Add validation to this filed */}
       {!data && (
-        <div className="col-span-4 w-full">
-          <Label>{dictionary.UploadFile}</Label>
-          <Input
-            id="file"
-            type="file"
-            onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
-          />
-        </div>
+        <UploadFiles
+          setFiles={setFiles}
+          files={files ?? []}
+          isReadonly={false}
+          accept={{}}
+        />
       )}
     </Formiz>
   );

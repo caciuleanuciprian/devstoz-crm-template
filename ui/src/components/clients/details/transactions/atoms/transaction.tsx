@@ -9,7 +9,7 @@ export const Transaction = ({ transaction }: TransactionProps) => {
   const { dictionary } = useContext(LanguageContext);
   return (
     <TableRow key={transaction.id}>
-      <TableCell>{getIcon(transaction.fileName)}</TableCell>
+      <TableCell>{getIcon(transaction.fileNames.split(",")[0])}</TableCell>
       <TableCell>{transaction.name}</TableCell>
       <TableCell>{transaction.amount}</TableCell>
       <TableCell>
@@ -18,7 +18,11 @@ export const Transaction = ({ transaction }: TransactionProps) => {
           dictionary
         )}
       </TableCell>
-      <TableCell className="text-xs italic">{transaction.fileName}</TableCell>
+      <TableCell className="text-xs italic">
+        {transaction.fileNames.split(",").length > 0
+          ? `${transaction.fileNames.split(",").length} files`
+          : transaction.fileNames}
+      </TableCell>
       <TableCell>
         <TransactionsActions transaction={transaction} />
       </TableCell>
