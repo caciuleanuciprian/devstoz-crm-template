@@ -1,6 +1,7 @@
 import { CLIENTS_URL, MAIL_URL, REPORTS_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
+import * as SibApiV3Sdk from "@sendinblue/client";
 
 export const AddClient = async ({
   organizationId,
@@ -182,6 +183,42 @@ export const PostEmail = async ({
           "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
       },
     });
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetEmailEvents = async ({
+  limit = 2500,
+  offset = 0,
+  email,
+  templateId = 2,
+  sort = "desc",
+}: {
+  limit: number;
+  offset: number;
+  email: string;
+  templateId: number;
+  sort: "asc" | "desc";
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  const params = new URLSearchParams({
+    limit: limit.toString(),
+    offset: offset.toString(),
+    email: email.toString(),
+    templateId: templateId.toString(),
+    sort: sort.toString(),
+  });
+
+  try {
+    const response: any = await axios.get(
+      `https://api.brevo.com/v3/smtp/statistics/events?${params}`,
+      {
+        headers: {
+          "api-key": import.meta.env.VITE_BREVO_API_KEY,
+        },
+      }
+    );
     return response;
   } catch (error) {
     return handleError(error);

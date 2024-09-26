@@ -5,7 +5,11 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { ClientReport } from "./molecules/client-report";
 import { ClientCards } from "./molecules/client-cards";
 import useAxios from "@/lib/axios/useAxios";
-import { GetClientReport } from "../core/clients.service";
+import {
+  GetClient,
+  GetClientReport,
+  GetEmailEvents,
+} from "../core/clients.service";
 import { useParams } from "react-router-dom";
 import { toast } from "../../ui/use-toast";
 import { useRecoilState } from "recoil";
@@ -13,6 +17,7 @@ import { transactionChangedAtom } from "./transactions/utils/transactions.recoil
 import { Transactions } from "./transactions/transactions";
 import clsx from "clsx";
 import { DatePicker } from "@/components/common/date-picker";
+import { EmailEvents } from "./email-events/email-events";
 
 export const ClientDetails = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -37,6 +42,20 @@ export const ClientDetails = () => {
     () => (date ? date?.getFullYear() : new Date(Date.now()).getFullYear()),
     [date]
   );
+
+  const {
+    data: clientData,
+    error: clientError,
+    isLoading: clientIsLoading,
+    dataCode: clientDataCode,
+    loadData: clientLoadData,
+  } = useAxios({
+    fetchFn: GetClient,
+    paramsOfFetch: {
+      clientId: clientId,
+    },
+    loadOnMount: true,
+  });
 
   const { data, error, isLoading, loadData } = useAxios({
     fetchFn: GetClientReport,
@@ -101,7 +120,13 @@ export const ClientDetails = () => {
             )}
           >
             <p className="font-medium text-md">{dictionary.ClientDetails}</p>
-            <ClientDetailsCardForm />
+            <ClientDetailsCardForm
+              data={clientData}
+              error={clientError}
+              loadData={clientLoadData}
+              dataCode={clientDataCode}
+              isLoading={clientIsLoading}
+            />
           </div>
           {!isDataEmpty && (
             <div className="bg-secondary p-4 w-full lg:w-[33%] rounded-md flex flex-col min-h-[250px]">
@@ -128,6 +153,7 @@ export const ClientDetails = () => {
           <ClientCards data={data} isLoading={isLoading} error={error} />
         </div>
         <Transactions day={currDay} month={currMonth} year={currYear} />
+        <EmailEvents clientData={clientData} isLoading={clientIsLoading} />
       </div>
     </div>
   );

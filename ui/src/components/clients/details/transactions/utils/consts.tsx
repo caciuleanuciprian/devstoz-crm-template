@@ -46,6 +46,14 @@ export const documentsHeader = (dictionary: any) => {
   ];
 };
 
+export const emailEventsHeasder = (dictionary: any) => {
+  return [
+    { id: "subject", label: dictionary.Subject, size: 40 },
+    { id: "date", label: dictionary.Date, size: 40 },
+    { id: "status", label: dictionary.Status, size: 20 },
+  ];
+};
+
 export const selectTransactionsTypeOptions = [
   TransactionType.INCOME,
   TransactionType.EXPENSE,

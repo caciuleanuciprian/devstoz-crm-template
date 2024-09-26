@@ -228,5 +228,39 @@
 
   "DeleteDocument": "Șterge document",
   "DeleteDocumentConfirmation": "Sunteți sigur că vreți să ștergeți acest document? Nu puteți recupera un document șters.",
-  "InitialSettings": "Setări Inițiale"
+  "InitialSettings": "Setări Inițiale",
+
+  "Emails": "Emailuri",
+  "Status": "Status",
+
+  "Bounces": "Respingeri",
+  "HardBounces": "Respingeri Definitive",
+  "SoftBounces": "Respingeri Temporare",
+  "Delivered": "Livrat",
+  "Spam": "Spam",
+  "Requests": "Solicitări",
+  "Opened": "Deschis",
+  "Clicks": "Click-uri",
+  "Invalid": "Invalid",
+  "Deferred": "Amânat",
+  "Blocked": "Blocat",
+  "Unsubscribed": "Dezabonat",
+  "Error": "Eroare",
+  "LoadedByProxy": "Încărcat de Proxy",
+  "Unknown": "Necunoscut",
+
+  "BouncesTooltip": "Emailul nu a putut fi livrat destinatarului din cauza unei probleme (termen generic pentru emailurile respinse).",
+  "HardBouncesTooltip": "Emailul nu a putut fi livrat din cauza unei probleme permanente (de exemplu, adresa de email este invalidă, domeniul nu există).",
+  "SoftBouncesTooltip": "Emailul nu a putut fi livrat din cauza unei probleme temporare (de exemplu, căsuța de email a destinatarului este plină sau serverul este căzut).",
+  "DeliveredTooltip": "Emailul a fost livrat cu succes către serverul de email al destinatarului.",
+  "SpamTooltip": "Emailul a fost marcat ca spam de către destinatar sau furnizorul său de email.",
+  "RequestsTooltip": "Numărul de solicitări de trimitere a emailurilor efectuate către Brevo.",
+  "OpenedTooltip": "Destinatarul a deschis emailul.",
+  "ClicksTooltip": "Destinatarul a dat clic pe un link din email.",
+  "InvalidTooltip": "Adresa de email este considerată invalidă sau nu este formatată corect.",
+  "DeferredTooltip": "Livrarea emailului a fost întârziată de serverul de email al destinatarului, dar poate fi reîncercată.",
+  "BlockedTooltip": "Emailul a fost blocat de la livrare, posibil din cauza filtrelor de spam sau a listelor negre.",
+  "UnsubscribedTooltip": "Destinatarul s-a dezabonat sau a optat să nu mai primească emailuri.",
+  "ErrorTooltip": "A apărut o eroare tehnică la încercarea de a trimite emailul.",
+  "LoadedByProxyTooltip": "Emailul a fost deschis sau urmărit printr-un server proxy (se întâmplă uneori cu setările de confidențialitate activate)."
 }

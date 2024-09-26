@@ -26,7 +26,13 @@ import { AxiosStatusCode } from "@/lib/axios/helpers";
 import { useParams } from "react-router-dom";
 import { isEmail, isNotEmptyString, isRequired } from "@formiz/validations";
 
-export const ClientDetailsCardForm = () => {
+export const ClientDetailsCardForm = ({
+  data,
+  error,
+  loadData,
+  dataCode,
+  isLoading,
+}: any) => {
   const { dictionary } = useContext(LanguageContext);
   const { clientId } = useParams();
   const [isResetting, setIsResetting] = useState<boolean>(false);
@@ -40,14 +46,6 @@ export const ClientDetailsCardForm = () => {
   const [interactionMode, setInteractionMode] = useState<InteractionMode>(
     InteractionMode.View
   );
-
-  const { data, error, isLoading, dataCode, loadData } = useAxios({
-    fetchFn: GetClient,
-    paramsOfFetch: {
-      clientId: clientId,
-    },
-    loadOnMount: true,
-  });
 
   const [clientType, setClientType] = useState<string>(data?.clientType);
 
@@ -113,143 +111,147 @@ export const ClientDetailsCardForm = () => {
 
   return (
     <div className="w-full bg-background h-full md:h-[310px] flex flex-col justify-center items-center  rounded-md">
-      <Formiz connect={clientForm}>
-        {!isLoading && data && (
-          <div className="p-4 w-full flex flex-col h-full">
-            <div className="flex gap-4 justify-center w-full flex-wrap md:flex-nowrap">
-              <div className="col-span-4 w-full">
-                <InputWithLabel
-                  label={dictionary.Name}
-                  isDisabled={InteractionMode.View === interactionMode}
-                  type={"text"}
-                  name={"name"}
-                  required={dictionary.FieldCannotBeEmpty}
-                  validations={[
-                    {
-                      handler: isRequired() && isNotEmptyString(),
-                      message: `${dictionary.InvalidName}`,
-                    },
-                    {
-                      handler: isNotEmptyString(),
-                      message: `${dictionary.InvalidName}`,
-                    },
-                  ]}
-                />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Formiz connect={clientForm}>
+          {!isLoading && data && (
+            <div className="p-4 w-full flex flex-col h-full">
+              <div className="flex gap-4 justify-center w-full flex-wrap md:flex-nowrap">
+                <div className="col-span-4 w-full">
+                  <InputWithLabel
+                    label={dictionary.Name}
+                    isDisabled={InteractionMode.View === interactionMode}
+                    type={"text"}
+                    name={"name"}
+                    required={dictionary.FieldCannotBeEmpty}
+                    validations={[
+                      {
+                        handler: isRequired() && isNotEmptyString(),
+                        message: `${dictionary.InvalidName}`,
+                      },
+                      {
+                        handler: isNotEmptyString(),
+                        message: `${dictionary.InvalidName}`,
+                      },
+                    ]}
+                  />
+                </div>
+                <div className="col-span-4 w-full">
+                  <InputWithLabel
+                    label={dictionary.Email}
+                    isDisabled={InteractionMode.View === interactionMode}
+                    type={"email"}
+                    name={"email"}
+                    required={dictionary.FieldCannotBeEmpty}
+                    validations={[
+                      {
+                        handler: isEmail(),
+                        message: `${dictionary.InvalidEmail}`,
+                      },
+                    ]}
+                  />
+                </div>
               </div>
-              <div className="col-span-4 w-full">
-                <InputWithLabel
-                  label={dictionary.Email}
-                  isDisabled={InteractionMode.View === interactionMode}
-                  type={"email"}
-                  name={"email"}
-                  required={dictionary.FieldCannotBeEmpty}
-                  validations={[
-                    {
-                      handler: isEmail(),
-                      message: `${dictionary.InvalidEmail}`,
-                    },
-                  ]}
-                />
+              <div className="flex gap-4 justify-center w-full flex-wrap md:flex-nowrap">
+                <div className="col-span-4 w-full">
+                  <InputWithLabel
+                    label={dictionary.Phone}
+                    isDisabled={InteractionMode.View === interactionMode}
+                    type={"phone"}
+                    name={"telephone"}
+                    required={dictionary.FieldCannotBeEmpty}
+                  />
+                </div>
+                <div className="col-span-4 w-full">
+                  <InputWithLabel
+                    label={dictionary.Address}
+                    isDisabled={InteractionMode.View === interactionMode}
+                    type={"text"}
+                    name={"address"}
+                    required={dictionary.FieldCannotBeEmpty}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="flex gap-4 justify-center w-full flex-wrap md:flex-nowrap">
-              <div className="col-span-4 w-full">
-                <InputWithLabel
-                  label={dictionary.Phone}
-                  isDisabled={InteractionMode.View === interactionMode}
-                  type={"phone"}
-                  name={"telephone"}
-                  required={dictionary.FieldCannotBeEmpty}
-                />
-              </div>
-              <div className="col-span-4 w-full">
-                <InputWithLabel
-                  label={dictionary.Address}
-                  isDisabled={InteractionMode.View === interactionMode}
-                  type={"text"}
-                  name={"address"}
-                  required={dictionary.FieldCannotBeEmpty}
-                />
-              </div>
-            </div>
-            <div className="flex gap-4 justify-center w-full flex-wrap md:flex-nowrap">
-              <div className="col-span-4 w-full">
-                <Select
-                  onValueChange={(e: ClientType) => setClientType(e)}
-                  disabled={InteractionMode.View === interactionMode}
-                  defaultValue={data?.clientType}
-                >
-                  <Label>{dictionary.Type}</Label>
-                  <SelectTrigger>
-                    <SelectValue placeholder={dictionary.Type} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {selectClientTypeOptions.map((option: string) => (
-                      <SelectItem key={option} value={option}>
-                        {valueToLabelClientType(option, dictionary)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="col-span-4 w-full">
-                <InputWithLabel
-                  label={dictionary.CreationDate}
-                  isDisabled={true}
-                  type={"text"}
-                  name={"creationDate"}
-                  required={dictionary.FieldCannotBeEmpty}
-                />
-              </div>
-            </div>
-            <div className="flex justify-end gap-4">
-              {interactionMode === "view" ? (
-                <Button
-                  variant={"default"}
-                  onClick={() => setInteractionMode(InteractionMode.Edit)}
-                  className="text-xs flex items-center px-8"
-                  size={"sm"}
-                >
-                  {dictionary.Edit}
-                </Button>
-              ) : (
-                <>
-                  <Button
-                    variant={"destructive"}
-                    onClick={() => {
-                      setIsResetting(true);
-                      setInteractionMode(InteractionMode.View);
-                    }}
-                    className="text-xs flex items-center px-8"
-                    size={"sm"}
+              <div className="flex gap-4 justify-center w-full flex-wrap md:flex-nowrap">
+                <div className="col-span-4 w-full">
+                  <Select
+                    onValueChange={(e: ClientType) => setClientType(e)}
+                    disabled={InteractionMode.View === interactionMode}
+                    defaultValue={data?.clientType}
                   >
-                    {dictionary.Cancel}
-                  </Button>
+                    <Label>{dictionary.Type}</Label>
+                    <SelectTrigger>
+                      <SelectValue placeholder={dictionary.Type} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {selectClientTypeOptions.map((option: string) => (
+                        <SelectItem key={option} value={option}>
+                          {valueToLabelClientType(option, dictionary)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="col-span-4 w-full">
+                  <InputWithLabel
+                    label={dictionary.CreationDate}
+                    isDisabled={true}
+                    type={"text"}
+                    name={"creationDate"}
+                    required={dictionary.FieldCannotBeEmpty}
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end gap-4">
+                {interactionMode === "view" ? (
                   <Button
-                    onClick={() => handleClientUpdate()}
                     variant={"default"}
+                    onClick={() => setInteractionMode(InteractionMode.Edit)}
                     className="text-xs flex items-center px-8"
                     size={"sm"}
-                    disabled={!clientForm.isValid}
                   >
-                    {dictionary.Save}
+                    {dictionary.Edit}
                   </Button>
-                </>
-              )}
+                ) : (
+                  <>
+                    <Button
+                      variant={"destructive"}
+                      onClick={() => {
+                        setIsResetting(true);
+                        setInteractionMode(InteractionMode.View);
+                      }}
+                      className="text-xs flex items-center px-8"
+                      size={"sm"}
+                    >
+                      {dictionary.Cancel}
+                    </Button>
+                    <Button
+                      onClick={() => handleClientUpdate()}
+                      variant={"default"}
+                      className="text-xs flex items-center px-8"
+                      size={"sm"}
+                      disabled={!clientForm.isValid}
+                    >
+                      {dictionary.Save}
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-        )}
-        {error && (
-          <div className="flex justify-start items-center h-full">
-            <div className="text-center">{dictionary.GenericError}</div>
-          </div>
-        )}
-        {isLoading && (
-          <div className="flex justify-center items-center h-full">
-            <Loader />
-          </div>
-        )}
-      </Formiz>
+          )}
+          {error && (
+            <div className="flex justify-start items-center h-full">
+              <div className="text-center">{dictionary.GenericError}</div>
+            </div>
+          )}
+          {isLoading && (
+            <div className="flex justify-center items-center h-full">
+              <Loader />
+            </div>
+          )}
+        </Formiz>
+      )}
     </div>
   );
 };

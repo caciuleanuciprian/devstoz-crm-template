@@ -23,9 +23,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Loader, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UploadFiles } from "@/components/common/settings/molecules/upload-image";
+import { Loader } from "@/components/common/loader";
 
 type EmailFormProps = {
   email: string;
