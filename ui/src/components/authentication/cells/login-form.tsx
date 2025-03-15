@@ -3,6 +3,10 @@ import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/icons";
+import Icon from "@/components/common/icon";
+import { ScanSearch, ScanSearchIcon } from "lucide-react";
+import { OTPForm } from "./otp-form";
+import React from "react";
 
 interface LoginFormProps {
   onClick: () => void;
@@ -10,6 +14,10 @@ interface LoginFormProps {
 
 const LoginForm = ({ onClick }: LoginFormProps) => {
   const { dictionary } = useContext(LanguageContext);
+  const isDemoURL = React.useMemo(
+    () => location.hostname === import.meta.env.VITE_DEMO_URL,
+    [location]
+  );
   return (
     <div className="lg:p-8">
       <div className="mx-auto flex w-full flex-col justify-center gap-8 sm:w-[350px]">
@@ -22,11 +30,12 @@ const LoginForm = ({ onClick }: LoginFormProps) => {
           </p>
         </div>
 
-        <div className="grid gap-4">
+        <div className="flex gap-4">
           <Button variant="outline" type="button" onClick={onClick}>
             <Icons.google className="mr-2 h-4 w-4" />
             {dictionary.SignInWith} {dictionary.Google}
           </Button>
+          {isDemoURL && <OTPForm />}
           {/* <p className="flex justify-center gap-4 text-center text-sm text-muted-foreground">
             <Link
               to="/"

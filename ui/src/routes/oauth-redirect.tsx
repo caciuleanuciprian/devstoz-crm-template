@@ -1,13 +1,15 @@
 import { GetGoogleAuth } from "@/components/authentication/core/authentication.service";
 import { idTokenAtom } from "@/components/authentication/utils/authentication.recoil";
 import { PagesURL } from "@/components/authentication/utils/consts";
+import { LanguageContext } from "@/i18n/language-context";
 import { FRONT_END_BASE_URL } from "@/lib/axios/consts";
 import useAxios from "@/lib/axios/useAxios";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 export const OauthRedirectPage = () => {
   const queryParameters = new URLSearchParams(window.location.search);
+  const { dictionary } = useContext(LanguageContext);
 
   const [, setIdToken] = useRecoilState(idTokenAtom);
 
@@ -31,5 +33,5 @@ export const OauthRedirectPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  return <div>Redirecting...</div>;
+  return <div>{dictionary.Redirecting}</div>;
 };

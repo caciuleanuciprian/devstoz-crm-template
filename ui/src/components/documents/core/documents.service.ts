@@ -1,9 +1,14 @@
 import {
   BASE_URL_AUTHORIZED,
-  ORGANIZATION_PREFIX,
+  PDF_PREFIX,
   ORGANIZATION_URL,
+  PDF_URL,
 } from "@/lib/axios/consts";
-import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
+import {
+  authHeader,
+  DefaultErrorResult,
+  handleError,
+} from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
 export const ExportPDF = async ({
@@ -25,9 +30,7 @@ export const ExportPDF = async ({
       {
         responseType: "arraybuffer",
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -55,9 +58,7 @@ export const GetOrganizationsDocuments = async ({
       `${ORGANIZATION_URL}/${organizationId}/documents?${params}`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -86,9 +87,7 @@ export const UploadOrganizationsDocuments = async ({
         responseType: "blob",
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -111,9 +110,7 @@ export const GetDocumentFile = async ({
       {
         responseType: "blob",
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -135,12 +132,52 @@ export const DeleteDocument = async ({
       `${ORGANIZATION_URL}/${organizationId}/documents/${documentId}`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetAvailablePDFs = async ({
+  organizationId,
+}: {
+  organizationId: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  const params = new URLSearchParams({
+    organizationId: organizationId,
+  });
+  try {
+    const response: any = await axios.get(`${PDF_URL}?${params}`, {
+      headers: {
+        ...authHeader,
+      },
+    });
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const GetAvailablePDF = async ({
+  organizationId,
+  name,
+}: {
+  organizationId: string;
+  name: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  const params = new URLSearchParams({
+    organizationId: organizationId,
+  });
+  try {
+    const response: any = await axios.get(`${PDF_URL}/${name}?${params}`, {
+      headers: {
+        ...authHeader,
+      },
+    });
     return response;
   } catch (error) {
     return handleError(error);

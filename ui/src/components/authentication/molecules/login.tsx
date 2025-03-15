@@ -4,10 +4,16 @@ import { useEffect } from "react";
 import { PagesURL } from "../utils/consts";
 import { FRONT_END_BASE_URL, GOOGLE_AUTH_URL } from "@/lib/axios/consts";
 import { useRecoilState } from "recoil";
-import { idTokenAtom } from "../utils/authentication.recoil";
+import { idTokenAtom, isDemoAtom } from "../utils/authentication.recoil";
+import React from "react";
 
 const Login = () => {
   const [idToken] = useRecoilState(idTokenAtom);
+  const [, setIsDemo] = useRecoilState(isDemoAtom);
+
+  React.useEffect(() => {
+    setIsDemo(false);
+  }, []);
 
   const configs = {
     response_type: "code",

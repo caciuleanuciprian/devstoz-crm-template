@@ -2,9 +2,11 @@
 
 interface ImportMetaEnv {
   readonly VITE_BASE_URL: string;
-  // TODO Delete this after auth is implemented
-  readonly VITE_USER_ID: string;
-  // more env variables...
+  readonly VITE_FRONT_END_BASE_URL: string;
+  readonly VITE_CLIENT_ID: string;
+  readonly VITE_CLIENT_SECRET: string;
+  readonly VITE_BREVO_API_KEY: string;
+  readonly VITE_DEMO_URL: string;
 }
 
 interface ImportMeta {
