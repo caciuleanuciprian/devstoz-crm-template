@@ -28,7 +28,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@sendinblue/client": "^3.3.1",
     "@tanstack/react-table": "^8.10.7",
-    "axios": "^1.6.2",
+    "axios": "^1.8.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
