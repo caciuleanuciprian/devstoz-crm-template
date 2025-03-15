@@ -1,5 +1,5 @@
 import { authHeader } from "./../../../lib/axios/helpers";
-import { AUTH_URL, ORGANIZATION_URL, USERS_URL } from "@/lib/axios/consts";
+import { DEMO_AUTH_URL, ORGANIZATION_URL, USERS_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
@@ -100,7 +100,7 @@ export const PostOTPCode = async ({
   email: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
-    const response: any = axios.post(`${AUTH_URL}/codes`, {
+    const response: any = axios.post(`${DEMO_AUTH_URL}/codes`, {
       email: email,
     });
     return response;
@@ -117,7 +117,7 @@ export const PostOTPToken = async ({
   code: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
-    const response: any = axios.post(`${AUTH_URL}/token`, {
+    const response: any = axios.post(`${DEMO_AUTH_URL}/token`, {
       email: email,
       code: code,
     });

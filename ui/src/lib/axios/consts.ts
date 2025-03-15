@@ -14,6 +14,7 @@ export const BASE_URL =
   location.hostname === import.meta.env.VITE_DEMO_URL
     ? import.meta.env.VITE_DEMO_BASE_URL
     : import.meta.env.VITE_BASE_URL;
+export const DEMO_BASE_URL = import.meta.env.VITE_DEMO_BASE_URL;
 export const BASE_URL_AUTHORIZED = `${BASE_URL}/authorized`;
 
 export const FRONT_END_BASE_URL = `${window.location.origin}`;
@@ -26,6 +27,6 @@ export const ORGANIZATION_URL = `${BASE_URL_AUTHORIZED}${ORGANIZATION_PREFIX}`;
 export const REPORTS_URL = `${BASE_URL_AUTHORIZED}${REPORTS_PREFIX}`;
 export const MAIL_URL = `${BASE_URL_AUTHORIZED}${MAIL_PREFIX}`;
 export const PDF_URL = `${BASE_URL_AUTHORIZED}${PDF_PREFIX}`;
-export const AUTH_URL = `${BASE_URL}${AUTH_PREFIX}`;
+export const DEMO_AUTH_URL = `${DEMO_BASE_URL}${AUTH_PREFIX}`;
 
 export const GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";

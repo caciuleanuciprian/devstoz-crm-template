@@ -204,50 +204,6 @@ export const OTPForm = () => {
           ) : null}
         </DialogFooter>
       </DialogContent>
-      {/* step === "otp" &&
-        !isTokenLoading &&
-        !isLoading && (
-          <DialogContent className="sm:max-w-[425px] min-h-[250px]">
-            <DialogHeader>
-              <DialogTitle>{dictionary.OTPTitle}</DialogTitle>
-              <DialogDescription>
-                {dictionary.OTPDescription2}
-              </DialogDescription>
-            </DialogHeader>
-            <div className="flex flex-col items-start gap-4">
-              <Label htmlFor="name">{dictionary.OTPTitle}</Label>
-              <InputOTP
-                maxLength={6}
-                value={otp}
-                onChange={(value) => setOTP(value)}
-              >
-                <InputOTPGroup>
-                  <InputOTPSlot index={0} />
-                  <InputOTPSlot index={1} />
-                  <InputOTPSlot index={2} />
-                </InputOTPGroup>
-                <InputOTPSeparator />
-                <InputOTPGroup>
-                  <InputOTPSlot index={3} />
-                  <InputOTPSlot index={4} />
-                  <InputOTPSlot index={5} />
-                </InputOTPGroup>
-              </InputOTP>
-            </div>
-            <DialogFooter className="gap-2">
-              <Button
-                onClick={() => {
-                  setStep("email");
-                  setOTP("");
-                }}
-              >
-                {dictionary.Back}
-              </Button>
-              <Button onClick={() => loadToken()}>{dictionary.Send}</Button>
-            </DialogFooter>
-          </DialogContent>
-        )
-      )} */}
     </Dialog>
   );
 };
