@@ -291,5 +291,6 @@
   "OTPTokenIncorrectOrExpired": "Codul OTP este greșit sau a expirat. Vă rugăm să solicitați altul.",
   "OTPTokenSuccesfully": "Codul OTP a fost validat cu succes. Veți fi redirecționat către tabloul de lucru...",
   "OTPTokenError": "Validarea codului OTP a întămpinat o eroare.",
-  "Redirecting": "Redirecționare..."
+  "Redirecting": "Redirecționare...",
+  "NoDocumentsAvailable": "Nu aveți documente"
 }

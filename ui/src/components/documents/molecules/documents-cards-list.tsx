@@ -5,7 +5,7 @@ import useAxios from "@/lib/axios/useAxios";
 import { GetAvailablePDFs } from "../core/documents.service";
 import { useRecoilState } from "recoil";
 import { selectedOrganizationAtom } from "@/components/authentication/utils/authentication.recoil";
-import { LoadingDocumentCard } from "../atoms/document-card";
+import { EmptyDocumentCard, LoadingDocumentCard } from "../atoms/document-card";
 
 export const DocumentsCardsList = () => {
   const { dictionary } = useContext(LanguageContext);
@@ -27,6 +27,7 @@ export const DocumentsCardsList = () => {
       <div className="flex bg-background rounded-md p-4 flex-col gap-4 ">
         <div className=" w-full flex gap-2 overflow-auto">
           {isLoading && <LoadingDocumentCard />}
+          {!isLoading && data?.length === 0 && <EmptyDocumentCard />}
           {!isLoading &&
             data?.map((document: string, index: number) => (
               <DocumentsForm

@@ -1,5 +1,7 @@
 import { Loader } from "@/components/common/loader";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { LanguageContext } from "@/i18n/language-context";
+import { useContext } from "react";
 
 type DocumentCardProps = {
   title: string;
@@ -32,6 +34,19 @@ export const LoadingDocumentCard = () => {
     <Card className="w-[200px] h-[275px] min-w-[200px] min-h-[275px] !rounded-lg flex flex-col">
       <CardContent className="p-4 w-full h-full justify-center items-center text-sm text-foreground flex">
         <Loader center className="h-full" />
+      </CardContent>
+    </Card>
+  );
+};
+
+export const EmptyDocumentCard = () => {
+  const { dictionary } = useContext(LanguageContext);
+  return (
+    <Card className="w-[200px] h-[275px] min-w-[200px] min-h-[275px] !rounded-lg flex flex-col">
+      <CardContent className="p-4 w-full h-full justify-center items-center text-sm text-foreground flex">
+        <p className="text-foreground pointer-events-none">
+          {dictionary.NoDocumentsAvailable}
+        </p>
       </CardContent>
     </Card>
   );

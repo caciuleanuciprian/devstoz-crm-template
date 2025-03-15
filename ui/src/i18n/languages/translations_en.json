@@ -288,5 +288,6 @@
   "OTPTokenIncorrectOrExpired": "The OTP code is wrong or expired. Please request another one.",
   "OTPTokenSuccesfully": "The OTP Code is valid. Redirecting to dashboard...",
   "OTPTokenError": "Validating the OTP code encountered an error.",
-  "Redirecting": "Redirecting..."
+  "Redirecting": "Redirecting...",
+  "NoDocumentsAvailable": "No documents available"
 }
