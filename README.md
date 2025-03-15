@@ -1,11 +1,32 @@
-# devstoz-crm-template
+## DevsToZ CRM Template
 
-TODO:
+This project is serving as the frontend part for CRM Template, a Customer Relationship Management platform.
 
-FRONTEND
+## Development
 
-- no feedback cand dai Send email - WILL FIX IN FUTURE PATCH
-- trebuie o limita de caractere la numele clientului - WILL FIX IN FUTURE PATCH
-- posibil sa fie necesara o limita de caractere la majoritatea lucrurilor - WILL FIX IN FUTURE PATCH
-- la sectiunea "Documente" orice valoarea pozitiva este valabila la "Zi", "Luna", "An", ar trebui limitate - WILL FIX IN FUTURE PATCH
-- la sectiunea "Documente", la "Nume" si "Prenume", "Adresa1", "Adresa2", "Destinatie" poti introduce orice caracte - WILL FIX IN FUTURE PATCH
+- axios for API requests;
+- shad cn with tailwind for components and styling;
+- recharts for charts;
+- recoil for state management;
+- formiz for forms;
+- crypto.js and jwt-decode for integration with google oauth;
+- vite
+
+## Environment Variables
+
+```ts
+VITE_BASE_URL: string;
+VITE_FRONT_END_BASE_URL: string;
+VITE_CLIENT_ID: string;
+VITE_CLIENT_SECRET: string;
+VITE_BREVO_API_KEY: string;
+VITE_DEMO_URL: string;
+```
+
+## Demo
+
+You can check the app here: [DEMO](https://crm.devstoz.com/)
+
+## Authors
+
+[Caciuleanu Ciprian](https://github.com/caciuleanuciprian)
