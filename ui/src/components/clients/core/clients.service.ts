@@ -1,5 +1,9 @@
 import { CLIENTS_URL, MAIL_URL, REPORTS_URL } from "@/lib/axios/consts";
-import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
+import {
+  authHeader,
+  DefaultErrorResult,
+  handleError,
+} from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 import * as SibApiV3Sdk from "@sendinblue/client";
 
@@ -19,9 +23,7 @@ export const AddClient = async ({
       },
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -39,9 +41,7 @@ export const DeleteClient = async ({
   try {
     const response: any = await axios.delete(`${CLIENTS_URL}/${clientId}`, {
       headers: {
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        ...authHeader,
       },
     });
     return response;
@@ -58,9 +58,7 @@ export const GetClient = async ({
   try {
     const response: any = await axios.get(`${CLIENTS_URL}/${clientId}`, {
       headers: {
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        ...authHeader,
       },
     });
     return response;
@@ -85,9 +83,7 @@ export const UpdateClient = async ({
       },
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -112,9 +108,7 @@ export const ArchiveClient = async ({
       },
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -138,9 +132,7 @@ export const GetClientReport = async ({
       `${REPORTS_URL}/client/${clientId}/monthly?month=${month}&year=${year}`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -177,9 +169,7 @@ export const PostEmail = async ({
     const response: any = await axios.post(`${MAIL_URL}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        ...authHeader,
       },
     });
     return response;

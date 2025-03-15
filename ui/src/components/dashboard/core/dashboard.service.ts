@@ -1,6 +1,10 @@
 import { ORGANIZATION_PREFIX } from "./../../../lib/axios/consts";
 import { ORGANIZATION_URL, REPORTS_URL } from "@/lib/axios/consts";
-import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
+import {
+  authHeader,
+  DefaultErrorResult,
+  handleError,
+} from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 import { MonthlyReportResponse } from "../utils/types";
 
@@ -41,9 +45,7 @@ export const GetClients = async ({
       `${ORGANIZATION_URL}/${organizationId}/clients?${params.toString()}`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -66,9 +68,7 @@ export const GetOrganizationLastTransactions = async ({
       `${REPORTS_URL}${ORGANIZATION_PREFIX}/${organizationId}?numberOfTransactions=${transactions}`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -92,9 +92,7 @@ export const GetOrganizationReportMonthly = async ({
       `${REPORTS_URL}${ORGANIZATION_PREFIX}/${organizationId}/monthly?month=${month}&year=${year}`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -116,9 +114,7 @@ export const GetOrganizationReportYearly = async ({
       `${REPORTS_URL}${ORGANIZATION_PREFIX}/${organizationId}/yearly?&year=${year}`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );

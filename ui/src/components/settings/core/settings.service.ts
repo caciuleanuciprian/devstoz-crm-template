@@ -1,5 +1,9 @@
 import { ORGANIZATION_URL, ROLES_URL, USERS_URL } from "@/lib/axios/consts";
-import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
+import {
+  authHeader,
+  DefaultErrorResult,
+  handleError,
+} from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
 export const UpdateUserOrganization = async ({
@@ -16,9 +20,7 @@ export const UpdateUserOrganization = async ({
       body,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -43,9 +45,7 @@ export const UpdateOrganizationLogo = async ({
       {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -65,9 +65,7 @@ export const AddMember = async ({
   try {
     const response: any = axios.put(`${ROLES_URL}/${adminId}`, body, {
       headers: {
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        ...authHeader,
       },
     });
     return response;
@@ -87,9 +85,7 @@ export const GetMembers = async ({
       `${ORGANIZATION_URL}/${organizationId}/members`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );

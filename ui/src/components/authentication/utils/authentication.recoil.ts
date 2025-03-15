@@ -17,3 +17,9 @@ export const selectedOrganizationAtom = atom({
   key: "selectedOrganization",
   default: null as UserOrganization | null,
 });
+
+export const isDemoAtom = atom({
+  key: "isDemo",
+  default: false,
+  effects: [localStorageEffect("isDemo")],
+});

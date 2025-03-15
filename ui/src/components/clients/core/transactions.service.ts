@@ -4,7 +4,11 @@ import {
   TRANSACTIONS_PREFIX,
   TRANSACTIONS_URL,
 } from "@/lib/axios/consts";
-import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
+import {
+  authHeader,
+  DefaultErrorResult,
+  handleError,
+} from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
 export const GetTransactions = async ({
@@ -46,9 +50,7 @@ export const GetTransactions = async ({
       `${CLIENTS_URL}/${clientId}${TRANSACTIONS_PREFIX}?${params.toString()}`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -92,9 +94,7 @@ export const AddTransaction = async ({
     const response: any = await axios.post(`${TRANSACTIONS_URL}`, payload, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        ...authHeader,
       },
     });
     return response;
@@ -113,9 +113,7 @@ export const DeleteTransaction = async ({
       `${TRANSACTIONS_URL}/${transactionId}`,
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -136,9 +134,7 @@ export const GetTransactionFile = async ({
       {
         responseType: "blob",
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
@@ -163,9 +159,7 @@ export const UpdateTransaction = async ({
       },
       {
         headers: {
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );

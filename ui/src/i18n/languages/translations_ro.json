@@ -278,5 +278,18 @@
   "hasExpiredOn": "a expirat pe",
   "ExpiringDocuments": "Documente care expiră",
   "ExpiringDate": "Data de expirare",
-  "NonExpiring": "Fără expirare"
+  "NonExpiring": "Fără expirare",
+  "NoFieldsAvailable": "Nu sunt disponibile câmpuri",
+  "TryDemo": "Încercați demo-ul",
+  "OTPDescription": "După ce ați introdus adresa de email, veți primi un cod OTP pentru a utiliza demo-ul.",
+  "OTPDescription2": "Introduceți codul OTP primit pe email pentru a accesa demo-ul.",
+  "OTPTitle": "Cod OTP",
+  "Back": "Înapoi",
+  "OTPSentSuccesfully": "Codul OTP a fost trimis cu succes.",
+  "OTPError": "A apărut o eroare la trimiterea codului OTP.",
+  "Loading": "Încărcare",
+  "OTPTokenIncorrectOrExpired": "Codul OTP este greșit sau a expirat. Vă rugăm să solicitați altul.",
+  "OTPTokenSuccesfully": "Codul OTP a fost validat cu succes. Veți fi redirecționat către tabloul de lucru...",
+  "OTPTokenError": "Validarea codului OTP a întămpinat o eroare.",
+  "Redirecting": "Redirecționare..."
 }

@@ -1,4 +1,5 @@
-import { ORGANIZATION_URL, USERS_URL } from "@/lib/axios/consts";
+import { authHeader } from "./../../../lib/axios/helpers";
+import { AUTH_URL, ORGANIZATION_URL, USERS_URL } from "@/lib/axios/consts";
 import { DefaultErrorResult, handleError } from "@/lib/axios/helpers";
 import axios, { AxiosResponse } from "axios";
 
@@ -44,9 +45,7 @@ export const GetUserByEmail = async ({
   try {
     const response: any = axios.get(`${USERS_URL}?email=${email}`, {
       headers: {
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        ...authHeader,
       },
     });
     return response;
@@ -63,9 +62,7 @@ export const GetUserOrganizations = async ({
   try {
     const response: any = axios.get(`${USERS_URL}/${userId}/organizations`, {
       headers: {
-        Authorization:
-          //@ts-ignore
-          "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+        ...authHeader,
       },
     });
     return response;
@@ -87,12 +84,43 @@ export const CreateUserOrganization = async ({
       {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization:
-            //@ts-ignore
-            "Bearer " + localStorage.getItem("idToken").replace(/['"]+/g, ""),
+          ...authHeader,
         },
       }
     );
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const PostOTPCode = async ({
+  email,
+}: {
+  email: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = axios.post(`${AUTH_URL}/codes`, {
+      email: email,
+    });
+    return response;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const PostOTPToken = async ({
+  email,
+  code,
+}: {
+  email: string;
+  code: string;
+}): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
+  try {
+    const response: any = axios.post(`${AUTH_URL}/token`, {
+      email: email,
+      code: code,
+    });
     return response;
   } catch (error) {
     return handleError(error);

@@ -43,3 +43,15 @@ export const handleError = (error: unknown): ErrorResponse => {
     };
   }
 };
+
+export const authHeader =
+  localStorage.getItem("isDemo") === "true"
+    ? {
+        CodeAuthorization: localStorage
+          .getItem("idToken")
+          ?.replace(/['"]+/g, ""),
+      }
+    : {
+        Authorization:
+          "Bearer " + localStorage.getItem("idToken")?.replace(/['"]+/g, ""),
+      };

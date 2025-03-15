@@ -3,10 +3,11 @@ export const CLIENTS_PREFIX = "/clients";
 export const TRANSACTIONS_PREFIX = "/transactions";
 export const ROLES_PREFIX = "/roles";
 export const ORGANIZATION_PREFIX = "/organizations";
-export const DOCUMENTS_PREFIX_TEMP = "/pdfs"; // TODO: Replace with /documents/pdfs when BE is ready
+export const PDF_PREFIX = "/pdfs";
 export const DOCUMENTS_PREFIX = "/documents";
 export const REPORTS_PREFIX = "/reports";
 export const MAIL_PREFIX = "/mail";
+export const AUTH_PREFIX = "/auth";
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const BASE_URL_AUTHORIZED = `${BASE_URL}/authorized`;
@@ -20,5 +21,7 @@ export const ROLES_URL = `${BASE_URL_AUTHORIZED}${ROLES_PREFIX}`;
 export const ORGANIZATION_URL = `${BASE_URL_AUTHORIZED}${ORGANIZATION_PREFIX}`;
 export const REPORTS_URL = `${BASE_URL_AUTHORIZED}${REPORTS_PREFIX}`;
 export const MAIL_URL = `${BASE_URL_AUTHORIZED}${MAIL_PREFIX}`;
+export const PDF_URL = `${BASE_URL_AUTHORIZED}${PDF_PREFIX}`;
+export const AUTH_URL = `${BASE_URL}${AUTH_PREFIX}`;
 
 export const GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
