@@ -21,6 +21,7 @@ VITE_CLIENT_ID: string;
 VITE_CLIENT_SECRET: string;
 VITE_BREVO_API_KEY: string;
 VITE_DEMO_URL: string;
+VITE_DEMO_BASE_URL: string;
 ```
 
 ## Demo

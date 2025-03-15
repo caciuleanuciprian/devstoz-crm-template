@@ -9,7 +9,11 @@ export const REPORTS_PREFIX = "/reports";
 export const MAIL_PREFIX = "/mail";
 export const AUTH_PREFIX = "/auth";
 
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
+export const BASE_URL =
+  localStorage.getItem("isDemo") === "true" &&
+  location.hostname === import.meta.env.VITE_DEMO_URL
+    ? import.meta.env.VITE_DEMO_BASE_URL
+    : import.meta.env.VITE_BASE_URL;
 export const BASE_URL_AUTHORIZED = `${BASE_URL}/authorized`;
 
 export const FRONT_END_BASE_URL = `${window.location.origin}`;
