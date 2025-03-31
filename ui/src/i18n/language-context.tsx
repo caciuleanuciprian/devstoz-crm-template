@@ -16,9 +16,17 @@ export function LanguageProvider({ children }: any) {
   const [selectedOrganization, setSelectedOrganization] = useRecoilState(
     selectedOrganizationAtom
   );
+
+  const isDemoURL = React.useMemo(
+    () => location.hostname === import.meta.env.VITE_DEMO_URL,
+    []
+  );
+
   const defaultLanguage =
     selectedOrganization?.language || window.localStorage.getItem("rcml-lang");
-  const [userLanguage, setUserLanguage] = useState(defaultLanguage || "ro");
+  const [userLanguage, setUserLanguage] = useState(
+    defaultLanguage || isDemoURL ? "en" : "ro"
+  );
 
   const provider = {
     userLanguage,
