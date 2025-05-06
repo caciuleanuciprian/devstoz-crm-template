@@ -8,39 +8,39 @@ import { idTokenAtom, isDemoAtom } from "../utils/authentication.recoil";
 import React from "react";
 
 const Login = () => {
-  const [idToken] = useRecoilState(idTokenAtom);
-  const [, setIsDemo] = useRecoilState(isDemoAtom);
+	const [idToken] = useRecoilState(idTokenAtom);
+	const [, setIsDemo] = useRecoilState(isDemoAtom);
 
-  React.useEffect(() => {
-    setIsDemo(false);
-  }, []);
+	React.useEffect(() => {
+		setIsDemo(false);
+	}, []);
 
-  const configs = {
-    response_type: "code",
-    client_id: import.meta.env.VITE_CLIENT_ID,
-    scope: "email profile openid",
-    redirect_uri: `${FRONT_END_BASE_URL}${PagesURL.OAUTH2_REDIRECT}`,
-  };
+	const configs = {
+		response_type: "code",
+		client_id: import.meta.env.VITE_CLIENT_ID,
+		scope: "email profile openid",
+		redirect_uri: `${FRONT_END_BASE_URL}${PagesURL.OAUTH2_REDIRECT}`,
+	};
 
-  const handleGoogleAuth = () => {
-    const params = new URLSearchParams({
-      ...configs,
-    });
-    window.location.href = `${GOOGLE_AUTH_URL}?${params}`;
-  };
+	const handleGoogleAuth = () => {
+		const params = new URLSearchParams({
+			...configs,
+		});
+		window.location.href = `${GOOGLE_AUTH_URL}?${params}`;
+	};
 
-  useEffect(() => {
-    if (idToken) {
-      location.href = `${FRONT_END_BASE_URL}${PagesURL.DASHBOARD}`;
-    }
-  }, []);
+	useEffect(() => {
+		if (idToken) {
+			location.href = `${FRONT_END_BASE_URL}${PagesURL.ORGANIZATION_SELECTION}`;
+		}
+	}, []);
 
-  return (
-    <div className="grid animate-fade-in container relative h-[100vh] w-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <LoginForm onClick={handleGoogleAuth} />
-      <AuthBackground />
-    </div>
-  );
+	return (
+		<div className="grid animate-fade-in container relative h-[100vh] w-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+			<LoginForm onClick={handleGoogleAuth} />
+			<AuthBackground />
+		</div>
+	);
 };
 
 export default Login;
