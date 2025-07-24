@@ -39,6 +39,9 @@ export const OrganizationSelection = () => {
 	React.useEffect(() => {
 		if (data) {
 			setAllOrganizations(data);
+			if (data.length === 0) {
+				navigate(PagesURL.INITIAL_SETTINGS);
+			}
 			if (selectedOrganization === null && data.length === 1) {
 				handleSelectOrganization(data[0]);
 			}
