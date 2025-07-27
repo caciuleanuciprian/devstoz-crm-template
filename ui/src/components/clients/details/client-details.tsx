@@ -149,7 +149,8 @@ export const ClientDetails = () => {
 					<ClientCards data={data} isLoading={isLoading} error={error} />
 				</div>
 				<Transactions day={currDay} month={currMonth} year={currYear} />
-				<EmailEvents clientData={clientData} isLoading={clientIsLoading} />
+				{/* TODO: Re-enable after brevo is fixed */}
+				{/* <EmailEvents clientData={clientData} isLoading={clientIsLoading} /> */}
 			</div>
 		</div>
 	);
